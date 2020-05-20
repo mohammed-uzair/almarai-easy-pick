@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/screen_route_selection_root"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".screens.LoginScreen">
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/screen_route_selection_guideline_for_background_theme"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.32" />
+
+    <View
+        android:id="@+id/screen_route_selection_background_theme_dark_view"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="?attr/colorPrimaryDark"
+        app:layout_constraintBottom_toTopOf="@id/screen_route_selection_guideline_for_background_theme"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/screen_route_selection_background_image"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginBottom="@dimen/_30sdp"
+        android:contentDescription="@string/image_description_theme_background"
+        android:scaleType="fitXY"
+        android:src="@drawable/ic_other_screens_background"
+        android:tint="?attr/colorPrimary"
+        app:layout_constraintBottom_toTopOf="@id/screen_route_selection_guideline_for_background_theme"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/screen_route_selection_serviced_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_20sdp"
+        android:text="@string/route_serviced"
+        android:textColor="@android:color/white"
+        android:textSize="30sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/screen_route_selection_serviced_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/_16sdp"
+        android:textColor="@android:color/white"
+        android:textSize="50sp"
+        android:textStyle="bold"
+        app:layout_constraintBaseline_toBaselineOf="@+id/screen_route_selection_serviced_label"
+        app:layout_constraintStart_toEndOf="@id/screen_route_selection_serviced_label"
+        tools:text="47" />
+
+    <TextView
+        android:id="@+id/screen_route_selection_serving_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_16sdp"
+        android:layout_marginEnd="@dimen/_16sdp"
+        android:textColor="@android:color/white"
+        android:textSize="50sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toStartOf="@id/screen_route_selection_serving_label"
+        app:layout_constraintTop_toBottomOf="@id/screen_route_selection_serviced_label"
+        tools:text="15" />
+
+    <TextView
+        android:id="@+id/screen_route_selection_serving_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/route_serving"
+        android:textColor="@android:color/white"
+        android:textSize="30sp"
+        android:textStyle="bold"
+        app:layout_constraintBaseline_toBaselineOf="@+id/screen_route_selection_serving_text"
+        app:layout_constraintEnd_toEndOf="@id/screen_route_selection_serviced_label" />
+
+    <TextView
+        android:id="@+id/screen_route_selection_title_route_number"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/_50sdp"
+        android:text="@string/route_number"
+        android:textColor="@android:color/white"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@id/screen_route_selection_guideline_for_background_theme"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/screen_route_selection_background_image" />
+
+    <TextView
+        android:id="@+id/screen_route_selection_title_route_description"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/_20sdp"
+        android:text="@string/route_description"
+        android:textColor="@android:color/white"
+        android:textStyle="bold"
+        app:layout_constraintBaseline_toBaselineOf="@+id/screen_route_selection_title_route_number"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/screen_route_selection_title_route_number" />
+
+    <include
+        layout="@layout/main_recycler_view"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@id/screen_route_selection_guideline_for_background_theme" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,0 +1,138 @@
+//https://pastebin.com/raw/B48qYZYN
+{
+  "routes": [
+    {
+      "number": 712,
+      "description": "Al Kharj Road",
+      "descriptionArabic": "Al Kharj Road",
+      "group": 0,
+      "serviceStatus": 0
+    },
+    {
+      "number": 713,
+      "description": "Thaumama Road",
+      "descriptionArabic": "Al Kharj Road",
+      "group": 0,
+      "serviceStatus": 2
+    },
+    {
+      "number": 714,
+      "description": "Rose Mary Compound",
+      "descriptionArabic": "Al Kharj Road",
+      "group": 0,
+      "serviceStatus": 0
+    },
+    {
+      "number": 715,
+      "description": "Al Izdihar",
+      "descriptionArabic": "Al Kharj Road",
+      "group": 0,
+      "serviceStatus": 1
+    },
+    {
+      "number": 716,
+      "description": "Al Falah",
+      "descriptionArabic": "Al Kharj Road",
+      "group": 0,
+      "serviceStatus": 0
+    },
+    {
+      "number": 717,
+      "description": "Al Kharj",
+      "descriptionArabic": "Al Kharj Road",
+      "group": 0,
+      "serviceStatus": 0
+    },
+    {
+      "number": 718,
+      "description": "Damammam Highway",
+      "descriptionArabic": "Al Kharj Road",
+      "group": 0,
+      "serviceStatus": 1
+    },
+    {
+      "number": 719,
+      "description": "Makkah Road",
+      "descriptionArabic": "Al Kharj Road",
+      "group": 0,
+      "serviceStatus": 0
+    },
+    {
+      "number": 720,
+      "description": "Airport Road",
+      "descriptionArabic": "Al Kharj Road",
+      "group": 0,
+      "serviceStatus": 0
+    },
+    {
+      "number": 721,
+      "description": "Sultan College",
+      "descriptionArabic": "Al Kharj Road",
+      "group": 0,
+      "serviceStatus": 0
+    },
+    {
+      "number": 722,
+      "description": "LULU Hypermarket",
+      "descriptionArabic": "Al Kharj Road",
+      "group": 0,
+      "serviceStatus": 0
+    },
+    {
+      "number": 723,
+      "description": "Olaya Road",
+      "descriptionArabic": "Al Kharj Road",
+      "group": 0,
+      "serviceStatus": 0
+    },
+    {
+      "number": 724,
+      "description": "Khana Khazana Road",
+      "descriptionArabic": "Al Kharj Road",
+      "group": 0,
+      "serviceStatus": 0
+    },
+    {
+      "number": 725,
+      "description": "Al Mursalat Road",
+      "descriptionArabic": "Al Kharj Road",
+      "group": 0,
+      "serviceStatus": 0
+    },
+    {
+      "number": 726,
+      "description": "King Khalid Road",
+      "descriptionArabic": "Al Kharj Road",
+      "group": 0,
+      "serviceStatus": 0
+    },
+    {
+      "number": 727,
+      "description": "Prince Faisal Road",
+      "descriptionArabic": "Al Kharj Road",
+      "group": 0,
+      "serviceStatus": 0
+    },
+    {
+      "number": 728,
+      "description": "Al Wizarat",
+      "descriptionArabic": "Al Kharj Road",
+      "group": 0,
+      "serviceStatus": 0
+    },
+    {
+      "number": 729,
+      "description": "Al Murabba",
+      "descriptionArabic": "Al Kharj Road",
+      "group": 0,
+      "serviceStatus": 0
+    },
+    {
+      "number": 730,
+      "description": "Al Futah Road",
+      "descriptionArabic": "Al Kharj Road",
+      "group": 0,
+      "serviceStatus": 0
+    }
+  ]
+}

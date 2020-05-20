@@ -1,0 +1,7 @@
+<resources>
+    <!--region Edit Text Accepted Digits-->
+    <string name="alm_alphanumeric">-.0123456789/qwertyuiopasdfghjklzxcvbnm</string>
+    <string name="alm_number">-0123456789</string>
+    <string name="alm_number_positive">0123456789</string>
+    <!--endregion-->
+</resources>

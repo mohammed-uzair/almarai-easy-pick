@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/network_config_screen_root"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="?attr/colorHomeScreenSurface"
+    tools:context=".screens.LoginScreen">
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/screen_network_config_guideline_for_background_theme"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.4" />
+
+    <ImageView
+        android:id="@+id/screen_network_config_background_image"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:scaleType="fitXY"
+        android:src="@drawable/ic_other_screens_background"
+        app:layout_constraintBottom_toTopOf="@+id/screen_network_config_guideline_for_background_theme"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <com.airbnb.lottie.LottieAnimationView
+        android:id="@+id/screen_network_config_animation"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_settings"
+        app:layout_constraintBottom_toTopOf="@+id/screen_network_config_guideline_for_background_theme"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:lottie_autoPlay="true"
+        app:lottie_loop="true"
+        app:lottie_rawRes="@raw/anim_network"
+        tools:src="@drawable/ic_settings" />
+
+    <View
+        android:id="@+id/view"
+        android:layout_width="1dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="@dimen/_50sdp"
+        android:layout_marginBottom="@dimen/_50sdp"
+        android:background="?attr/colorPrimary"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/screen_network_config_guideline_for_background_theme" />
+
+    <View
+        android:id="@+id/view1"
+        android:layout_width="0dp"
+        android:layout_height="1dp"
+        android:layout_marginStart="@dimen/_20sdp"
+        android:layout_marginEnd="@dimen/_20sdp"
+        android:background="?attr/colorPrimary"
+        app:layout_constraintBottom_toBottomOf="@+id/home_screen_data_configuration_button"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/home_screen_data_configuration_button" />
+
+    <View
+        android:id="@+id/view2"
+        android:layout_width="0dp"
+        android:layout_height="1dp"
+        android:layout_marginStart="@dimen/_20sdp"
+        android:layout_marginEnd="@dimen/_20sdp"
+        android:background="?attr/colorPrimary"
+        app:layout_constraintBottom_toTopOf="@+id/home_screen_data_configuration_button"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/home_screen_network_configuration_button" />
+
+    <Button
+        android:id="@+id/home_screen_routes_button"
+        style="@style/HomeButtonStyle"
+        android:layout_height="0dp"
+        android:layout_marginStart="@dimen/_20sdp"
+        android:drawableTop="@drawable/ic_route"
+        android:text="ROUTES"
+        android:textColor="?attr/colorTextPrimary"
+        app:layout_constraintBottom_toBottomOf="@+id/home_screen_network_configuration_button"
+        app:layout_constraintEnd_toStartOf="@+id/view"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/home_screen_network_configuration_button" />
+
+    <Button
+        android:id="@+id/home_screen_data_configuration_button"
+        style="@style/HomeButtonStyle"
+        android:layout_marginStart="@dimen/_20sdp"
+        android:drawableTop="@drawable/ic_data_configuration"
+        android:text="DATA\nCONFIGURATION"
+        android:textColor="?attr/colorTextPrimary"
+        app:layout_constraintEnd_toStartOf="@+id/view"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/home_screen_network_configuration_button" />
+
+    <Button
+        android:id="@+id/home_screen_statistics_button"
+        style="@style/HomeButtonStyle"
+        android:layout_marginStart="@dimen/_20sdp"
+        android:drawableTop="@drawable/ic_statistics"
+        android:text="STATISTICS\n"
+        android:textColor="?attr/colorTextPrimary"
+        app:layout_constraintEnd_toStartOf="@+id/view"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/home_screen_data_configuration_button" />
+
+    <Button
+        android:id="@+id/home_screen_network_configuration_button"
+        style="@style/HomeButtonStyle"
+        android:layout_marginTop="@dimen/_40sdp"
+        android:layout_marginEnd="@dimen/_20sdp"
+        android:drawableTop="@drawable/ic_network_configuration"
+        android:text="NETWORK CONFIGURATION"
+        android:textColor="?attr/colorTextPrimary"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@id/view"
+        app:layout_constraintTop_toTopOf="@+id/screen_network_config_guideline_for_background_theme" />
+
+    <Button
+        android:id="@+id/home_screen_settings_button"
+        style="@style/HomeButtonStyle"
+        android:layout_height="0dp"
+        android:layout_marginEnd="@dimen/_20sdp"
+        android:drawableTop="@drawable/ic_settings"
+        android:text="SETTINGS"
+        android:textColor="?attr/colorTextPrimary"
+        app:layout_constraintBottom_toBottomOf="@+id/home_screen_data_configuration_button"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@id/view"
+        app:layout_constraintTop_toBottomOf="@+id/home_screen_routes_button" />
+
+    <Button
+        android:id="@+id/home_screen_exit_app_button"
+        style="@style/HomeButtonStyle"
+        android:layout_height="0dp"
+        android:layout_marginEnd="@dimen/_20sdp"
+        android:drawableTop="@drawable/ic_exit"
+        android:text="EXIT"
+        android:textColor="?attr/colorTextPrimary"
+        app:layout_constraintBottom_toBottomOf="@+id/home_screen_statistics_button"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@id/view"
+        app:layout_constraintTop_toBottomOf="@+id/home_screen_data_configuration_button" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

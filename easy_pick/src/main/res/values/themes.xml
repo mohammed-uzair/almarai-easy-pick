@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!--region Base App Theme-->
+    <style name="Theme.Base" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="colorPrimary">@color/baseColorPrimary</item>
+        <item name="colorPrimaryDark">@color/baseColorPrimaryDark</item>
+        <item name="colorAccent">@color/baseColorAccent</item>
+
+        <item name="colorTextPrimary">@color/baseColorText</item>
+        <item name="colorButtonBase">@color/baseColorButtonPrimaryNormal</item>
+        <item name="colorButtonHighlight">@color/baseColorButtonPrimaryHighlight</item>
+        <item name="colorButtonText">@color/baseColorButtonPrimaryText</item>
+        <item name="colorIcon">@color/baseColorIcon</item>
+
+        <item name="colorBackgroundTheme">@color/baseColorBackgroundTheme</item>
+        <item name="colorBackgroundSurface">@color/baseColorBackgroundSurface</item>
+        <item name="colorListDataHolder">@color/baseColorListDataHolder</item>
+        <item name="colorHomeScreenSurface">@color/baseColorHomeScreenSurface</item>
+        <item name="colorHomeScreenTitle">@color/baseColorHomeScreenTitle</item>
+        <item name="colorFilterScreenTitle">@color/baseColorFilterScreenTitle</item>
+        <item name="colorScreenTitle">@color/baseColorScreenTitle</item>
+
+        <item name="android:textViewStyle">@style/PrimaryTextStyle</item>
+        <item name="styleButtonPrimary">@style/PrimaryButtonStyle</item>
+    </style>
+    <!--endregion-->
+
+    <!--region Light Theme-->
+    <style name="Theme.Base.LightAppTheme" />
+    <!--endregion-->
+
+    <!--region Dark Theme-->
+    <style name="Theme.Base.DarkAppTheme">
+        <item name="colorPrimary">@color/darkColorPrimary</item>
+        <item name="colorPrimaryDark">@color/darkColorPrimaryDark</item>
+        <item name="colorAccent">@color/darkColorAccent</item>
+
+        <item name="colorTextPrimary">@color/darkColorText</item>
+        <item name="colorButtonBase">@color/darkColorButtonPrimaryNormal</item>
+        <item name="colorButtonHighlight">@color/darkColorButtonPrimaryHighlight</item>
+        <item name="colorButtonText">@color/darkColorButtonPrimaryText</item>
+        <item name="colorIcon">@color/darkColorIcon</item>
+
+        <item name="colorBackgroundTheme">@color/darkColorBackgroundTheme</item>
+        <item name="colorBackgroundSurface">@color/darkColorBackgroundSurface</item>
+        <item name="colorHomeScreenSurface">@color/darkColorHomeScreenSurface</item>
+        <item name="colorListDataHolder">@color/darkColorListDataHolder</item>
+        <item name="colorHomeScreenTitle">@color/darkColorHomeScreenTitle</item>
+        <item name="colorFilterScreenTitle">@color/darkColorFilterScreenTitle</item>
+        <item name="colorScreenTitle">@color/darkColorScreenTitle</item>
+    </style>
+    <!--endregion-->
+
+    <!--region Night Theme-->
+    <style name="Theme.Base.NightAppTheme">
+        <item name="colorPrimary">@color/nightColorPrimary</item>
+        <item name="colorPrimaryDark">@color/nightColorPrimaryDark</item>
+        <item name="colorAccent">@color/nightColorAccent</item>
+
+        <item name="colorTextPrimary">@color/nightColorText</item>
+        <item name="colorButtonBase">@color/nightColorButtonPrimaryNormal</item>
+        <item name="colorButtonHighlight">@color/nightColorButtonPrimaryHighlight</item>
+        <item name="colorButtonText">@color/nightColorButtonPrimaryText</item>
+        <item name="colorIcon">@color/nightColorIcon</item>
+
+        <item name="colorBackgroundTheme">@color/nightColorBackgroundTheme</item>
+        <item name="colorBackgroundSurface">@color/nightColorBackgroundSurface</item>
+        <item name="colorHomeScreenSurface">@color/nightColorHomeScreenSurface</item>
+        <item name="colorListDataHolder">@color/nightColorListDataHolder</item>
+        <item name="colorHomeScreenTitle">@color/nightColorHomeScreenTitle</item>
+        <item name="colorFilterScreenTitle">@color/nightColorFilterScreenTitle</item>
+        <item name="colorScreenTitle">@color/nightColorScreenTitle</item>
+    </style>
+    <!--endregion-->
+
+    <!--region Toolbar Theme-->
+    <style name="Theme.Base.ToolbarTheme">
+        <item name="android:colorControlNormal">?attr/colorPrimary</item>
+    </style>
+
+    <style name="Theme.Base.ToolbarThemeWhite">
+        <item name="android:colorControlNormal">@android:color/white</item>
+    </style>
+    <!--endregion-->
+</resources>

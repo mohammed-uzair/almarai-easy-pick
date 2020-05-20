@@ -1,0 +1,64 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/item_item_root"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="?attr/colorBackgroundSurface"
+    android:orientation="horizontal"
+    android:weightSum="14">
+
+    <ImageView
+        android:id="@+id/item_item_status_image"
+        style="@style/AlmGridItemsTextView"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/_25sdp"
+        android:layout_weight="1"
+        android:contentDescription="@string/image_description_status_route"
+        android:src="@drawable/ic_status" />
+
+    <TextView
+        android:id="@+id/item_item_number_text"
+        style="@style/AlmGridItemsTextView"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="2"
+        android:gravity="center"
+        tools:text="124406" />
+
+    <TextView
+        android:id="@+id/item_item_description_text"
+        style="@style/AlmGridItemsTextView"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="5"
+        android:gravity="center"
+        tools:text="Laban Vanilla 250ml" />
+
+    <TextView
+        android:id="@+id/item_item_truck_stock"
+        style="@style/AlmGridItemsTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_weight="2"
+        android:gravity="end"
+        tools:text="12/21" />
+
+    <TextView
+        android:id="@+id/item_item_fresh_load"
+        style="@style/AlmGridItemsTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_weight="2"
+        android:gravity="end"
+        tools:text="112/2" />
+
+    <TextView
+        android:id="@+id/item_item_total_stock"
+        style="@style/AlmGridItemsTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_weight="2"
+        android:gravity="end"
+        tools:text="21/10" />
+
+</LinearLayout>

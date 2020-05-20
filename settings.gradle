@@ -1,0 +1,8 @@
+rootProject.name='Easy Pick'
+include ':easy_pick'
+include ':business'
+include ':alm_ui'
+include ':data'
+include ':repository'
+include ':alm_logging'
+include ':data_source'

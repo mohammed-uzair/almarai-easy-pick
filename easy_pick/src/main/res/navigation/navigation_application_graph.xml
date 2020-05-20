@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/navigation_app"
+    app:startDestination="@id/launchScreen">
+
+    <fragment
+        android:id="@+id/loginScreen"
+        android:name="com.almarai.easypick.screens.LoginScreen"
+        android:label="screen_login"
+        tools:layout="@layout/screen_login">
+        <action
+            android:id="@+id/action_loginScreen_to_dataConfigurationScreen"
+            app:destination="@id/dataConfigurationScreen"
+            app:enterAnim="@anim/anim_screen_slide_in_right"
+            app:exitAnim="@anim/anim_screen_slide_out_left"
+            app:popEnterAnim="@anim/anim_screen_slide_in_left"
+            app:popExitAnim="@anim/anim_screen_slide_out_right" />
+    </fragment>
+    <fragment
+        android:id="@+id/networkConfiurationScreen"
+        android:name="com.almarai.easypick.screens.NetworkConfigurationScreen"
+        android:label="screen_network_confiuration"
+        tools:layout="@layout/screen_network_confiuration">
+        <action
+            android:id="@+id/action_networkConfiurationScreen_to_loginScreen"
+            app:destination="@id/loginScreen"
+            app:enterAnim="@anim/anim_screen_slide_in_right"
+            app:exitAnim="@anim/anim_screen_slide_out_left"
+            app:popEnterAnim="@anim/anim_screen_slide_in_left"
+            app:popExitAnim="@anim/anim_screen_slide_out_right" />
+        <action
+            android:id="@+id/action_networkConfiurationScreen_to_dataConfigurationScreen"
+            app:destination="@id/dataConfigurationScreen"
+            app:enterAnim="@anim/anim_screen_slide_in_right"
+            app:exitAnim="@anim/anim_screen_slide_out_left"
+            app:popEnterAnim="@anim/anim_screen_slide_in_left"
+            app:popExitAnim="@anim/anim_screen_slide_out_right" />
+    </fragment>
+    <fragment
+        android:id="@+id/dataConfigurationScreen"
+        android:name="com.almarai.easypick.screens.DataConfigurationScreen"
+        android:label="screen_data_configuration"
+        tools:layout="@layout/screen_data_configuration">
+        <action
+            android:id="@+id/action_dataConfigurationScreen_to_homeScreen"
+            app:destination="@id/homeScreen"
+            app:enterAnim="@anim/anim_screen_slide_in_right"
+            app:exitAnim="@anim/anim_screen_slide_out_left"
+            app:popEnterAnim="@anim/anim_screen_slide_in_left"
+            app:popExitAnim="@anim/anim_screen_slide_out_right" />
+    </fragment>
+    <fragment
+        android:id="@+id/routeSelectionScreen"
+        android:name="com.almarai.easypick.screens.RouteSelectionScreen"
+        android:label="screen_route_selection"
+        tools:layout="@layout/screen_route_selection">
+        <action
+            android:id="@+id/action_routeSelectionScreen_to_productListScreen"
+            app:destination="@id/productListScreen"
+            app:enterAnim="@anim/anim_screen_slide_in_right"
+            app:exitAnim="@anim/anim_screen_slide_out_left"
+            app:popEnterAnim="@anim/anim_screen_slide_in_left"
+            app:popExitAnim="@anim/anim_screen_slide_out_right" />
+        <action
+            android:id="@+id/action_routeSelectionScreen_to_filterScreen2"
+            app:destination="@id/filterScreen2" />
+    </fragment>
+    <fragment
+        android:id="@+id/productListScreen"
+        android:name="com.almarai.easypick.screens.ItemsScreen"
+        android:label="screen_product_list"
+        tools:layout="@layout/screen_items">
+        <action
+            android:id="@+id/action_productListScreen_to_routeSelectionScreen"
+            app:destination="@id/routeSelectionScreen"
+            app:enterAnim="@anim/anim_screen_slide_in_right"
+            app:exitAnim="@anim/anim_screen_slide_out_left"
+            app:popEnterAnim="@anim/anim_screen_slide_in_left"
+            app:popExitAnim="@anim/anim_screen_slide_out_right" />
+        <action
+            android:id="@+id/action_productListScreen_to_filterScreen2"
+            app:destination="@id/filterScreen2" />
+    </fragment>
+    <fragment
+        android:id="@+id/homeScreen"
+        android:name="com.almarai.easypick.screens.HomeScreen"
+        android:label="main_recycler_view"
+        tools:layout="@layout/main_recycler_view">
+        <action
+            android:id="@+id/action_homeScreen_to_routeSelectionScreen"
+            app:destination="@id/routeSelectionScreen"
+            app:enterAnim="@anim/anim_screen_slide_in_right"
+            app:exitAnim="@anim/anim_screen_slide_out_left"
+            app:popEnterAnim="@anim/anim_screen_slide_in_left"
+            app:popExitAnim="@anim/anim_screen_slide_out_right" />
+        <action
+            android:id="@+id/action_homeScreen_to_networkConfiurationScreen"
+            app:destination="@id/networkConfiurationScreen"
+            app:enterAnim="@anim/anim_screen_slide_in_right"
+            app:exitAnim="@anim/anim_screen_slide_out_left"
+            app:popEnterAnim="@anim/anim_screen_slide_in_left"
+            app:popExitAnim="@anim/anim_screen_slide_out_right" />
+        <action
+            android:id="@+id/action_homeScreen_to_dataConfigurationScreen"
+            app:destination="@id/dataConfigurationScreen"
+            app:enterAnim="@anim/anim_screen_slide_in_right"
+            app:exitAnim="@anim/anim_screen_slide_out_left"
+            app:popEnterAnim="@anim/anim_screen_slide_in_left"
+            app:popExitAnim="@anim/anim_screen_slide_out_right" />
+    </fragment>
+    <fragment
+        android:id="@+id/launchScreen"
+        android:name="com.almarai.easypick.screens.LaunchScreen"
+        android:label="LaunchScreen">
+        <action
+            android:id="@+id/action_launchScreen_to_networkConfiurationScreen"
+            app:destination="@id/networkConfiurationScreen"
+            app:enterAnim="@anim/anim_screen_slide_in_right"
+            app:exitAnim="@anim/anim_screen_slide_out_left"
+            app:popEnterAnim="@anim/anim_screen_slide_in_left"
+            app:popExitAnim="@anim/anim_screen_slide_out_right" />
+        <action
+            android:id="@+id/action_launchScreen_to_routeSelectionScreen"
+            app:destination="@id/routeSelectionScreen"
+            app:enterAnim="@anim/anim_screen_slide_in_right"
+            app:exitAnim="@anim/anim_screen_slide_out_left"
+            app:popEnterAnim="@anim/anim_screen_slide_in_left"
+            app:popExitAnim="@anim/anim_screen_slide_out_right" />
+    </fragment>
+    <fragment
+        android:id="@+id/filterScreen2"
+        android:name="com.almarai.easypick.screens.FilterScreen"
+        android:label="FilterScreen" />
+</navigation>

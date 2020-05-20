@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <attr name="colorTextPrimary" format="color"/>
+
+    <attr name="colorButtonBase" format="color"/>
+    <attr name="colorButtonHighlight" format="color" />
+    <attr name="colorButtonText" format="color" />
+
+    <attr name="colorIcon" format="color" />
+
+    <attr name="colorBackgroundTheme" format="color" />
+    <attr name="colorBackgroundSurface" format="color" />
+    <attr name="colorListDataHolder" format="color" />
+    <attr name="colorHomeScreenSurface" format="color" />
+    <attr name="colorHomeScreenTitle" format="color" />
+    <attr name="colorFilterScreenTitle" format="color" />
+    <attr name="colorScreenTitle" format="color" />
+
+    <attr name="styleTextViewPrimary" format="reference" />
+    <attr name="styleButtonPrimary" format="reference" />
+</resources>

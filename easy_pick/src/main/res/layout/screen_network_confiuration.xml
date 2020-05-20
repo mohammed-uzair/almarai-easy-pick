@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/screen_network_config_root"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="?attr/colorBackgroundSurface"
+    tools:context=".screens.LoginScreen">
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/screen_network_config_guideline_for_background_theme"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.5" />
+
+    <ImageView
+        android:id="@+id/screen_network_config_background_image"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:contentDescription="@string/image_description_theme_background"
+        android:scaleType="fitXY"
+        android:src="@drawable/ic_other_screens_background"
+        app:layout_constraintBottom_toTopOf="@id/screen_network_config_guideline_for_background_theme"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <com.airbnb.lottie.LottieAnimationView
+        android:id="@+id/screen_network_config_animation"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_settings"
+        app:layout_constraintBottom_toTopOf="@id/screen_network_config_guideline_for_background_theme"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:lottie_autoPlay="true"
+        app:lottie_loop="true"
+        app:lottie_rawRes="@raw/anim_network"
+        tools:src="@drawable/ic_settings" />
+
+    <com.almarai.alm_ui.AlmEditText
+        android:id="@+id/screen_network_config_server_ip_edit_text"
+        style="@style/EditTextStyle"
+        android:drawableStart="@drawable/ic_server"
+        android:hint="@string/server_ip"
+        app:layout_constraintEnd_toEndOf="@id/screen_network_config_save_button"
+        app:layout_constraintStart_toStartOf="@+id/screen_network_config_save_button"
+        app:layout_constraintTop_toTopOf="@id/screen_network_config_guideline_for_background_theme"
+        app:type="alphanumeric">
+
+        <requestFocus />
+    </com.almarai.alm_ui.AlmEditText>
+
+    <com.almarai.alm_ui.AlmEditText
+        android:id="@+id/screen_network_config_port_edit_text"
+        style="@style/EditTextStyle"
+        android:drawableStart="@drawable/ic_server"
+        android:hint="@string/server_port"
+        app:layout_constraintBottom_toTopOf="@+id/screen_network_config_save_button"
+        app:layout_constraintEnd_toEndOf="@id/screen_network_config_save_button"
+        app:layout_constraintStart_toStartOf="@id/screen_network_config_save_button"
+        app:layout_constraintTop_toBottomOf="@id/screen_network_config_server_ip_edit_text"
+        app:layout_constraintVertical_bias="0.0"
+        app:type="number_positive" />
+
+    <Button
+        android:id="@+id/screen_network_config_save_button"
+        style="@style/PrimaryButtonStyle"
+        android:text="@string/button_save"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

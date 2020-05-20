@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/screen_items_root"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".screens.LoginScreen">
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/screen_items_guideline_for_background_theme"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.32" />
+
+    <View
+        android:id="@+id/screen_items_background_theme_dark_view"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="?attr/colorPrimaryDark"
+        app:layout_constraintBottom_toTopOf="@id/screen_items_guideline_for_background_theme"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/screen_items_background_image"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginBottom="@dimen/_30sdp"
+        android:contentDescription="@string/image_description_theme_background"
+        android:scaleType="fitXY"
+        android:src="@drawable/ic_other_screens_background"
+        android:tint="?attr/colorPrimary"
+        app:layout_constraintBottom_toTopOf="@id/screen_items_guideline_for_background_theme"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/screen_items_total_items_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_20sdp"
+        android:text="@string/total_items"
+        android:textColor="@android:color/white"
+        android:textSize="30sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/screen_items_total_items_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/_16sdp"
+        android:textColor="@android:color/white"
+        android:textSize="50sp"
+        android:textStyle="bold"
+        app:layout_constraintBaseline_toBaselineOf="@+id/screen_items_total_items_label"
+        app:layout_constraintStart_toEndOf="@id/screen_items_total_items_label"
+        tools:text="347" />
+
+    <TextView
+        android:id="@+id/screen_items_picked_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_16sdp"
+        android:layout_marginEnd="@dimen/_16sdp"
+        android:textColor="@android:color/white"
+        android:textSize="50sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toStartOf="@id/screen_items_picked_label"
+        app:layout_constraintTop_toBottomOf="@id/screen_items_total_items_label"
+        tools:text="128" />
+
+    <TextView
+        android:id="@+id/screen_items_picked_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/items_picked"
+        android:textColor="@android:color/white"
+        android:textSize="30sp"
+        android:textStyle="bold"
+        app:layout_constraintBaseline_toBaselineOf="@+id/screen_items_picked_text"
+        app:layout_constraintEnd_toEndOf="@id/screen_items_total_items_label" />
+
+    <LinearLayout
+        android:id="@+id/screen_items_header_titles_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:weightSum="14"
+        app:layout_constraintBottom_toTopOf="@id/screen_items_guideline_for_background_theme"
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <ImageView
+            android:id="@+id/screen_items_status_label"
+            style="@style/AlmGridTitleTextView"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/_25sdp"
+            android:layout_weight="1"
+            android:contentDescription="@string/image_description_status_route" />
+
+        <TextView
+            android:id="@+id/screen_items_number_label"
+            style="@style/AlmGridTitleTextView"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="2"
+            android:gravity="center"
+            android:text="@string/item_number" />
+
+        <TextView
+            android:id="@+id/screen_items_description_label"
+            style="@style/AlmGridTitleTextView"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="5"
+            android:gravity="center"
+            android:text="@string/item_description" />
+
+        <TextView
+            android:id="@+id/screen_items_truck_stock_label"
+            style="@style/AlmGridTitleTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="2"
+            android:gravity="end"
+            android:text="@string/truck_stock" />
+
+        <TextView
+            android:id="@+id/screen_items_fresh_load_label"
+            style="@style/AlmGridTitleTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="2"
+            android:gravity="end"
+            android:text="@string/fresh_load" />
+
+        <TextView
+            android:id="@+id/screen_items_total_load_label"
+            style="@style/AlmGridTitleTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="2"
+            android:gravity="end"
+            android:text="@string/total_stock" />
+
+    </LinearLayout>
+
+    <include
+        layout="@layout/main_recycler_view"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@id/screen_items_guideline_for_background_theme" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

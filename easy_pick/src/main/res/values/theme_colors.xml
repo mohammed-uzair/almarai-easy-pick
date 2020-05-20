@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!--region Theme Colors-->
+    <!--region Base Theme Colors-->
+    <color name="baseColorPrimary">#59AB61</color>
+    <color name="baseColorPrimaryDark">#508B5D</color>
+    <color name="baseColorAccent">#59AB61</color>
+
+    <color name="baseColorText">#3C4053</color>
+
+    <color name="baseColorButtonPrimaryNormal">#59AB61</color>
+    <color name="baseColorButtonPrimaryHighlight">#ffffbb33</color>
+    <color name="baseColorButtonPrimaryText">#FFFFFF</color>
+
+    <color name="baseColorIcon">#FFFFFF</color>
+
+    <color name="baseColorBackgroundTheme">#F2F2F2</color>
+    <color name="baseColorBackgroundSurface">#FFFFFF</color>
+    <color name="baseColorHomeScreenSurface">#F2F2F2</color>
+    <color name="baseColorHomeScreenTitle">#59AB61</color>
+    <color name="baseColorFilterScreenTitle">#59AB61</color>
+    <color name="baseColorScreenTitle">#59AB61</color>
+
+    <color name="baseColorListDataHolder">#1E1E1E</color>
+    <!--endregion-->
+
+    <!--region Light Theme Colors-->
+    <color name="lightColorPrimary">#59AB61</color>
+    <color name="lightColorPrimaryDark">#508B5D</color>
+    <color name="lightColorAccent">#59AB61</color>
+
+    <color name="lightColorText">#3C4053</color>
+
+    <color name="lightColorButtonPrimaryNormal">#59AB61</color>
+    <color name="lightColorButtonPrimaryHighlight">#ffffbb33</color>
+    <color name="lightColorButtonPrimaryText">#FFFFFF</color>
+
+    <color name="lightColorIcon">#FFFFFF</color>
+
+    <color name="lightColorBackgroundTheme">#F2F2F2</color>
+    <color name="lightColorBackgroundSurface">#FFFFFF</color>
+    <color name="lightColorHomeScreenSurface">#F2F2F2</color>
+    <color name="lightColorHomeScreenTitle">#59AB61</color>
+    <color name="lightColorFilterScreenTitle">#59AB61</color>
+    <color name="lightColorScreenTitle">#59AB61</color>
+
+    <color name="lightColorListDataHolder">#1E1E1E</color>
+    <!--endregion-->
+
+    <!--region Dark Theme Colors-->
+    <color name="darkColorPrimary">#4B5067</color>
+    <color name="darkColorPrimaryDark">#3C4053</color>
+    <color name="darkColorAccent">#59AB61</color>
+
+    <color name="darkColorText">#4B5067</color>
+
+    <color name="darkColorButtonPrimaryNormal">#59AB61</color>
+    <color name="darkColorButtonPrimaryHighlight">#ffffbb33</color>
+    <color name="darkColorButtonPrimaryText">#FFFFFF</color>
+
+    <color name="darkColorIcon">#FFFFFF</color>
+
+    <color name="darkColorBackgroundTheme">#3C4053</color>
+    <color name="darkColorBackgroundSurface">#FFFFFF</color>
+    <color name="darkColorHomeScreenSurface">#3B3F53</color>
+    <color name="darkColorHomeScreenTitle">#4B5067</color>
+    <color name="darkColorFilterScreenTitle">#4B5067</color>
+    <color name="darkColorScreenTitle">#F2F2F2</color>
+
+    <color name="darkColorListDataHolder">#1E1E1E</color>
+    <!--endregion-->
+
+    <!--region Night Theme Colors-->
+    <color name="nightColorPrimary">#1F1F1F</color>
+    <color name="nightColorPrimaryDark">#121212</color>
+    <color name="nightColorAccent">#59AB61</color>
+
+    <color name="nightColorText">#E1E1E1</color>
+
+    <color name="nightColorButtonPrimaryNormal">#59AB61</color>
+    <color name="nightColorButtonPrimaryHighlight">#ffffbb33</color>
+    <color name="nightColorButtonPrimaryText">#FFFFFF</color>
+
+    <color name="nightColorIcon">#FFFFFF</color>
+
+    <color name="nightColorBackgroundTheme">#272727</color>
+    <color name="nightColorBackgroundSurface">#121212</color>
+    <color name="nightColorHomeScreenSurface">#121212</color>
+    <color name="nightColorHomeScreenTitle">#121212</color>
+    <color name="nightColorFilterScreenTitle">#E1E1E1</color>
+    <color name="nightColorScreenTitle">#E1E1E1</color>
+
+    <color name="nightColorListDataHolder">#1E1E1E</color>
+    <!--endregion-->
+    <!--endregion-->
+</resources>

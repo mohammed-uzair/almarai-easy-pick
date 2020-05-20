@@ -1,0 +1,89 @@
+<resources>
+    <string name="app_name">Easy Pick</string>
+    <string name="app_description">Picking Products Made Easy</string>
+
+    <!--region Screen Titles-->
+    <string name="title_network_configuration">Network Configuration</string>
+    <string name="title_login">Login</string>
+    <string name="title_data_configuration">Data Configuration</string>
+    <string name="title_home">Home</string>
+    <string name="title_route_selection">Routes</string>
+    <string name="title_item_list">Items</string>
+    <!--endregion-->
+
+    <!--region Menu Titles-->
+    <string name="menu_title_search">Search</string>
+    <string name="menu_title_filter">Filter</string>
+    <string name="menu_title_save">Save</string>
+    <!--endregion-->
+
+    <!--region User Alert Messages-->
+    <!--endregion-->
+
+    <!--region Success Messages-->
+    <!--endregion-->
+
+    <!--region Failure Messages-->
+    <string name="network_not_available">Network not available.</string>
+    <string name="data_not_available">Data not available.</string>
+    <string name="system_date_not_in_range">System date is not within range.</string>
+    <!--endregion-->
+
+    <!--region List Header Titles-->
+    <string name="route_serviced">Served</string>
+    <string name="route_serving">Serving</string>
+    <string name="total_routes">Routes</string>
+
+    <string name="items_picked">Picked</string>
+    <string name="total_items">Items</string>
+
+    <string name="route_number">Route #</string>
+    <string name="route_description">Route Description</string>
+
+    <string name="item_number">Item #</string>
+    <string name="item_description">Item Description</string>
+    <string name="truck_stock">TS</string>
+    <string name="fresh_load">FL</string>
+    <string name="total_stock">TLS</string>
+    <!--endregion-->
+
+    <!--region Common-->
+    <string name="crates">Crate(s)</string>
+    <string name="pieces">Piece(s)</string>
+    <!--endregion-->
+
+    <!--region Buttons-->
+    <string name="button_launch">Launch</string>
+    <string name="button_next">Next</string>
+    <string name="button_continue">Continue</string>
+    <string name="button_save">Save</string>
+    <string name="button_login">Login</string>
+    <!--endregion-->
+
+    <!--region Images Descriptions-->
+    <string name="image_description_launch_background">Launch Screen Background</string>
+    <string name="image_description_theme_background">Theme Background</string>
+    <string name="image_description_status_route">Route Status</string>
+    <string name="image_description_status_item">Item Picked Status</string>
+    <!--endregion-->
+
+    <!--region Other labels-->
+    <string name="love_from_almarai"><![CDATA[<font color=#000000> Made with <font color=#F50909> \u2764 <font color=#000000> from <font color=#58AA61> ALMARAI]]></string>
+    <string name="server_ip">Server IP</string>
+    <string name="server_port">Server Port</string>
+    <string name="dept_code">Depot Code</string>
+    <string name="preference">Preference</string>
+    <!--endregion-->
+
+    <!--region Route Products Preferences-->
+    <string-array name="route_product_type_preferences">
+        <item>No Preference</item>
+        <item>Bakery</item>
+        <item>Poultry</item>
+        <item>Dairy</item>
+        <item>IPNC</item>
+        <item>Non IPNC</item>
+    </string-array>
+    <!--endregion-->
+
+</resources>
