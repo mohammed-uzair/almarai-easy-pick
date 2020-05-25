@@ -15,5 +15,4 @@ class RoutesRepositoryImplementation(private val webRoutesDataSource: WebRoutesD
     ) {
         webRoutesDataSource.getAllRoutes(depotCode, salesDate, routesPreferences, mutableRoutes)
     }
-
 }

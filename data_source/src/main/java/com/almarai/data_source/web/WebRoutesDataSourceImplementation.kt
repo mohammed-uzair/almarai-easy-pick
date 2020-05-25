@@ -25,7 +25,6 @@ class WebRoutesDataSourceImplementation(private val webClient: WebService) : Web
 
                 override fun onResponse(call: Call<List<Route>>, response: Response<List<Route>>) {
                     println("Debugger mine - failed it ${response.body()}")
-
                     mutableRoutes.postValue(response.body())
                 }
             })
