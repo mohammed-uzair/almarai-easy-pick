@@ -7,13 +7,13 @@ import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
-import com.almarai.data.easy_pick_models.Item
+import com.almarai.data.easy_pick_models.Product
 import com.almarai.easypick.R
 
 class ItemsAdapter : RecyclerView.Adapter<ItemsAdapter.ViewHolder>() {
-    private var list: List<Item>? = null
+    private var list: List<Product>? = null
 
-    fun setValues(list: List<Item>) {
+    fun setValues(list: List<Product>) {
         this.list = list
     }
 
@@ -49,7 +49,7 @@ class ItemsAdapter : RecyclerView.Adapter<ItemsAdapter.ViewHolder>() {
     override fun getItemCount() = list!!.size
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        val item = list!![holder.adapterPosition]
+        val item = list!![holder.bindingAdapterPosition]
 
 //        holder.itemStatus.text = route.itemNumber.toString()
         holder.itemNumber.text = item.itemNumber.toString()

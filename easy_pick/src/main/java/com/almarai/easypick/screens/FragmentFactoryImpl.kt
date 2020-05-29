@@ -1,7 +1,6 @@
 package com.almarai.easypick.screens
 
 import androidx.fragment.app.FragmentFactory
-import androidx.lifecycle.ViewModelProvider
 import com.almarai.easypick.adapters.route.RoutesAdapter
 
 class FragmentFactoryImpl(
@@ -15,7 +14,7 @@ class FragmentFactoryImpl(
             LoginScreen::class.java.name -> LoginScreen()
             HomeScreen::class.java.name -> HomeScreen()
             RouteSelectionScreen::class.java.name -> RouteSelectionScreen()
-            ItemsScreen::class.java.name -> ItemsScreen()
+            ProductListScreen::class.java.name -> ProductListScreen()
             FilterScreen::class.java.name -> FilterScreen()
             else -> super.instantiate(classLoader, className)
         }

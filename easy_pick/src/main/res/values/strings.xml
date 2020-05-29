@@ -9,6 +9,7 @@
     <string name="title_home">Home</string>
     <string name="title_route_selection">Routes</string>
     <string name="title_item_list">Items</string>
+    <string name="title_filter">Filter %s</string>
     <!--endregion-->
 
     <!--region Menu Titles-->
@@ -65,6 +66,7 @@
     <string name="image_description_theme_background">Theme Background</string>
     <string name="image_description_status_route">Route Status</string>
     <string name="image_description_status_item">Item Picked Status</string>
+    <string name="image_description_back_button">Back Button Image</string>
     <!--endregion-->
 
     <!--region Other labels-->

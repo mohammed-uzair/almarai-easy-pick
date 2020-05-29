@@ -1,14 +1,14 @@
 package com.almarai.data_source.web
 
 import androidx.lifecycle.MutableLiveData
-import com.almarai.data.easy_pick_models.Item
+import com.almarai.data.easy_pick_models.Product
 
-interface WebItemsDataSource {
-    fun getAllItems(
+interface WebProductsDataSource {
+    fun getAllProducts(
         depotCode: Int,
         salesDate: String,
         routeNumber: Int,
         routesPreferences: Int = 0,
-        mutableItems: MutableLiveData<List<Item>>
+        mutableItems: MutableLiveData<List<Product>>
     )
 }

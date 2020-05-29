@@ -14,6 +14,8 @@ import androidx.core.graphics.BlendModeCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.NavController
+import androidx.navigation.Navigation
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.almarai.data.easy_pick_models.Route
@@ -32,6 +34,8 @@ class RouteSelectionScreen(
     private lateinit var routesViewModel: RouteSelectionViewModel
     private val adapter by lazy { RoutesAdapter() }
 
+    lateinit var navController: NavController
+
 //    val viewModel: RouteSelectionViewModel by viewModels { viewModelFactory }
 
     override fun onCreateView(
@@ -43,6 +47,7 @@ class RouteSelectionScreen(
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        navController = Navigation.findNavController(view)
 
         routesViewModel = ViewModelProvider(this).get(RouteSelectionViewModel::class.java)
 
@@ -72,6 +77,10 @@ class RouteSelectionScreen(
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when (item.itemId) {
+            R.id.menu_route_action_filter -> navController.navigate(R.id.action_routeSelectionScreen_to_filterScreen)
+        }
+
         return super.onOptionsItemSelected(item)
     }
 
@@ -116,7 +125,7 @@ class RouteSelectionScreen(
         )
 
         val toolbar: Toolbar =
-            (activity as MainActivity).findViewById(R.id.fragment_container_toolbar_included_layout)
+            (activity as MainActivity).findViewById(R.id.toolbar)
 
         toolbar.setTitleTextColor(resources.getColor(android.R.color.white, theme))
 

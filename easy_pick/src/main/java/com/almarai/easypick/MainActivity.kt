@@ -5,10 +5,9 @@ import android.view.MenuItem
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
-import kotlinx.android.synthetic.main.fragment_container.*
+import kotlinx.android.synthetic.main.toolbar.*
 import org.koin.androidx.fragment.android.setupKoinFragmentFactory
 import org.koin.core.KoinComponent
-
 
 class MainActivity : AppCompatActivity(), KoinComponent {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -34,9 +33,8 @@ class MainActivity : AppCompatActivity(), KoinComponent {
     }
 
     private fun init() {
-        setSupportActionBar(fragment_container_toolbar_included_layout as Toolbar)
+        setSupportActionBar(toolbar as Toolbar)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
-//        fragment_container_toolbar_included_layout.bringToFront()
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {

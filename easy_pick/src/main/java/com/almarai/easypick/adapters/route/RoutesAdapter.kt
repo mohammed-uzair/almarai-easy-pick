@@ -50,7 +50,7 @@ class RoutesAdapter : RecyclerView.Adapter<RoutesAdapter.ViewHolder>() {
     override fun getItemCount() = list!!.size
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        val route = list!![holder.adapterPosition]
+        val route = list!![holder.bindingAdapterPosition]
 
         holder.routeNumber.text = route.number.toString()
         holder.routeDescription.text = route.description

@@ -67,7 +67,7 @@ class LaunchScreen : Fragment() {
 //            }
 //            activity?.recreate()
 
-            navController.navigate(R.id.action_launchScreen_to_networkConfiurationScreen)
+            navController.navigate(R.id.action_launchScreen_to_networkConfigurationScreen)
 
 //            when {
 //                !(viewModel.networkConfigurationCompleted()) -> {

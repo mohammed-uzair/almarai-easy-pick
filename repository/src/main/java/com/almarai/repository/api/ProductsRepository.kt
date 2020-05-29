@@ -1,14 +1,14 @@
 package com.almarai.repository.api
 
 import androidx.lifecycle.MutableLiveData
-import com.almarai.data.easy_pick_models.Item
+import com.almarai.data.easy_pick_models.Product
 
-interface ItemsRepository {
-    fun getAllItems(
+interface ProductsRepository {
+    fun getAllProducts(
         depotCode: Int,
         salesDate: String,
         routeNumber: Int,
         routesPreferences: Int = 0,
-        mutableItems: MutableLiveData<List<Item>>
+        mutableItems: MutableLiveData<List<Product>>
     )
 }

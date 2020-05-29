@@ -15,6 +15,6 @@ val FragmentModule = module {
     fragment { LoginScreen() }
     fragment { HomeScreen() }
     fragment { RouteSelectionScreen() }
-    fragment { ItemsScreen() }
+    fragment { ProductListScreen() }
     fragment { FilterScreen() }
 }

@@ -8,7 +8,7 @@ import androidx.navigation.NavController
 import androidx.navigation.Navigation
 import com.almarai.easypick.R
 import com.almarai.easypick.view_models.NetworkConfiurationScreenViewModel
-import kotlinx.android.synthetic.main.screen_network_confiuration.*
+import kotlinx.android.synthetic.main.screen_network_configuration.*
 
 class NetworkConfigurationScreen : Fragment() {
     lateinit var navController: NavController
@@ -23,7 +23,7 @@ class NetworkConfigurationScreen : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.screen_network_confiuration, container, false)
+        return inflater.inflate(R.layout.screen_network_configuration, container, false)
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
@@ -44,7 +44,7 @@ class NetworkConfigurationScreen : Fragment() {
         activity?.title = getString(R.string.title_network_configuration)
 
         screen_network_config_save_button.setOnClickListener {
-            navController.navigate(R.id.action_networkConfiurationScreen_to_dataConfigurationScreen)
+            navController.navigate(R.id.action_networkConfigurationScreen_to_dataConfigurationScreen)
         }
     }
 

@@ -19,19 +19,19 @@
             app:popExitAnim="@anim/anim_screen_slide_out_right" />
     </fragment>
     <fragment
-        android:id="@+id/networkConfiurationScreen"
+        android:id="@+id/networkConfigurationScreen"
         android:name="com.almarai.easypick.screens.NetworkConfigurationScreen"
-        android:label="screen_network_confiuration"
-        tools:layout="@layout/screen_network_confiuration">
+        android:label="screen_network_configuration"
+        tools:layout="@layout/screen_network_configuration">
         <action
-            android:id="@+id/action_networkConfiurationScreen_to_loginScreen"
+            android:id="@+id/action_networkConfigurationScreen_to_loginScreen"
             app:destination="@id/loginScreen"
             app:enterAnim="@anim/anim_screen_slide_in_right"
             app:exitAnim="@anim/anim_screen_slide_out_left"
             app:popEnterAnim="@anim/anim_screen_slide_in_left"
             app:popExitAnim="@anim/anim_screen_slide_out_right" />
         <action
-            android:id="@+id/action_networkConfiurationScreen_to_dataConfigurationScreen"
+            android:id="@+id/action_networkConfigurationScreen_to_dataConfigurationScreen"
             app:destination="@id/dataConfigurationScreen"
             app:enterAnim="@anim/anim_screen_slide_in_right"
             app:exitAnim="@anim/anim_screen_slide_out_left"
@@ -64,12 +64,16 @@
             app:popEnterAnim="@anim/anim_screen_slide_in_left"
             app:popExitAnim="@anim/anim_screen_slide_out_right" />
         <action
-            android:id="@+id/action_routeSelectionScreen_to_filterScreen2"
-            app:destination="@id/filterScreen2" />
+            android:id="@+id/action_routeSelectionScreen_to_filterScreen"
+            app:destination="@id/filterScreen"
+            app:enterAnim="@anim/anim_screen_slide_in_right"
+            app:exitAnim="@anim/anim_screen_slide_out_left"
+            app:popEnterAnim="@anim/anim_screen_slide_in_left"
+            app:popExitAnim="@anim/anim_screen_slide_out_right"/>
     </fragment>
     <fragment
         android:id="@+id/productListScreen"
-        android:name="com.almarai.easypick.screens.ItemsScreen"
+        android:name="com.almarai.easypick.screens.ProductListScreen"
         android:label="screen_product_list"
         tools:layout="@layout/screen_items">
         <action
@@ -80,8 +84,12 @@
             app:popEnterAnim="@anim/anim_screen_slide_in_left"
             app:popExitAnim="@anim/anim_screen_slide_out_right" />
         <action
-            android:id="@+id/action_productListScreen_to_filterScreen2"
-            app:destination="@id/filterScreen2" />
+            android:id="@+id/action_productListScreen_to_filterScreen"
+            app:destination="@id/filterScreen"
+            app:enterAnim="@anim/anim_screen_slide_in_right"
+            app:exitAnim="@anim/anim_screen_slide_out_left"
+            app:popEnterAnim="@anim/anim_screen_slide_in_left"
+            app:popExitAnim="@anim/anim_screen_slide_out_right"/>
     </fragment>
     <fragment
         android:id="@+id/homeScreen"
@@ -96,8 +104,8 @@
             app:popEnterAnim="@anim/anim_screen_slide_in_left"
             app:popExitAnim="@anim/anim_screen_slide_out_right" />
         <action
-            android:id="@+id/action_homeScreen_to_networkConfiurationScreen"
-            app:destination="@id/networkConfiurationScreen"
+            android:id="@+id/action_homeScreen_to_networkConfigurationScreen"
+            app:destination="@id/networkConfigurationScreen"
             app:enterAnim="@anim/anim_screen_slide_in_right"
             app:exitAnim="@anim/anim_screen_slide_out_left"
             app:popEnterAnim="@anim/anim_screen_slide_in_left"
@@ -115,8 +123,8 @@
         android:name="com.almarai.easypick.screens.LaunchScreen"
         android:label="LaunchScreen">
         <action
-            android:id="@+id/action_launchScreen_to_networkConfiurationScreen"
-            app:destination="@id/networkConfiurationScreen"
+            android:id="@+id/action_launchScreen_to_networkConfigurationScreen"
+            app:destination="@id/networkConfigurationScreen"
             app:enterAnim="@anim/anim_screen_slide_in_right"
             app:exitAnim="@anim/anim_screen_slide_out_left"
             app:popEnterAnim="@anim/anim_screen_slide_in_left"
@@ -130,7 +138,7 @@
             app:popExitAnim="@anim/anim_screen_slide_out_right" />
     </fragment>
     <fragment
-        android:id="@+id/filterScreen2"
+        android:id="@+id/filterScreen"
         android:name="com.almarai.easypick.screens.FilterScreen"
         android:label="FilterScreen" />
 </navigation>

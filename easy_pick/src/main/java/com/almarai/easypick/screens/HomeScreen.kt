@@ -61,7 +61,7 @@ class HomeScreen : Fragment(), View.OnClickListener {
     override fun onClick(v: View?) {
         when (v?.id) {
             R.id.home_screen_routes_button -> navController.navigate(R.id.action_homeScreen_to_routeSelectionScreen)
-            R.id.home_screen_network_configuration_button -> navController.navigate(R.id.action_homeScreen_to_networkConfiurationScreen)
+            R.id.home_screen_network_configuration_button -> navController.navigate(R.id.action_homeScreen_to_networkConfigurationScreen)
             R.id.home_screen_data_configuration_button -> navController.navigate(R.id.action_homeScreen_to_dataConfigurationScreen)
 //            R.id.home_screen_settings_button -> navController.navigate(R.id.action_homeScreen_to_routeSelectionScreen)
 //            R.id.home_screen_statistics_button -> navController.navigate(R.id.action_homeScreen_to_routeSelectionScreen)
@@ -96,7 +96,7 @@ class HomeScreen : Fragment(), View.OnClickListener {
         )
 
         val toolbar: Toolbar =
-            (activity as MainActivity).findViewById(R.id.fragment_container_toolbar_included_layout)
+            (activity as MainActivity).findViewById(R.id.toolbar)
 
         toolbar.setTitleTextColor(titleAndIconsColor)
 

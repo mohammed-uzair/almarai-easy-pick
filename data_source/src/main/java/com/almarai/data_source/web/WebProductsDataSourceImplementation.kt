@@ -1,30 +1,30 @@
 package com.almarai.data_source.web
 
 import androidx.lifecycle.MutableLiveData
-import com.almarai.data.easy_pick_models.Item
+import com.almarai.data.easy_pick_models.Product
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-class WebItemsDataSourceImplementation(private val webClient: WebService) : WebItemsDataSource {
+class WebProductsDataSourceImplementation(private val webClient: WebService) : WebProductsDataSource {
     //Fetch the data from data source as a web service for now
-    private var mWebService: ItemsApi? = webClient.client?.create(ItemsApi::class.java)
+    private var mWebService: ProductsApi? = webClient.client?.create(ProductsApi::class.java)
 
-    override fun getAllItems(
+    override fun getAllProducts(
         depotCode: Int,
         salesDate: String,
         routeNumber: Int,
         routesPreferences: Int,
-        mutableItems: MutableLiveData<List<Item>>
+        mutableItems: MutableLiveData<List<Product>>
     ) {
-        mWebService?.getAllItems()
-            ?.enqueue(object : Callback<List<Item>> {
-                override fun onFailure(call: Call<List<Item>>, t: Throwable) {
+        mWebService?.getAllProducts()
+            ?.enqueue(object : Callback<List<Product>> {
+                override fun onFailure(call: Call<List<Product>>, t: Throwable) {
                     println("Debugger mine - Failed it ${t.message}")
                     mutableItems.postValue(listOf())
                 }
 
-                override fun onResponse(call: Call<List<Item>>, response: Response<List<Item>>) {
+                override fun onResponse(call: Call<List<Product>>, response: Response<List<Product>>) {
                     println("Debugger mine - failed it ${response.body()}")
 
                     mutableItems.postValue(response.body())

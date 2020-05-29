@@ -85,10 +85,6 @@ Reasy_pick/src/main/java/com/almarai/easypick/screens/NetworkConfigurationScreen
 Seasy_pick/src/main/java/com/almarai/easypick/view_models/RouteSelectionViewModel.kt,8/5/856410341d3d0a6ab00b83e78d19a2534c86859b
 x
 Heasy_pick/src/main/java/com/almarai/easypick/di/FragmentFactoryModule.kt,e/6/e6e6bc3e2f3b180948640f20d86da444dc81acb3
-Y
-)easy_pick/src/main/res/layout/toolbar.xml,f/d/fd144f17ec8af0d43743db7291d9112522e5b8c5
-d
-4easy_pick/src/main/res/layout/fragment_container.xml,3/4/34ae0211dcc2cbe05043d3edc8f4b7ef3b54e6d6
 G
 repository/build.gradle,c/d/cd9ab70eebe94b4085d868aeb0d58a74b634877b
 {
@@ -97,8 +93,6 @@ y
 Ieasy_pick/src/main/java/com/almarai/easypick/view_models/ItemViewModel.kt,3/4/346d45b0976c31e366308ef0a5426d8594765b3a
 s
 Ceasy_pick/src/main/java/com/almarai/easypick/screens/ItemsScreen.kt,b/3/b36b5b6ef848ecba2b683218edbfbece5445ef3d
-@
-local.properties,0/7/0712df971a99ac4d2fccb8e0fb19f377f3374cca
 A
 gradle.properties,2/a/2afbb999f001938c88fa43fc2ef52abf0f8213e4
 W
