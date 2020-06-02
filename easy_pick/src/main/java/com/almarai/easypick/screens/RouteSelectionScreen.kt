@@ -2,7 +2,6 @@ package com.almarai.easypick.screens
 
 import android.content.res.Resources
 import android.graphics.Color
-import android.graphics.PorterDuff
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.util.TypedValue
@@ -140,7 +139,7 @@ class RouteSelectionScreen(
 
         arr.recycle()
 
-        requireActivity().actionBar?.themedContext?.setTheme(R.style.Theme_Base_ToolbarThemeWhite)
+        requireActivity().actionBar?.themedContext?.setTheme(R.style.Theme_Base_ToolbarThemeLight)
     }
 
     private fun setRecyclerView() {

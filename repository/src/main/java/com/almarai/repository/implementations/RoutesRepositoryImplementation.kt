@@ -1,8 +1,8 @@
-package com.almarai.repository.api_implementations
+package com.almarai.repository.implementations
 
 import androidx.lifecycle.MutableLiveData
 import com.almarai.data.easy_pick_models.Route
-import com.almarai.data_source.web.WebRoutesDataSource
+import com.almarai.data_source.web.interfaces.WebRoutesDataSource
 import com.almarai.repository.api.RoutesRepository
 
 class RoutesRepositoryImplementation(private val webRoutesDataSource: WebRoutesDataSource) :

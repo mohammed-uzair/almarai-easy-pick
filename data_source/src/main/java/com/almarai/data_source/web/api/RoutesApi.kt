@@ -1,4 +1,4 @@
-package com.almarai.data_source.web
+package com.almarai.data_source.web.api
 
 import com.almarai.data.easy_pick_models.Route
 import retrofit2.Call

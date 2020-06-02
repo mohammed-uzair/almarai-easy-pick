@@ -26,7 +26,6 @@ import com.almarai.easypick.view_models.ProductListViewModel
 import kotlinx.android.synthetic.main.main_recycler_view.*
 import kotlinx.android.synthetic.main.screen_items.*
 
-
 class ProductListScreen : Fragment() {
     //     Lazy Inject ViewModel
     private lateinit var productListViewModel: ProductListViewModel
@@ -136,7 +135,7 @@ class ProductListScreen : Fragment() {
 
         arr.recycle()
 
-        requireActivity().actionBar?.themedContext?.setTheme(R.style.Theme_Base_ToolbarThemeWhite)
+        requireActivity().actionBar?.themedContext?.setTheme(R.style.Theme_Base_ToolbarThemeLight)
     }
 
     private fun setRecyclerView() {

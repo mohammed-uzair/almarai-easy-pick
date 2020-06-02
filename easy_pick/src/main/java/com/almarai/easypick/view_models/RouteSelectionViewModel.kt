@@ -4,7 +4,6 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.almarai.data.easy_pick_models.Route
 import com.almarai.repository.api.RoutesRepository
-import com.almarai.repository.api_implementations.RoutesRepositoryImplementation
 import org.koin.core.KoinComponent
 import org.koin.core.inject
 

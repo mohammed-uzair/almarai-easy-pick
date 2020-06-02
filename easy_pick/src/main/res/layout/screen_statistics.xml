@@ -13,7 +13,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.6" />
+        app:layout_constraintGuide_percent="0.4" />
 
     <ImageView
         android:id="@+id/screen_network_config_background_image"
@@ -30,23 +30,21 @@
         android:id="@+id/login_screen_greetings_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/_40sdp"
-        android:layout_marginTop="@dimen/_30sdp"
-        android:text="120,000"
-        android:textColor="?attr/colorButtonText"
-        android:textSize="50sp"
+        android:layout_marginStart="@dimen/_15sdp"
+        android:layout_marginTop="@dimen/_15sdp"
+        android:textSize="40sp"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="120,000" />
 
     <TextView
         android:id="@+id/textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
-        android:text="Sheets of papers saved"
-        android:textColor="?attr/colorButtonText"
-        android:textSize="20sp"
+        android:text="@string/sheets_of_papers_saved"
+        android:textSize="16sp"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="@+id/login_screen_greetings_text"
         app:layout_constraintTop_toBottomOf="@+id/login_screen_greetings_text" />

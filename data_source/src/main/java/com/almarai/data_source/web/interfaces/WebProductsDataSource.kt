@@ -1,4 +1,4 @@
-package com.almarai.data_source.web
+package com.almarai.data_source.web.interfaces
 
 import androidx.lifecycle.MutableLiveData
 import com.almarai.data.easy_pick_models.Product

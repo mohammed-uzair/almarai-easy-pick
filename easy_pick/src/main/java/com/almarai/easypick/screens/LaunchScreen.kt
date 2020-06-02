@@ -18,10 +18,6 @@ import kotlinx.android.synthetic.main.screen_launch.*
 class LaunchScreen : Fragment() {
     lateinit var navController: NavController
 
-    companion object {
-        fun newInstance() = LaunchScreen()
-    }
-
     private lateinit var viewModel: LaunchScreenViewModel
 
     override fun onStop() {
@@ -49,6 +45,7 @@ class LaunchScreen : Fragment() {
     }
 
     private fun init() {
+        //Hide the toolbar
         (activity as AppCompatActivity).supportActionBar?.hide()
 
         screen_launch_made_with_love_text.text =
@@ -60,13 +57,6 @@ class LaunchScreen : Fragment() {
         animateUI()
 
         screen_launch_launch_button.setOnClickListener {
-////            //todo testing the theme changing functionality
-//            THEME_SET++
-//            if (THEME_SET > 2) {
-//                THEME_SET = 0
-//            }
-//            activity?.recreate()
-
             navController.navigate(R.id.action_launchScreen_to_networkConfigurationScreen)
 
 //            when {
@@ -86,7 +76,6 @@ class LaunchScreen : Fragment() {
     private fun animateUI() {
         val bottomUp = AnimationUtils.loadAnimation(activity, R.anim.bottom_up)
         val upBottom = AnimationUtils.loadAnimation(activity, R.anim.up_bottom)
-        val fadeIn = AnimationUtils.loadAnimation(activity, R.anim.anim_screen_fade_in)
 
         screen_launch_animation.startAnimation(bottomUp)
 
@@ -97,10 +86,5 @@ class LaunchScreen : Fragment() {
         screen_launch_app_name_text.startAnimation(upBottom)
         screen_launch_app_description_text.startAnimation(upBottom)
         screen_launch_app_version_text.startAnimation(upBottom)
-
-//        YoYo.with(Techniques.FadeIn)
-//            .delay(300)
-//            .duration(1200)
-//            .playOn(launch_screen_theme_changer_view)
     }
 }

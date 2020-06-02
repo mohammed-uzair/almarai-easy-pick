@@ -1,0 +1,23 @@
+<resources>
+    <string-array name="app_theme_entities">
+        <item>Light</item>
+        <item>Dark</item>
+        <item>Night</item>
+    </string-array>
+
+    <string-array name="app_theme_values">
+        <item>light</item>
+        <item>dark</item>
+        <item>night</item>
+    </string-array>
+
+    <string-array name="app_language_entities">
+        <item>English</item>
+        <item>Arabic</item>
+    </string-array>
+
+    <string-array name="app_language_values">
+        <item>english</item>
+        <item>arabic</item>
+    </string-array>
+</resources>

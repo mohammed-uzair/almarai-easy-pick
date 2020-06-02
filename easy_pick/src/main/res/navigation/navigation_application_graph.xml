@@ -69,7 +69,7 @@
             app:enterAnim="@anim/anim_screen_slide_in_right"
             app:exitAnim="@anim/anim_screen_slide_out_left"
             app:popEnterAnim="@anim/anim_screen_slide_in_left"
-            app:popExitAnim="@anim/anim_screen_slide_out_right"/>
+            app:popExitAnim="@anim/anim_screen_slide_out_right" />
     </fragment>
     <fragment
         android:id="@+id/productListScreen"
@@ -89,13 +89,13 @@
             app:enterAnim="@anim/anim_screen_slide_in_right"
             app:exitAnim="@anim/anim_screen_slide_out_left"
             app:popEnterAnim="@anim/anim_screen_slide_in_left"
-            app:popExitAnim="@anim/anim_screen_slide_out_right"/>
+            app:popExitAnim="@anim/anim_screen_slide_out_right" />
     </fragment>
     <fragment
         android:id="@+id/homeScreen"
         android:name="com.almarai.easypick.screens.HomeScreen"
         android:label="main_recycler_view"
-        tools:layout="@layout/main_recycler_view">
+        tools:layout="@layout/screen_home">
         <action
             android:id="@+id/action_homeScreen_to_routeSelectionScreen"
             app:destination="@id/routeSelectionScreen"
@@ -117,11 +117,26 @@
             app:exitAnim="@anim/anim_screen_slide_out_left"
             app:popEnterAnim="@anim/anim_screen_slide_in_left"
             app:popExitAnim="@anim/anim_screen_slide_out_right" />
+        <action
+            android:id="@+id/action_homeScreen_to_statisticsScreen"
+            app:destination="@id/statisticsScreen"
+            app:enterAnim="@anim/anim_screen_slide_in_right"
+            app:exitAnim="@anim/anim_screen_slide_out_left"
+            app:popEnterAnim="@anim/anim_screen_slide_in_left"
+            app:popExitAnim="@anim/anim_screen_slide_out_right" />
+        <action
+            android:id="@+id/action_homeScreen_to_settingsScreen"
+            app:destination="@id/settingsScreen"
+            app:enterAnim="@anim/anim_screen_slide_in_right"
+            app:exitAnim="@anim/anim_screen_slide_out_left"
+            app:popEnterAnim="@anim/anim_screen_slide_in_left"
+            app:popExitAnim="@anim/anim_screen_slide_out_right" />
     </fragment>
     <fragment
         android:id="@+id/launchScreen"
         android:name="com.almarai.easypick.screens.LaunchScreen"
-        android:label="LaunchScreen">
+        android:label="LaunchScreen"
+        tools:layout="@layout/screen_launch">
         <action
             android:id="@+id/action_launchScreen_to_networkConfigurationScreen"
             app:destination="@id/networkConfigurationScreen"
@@ -140,5 +155,15 @@
     <fragment
         android:id="@+id/filterScreen"
         android:name="com.almarai.easypick.screens.FilterScreen"
-        android:label="FilterScreen" />
+        android:label="FilterScreen"
+        tools:layout="@layout/screen_filter" />
+    <fragment
+        android:id="@+id/statisticsScreen"
+        android:name="com.almarai.easypick.screens.StatisticsScreen"
+        android:label="StatisticsScreen"
+        tools:layout="@layout/screen_statistics" />
+    <fragment
+        android:id="@+id/settingsScreen"
+        android:name="com.almarai.easypick.screens.SettingsScreen"
+        android:label="SettingsScreen" />
 </navigation>

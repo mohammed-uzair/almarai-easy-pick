@@ -56,6 +56,9 @@ class HomeScreen : Fragment(), View.OnClickListener {
         home_screen_routes_button.setOnClickListener(this)
         home_screen_network_configuration_button.setOnClickListener(this)
         home_screen_data_configuration_button.setOnClickListener(this)
+        home_screen_settings_button.setOnClickListener(this)
+        home_screen_statistics_button.setOnClickListener(this)
+        home_screen_exit_app_button.setOnClickListener(this)
     }
 
     override fun onClick(v: View?) {
@@ -63,8 +66,8 @@ class HomeScreen : Fragment(), View.OnClickListener {
             R.id.home_screen_routes_button -> navController.navigate(R.id.action_homeScreen_to_routeSelectionScreen)
             R.id.home_screen_network_configuration_button -> navController.navigate(R.id.action_homeScreen_to_networkConfigurationScreen)
             R.id.home_screen_data_configuration_button -> navController.navigate(R.id.action_homeScreen_to_dataConfigurationScreen)
-//            R.id.home_screen_settings_button -> navController.navigate(R.id.action_homeScreen_to_routeSelectionScreen)
-//            R.id.home_screen_statistics_button -> navController.navigate(R.id.action_homeScreen_to_routeSelectionScreen)
+            R.id.home_screen_settings_button -> navController.navigate(R.id.action_homeScreen_to_settingsScreen)
+            R.id.home_screen_statistics_button -> navController.navigate(R.id.action_homeScreen_to_statisticsScreen)
 //            R.id.home_screen_exit_app_button -> navController.navigate(R.id.action_homeScreen_to_routeSelectionScreen)
         }
     }
@@ -106,6 +109,6 @@ class HomeScreen : Fragment(), View.OnClickListener {
 
         arr.recycle()
 
-        requireActivity().actionBar?.themedContext?.setTheme(R.style.Theme_Base_ToolbarThemeWhite)
+        requireActivity().actionBar?.themedContext?.setTheme(R.style.Theme_Base_ToolbarThemeLight)
     }
 }

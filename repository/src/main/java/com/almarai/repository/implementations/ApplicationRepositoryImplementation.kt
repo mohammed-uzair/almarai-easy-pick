@@ -1,4 +1,4 @@
-package com.almarai.repository.api_implementations
+package com.almarai.repository.implementations
 
 import com.almarai.repository.api.ApplicationRepository
 

@@ -16,7 +16,7 @@
 
     <color name="baseColorBackgroundTheme">#F2F2F2</color>
     <color name="baseColorBackgroundSurface">#FFFFFF</color>
-    <color name="baseColorHomeScreenSurface">#F2F2F2</color>
+    <color name="baseColorHomeScreenSurface">#FFFFFF</color>
     <color name="baseColorHomeScreenTitle">#59AB61</color>
     <color name="baseColorFilterScreenTitle">#59AB61</color>
     <color name="baseColorScreenTitle">#59AB61</color>

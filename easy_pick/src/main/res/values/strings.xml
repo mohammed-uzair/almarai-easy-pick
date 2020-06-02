@@ -3,11 +3,14 @@
     <string name="app_description">Picking Products Made Easy</string>
 
     <!--region Screen Titles-->
-    <string name="title_network_configuration">Network Configuration</string>
-    <string name="title_login">Login</string>
-    <string name="title_data_configuration">Data Configuration</string>
-    <string name="title_home">Home</string>
     <string name="title_route_selection">Routes</string>
+    <string name="title_network_configuration">Network Configuration</string>
+    <string name="title_data_configuration">Data Configuration</string>
+    <string name="title_settings">Settings</string>
+    <string name="title_statistics">Statistics</string>
+    <string name="title_exit">Exit</string>
+    <string name="title_login">Login</string>
+    <string name="title_home">Home</string>
     <string name="title_item_list">Items</string>
     <string name="title_filter">Filter %s</string>
     <!--endregion-->
@@ -75,6 +78,7 @@
     <string name="server_port">Server Port</string>
     <string name="dept_code">Depot Code</string>
     <string name="preference">Preference</string>
+    <string name="sheets_of_papers_saved">Sheets of papers saved</string>
     <!--endregion-->
 
     <!--region Route Products Preferences-->
@@ -86,6 +90,19 @@
         <item>IPNC</item>
         <item>Non IPNC</item>
     </string-array>
+
+    <!--region Setting Screen Titles-->
+    <string name="general">General</string>
+    <string name="app_theme">App Theme</string>
+    <string name="app_language">App Language</string>
+
+    <string name="base_app_theme">base</string>
+    <string name="light_app_theme">light</string>
+    <string name="dark_app_theme">dark</string>
+    <string name="night_app_theme">night</string>
+
+    <string name="english_app_language">english</string>
+    <string name="arabic_app_language">arabic</string>
     <!--endregion-->
 
 </resources>

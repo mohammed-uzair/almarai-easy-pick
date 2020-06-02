@@ -1,14 +1,19 @@
-package com.almarai.data_source.web
+package com.almarai.data_source.web.implementation
 
 import androidx.lifecycle.MutableLiveData
 import com.almarai.data.easy_pick_models.Route
+import com.almarai.data_source.web.interfaces.WebRoutesDataSource
+import com.almarai.data_source.web.WebService
+import com.almarai.data_source.web.api.RoutesApi
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-class WebRoutesDataSourceImplementation(private val webClient: WebService) : WebRoutesDataSource {
+class WebRoutesDataSourceImplementation(private val webClient: WebService) :
+    WebRoutesDataSource {
     //Fetch the data from data source as a web service for now
-    private var mWebService: RoutesApi? = webClient.client?.create(RoutesApi::class.java)
+    private var mWebService: RoutesApi? = webClient.client?.create(
+        RoutesApi::class.java)
 
     override fun getAllRoutes(
         depotCode: Int,

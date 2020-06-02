@@ -9,7 +9,7 @@
     tools:context=".screens.LoginScreen">
 
     <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/screen_network_config_guideline_for_background_theme"
+        android:id="@+id/screen_home_guideline_for_background_theme"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
@@ -19,134 +19,154 @@
         android:id="@+id/screen_network_config_background_image"
         android:layout_width="0dp"
         android:layout_height="0dp"
+        android:contentDescription="@string/image_description_theme_background"
         android:scaleType="fitXY"
         android:src="@drawable/ic_other_screens_background"
-        app:layout_constraintBottom_toTopOf="@+id/screen_network_config_guideline_for_background_theme"
+        app:layout_constraintBottom_toTopOf="@id/screen_home_guideline_for_background_theme"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <com.airbnb.lottie.LottieAnimationView
         android:id="@+id/screen_network_config_animation"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:src="@drawable/ic_settings"
-        app:layout_constraintBottom_toTopOf="@+id/screen_network_config_guideline_for_background_theme"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:src="@drawable/ic_temp_home_background"
+        app:layout_constraintBottom_toTopOf="@id/screen_home_guideline_for_background_theme"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:lottie_autoPlay="true"
         app:lottie_loop="true"
-        app:lottie_rawRes="@raw/anim_network"
-        tools:src="@drawable/ic_settings" />
+        tools:src="@drawable/ic_temp_home_background" />
 
-    <View
-        android:id="@+id/view"
-        android:layout_width="1dp"
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraintLayout"
+        android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_marginTop="@dimen/_50sdp"
-        android:layout_marginBottom="@dimen/_50sdp"
-        android:background="?attr/colorPrimary"
+        android:layout_marginStart="@dimen/_10sdp"
+        android:layout_marginTop="@dimen/_20sdp"
+        android:layout_marginEnd="@dimen/_10sdp"
+        android:layout_marginBottom="@dimen/_20sdp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/screen_network_config_guideline_for_background_theme" />
+        app:layout_constraintTop_toTopOf="@id/screen_home_guideline_for_background_theme"
+        app:layout_constraintVertical_bias="0.0">
 
-    <View
-        android:id="@+id/view1"
-        android:layout_width="0dp"
-        android:layout_height="1dp"
-        android:layout_marginStart="@dimen/_20sdp"
-        android:layout_marginEnd="@dimen/_20sdp"
-        android:background="?attr/colorPrimary"
-        app:layout_constraintBottom_toBottomOf="@+id/home_screen_data_configuration_button"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/home_screen_data_configuration_button" />
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/screen_home_guideline_for_center_menu_contents"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.5" />
 
-    <View
-        android:id="@+id/view2"
-        android:layout_width="0dp"
-        android:layout_height="1dp"
-        android:layout_marginStart="@dimen/_20sdp"
-        android:layout_marginEnd="@dimen/_20sdp"
-        android:background="?attr/colorPrimary"
-        app:layout_constraintBottom_toTopOf="@+id/home_screen_data_configuration_button"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/home_screen_network_configuration_button" />
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/screen_home_guideline_for_shelf_one_menu_contents"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.33" />
 
-    <Button
-        android:id="@+id/home_screen_routes_button"
-        style="@style/HomeButtonStyle"
-        android:layout_height="0dp"
-        android:layout_marginStart="@dimen/_20sdp"
-        android:drawableTop="@drawable/ic_route"
-        android:text="ROUTES"
-        android:textColor="?attr/colorTextPrimary"
-        app:layout_constraintBottom_toBottomOf="@+id/home_screen_network_configuration_button"
-        app:layout_constraintEnd_toStartOf="@+id/view"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/home_screen_network_configuration_button" />
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/screen_home_guideline_for_shelf_two_menu_contents"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.66" />
 
-    <Button
-        android:id="@+id/home_screen_data_configuration_button"
-        style="@style/HomeButtonStyle"
-        android:layout_marginStart="@dimen/_20sdp"
-        android:drawableTop="@drawable/ic_data_configuration"
-        android:text="DATA\nCONFIGURATION"
-        android:textColor="?attr/colorTextPrimary"
-        app:layout_constraintEnd_toStartOf="@+id/view"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/home_screen_network_configuration_button" />
+        <View
+            android:id="@+id/view"
+            android:layout_width="1dp"
+            android:layout_height="0dp"
+            android:background="?attr/colorPrimary"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/screen_home_guideline_for_center_menu_contents"
+            app:layout_constraintStart_toStartOf="@id/screen_home_guideline_for_center_menu_contents"
+            app:layout_constraintTop_toTopOf="parent" />
 
-    <Button
-        android:id="@+id/home_screen_statistics_button"
-        style="@style/HomeButtonStyle"
-        android:layout_marginStart="@dimen/_20sdp"
-        android:drawableTop="@drawable/ic_statistics"
-        android:text="STATISTICS\n"
-        android:textColor="?attr/colorTextPrimary"
-        app:layout_constraintEnd_toStartOf="@+id/view"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/home_screen_data_configuration_button" />
+        <View
+            android:id="@+id/view1"
+            android:layout_width="0dp"
+            android:layout_height="1dp"
+            android:background="?attr/colorPrimary"
+            app:layout_constraintBottom_toTopOf="@id/screen_home_guideline_for_shelf_two_menu_contents"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@id/screen_home_guideline_for_shelf_two_menu_contents" />
 
-    <Button
-        android:id="@+id/home_screen_network_configuration_button"
-        style="@style/HomeButtonStyle"
-        android:layout_marginTop="@dimen/_40sdp"
-        android:layout_marginEnd="@dimen/_20sdp"
-        android:drawableTop="@drawable/ic_network_configuration"
-        android:text="NETWORK CONFIGURATION"
-        android:textColor="?attr/colorTextPrimary"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="@id/view"
-        app:layout_constraintTop_toTopOf="@+id/screen_network_config_guideline_for_background_theme" />
+        <View
+            android:id="@+id/view2"
+            android:layout_width="0dp"
+            android:layout_height="1dp"
+            android:background="?attr/colorPrimary"
+            app:layout_constraintBottom_toTopOf="@id/screen_home_guideline_for_shelf_one_menu_contents"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@id/screen_home_guideline_for_shelf_one_menu_contents" />
 
-    <Button
-        android:id="@+id/home_screen_settings_button"
-        style="@style/HomeButtonStyle"
-        android:layout_height="0dp"
-        android:layout_marginEnd="@dimen/_20sdp"
-        android:drawableTop="@drawable/ic_settings"
-        android:text="SETTINGS"
-        android:textColor="?attr/colorTextPrimary"
-        app:layout_constraintBottom_toBottomOf="@+id/home_screen_data_configuration_button"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="@id/view"
-        app:layout_constraintTop_toBottomOf="@+id/home_screen_routes_button" />
+        <Button
+            android:id="@+id/home_screen_routes_button"
+            style="@style/HomeButtonStyle"
+            android:drawableTop="@drawable/ic_route"
+            android:text="@string/title_route_selection"
+            app:layout_constraintBottom_toTopOf="@id/screen_home_guideline_for_shelf_one_menu_contents"
+            app:layout_constraintEnd_toStartOf="@id/screen_home_guideline_for_center_menu_contents"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
-    <Button
-        android:id="@+id/home_screen_exit_app_button"
-        style="@style/HomeButtonStyle"
-        android:layout_height="0dp"
-        android:layout_marginEnd="@dimen/_20sdp"
-        android:drawableTop="@drawable/ic_exit"
-        android:text="EXIT"
-        android:textColor="?attr/colorTextPrimary"
-        app:layout_constraintBottom_toBottomOf="@+id/home_screen_statistics_button"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="@id/view"
-        app:layout_constraintTop_toBottomOf="@+id/home_screen_data_configuration_button" />
+        <Button
+            android:id="@+id/home_screen_data_configuration_button"
+            style="@style/HomeButtonStyle"
+            android:drawableTop="@drawable/ic_data_configuration"
+            android:text="@string/title_data_configuration"
+            app:layout_constraintBottom_toTopOf="@+id/screen_home_guideline_for_shelf_two_menu_contents"
+            app:layout_constraintEnd_toStartOf="@id/screen_home_guideline_for_center_menu_contents"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@id/screen_home_guideline_for_shelf_one_menu_contents" />
+
+        <Button
+            android:id="@+id/home_screen_statistics_button"
+            style="@style/HomeButtonStyle"
+            android:drawableTop="@drawable/ic_statistics"
+            android:text="@string/title_statistics"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/screen_home_guideline_for_center_menu_contents"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@id/screen_home_guideline_for_shelf_two_menu_contents" />
+
+        <Button
+            android:id="@+id/home_screen_network_configuration_button"
+            style="@style/HomeButtonStyle"
+            android:drawableTop="@drawable/ic_network_configuration"
+            android:text="@string/title_network_configuration"
+            app:layout_constraintBottom_toTopOf="@id/screen_home_guideline_for_shelf_one_menu_contents"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@id/screen_home_guideline_for_center_menu_contents"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <Button
+            android:id="@+id/home_screen_settings_button"
+            style="@style/HomeButtonStyle"
+            android:drawableTop="@drawable/ic_settings"
+            android:text="@string/title_settings"
+            app:layout_constraintBottom_toTopOf="@id/screen_home_guideline_for_shelf_two_menu_contents"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@id/screen_home_guideline_for_center_menu_contents"
+            app:layout_constraintTop_toTopOf="@id/screen_home_guideline_for_shelf_one_menu_contents" />
+
+        <Button
+            android:id="@+id/home_screen_exit_app_button"
+            style="@style/HomeButtonStyle"
+            android:drawableTop="@drawable/ic_exit"
+            android:text="@string/title_exit"
+            android:textColor="?attr/colorTextPrimary"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@id/screen_home_guideline_for_center_menu_contents"
+            app:layout_constraintTop_toTopOf="@id/screen_home_guideline_for_shelf_two_menu_contents" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

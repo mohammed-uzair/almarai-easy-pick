@@ -31,15 +31,14 @@
         android:id="@+id/screen_data_config_animation"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:src="@drawable/ic_settings"
+        android:src="@drawable/ic_temp_data_configuration_background"
         app:layout_constraintBottom_toTopOf="@id/screen_data_config_guideline_for_background_theme"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:lottie_autoPlay="true"
         app:lottie_loop="true"
-        app:lottie_rawRes="@raw/anim_network"
-        tools:src="@drawable/ic_settings" />
+        tools:src="@drawable/ic_temp_data_configuration_background" />
 
     <com.almarai.alm_ui.AlmEditText
         android:id="@+id/screen_data_config_server_ip_edit_text"
