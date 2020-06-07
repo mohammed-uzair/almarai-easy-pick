@@ -73,42 +73,42 @@ class HomeScreen : Fragment(), View.OnClickListener {
     }
 
     private fun setToolbarTheme() {
-        // Get the primary text color of the theme
-        val typedValue = TypedValue()
-        val theme: Resources.Theme = requireActivity().theme
-        theme.resolveAttribute(android.R.attr.textColorPrimary, typedValue, true)
-
-        val arr = requireActivity().obtainStyledAttributes(
-            typedValue.data, intArrayOf(
-                android.R.attr.colorPrimary
-            )
-        )
-
-        val arr1 = requireActivity().obtainStyledAttributes(
-            typedValue.data, intArrayOf(
-                R.attr.colorBackgroundTheme
-            )
-        )
-
-        val titleAndIconsColor = arr.getColor(0, -1)
-        val backgroundColor = arr1.getColor(0, -1)
-
-
-        (activity as AppCompatActivity).supportActionBar?.setBackgroundDrawable(
-            ColorDrawable(backgroundColor)
-        )
-
-        val toolbar: Toolbar =
-            (activity as MainActivity).findViewById(R.id.toolbar)
-
-        toolbar.setTitleTextColor(titleAndIconsColor)
-
-        val upArrow = resources.getDrawable(R.drawable.abc_ic_ab_back_material, theme)
-        upArrow.setColorFilter(titleAndIconsColor, PorterDuff.Mode.SRC_ATOP);
-        (activity as MainActivity).supportActionBar?.setHomeAsUpIndicator(upArrow)
-
-        arr.recycle()
-
-        requireActivity().actionBar?.themedContext?.setTheme(R.style.Theme_Base_ToolbarThemeLight)
+//        // Get the primary text color of the theme
+//        val typedValue = TypedValue()
+//        val theme: Resources.Theme = requireActivity().theme
+//        theme.resolveAttribute(android.R.attr.textColorPrimary, typedValue, true)
+//
+//        val arr = requireActivity().obtainStyledAttributes(
+//            typedValue.data, intArrayOf(
+//                android.R.attr.colorPrimary
+//            )
+//        )
+//
+//        val arr1 = requireActivity().obtainStyledAttributes(
+//            typedValue.data, intArrayOf(
+//                R.attr.colorBackgroundTheme
+//            )
+//        )
+//
+//        val titleAndIconsColor = arr.getColor(0, -1)
+//        val backgroundColor = arr1.getColor(0, -1)
+//
+//
+//        (activity as AppCompatActivity).supportActionBar?.setBackgroundDrawable(
+//            ColorDrawable(backgroundColor)
+//        )
+//
+//        val toolbar: Toolbar =
+//            (activity as MainActivity).findViewById(R.id.toolbar)
+//
+//        toolbar.setTitleTextColor(titleAndIconsColor)
+//
+//        val upArrow = resources.getDrawable(R.drawable.abc_ic_ab_back_material, theme)
+//        upArrow.setColorFilter(titleAndIconsColor, PorterDuff.Mode.SRC_ATOP);
+//        (activity as MainActivity).supportActionBar?.setHomeAsUpIndicator(upArrow)
+//
+//        arr.recycle()
+//
+//        requireActivity().actionBar?.themedContext?.setTheme(R.style.Theme_Base_ToolbarThemeLight)
     }
 }

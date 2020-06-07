@@ -1,5 +1,6 @@
 package com.almarai.easypick
 
+import android.R.id
 import android.content.SharedPreferences
 import android.os.Bundle
 import android.view.MenuItem
@@ -7,12 +8,15 @@ import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import androidx.preference.PreferenceManager
+import com.google.firebase.analytics.FirebaseAnalytics
 import kotlinx.android.synthetic.main.toolbar.*
 import org.koin.androidx.fragment.android.setupKoinFragmentFactory
 import org.koin.core.KoinComponent
 
+
 class MainActivity : AppCompatActivity(), KoinComponent {
     private lateinit var sharedPreferences: SharedPreferences
+    private lateinit var mFirebaseAnalytics: FirebaseAnalytics
 
     override fun onCreate(savedInstanceState: Bundle?) {
         setupKoinFragmentFactory()
@@ -21,6 +25,9 @@ class MainActivity : AppCompatActivity(), KoinComponent {
         setAppTheme()
 
         setContentView(R.layout.fragment_container)
+
+        // Obtain the FirebaseAnalytics instance.
+        mFirebaseAnalytics = FirebaseAnalytics.getInstance(this)
 
         init()
     }
@@ -49,6 +56,10 @@ class MainActivity : AppCompatActivity(), KoinComponent {
     private fun init() {
         setSupportActionBar(toolbar as Toolbar)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
+
+        val bundle = Bundle()
+        bundle.putString("screen_name", "Main Activity")
+        mFirebaseAnalytics.logEvent("screen_opened", bundle)
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {

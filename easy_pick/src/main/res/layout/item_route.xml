@@ -3,8 +3,9 @@
     android:id="@+id/item_route_root"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="?attr/colorBackgroundSurface"
-    android:focusable="true">
+    android:background="?attr/colorListItemBackground"
+    android:orientation="horizontal"
+    android:weightSum="6">
 
     <ImageView
         android:id="@+id/item_route_status_image"

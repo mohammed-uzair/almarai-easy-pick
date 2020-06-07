@@ -5,7 +5,7 @@
     android:id="@+id/network_config_screen_root"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="?attr/colorHomeScreenSurface"
+    android:background="?colorBackgroundScreenBody"
     tools:context=".screens.LoginScreen">
 
     <androidx.constraintlayout.widget.Guideline
@@ -80,7 +80,7 @@
             android:id="@+id/view"
             android:layout_width="1dp"
             android:layout_height="0dp"
-            android:background="?attr/colorPrimary"
+            android:background="?attr/colorHomeMenuDivider"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@id/screen_home_guideline_for_center_menu_contents"
             app:layout_constraintStart_toStartOf="@id/screen_home_guideline_for_center_menu_contents"
@@ -90,7 +90,7 @@
             android:id="@+id/view1"
             android:layout_width="0dp"
             android:layout_height="1dp"
-            android:background="?attr/colorPrimary"
+            android:background="?attr/colorHomeMenuDivider"
             app:layout_constraintBottom_toTopOf="@id/screen_home_guideline_for_shelf_two_menu_contents"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -100,7 +100,7 @@
             android:id="@+id/view2"
             android:layout_width="0dp"
             android:layout_height="1dp"
-            android:background="?attr/colorPrimary"
+            android:background="?attr/colorHomeMenuDivider"
             app:layout_constraintBottom_toTopOf="@id/screen_home_guideline_for_shelf_one_menu_contents"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -161,7 +161,6 @@
             style="@style/HomeButtonStyle"
             android:drawableTop="@drawable/ic_exit"
             android:text="@string/title_exit"
-            android:textColor="?attr/colorTextPrimary"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="@id/screen_home_guideline_for_center_menu_contents"

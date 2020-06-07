@@ -1,21 +1,32 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <attr name="colorTextPrimary" format="color"/>
+    <attr name="colorStatusBar" format="color" />
+    <attr name="colorToolbar" format="color" />
+    <attr name="colorNavigationBar" format="color" />
 
-    <attr name="colorButtonBase" format="color"/>
-    <attr name="colorButtonHighlight" format="color" />
-    <attr name="colorButtonText" format="color" />
+    <attr name="colorToolbarTitle" format="color" />
+    <attr name="colorToolbarSubTitle" format="color" />
+    <attr name="colorToolbarIcons" format="color" />
 
-    <attr name="colorIcon" format="color" />
+    <attr name="colorBackgroundScreenHeader" format="color" />
+    <attr name="colorBackgroundScreenBody" format="color" />
 
-    <attr name="colorBackgroundTheme" format="color" />
-    <attr name="colorBackgroundSurface" format="color" />
-    <attr name="colorListDataHolder" format="color" />
-    <attr name="colorHomeScreenSurface" format="color" />
-    <attr name="colorHomeScreenTitle" format="color" />
-    <attr name="colorFilterScreenTitle" format="color" />
-    <attr name="colorScreenTitle" format="color" />
+    <attr name="colorTitle" format="color" />
+    <attr name="colorSubTitle" format="color" />
+    <attr name="colorText" format="color" />
+    <attr name="colorButton" format="color" />
 
-    <attr name="styleTextViewPrimary" format="reference" />
-    <attr name="styleButtonPrimary" format="reference" />
+    <attr name="colorHomeMenuIcons" format="color" />
+    <attr name="colorHomeMenuDivider" format="color" />
+
+    <attr name="colorListBackground" format="color" />
+    <attr name="colorListHeaderBackground" format="color" />
+    <attr name="colorListHeaderTitle" format="color" />
+    <attr name="colorListItemBackground" format="color" />
+    <attr name="colorListItemDivider" format="color" />
+
+    <attr name="colorFilterScreenDivider" format="color" />
+
+    <attr name="styleTextView" format="reference" />
+    <attr name="styleButton" format="reference" />
 </resources>

@@ -104,38 +104,38 @@ class ProductListScreen : Fragment() {
 
     @SuppressLint("PrivateResource")
     private fun setToolbarTheme() {
-        // Get the primary text color of the theme
-        val typedValue = TypedValue()
-        val theme: Resources.Theme = requireActivity().theme
-        theme.resolveAttribute(android.R.attr.textColorPrimary, typedValue, true)
-        val arr = requireActivity().obtainStyledAttributes(
-            typedValue.data, intArrayOf(
-                android.R.attr.colorPrimary
-            )
-        )
-        val primaryColor = arr.getColor(0, -1)
-
-
-        (activity as AppCompatActivity).supportActionBar?.setBackgroundDrawable(
-            ColorDrawable(primaryColor)
-        )
-
-        val toolbar: Toolbar =
-            (activity as MainActivity).findViewById(R.id.toolbar)
-
-        toolbar.setTitleTextColor(resources.getColor(android.R.color.white, theme))
-
-        val upArrow = resources.getDrawable(R.drawable.abc_ic_ab_back_material, theme)
-        upArrow.colorFilter =
-            BlendModeColorFilterCompat.createBlendModeColorFilterCompat(
-                Color.parseColor("#FFFFFF"),
-                BlendModeCompat.SRC_ATOP
-            )
-        (activity as MainActivity).supportActionBar?.setHomeAsUpIndicator(upArrow)
-
-        arr.recycle()
-
-        requireActivity().actionBar?.themedContext?.setTheme(R.style.Theme_Base_ToolbarThemeLight)
+//        // Get the primary text color of the theme
+//        val typedValue = TypedValue()
+//        val theme: Resources.Theme = requireActivity().theme
+//        theme.resolveAttribute(android.R.attr.textColorPrimary, typedValue, true)
+//        val arr = requireActivity().obtainStyledAttributes(
+//            typedValue.data, intArrayOf(
+//                android.R.attr.colorPrimary
+//            )
+//        )
+//        val primaryColor = arr.getColor(0, -1)
+//
+//
+//        (activity as AppCompatActivity).supportActionBar?.setBackgroundDrawable(
+//            ColorDrawable(primaryColor)
+//        )
+//
+//        val toolbar: Toolbar =
+//            (activity as MainActivity).findViewById(R.id.toolbar)
+//
+//        toolbar.setTitleTextColor(resources.getColor(android.R.color.white, theme))
+//
+//        val upArrow = resources.getDrawable(R.drawable.abc_ic_ab_back_material, theme)
+//        upArrow.colorFilter =
+//            BlendModeColorFilterCompat.createBlendModeColorFilterCompat(
+//                Color.parseColor("#FFFFFF"),
+//                BlendModeCompat.SRC_ATOP
+//            )
+//        (activity as MainActivity).supportActionBar?.setHomeAsUpIndicator(upArrow)
+//
+//        arr.recycle()
+//
+//        requireActivity().actionBar?.themedContext?.setTheme(R.style.Theme_Base_ToolbarTheme)
     }
 
     private fun setRecyclerView() {

@@ -3,6 +3,7 @@
   <component name="CompilerConfiguration">
     <bytecodeTargetLevel>
       <module name="business" target="1.7" />
+      <module name="Easy Pick-business" target="1.7" />
     </bytecodeTargetLevel>
   </component>
 </project>

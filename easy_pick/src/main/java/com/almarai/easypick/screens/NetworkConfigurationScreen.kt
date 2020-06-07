@@ -46,12 +46,18 @@ class NetworkConfigurationScreen : Fragment() {
         setToolbarTheme()
 
         screen_network_config_save_button.setOnClickListener {
+            validateData()
+
             navController.navigate(R.id.action_networkConfigurationScreen_to_dataConfigurationScreen)
         }
     }
 
-    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
-        inflater.inflate(R.menu.menu_item_screen, menu)
+    private fun validateData(){
+        validateIpAddress()
+    }
+
+    private fun validateIpAddress() {
+
     }
 
     private fun setToolbarTheme() {
@@ -87,6 +93,6 @@ class NetworkConfigurationScreen : Fragment() {
 //
 //        arr.recycle()
 
-        requireActivity().actionBar?.themedContext?.setTheme(R.style.Theme_Base_ToolbarTheme)
+//        requireActivity().actionBar?.themedContext?.setTheme(R.style.Theme_Base_ToolbarTheme)
     }
 }

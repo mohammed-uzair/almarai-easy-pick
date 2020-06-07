@@ -7,7 +7,7 @@
         <item name="android:maxLines">1</item>
         <item name="android:ellipsize">end</item>
         <item name="android:gravity">center</item>
-        <item name="android:textColor">?attr/colorTextPrimary</item>
+        <item name="android:textColor">?attr/colorText</item>
     </style>
     <!--endregion-->
 
@@ -24,8 +24,8 @@
         <item name="android:imeOptions">actionNext</item>
         <item name="android:padding">@dimen/_10sdp</item>
         <item name="android:selectAllOnFocus">true</item>
-        <item name="android:textColor">?attr/colorTextPrimary</item>
-        <item name="android:textColorHint">?attr/colorTextPrimary</item>
+        <item name="android:textColor">?attr/colorText</item>
+        <item name="android:textColorHint">?attr/colorText</item>
     </style>
     <!--endregion-->
 
@@ -52,7 +52,7 @@
         <item name="android:layout_width">0dp</item>
         <item name="android:layout_height">0dp</item>
         <item name="android:padding">@dimen/_15sdp</item>
-        <item name="android:textColor">?attr/colorTextPrimary</item>
+        <item name="android:textColor">?attr/colorText</item>
         <item name="android:focusable">true</item>
         <item name="android:background">@drawable/home_button</item>
         <item name="android:gravity">center</item>
@@ -64,18 +64,18 @@
     <style name="ToolBarStyle">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">?attr/actionBarSize</item>
-        <item name="android:background">?attr/colorBackgroundTheme</item>
-        <item name="titleTextColor">?attr/colorPrimary</item>
+        <item name="android:background">?attr/colorToolbar</item>
+        <item name="theme">@style/ToolbarTheme</item>
     </style>
     <!--endregion-->
 
     <!--region Grid Style-->
     <style name="AlmGridItemsTextView" parent="android:Widget.Material.TextView">
-        <item name="android:textColor">?attr/colorTextPrimary</item>
+        <item name="android:textColor">?attr/colorText</item>
         <item name="android:width">0dp</item>
         <item name="android:maxLines">1</item>
         <item name="android:textStyle">bold</item>
-        <item name="android:paddingStart">@dimen/_2sdp</item>
+        <item name="android:paddingStart">@dimen/_4sdp</item>
         <item name="android:paddingEnd">@dimen/_2sdp</item>
         <item name="android:paddingTop">@dimen/_5sdp</item>
         <item name="android:paddingBottom">@dimen/_5sdp</item>
@@ -86,28 +86,9 @@
     </style>
 
     <style name="AlmGridTitleTextView" parent="AlmGridItemsTextView">
-        <item name="android:textColor">@android:color/white</item>
+        <item name="android:textColor">?colorListHeaderTitle</item>
         <item name="android:gravity">center</item>
-        <item name="android:background">@null</item>
+        <item name="android:background">?colorListHeaderBackground</item>
     </style>
     <!--endregion-->
-
-    <style name="ToolbarTheme" parent="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
-        <!-- android:textColorPrimary is the color of the title text in the Toolbar  -->
-        <item name="android:textColorPrimary">@android:color/holo_blue_light</item>
-        <!-- actionMenuTextColor is the color of the text of action (menu) items  -->
-        <item name="actionMenuTextColor">@android:color/holo_green_light</item>
-        <!-- Tints the input fields like checkboxes and text fields -->
-        <item name="colorAccent">?attr/colorAccent</item>
-        <!-- Applies to views in their normal state. -->
-        <item name="colorControlNormal">?attr/colorPrimary</item>
-        <!-- Applies to views in their activated state (i.e checked or switches) -->
-        <item name="colorControlActivated">?attr/colorPrimary</item>
-        <!-- Applied to framework control highlights (i.e ripples or list selectors) -->
-        <item name="colorControlHighlight">?attr/colorPrimary</item>
-
-        <!-- Enable these below if you want clicking icons to trigger a ripple effect -->
-        <item name="selectableItemBackground">?android:selectableItemBackground</item>
-        <item name="selectableItemBackgroundBorderless">?android:selectableItemBackground</item>
-    </style>
 </resources>

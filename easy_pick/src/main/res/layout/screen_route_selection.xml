@@ -5,6 +5,7 @@
     android:id="@+id/screen_route_selection_root"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="?colorListBackground"
     tools:context=".screens.LoginScreen">
 
     <androidx.constraintlayout.widget.Guideline
@@ -14,16 +15,6 @@
         android:orientation="horizontal"
         app:layout_constraintGuide_percent="0.32" />
 
-    <View
-        android:id="@+id/screen_route_selection_background_theme_dark_view"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:background="?attr/colorPrimaryDark"
-        app:layout_constraintBottom_toTopOf="@id/screen_route_selection_guideline_for_background_theme"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
     <ImageView
         android:id="@+id/screen_route_selection_background_image"
         android:layout_width="0dp"
@@ -32,7 +23,6 @@
         android:contentDescription="@string/image_description_theme_background"
         android:scaleType="fitXY"
         android:src="@drawable/ic_other_screens_background"
-        android:tint="?attr/colorPrimary"
         app:layout_constraintBottom_toTopOf="@id/screen_route_selection_guideline_for_background_theme"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -44,7 +34,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/_20sdp"
         android:text="@string/route_serviced"
-        android:textColor="@android:color/white"
+        android:textColor="?colorTitle"
         android:textSize="30sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
@@ -56,7 +46,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/_16sdp"
-        android:textColor="@android:color/white"
+        android:textColor="?colorTitle"
         android:textSize="50sp"
         android:textStyle="bold"
         app:layout_constraintBaseline_toBaselineOf="@+id/screen_route_selection_serviced_label"
@@ -69,7 +59,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/_16sdp"
         android:layout_marginEnd="@dimen/_16sdp"
-        android:textColor="@android:color/white"
+        android:textColor="?colorTitle"
         android:textSize="50sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toStartOf="@id/screen_route_selection_serving_label"
@@ -81,35 +71,49 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/route_serving"
-        android:textColor="@android:color/white"
+        android:textColor="?colorTitle"
         android:textSize="30sp"
         android:textStyle="bold"
         app:layout_constraintBaseline_toBaselineOf="@+id/screen_route_selection_serving_text"
         app:layout_constraintEnd_toEndOf="@id/screen_route_selection_serviced_label" />
 
-    <TextView
-        android:id="@+id/screen_route_selection_title_route_number"
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:id="@+id/screen_routes_header_titles_layout"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/_50sdp"
-        android:text="@string/route_number"
-        android:textColor="@android:color/white"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@id/screen_route_selection_guideline_for_background_theme"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/screen_route_selection_background_image" />
-
-    <TextView
-        android:id="@+id/screen_route_selection_title_route_description"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/_20sdp"
-        android:text="@string/route_description"
-        android:textColor="@android:color/white"
-        android:textStyle="bold"
-        app:layout_constraintBaseline_toBaselineOf="@+id/screen_route_selection_title_route_number"
+        android:orientation="horizontal"
+        android:weightSum="6"
+        app:layout_constraintBottom_toTopOf="@+id/screen_route_selection_guideline_for_background_theme"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@id/screen_route_selection_title_route_number" />
+        app:layout_constraintTop_toBottomOf="@+id/screen_route_selection_background_image">
+
+        <ImageView
+            android:id="@+id/screen_routes_status_label"
+            style="@style/AlmGridTitleTextView"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/_25sdp"
+            android:layout_weight="1"
+            android:contentDescription="@string/image_description_status_route" />
+
+        <TextView
+            android:id="@+id/screen_routes_number_label"
+            style="@style/AlmGridTitleTextView"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="2"
+            android:gravity="center"
+            android:text="@string/item_number" />
+
+        <TextView
+            android:id="@+id/screen_routes_description_label"
+            style="@style/AlmGridTitleTextView"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="3"
+            android:gravity="center"
+            android:text="@string/item_description" />
+
+    </LinearLayout>
 
     <include
         layout="@layout/main_recycler_view"

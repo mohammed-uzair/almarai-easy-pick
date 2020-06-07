@@ -5,7 +5,7 @@
     android:id="@+id/screen_data_config_root"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="?attr/colorBackgroundSurface"
+    android:background="?attr/colorBackgroundScreenBody"
     tools:context=".screens.LoginScreen">
 
     <androidx.constraintlayout.widget.Guideline
@@ -29,8 +29,9 @@
 
     <com.airbnb.lottie.LottieAnimationView
         android:id="@+id/screen_data_config_animation"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:scaleType="centerCrop"
         android:src="@drawable/ic_temp_data_configuration_background"
         app:layout_constraintBottom_toTopOf="@id/screen_data_config_guideline_for_background_theme"
         app:layout_constraintEnd_toEndOf="parent"

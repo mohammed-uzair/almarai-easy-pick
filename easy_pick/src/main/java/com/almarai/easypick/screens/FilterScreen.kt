@@ -1,9 +1,7 @@
 package com.almarai.easypick.screens
 
 import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
@@ -46,13 +44,5 @@ class FilterScreen : Fragment() {
     private fun init() {
         //Set screen title
         val title = String.format(Locale.ENGLISH, getString(R.string.title_filter), "Route")
-        filter_screen_title.text = title
-
-        //Hide the toolbar for this screen
-        (activity as AppCompatActivity).supportActionBar?.hide()
-
-        filter_screen_back_button_image_view.setOnClickListener {
-            navController.popBackStack()
-        }
     }
 }

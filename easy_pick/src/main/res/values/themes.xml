@@ -2,26 +2,39 @@
 <resources>
     <!--region Base App Theme-->
     <style name="Theme.Base" parent="Theme.AppCompat.Light.NoActionBar">
-        <item name="colorPrimary">@color/baseColorPrimary</item>
-        <item name="colorPrimaryDark">@color/baseColorPrimaryDark</item>
+        <item name="colorPrimaryDark">@color/baseColorStatusBar</item>
         <item name="colorAccent">@color/baseColorAccent</item>
 
-        <item name="colorTextPrimary">@color/baseColorText</item>
-        <item name="colorButtonBase">@color/baseColorButtonPrimaryNormal</item>
-        <item name="colorButtonHighlight">@color/baseColorButtonPrimaryHighlight</item>
-        <item name="colorButtonText">@color/baseColorButtonPrimaryText</item>
-        <item name="colorIcon">@color/baseColorIcon</item>
+        <item name="colorStatusBar">@color/baseColorStatusBar</item>
+        <item name="colorToolbar">@color/baseColorToolbar</item>
+        <item name="colorNavigationBar">@color/baseColorNavigationBar</item>
 
-        <item name="colorBackgroundTheme">@color/baseColorBackgroundTheme</item>
-        <item name="colorBackgroundSurface">@color/baseColorBackgroundSurface</item>
-        <item name="colorListDataHolder">@color/baseColorListDataHolder</item>
-        <item name="colorHomeScreenSurface">@color/baseColorHomeScreenSurface</item>
-        <item name="colorHomeScreenTitle">@color/baseColorHomeScreenTitle</item>
-        <item name="colorFilterScreenTitle">@color/baseColorFilterScreenTitle</item>
-        <item name="colorScreenTitle">@color/baseColorScreenTitle</item>
+        <item name="colorToolbarTitle">@color/baseColorToolbarTitle</item>
+        <item name="colorToolbarSubTitle">@color/baseColorToolbarSubTitle</item>
+        <item name="colorToolbarIcons">@color/baseColorToolbarIcons</item>
+
+        <item name="colorBackgroundScreenHeader">@color/baseColorBackgroundScreenHeader</item>
+        <item name="colorBackgroundScreenBody">@color/baseColorBackgroundScreenBody</item>
+
+        <item name="colorTitle">@color/baseColorTitle</item>
+        <item name="colorSubTitle">@color/baseColorSubTitle</item>
+
+        <item name="colorText">@color/baseColorText</item>
+        <item name="colorButton">@color/baseColorButton</item>
+
+        <item name="colorHomeMenuIcons">@color/baseColorHomeMenuIcons</item>
+        <item name="colorHomeMenuDivider">@color/baseColorHomeMenuDivider</item>
+
+        <item name="colorListBackground">@color/baseColorListBackground</item>
+        <item name="colorListHeaderBackground">@color/baseColorListHeaderBackground</item>
+        <item name="colorListHeaderTitle">@color/baseColorListHeaderTitle</item>
+        <item name="colorListItemBackground">@color/baseColorListItemBackground</item>
+        <item name="colorListItemDivider">@color/baseColorListItemDivider</item>
+
+        <item name="colorFilterScreenDivider">@color/baseColorFilterScreenDivider</item>
 
         <item name="android:textViewStyle">@style/PrimaryTextStyle</item>
-        <item name="styleButtonPrimary">@style/PrimaryButtonStyle</item>
+        <item name="styleButton">@style/PrimaryButtonStyle</item>
     </style>
     <!--endregion-->
 
@@ -31,63 +44,77 @@
 
     <!--region Dark Theme-->
     <style name="Theme.Base.DarkAppTheme">
-        <item name="colorPrimary">@color/darkColorPrimary</item>
-        <item name="colorPrimaryDark">@color/darkColorPrimaryDark</item>
+        <item name="colorPrimaryDark">@color/darkColorStatusBar</item>
         <item name="colorAccent">@color/darkColorAccent</item>
 
-        <item name="colorTextPrimary">@color/darkColorText</item>
-        <item name="colorButtonBase">@color/darkColorButtonPrimaryNormal</item>
-        <item name="colorButtonHighlight">@color/darkColorButtonPrimaryHighlight</item>
-        <item name="colorButtonText">@color/darkColorButtonPrimaryText</item>
-        <item name="colorIcon">@color/darkColorIcon</item>
+        <item name="colorStatusBar">@color/darkColorStatusBar</item>
+        <item name="colorToolbar">@color/darkColorToolbar</item>
+        <item name="colorNavigationBar">@color/darkColorNavigationBar</item>
 
-        <item name="colorBackgroundTheme">@color/darkColorBackgroundTheme</item>
-        <item name="colorBackgroundSurface">@color/darkColorBackgroundSurface</item>
-        <item name="colorHomeScreenSurface">@color/darkColorHomeScreenSurface</item>
-        <item name="colorListDataHolder">@color/darkColorListDataHolder</item>
-        <item name="colorHomeScreenTitle">@color/darkColorHomeScreenTitle</item>
-        <item name="colorFilterScreenTitle">@color/darkColorFilterScreenTitle</item>
-        <item name="colorScreenTitle">@color/darkColorScreenTitle</item>
+        <item name="colorToolbarTitle">@color/darkColorToolbarTitle</item>
+        <item name="colorToolbarSubTitle">@color/darkColorToolbarSubTitle</item>
+        <item name="colorToolbarIcons">@color/darkColorToolbarIcons</item>
+
+        <item name="colorBackgroundScreenHeader">@color/darkColorBackgroundScreenHeader</item>
+        <item name="colorBackgroundScreenBody">@color/darkColorBackgroundScreenBody</item>
+
+        <item name="colorTitle">@color/darkColorTitle</item>
+        <item name="colorSubTitle">@color/darkColorSubTitle</item>
+
+        <item name="colorText">@color/darkColorText</item>
+        <item name="colorButton">@color/darkColorButton</item>
+
+        <item name="colorHomeMenuIcons">@color/darkColorHomeMenuIcons</item>
+        <item name="colorHomeMenuDivider">@color/darkColorHomeMenuDivider</item>
+
+        <item name="colorListBackground">@color/darkColorListBackground</item>
+        <item name="colorListHeaderBackground">@color/darkColorListHeaderBackground</item>
+        <item name="colorListHeaderTitle">@color/darkColorListHeaderTitle</item>
+        <item name="colorListItemBackground">@color/darkColorListItemBackground</item>
+        <item name="colorListItemDivider">@color/darkColorListItemDivider</item>
+
+        <item name="colorFilterScreenDivider">@color/darkColorFilterScreenDivider</item>
     </style>
     <!--endregion-->
 
     <!--region Night Theme-->
     <style name="Theme.Base.NightAppTheme">
-        <item name="colorPrimary">@color/nightColorPrimary</item>
-        <item name="colorPrimaryDark">@color/nightColorPrimaryDark</item>
+        <item name="colorPrimaryDark">@color/nightColorStatusBar</item>
         <item name="colorAccent">@color/nightColorAccent</item>
 
-        <item name="colorTextPrimary">@color/nightColorText</item>
-        <item name="colorButtonBase">@color/nightColorButtonPrimaryNormal</item>
-        <item name="colorButtonHighlight">@color/nightColorButtonPrimaryHighlight</item>
-        <item name="colorButtonText">@color/nightColorButtonPrimaryText</item>
-        <item name="colorIcon">@color/nightColorIcon</item>
+        <item name="colorStatusBar">@color/nightColorStatusBar</item>
+        <item name="colorToolbar">@color/nightColorToolbar</item>
+        <item name="colorNavigationBar">@color/nightColorNavigationBar</item>
 
-        <item name="colorBackgroundTheme">@color/nightColorBackgroundTheme</item>
-        <item name="colorBackgroundSurface">@color/nightColorBackgroundSurface</item>
-        <item name="colorHomeScreenSurface">@color/nightColorHomeScreenSurface</item>
-        <item name="colorListDataHolder">@color/nightColorListDataHolder</item>
-        <item name="colorHomeScreenTitle">@color/nightColorHomeScreenTitle</item>
-        <item name="colorFilterScreenTitle">@color/nightColorFilterScreenTitle</item>
-        <item name="colorScreenTitle">@color/nightColorScreenTitle</item>
+        <item name="colorToolbarTitle">@color/nightColorToolbarTitle</item>
+        <item name="colorToolbarSubTitle">@color/nightColorToolbarSubTitle</item>
+        <item name="colorToolbarIcons">@color/nightColorToolbarIcons</item>
+
+        <item name="colorBackgroundScreenHeader">@color/nightColorBackgroundScreenHeader</item>
+        <item name="colorBackgroundScreenBody">@color/nightColorBackgroundScreenBody</item>
+
+        <item name="colorTitle">@color/nightColorTitle</item>
+        <item name="colorSubTitle">@color/nightColorSubTitle</item>
+
+        <item name="colorText">@color/nightColorText</item>
+        <item name="colorButton">@color/nightColorButton</item>
+
+        <item name="colorHomeMenuIcons">@color/nightColorHomeMenuIcons</item>
+        <item name="colorHomeMenuDivider">@color/nightColorHomeMenuDivider</item>
+
+        <item name="colorListBackground">@color/nightColorListBackground</item>
+        <item name="colorListHeaderBackground">@color/nightColorListHeaderBackground</item>
+        <item name="colorListHeaderTitle">@color/nightColorListHeaderTitle</item>
+        <item name="colorListItemBackground">@color/nightColorListItemBackground</item>
+        <item name="colorListItemDivider">@color/nightColorListItemDivider</item>
+
+        <item name="colorFilterScreenDivider">@color/nightColorFilterScreenDivider</item>
     </style>
     <!--endregion-->
 
     <!--region Toolbar Theme-->
-    <style name="Theme.Base.ToolbarTheme">
-        <item name="android:colorControlNormal">?attr/colorPrimary</item>
-    </style>
-
-    <style name="Theme.Base.ToolbarThemeLight">
-        <item name="android:colorControlNormal">@android:color/white</item>
-    </style>
-
-    <style name="Theme.Base.ToolbarThemeDark">
-        <item name="android:colorControlNormal">@android:color/white</item>
-    </style>
-
-    <style name="Theme.Base.ToolbarThemeNight">
-        <item name="android:colorControlNormal">@android:color/white</item>
+    <style name="ToolbarTheme">
+        <item name="android:colorControlNormal">?attr/colorToolbarIcons</item>
     </style>
     <!--endregion-->
 </resources>

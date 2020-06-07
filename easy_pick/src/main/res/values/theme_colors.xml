@@ -2,95 +2,127 @@
 <resources>
     <!--region Theme Colors-->
     <!--region Base Theme Colors-->
-    <color name="baseColorPrimary">#59AB61</color>
-    <color name="baseColorPrimaryDark">#508B5D</color>
     <color name="baseColorAccent">#59AB61</color>
+    <color name="baseColorStatusBar">#F2F2F2</color>
+    <color name="baseColorToolbar">#F2F2F2</color>
+    <color name="baseColorNavigationBar">#F2F2F2</color>
+
+    <color name="baseColorToolbarTitle">#59AB61</color>
+    <color name="baseColorToolbarSubTitle">#59AB61</color>
+    <color name="baseColorToolbarIcons">#59AB61</color>
+
+    <color name="baseColorBackgroundScreenHeader">#F2F2F2</color>
+    <color name="baseColorBackgroundScreenBody">#FAFAFA</color>
+
+    <color name="baseColorTitle">#59AB61</color>
+    <color name="baseColorSubTitle">#808183</color>
 
     <color name="baseColorText">#3C4053</color>
+    <color name="baseColorButton">#59AB61</color>
 
-    <color name="baseColorButtonPrimaryNormal">#59AB61</color>
-    <color name="baseColorButtonPrimaryHighlight">#ffffbb33</color>
-    <color name="baseColorButtonPrimaryText">#FFFFFF</color>
+    <color name="baseColorHomeMenuIcons">#59AB61</color>
+    <color name="baseColorHomeMenuDivider">#59AB61</color>
 
-    <color name="baseColorIcon">#FFFFFF</color>
+    <color name="baseColorListBackground">#E4E4E4</color>
+    <color name="baseColorListHeaderBackground">#E4E4E4</color>
+    <color name="baseColorListHeaderTitle">#3C4053</color>
+    <color name="baseColorListItemBackground">#F2F2F2</color>
+    <color name="baseColorListItemDivider">#59AB61</color>
 
-    <color name="baseColorBackgroundTheme">#F2F2F2</color>
-    <color name="baseColorBackgroundSurface">#FFFFFF</color>
-    <color name="baseColorHomeScreenSurface">#FFFFFF</color>
-    <color name="baseColorHomeScreenTitle">#59AB61</color>
-    <color name="baseColorFilterScreenTitle">#59AB61</color>
-    <color name="baseColorScreenTitle">#59AB61</color>
-
-    <color name="baseColorListDataHolder">#1E1E1E</color>
+    <color name="baseColorFilterScreenDivider">#59AB61</color>
     <!--endregion-->
 
     <!--region Light Theme Colors-->
-    <color name="lightColorPrimary">#59AB61</color>
-    <color name="lightColorPrimaryDark">#508B5D</color>
     <color name="lightColorAccent">#59AB61</color>
+    <color name="lightColorStatusBar">#F2F2F2</color>
+    <color name="lightColorToolbar">#F2F2F2</color>
+    <color name="lightColorNavigationBar">#F2F2F2</color>
+
+    <color name="lightColorToolbarTitle">#59AB61</color>
+    <color name="lightColorToolbarSubTitle">#59AB61</color>
+    <color name="lightColorToolbarIcons">#59AB61</color>
+
+    <color name="lightColorBackgroundScreenHeader">#F2F2F2</color>
+    <color name="lightColorBackgroundScreenBody">#FAFAFA</color>
+
+    <color name="lightColorTitle">#59AB61</color>
+    <color name="lightColorSubTitle">#808183</color>
 
     <color name="lightColorText">#3C4053</color>
+    <color name="lightColorButton">#59AB61</color>
 
-    <color name="lightColorButtonPrimaryNormal">#59AB61</color>
-    <color name="lightColorButtonPrimaryHighlight">#ffffbb33</color>
-    <color name="lightColorButtonPrimaryText">#FFFFFF</color>
+    <color name="lightColorHomeMenuIcons">#59AB61</color>
+    <color name="lightColorHomeMenuDivider">#59AB61</color>
 
-    <color name="lightColorIcon">#FFFFFF</color>
+    <color name="lightColorListBackground">#E4E4E4</color>
+    <color name="lightColorListHeaderBackground">#E4E4E4</color>
+    <color name="lightColorListHeaderTitle">#3C4053</color>
+    <color name="lightColorListItemBackground">#F2F2F2</color>
+    <color name="lightColorListItemDivider">#59AB61</color>
 
-    <color name="lightColorBackgroundTheme">#F2F2F2</color>
-    <color name="lightColorBackgroundSurface">#FFFFFF</color>
-    <color name="lightColorHomeScreenSurface">#F2F2F2</color>
-    <color name="lightColorHomeScreenTitle">#59AB61</color>
-    <color name="lightColorFilterScreenTitle">#59AB61</color>
-    <color name="lightColorScreenTitle">#59AB61</color>
-
-    <color name="lightColorListDataHolder">#1E1E1E</color>
+    <color name="lightColorFilterScreenDivider">#59AB61</color>
     <!--endregion-->
 
     <!--region Dark Theme Colors-->
-    <color name="darkColorPrimary">#4B5067</color>
-    <color name="darkColorPrimaryDark">#3C4053</color>
     <color name="darkColorAccent">#59AB61</color>
+    <color name="darkColorStatusBar">#3C4053</color>
+    <color name="darkColorToolbar">#3C4053</color>
+    <color name="darkColorNavigationBar">#3C4053</color>
 
-    <color name="darkColorText">#4B5067</color>
+    <color name="darkColorToolbarTitle">#FAFAFA</color>
+    <color name="darkColorToolbarSubTitle">#FAFAFA</color>
+    <color name="darkColorToolbarIcons">#FAFAFA</color>
 
-    <color name="darkColorButtonPrimaryNormal">#59AB61</color>
-    <color name="darkColorButtonPrimaryHighlight">#ffffbb33</color>
-    <color name="darkColorButtonPrimaryText">#FFFFFF</color>
+    <color name="darkColorBackgroundScreenHeader">#3C4053</color>
+    <color name="darkColorBackgroundScreenBody">#FAFAFA</color>
 
-    <color name="darkColorIcon">#FFFFFF</color>
+    <color name="darkColorTitle">#FAFAFA</color>
+    <color name="darkColorSubTitle">#FAFAFA</color>
 
-    <color name="darkColorBackgroundTheme">#3C4053</color>
-    <color name="darkColorBackgroundSurface">#FFFFFF</color>
-    <color name="darkColorHomeScreenSurface">#3B3F53</color>
-    <color name="darkColorHomeScreenTitle">#4B5067</color>
-    <color name="darkColorFilterScreenTitle">#4B5067</color>
-    <color name="darkColorScreenTitle">#F2F2F2</color>
+    <color name="darkColorText">#3C4053</color>
+    <color name="darkColorButton">#59AB61</color>
 
-    <color name="darkColorListDataHolder">#1E1E1E</color>
+    <color name="darkColorHomeMenuIcons">#59AB61</color>
+    <color name="darkColorHomeMenuDivider">#59AB61</color>
+
+    <color name="darkColorListBackground">#4A4F66</color>
+    <color name="darkColorListHeaderBackground">#4A4F66</color>
+    <color name="darkColorListHeaderTitle">#FAFAFA</color>
+    <color name="darkColorListItemBackground">#F2F2F2</color>
+    <color name="darkColorListItemDivider">#59AB61</color>
+
+    <color name="darkColorFilterScreenDivider">#59AB61</color>
     <!--endregion-->
 
     <!--region Night Theme Colors-->
-    <color name="nightColorPrimary">#1F1F1F</color>
-    <color name="nightColorPrimaryDark">#121212</color>
     <color name="nightColorAccent">#59AB61</color>
+    <color name="nightColorStatusBar">#202020</color>
+    <color name="nightColorToolbar">#202020</color>
+    <color name="nightColorNavigationBar">#202020</color>
+
+    <color name="nightColorToolbarTitle">#E2E2E2</color>
+    <color name="nightColorToolbarSubTitle">#E1E1E1</color>
+    <color name="nightColorToolbarIcons">#E2E2E2</color>
+
+    <color name="nightColorBackgroundScreenHeader">#202020</color>
+    <color name="nightColorBackgroundScreenBody">#000000</color>
+
+    <color name="nightColorTitle">#E2E2E2</color>
+    <color name="nightColorSubTitle">#E1E1E1</color>
 
     <color name="nightColorText">#E1E1E1</color>
+    <color name="nightColorButton">#59AB61</color>
 
-    <color name="nightColorButtonPrimaryNormal">#59AB61</color>
-    <color name="nightColorButtonPrimaryHighlight">#ffffbb33</color>
-    <color name="nightColorButtonPrimaryText">#FFFFFF</color>
+    <color name="nightColorHomeMenuIcons">#E2E2E2</color>
+    <color name="nightColorHomeMenuDivider">#E1E1E1</color>
 
-    <color name="nightColorIcon">#FFFFFF</color>
+    <color name="nightColorListBackground">#000000</color>
+    <color name="nightColorListHeaderBackground">#000000</color>
+    <color name="nightColorListHeaderTitle">#FAFAFA</color>
+    <color name="nightColorListItemBackground">#131313</color>
+    <color name="nightColorListItemDivider">#000000</color>
 
-    <color name="nightColorBackgroundTheme">#272727</color>
-    <color name="nightColorBackgroundSurface">#121212</color>
-    <color name="nightColorHomeScreenSurface">#121212</color>
-    <color name="nightColorHomeScreenTitle">#121212</color>
-    <color name="nightColorFilterScreenTitle">#E1E1E1</color>
-    <color name="nightColorScreenTitle">#E1E1E1</color>
-
-    <color name="nightColorListDataHolder">#1E1E1E</color>
+    <color name="nightColorFilterScreenDivider">#59AB61</color>
     <!--endregion-->
     <!--endregion-->
 </resources>

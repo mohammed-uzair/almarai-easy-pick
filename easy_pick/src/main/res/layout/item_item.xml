@@ -3,7 +3,7 @@
     android:id="@+id/item_item_root"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="?attr/colorBackgroundSurface"
+    android:background="?attr/colorListItemBackground"
     android:orientation="horizontal"
     android:weightSum="14">
 
