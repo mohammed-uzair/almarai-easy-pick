@@ -1,43 +1,34 @@
 package com.almarai.easypick.screens
 
-import android.content.res.Resources
-import android.graphics.PorterDuff
-import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
-import android.util.TypedValue
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.appcompat.app.AppCompatActivity
-import androidx.appcompat.widget.Toolbar
+import android.view.animation.AnimationUtils
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
-import com.almarai.easypick.MainActivity
 import com.almarai.easypick.R
 import com.almarai.easypick.view_models.HomeScreenViewModel
 import kotlinx.android.synthetic.main.screen_home.*
 
 class HomeScreen : Fragment(), View.OnClickListener {
-    lateinit var navController: NavController
-
-    companion object {
-        fun newInstance() = HomeScreen()
-    }
+    private lateinit var navController: NavController
 
     private lateinit var viewModel: HomeScreenViewModel
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+
+        viewModel = ViewModelProvider(this).get(HomeScreenViewModel::class.java)
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         return inflater.inflate(R.layout.screen_home, container, false)
-    }
-
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
-        viewModel = ViewModelProvider(this).get(HomeScreenViewModel::class.java)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -51,7 +42,7 @@ class HomeScreen : Fragment(), View.OnClickListener {
         //Set screen title
         activity?.title = getString(R.string.title_home)
 
-        setToolbarTheme()
+        animateUI()
 
         home_screen_routes_button.setOnClickListener(this)
         home_screen_network_configuration_button.setOnClickListener(this)
@@ -72,43 +63,19 @@ class HomeScreen : Fragment(), View.OnClickListener {
         }
     }
 
-    private fun setToolbarTheme() {
-//        // Get the primary text color of the theme
-//        val typedValue = TypedValue()
-//        val theme: Resources.Theme = requireActivity().theme
-//        theme.resolveAttribute(android.R.attr.textColorPrimary, typedValue, true)
-//
-//        val arr = requireActivity().obtainStyledAttributes(
-//            typedValue.data, intArrayOf(
-//                android.R.attr.colorPrimary
-//            )
-//        )
-//
-//        val arr1 = requireActivity().obtainStyledAttributes(
-//            typedValue.data, intArrayOf(
-//                R.attr.colorBackgroundTheme
-//            )
-//        )
-//
-//        val titleAndIconsColor = arr.getColor(0, -1)
-//        val backgroundColor = arr1.getColor(0, -1)
-//
-//
-//        (activity as AppCompatActivity).supportActionBar?.setBackgroundDrawable(
-//            ColorDrawable(backgroundColor)
-//        )
-//
-//        val toolbar: Toolbar =
-//            (activity as MainActivity).findViewById(R.id.toolbar)
-//
-//        toolbar.setTitleTextColor(titleAndIconsColor)
-//
-//        val upArrow = resources.getDrawable(R.drawable.abc_ic_ab_back_material, theme)
-//        upArrow.setColorFilter(titleAndIconsColor, PorterDuff.Mode.SRC_ATOP);
-//        (activity as MainActivity).supportActionBar?.setHomeAsUpIndicator(upArrow)
-//
-//        arr.recycle()
-//
-//        requireActivity().actionBar?.themedContext?.setTheme(R.style.Theme_Base_ToolbarThemeLight)
+    private fun animateUI() {
+        val topToBottom = AnimationUtils.loadAnimation(activity, R.anim.top_to_bottom)
+        val rightToLeft = AnimationUtils.loadAnimation(activity, R.anim.right_to_left)
+        val leftToRight = AnimationUtils.loadAnimation(activity, R.anim.left_to_right)
+
+        screen_home_background_image.startAnimation(topToBottom)
+        screen_home_animation.startAnimation(topToBottom)
+
+        home_screen_routes_button.startAnimation(leftToRight)
+        home_screen_data_configuration_button.startAnimation(leftToRight)
+        home_screen_statistics_button.startAnimation(leftToRight)
+        home_screen_network_configuration_button.startAnimation(rightToLeft)
+        home_screen_settings_button.startAnimation(rightToLeft)
+        home_screen_exit_app_button.startAnimation(rightToLeft)
     }
 }

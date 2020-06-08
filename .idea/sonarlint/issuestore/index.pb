@@ -151,14 +151,8 @@ x
 Heasy_pick/src/main/java/com/almarai/easypick/screens/StatisticsScreen.kt,0/b/0b26d0e5dde11d5aefb3f13824286be7b969b96d
 
 Oeasy_pick/src/main/java/com/almarai/easypick/view_models/StatisticsViewModel.kt,1/e/1edced944d76f5c38044847449368cd56e29a74e
-r
-Beasy_pick/src/main/res/navigation/navigation_application_graph.xml,a/8/a86bef89feb97520181ec201a6618fb8184a815f
 X
 (easy_pick/src/main/res/values/arrays.xml,f/2/f24c1902febc3aadc8cf52b37bcb8b4d6b6d20ac
-Y
-)easy_pick/src/main/res/values/strings.xml,c/4/c4fd2777f044260635e5dcaafba541fe67df74ad
-_
-/easy_pick/src/main/res/xml/root_preferences.xml,f/b/fb23b94110a13545430e9dd93c995d6e4b92ed4c
 {
 Krepository/src/main/java/com/almarai/repository/api/StatisticsRepository.kt,c/8/c8d7d1a6cf239f3fbe619a5ca183e4cb72ce9fec
 –

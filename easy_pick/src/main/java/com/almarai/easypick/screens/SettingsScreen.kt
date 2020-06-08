@@ -1,16 +1,37 @@
 package com.almarai.easypick.screens
 
 import android.os.Bundle
+import android.util.TypedValue
+import android.view.View
+import androidx.annotation.ColorInt
+import androidx.navigation.NavController
+import androidx.navigation.Navigation
 import androidx.preference.ListPreference
 import androidx.preference.Preference
 import androidx.preference.PreferenceFragmentCompat
 import com.almarai.easypick.R
 
+
 class SettingsScreen : PreferenceFragmentCompat(), Preference.OnPreferenceChangeListener {
+    private lateinit var navController: NavController
+
     override fun onCreatePreferences(savedInstanceState: Bundle?, rootKey: String?) {
-        setPreferencesFromResource(R.xml.root_preferences, rootKey)
+        setPreferencesFromResource(R.xml.app_settings_preferences, rootKey)
 
         init()
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        val typedValue = TypedValue()
+        val theme = requireContext().theme
+        theme.resolveAttribute(R.attr.colorBackgroundScreenBody, typedValue, true)
+        @ColorInt val color = typedValue.data
+
+        view.setBackgroundColor(color)
+
+        navController = Navigation.findNavController(view)
+
+        super.onViewCreated(view, savedInstanceState)
     }
 
     private fun init() {
@@ -26,6 +47,7 @@ class SettingsScreen : PreferenceFragmentCompat(), Preference.OnPreferenceChange
 
     override fun onPreferenceChange(preference: Preference?, newValue: Any?): Boolean {
         activity?.recreate()
+        navController.popBackStack()
         return true
     }
 }

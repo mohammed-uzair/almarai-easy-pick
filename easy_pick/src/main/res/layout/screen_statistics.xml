@@ -16,18 +16,18 @@
         app:layout_constraintGuide_percent="0.4" />
 
     <ImageView
-        android:id="@+id/screen_network_config_background_image"
+        android:id="@+id/screen_statistics_background_image"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:scaleType="fitXY"
         android:src="@drawable/ic_other_screens_background"
-        app:layout_constraintBottom_toTopOf="@+id/screen_network_config_guideline_for_background_theme"
+        app:layout_constraintBottom_toTopOf="@id/screen_network_config_guideline_for_background_theme"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/login_screen_greetings_text"
+        android:id="@+id/screen_statistics_physical_pages_saved_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/_15sdp"
@@ -39,15 +39,15 @@
         tools:text="120,000" />
 
     <TextView
-        android:id="@+id/textView"
+        android:id="@+id/screen_statistics_physical_pages_saved_text_summary_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:text="@string/sheets_of_papers_saved"
         android:textSize="16sp"
         android:textStyle="bold"
-        app:layout_constraintStart_toStartOf="@+id/login_screen_greetings_text"
-        app:layout_constraintTop_toBottomOf="@+id/login_screen_greetings_text" />
+        app:layout_constraintStart_toStartOf="@id/screen_statistics_physical_pages_saved_text"
+        app:layout_constraintTop_toBottomOf="@id/screen_statistics_physical_pages_saved_text" />
 
     <androidx.fragment.app.FragmentContainerView
         android:layout_width="0dp"
@@ -56,6 +56,6 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView" />
+        app:layout_constraintTop_toBottomOf="@id/screen_statistics_physical_pages_saved_text_summary_text" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

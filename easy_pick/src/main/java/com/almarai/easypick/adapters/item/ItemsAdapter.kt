@@ -9,6 +9,8 @@ import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import com.almarai.data.easy_pick_models.Product
 import com.almarai.easypick.R
+import com.almarai.easypick.utils.APP_SELECTED_LANGUAGE
+import com.almarai.easypick.utils.AppLanguage
 
 class ItemsAdapter : RecyclerView.Adapter<ItemsAdapter.ViewHolder>() {
     private var list: List<Product>? = null
@@ -53,7 +55,13 @@ class ItemsAdapter : RecyclerView.Adapter<ItemsAdapter.ViewHolder>() {
 
 //        holder.itemStatus.text = route.itemNumber.toString()
         holder.itemNumber.text = item.itemNumber.toString()
-        holder.itemDescription.text = item.itemDescription
+
+        //Check the selected language
+        when (APP_SELECTED_LANGUAGE) {
+            AppLanguage.English -> holder.itemDescription.text = item.itemDescription
+            AppLanguage.Arabic -> holder.itemDescription.text = item.itemDescriptionArabic
+        }
+
         holder.truckStock.text = item.truckStock
         holder.freshLoad.text = item.freshLoad
         holder.totalStock.text = item.totalStock

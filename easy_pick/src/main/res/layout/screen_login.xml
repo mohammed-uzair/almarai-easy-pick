@@ -16,9 +16,10 @@
         app:layout_constraintGuide_percent="0.5" />
 
     <ImageView
-        android:id="@+id/screen_network_config_background_image"
+        android:id="@+id/screen_login_background_image"
         android:layout_width="0dp"
         android:layout_height="0dp"
+        android:contentDescription="@string/image_description_theme_background"
         android:scaleType="fitXY"
         android:src="@drawable/ic_other_screens_background"
         app:layout_constraintBottom_toTopOf="@+id/screen_network_config_guideline_for_background_theme"
@@ -27,12 +28,12 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/login_screen_greetings_text"
+        android:id="@+id/screen_login_greetings_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/_40sdp"
         android:layout_marginTop="@dimen/_30sdp"
-        android:text="Hello,"
+        android:text="@string/user_greeting"
         android:textColor="?attr/colorAccent"
         android:textSize="30sp"
         android:textStyle="bold"
@@ -40,17 +41,18 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
+        android:id="@+id/screen_login_user_name_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Log In!"
         android:textColor="?attr/colorAccent"
         android:textSize="50sp"
         android:textStyle="bold"
-        app:layout_constraintStart_toStartOf="@+id/login_screen_greetings_text"
-        app:layout_constraintTop_toBottomOf="@+id/login_screen_greetings_text" />
+        app:layout_constraintStart_toStartOf="@+id/screen_login_greetings_text"
+        app:layout_constraintTop_toBottomOf="@+id/screen_login_greetings_text" />
 
     <com.airbnb.lottie.LottieAnimationView
-        android:id="@+id/screen_network_config_animation"
+        android:id="@+id/screen_login_animation"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="@dimen/_80sdp"
@@ -63,62 +65,43 @@
         app:lottie_rawRes="@raw/anim_network"
         tools:src="@drawable/ic_settings" />
 
-    <EditText
-        android:id="@+id/txtfleetNo"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/_16sdp"
-        android:layout_marginTop="@dimen/_50sdp"
-        android:background="@drawable/rounded_edit_text"
+    <com.almarai.alm_ui.AlmEditText
+        android:id="@+id/screen_login_user_name_edit_text"
+        style="@style/EditTextStyle"
         android:drawableStart="@drawable/ic_server"
-        android:drawablePadding="@dimen/_16sdp"
-        android:gravity="start|center"
-        android:hint="Username"
-        android:imeOptions="actionNext"
-        android:padding="@dimen/_8sdp"
-        android:selectAllOnFocus="true"
-        android:textColor="@android:color/black"
+        android:hint="@string/user_name"
+        android:maxLength="4"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/screen_network_config_guideline_for_background_theme">
 
         <requestFocus />
-    </EditText>
+    </com.almarai.alm_ui.AlmEditText>
 
-    <EditText
-        android:id="@+id/txtfleetNo1"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/_16sdp"
-        android:layout_marginTop="@dimen/_20sdp"
-        android:background="@drawable/rounded_edit_text"
+    <com.almarai.alm_ui.AlmEditText
+        android:id="@+id/screen_login_user_password_edit_text"
+        style="@style/EditTextStyle"
         android:drawableStart="@drawable/ic_server"
-        android:drawablePadding="@dimen/_16sdp"
-        android:gravity="start|center"
-        android:hint="Password"
-        android:imeOptions="actionNext"
-        android:padding="@dimen/_8sdp"
-        android:selectAllOnFocus="true"
-        android:textColor="@android:color/black"
+        android:hint="@string/user_name"
+        android:inputType="textPassword"
+        android:maxLength="4"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txtfleetNo">
-
-        <requestFocus />
-    </EditText>
+        app:layout_constraintTop_toBottomOf="@+id/screen_login_user_name_edit_text" />
 
     <TextView
+        android:id="@+id/screen_login_not_same_user_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Not the same user ? Logout"
         android:layout_marginBottom="@dimen/_15sdp"
+        android:text="@string/not_same_user"
         android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@+id/launch_screen_launch_button"
+        app:layout_constraintBottom_toTopOf="@+id/screen_login_button"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
     <Button
-        android:id="@+id/launch_screen_launch_button"
+        android:id="@+id/screen_login_button"
         style="@style/PrimaryButtonStyle"
         android:text="@string/button_login"
         app:layout_constraintBottom_toBottomOf="parent"

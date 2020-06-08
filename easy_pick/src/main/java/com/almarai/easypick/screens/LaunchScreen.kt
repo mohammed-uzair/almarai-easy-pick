@@ -13,16 +13,18 @@ import androidx.navigation.NavController
 import androidx.navigation.Navigation
 import com.almarai.easypick.R
 import com.almarai.easypick.view_models.LaunchScreenViewModel
+import com.almarai.repository.utils.AppDataConfiguration
 import kotlinx.android.synthetic.main.screen_launch.*
 
 class LaunchScreen : Fragment() {
-    lateinit var navController: NavController
+    private lateinit var navController: NavController
 
     private lateinit var viewModel: LaunchScreenViewModel
 
-    override fun onStop() {
-        super.onStop()
-        (activity as AppCompatActivity?)?.supportActionBar?.show()
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+
+        viewModel = ViewModelProvider(this).get(LaunchScreenViewModel::class.java)
     }
 
     override fun onCreateView(
@@ -32,16 +34,16 @@ class LaunchScreen : Fragment() {
         return inflater.inflate(R.layout.screen_launch, container, false)
     }
 
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
-        viewModel = ViewModelProvider(this).get(LaunchScreenViewModel::class.java)
-    }
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         navController = Navigation.findNavController(view)
 
         init()
+    }
+
+    override fun onStop() {
+        super.onStop()
+        (activity as AppCompatActivity?)?.supportActionBar?.show()
     }
 
     private fun init() {
@@ -57,34 +59,29 @@ class LaunchScreen : Fragment() {
         animateUI()
 
         screen_launch_launch_button.setOnClickListener {
-            navController.navigate(R.id.action_launchScreen_to_networkConfigurationScreen)
-
-//            when {
-//                !(viewModel.networkConfigurationCompleted()) -> {
-//                    navController.navigate(R.id.action_launchScreen_to_networkConfiurationScreen)
-//                }
-//                !(viewModel.userLoggedIn()) -> {
-//                    navController.navigate(R.id.action_launchScreen_to_networkConfiurationScreen)
-//                }
-//                !(viewModel.dataConfigurationCompleted()) -> {
-//                    navController.navigate(R.id.action_launchScreen_to_networkConfiurationScreen)
-//                }
-//            }
+            when (viewModel.checkAppDataConfigurations()) {
+                AppDataConfiguration.NetworkConfiguration ->
+                    navController.navigate(R.id.action_launchScreen_to_networkConfigurationScreen)
+                AppDataConfiguration.DataConfiguration ->
+                    navController.navigate(R.id.action_launchScreen_to_dataConfigurationScreen)
+                AppDataConfiguration.Home ->
+                    navController.navigate(R.id.action_launchScreen_to_homeScreen)
+            }
         }
     }
 
     private fun animateUI() {
-        val bottomUp = AnimationUtils.loadAnimation(activity, R.anim.bottom_up)
-        val upBottom = AnimationUtils.loadAnimation(activity, R.anim.up_bottom)
+        val bottomToTop = AnimationUtils.loadAnimation(activity, R.anim.bottom_to_top)
+        val topToBottom = AnimationUtils.loadAnimation(activity, R.anim.top_to_bottom)
 
-        screen_launch_animation.startAnimation(bottomUp)
+        screen_launch_animation.startAnimation(bottomToTop)
 
-        screen_launch_launch_button.startAnimation(bottomUp)
-        screen_launch_made_with_love_text.startAnimation(bottomUp)
-        screen_launch_employee_code_text.startAnimation(bottomUp)
+        screen_launch_launch_button.startAnimation(bottomToTop)
+        screen_launch_made_with_love_text.startAnimation(bottomToTop)
+        screen_launch_employee_code_text.startAnimation(bottomToTop)
 
-        screen_launch_app_name_text.startAnimation(upBottom)
-        screen_launch_app_description_text.startAnimation(upBottom)
-        screen_launch_app_version_text.startAnimation(upBottom)
+        screen_launch_app_name_text.startAnimation(topToBottom)
+        screen_launch_app_description_text.startAnimation(topToBottom)
+        screen_launch_app_version_text.startAnimation(topToBottom)
     }
 }

@@ -13,6 +13,8 @@ import androidx.navigation.Navigation
 import androidx.recyclerview.widget.RecyclerView
 import com.almarai.data.easy_pick_models.Route
 import com.almarai.easypick.R
+import com.almarai.easypick.utils.APP_SELECTED_LANGUAGE
+import com.almarai.easypick.utils.AppLanguage
 
 class RoutesAdapter : RecyclerView.Adapter<RoutesAdapter.ViewHolder>() {
     private var list: List<Route>? = null
@@ -53,10 +55,12 @@ class RoutesAdapter : RecyclerView.Adapter<RoutesAdapter.ViewHolder>() {
         val route = list!![holder.bindingAdapterPosition]
 
         holder.routeNumber.text = route.number.toString()
-        holder.routeDescription.text = route.description
 
-        //If arabic selected, then
-//        holder.routeDescription.text = route.descriptionArabic
+        //Check the selected language
+        when (APP_SELECTED_LANGUAGE) {
+            AppLanguage.English -> holder.routeDescription.text = route.description
+            AppLanguage.Arabic -> holder.routeDescription.text = route.descriptionArabic
+        }
 
         when (route.serviceStatus) {
             0 -> ImageViewCompat.setImageTintList(

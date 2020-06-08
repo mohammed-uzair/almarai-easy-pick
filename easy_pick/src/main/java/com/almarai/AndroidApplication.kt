@@ -1,6 +1,7 @@
 package com.almarai
 
 import android.app.Application
+import com.almarai.easypick.di.AppModule
 import com.almarai.easypick.di.FragmentModule
 import com.almarai.repository.di.RepositoryModule
 import org.koin.android.ext.koin.androidContext
@@ -23,8 +24,7 @@ class AndroidApplication : Application() {
             androidContext(this@AndroidApplication)
             fragmentFactory()
             // declare modules
-            modules(myModule, FragmentModule, RepositoryModule)
-//            modules(AppModule, FragmentFactoryModule, RoutesModule, ItemsModule, FragmentModule)
+            modules(AppModule, myModule, FragmentModule, RepositoryModule)
         }
     }
 }

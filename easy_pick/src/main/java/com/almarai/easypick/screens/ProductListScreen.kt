@@ -1,16 +1,8 @@
 package com.almarai.easypick.screens
 
-import android.annotation.SuppressLint
-import android.content.res.Resources
-import android.graphics.Color
-import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
-import android.util.TypedValue
 import android.view.*
-import androidx.appcompat.app.AppCompatActivity
-import androidx.appcompat.widget.Toolbar
-import androidx.core.graphics.BlendModeColorFilterCompat
-import androidx.core.graphics.BlendModeCompat
+import android.view.animation.AnimationUtils
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
@@ -19,32 +11,34 @@ import androidx.navigation.Navigation
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.almarai.data.easy_pick_models.Product
-import com.almarai.easypick.MainActivity
 import com.almarai.easypick.R
 import com.almarai.easypick.adapters.item.ItemsAdapter
 import com.almarai.easypick.view_models.ProductListViewModel
 import kotlinx.android.synthetic.main.main_recycler_view.*
-import kotlinx.android.synthetic.main.screen_items.*
+import kotlinx.android.synthetic.main.screen_product.*
 
 class ProductListScreen : Fragment() {
-    //     Lazy Inject ViewModel
     private lateinit var productListViewModel: ProductListViewModel
     private val adapter by lazy { ItemsAdapter() }
 
-    lateinit var navController: NavController
+    private lateinit var navController: NavController
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+
+        productListViewModel = ViewModelProvider(this).get(ProductListViewModel::class.java)
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.screen_items, container, false)
+        return inflater.inflate(R.layout.screen_product, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         navController = Navigation.findNavController(view)
-
-        productListViewModel = ViewModelProvider(this).get(ProductListViewModel::class.java)
 
         init()
     }
@@ -56,7 +50,6 @@ class ProductListScreen : Fragment() {
         setHasOptionsMenu(true)
 
         animateUI()
-        setToolbarTheme()
         adapter.setValues(listOf())
 
         productListViewModel.mutableItems.observe(viewLifecycleOwner, Observer { list ->
@@ -89,8 +82,8 @@ class ProductListScreen : Fragment() {
 
         val itemServiceDetails = productListViewModel.getRouteServiceDetails(list)
 
-        screen_items_total_items_text.text = "${itemServiceDetails.totalItems}"
-        screen_items_picked_text.text = itemServiceDetails.servedItems.toString()
+        screen_product_total_items_text.text = "${itemServiceDetails.totalItems}"
+        screen_product_picked_text.text = itemServiceDetails.servedItems.toString()
     }
 
     private fun showNoDataUi() {
@@ -98,44 +91,21 @@ class ProductListScreen : Fragment() {
 //        device_events_layout.visibility = View.GONE
     }
 
+
     private fun animateUI() {
+        val bottomToTop = AnimationUtils.loadAnimation(activity, R.anim.bottom_to_top)
+        val topToBottom = AnimationUtils.loadAnimation(activity, R.anim.top_to_bottom)
 
-    }
+        screen_product_background_image.startAnimation(topToBottom)
 
-    @SuppressLint("PrivateResource")
-    private fun setToolbarTheme() {
-//        // Get the primary text color of the theme
-//        val typedValue = TypedValue()
-//        val theme: Resources.Theme = requireActivity().theme
-//        theme.resolveAttribute(android.R.attr.textColorPrimary, typedValue, true)
-//        val arr = requireActivity().obtainStyledAttributes(
-//            typedValue.data, intArrayOf(
-//                android.R.attr.colorPrimary
-//            )
-//        )
-//        val primaryColor = arr.getColor(0, -1)
-//
-//
-//        (activity as AppCompatActivity).supportActionBar?.setBackgroundDrawable(
-//            ColorDrawable(primaryColor)
-//        )
-//
-//        val toolbar: Toolbar =
-//            (activity as MainActivity).findViewById(R.id.toolbar)
-//
-//        toolbar.setTitleTextColor(resources.getColor(android.R.color.white, theme))
-//
-//        val upArrow = resources.getDrawable(R.drawable.abc_ic_ab_back_material, theme)
-//        upArrow.colorFilter =
-//            BlendModeColorFilterCompat.createBlendModeColorFilterCompat(
-//                Color.parseColor("#FFFFFF"),
-//                BlendModeCompat.SRC_ATOP
-//            )
-//        (activity as MainActivity).supportActionBar?.setHomeAsUpIndicator(upArrow)
-//
-//        arr.recycle()
-//
-//        requireActivity().actionBar?.themedContext?.setTheme(R.style.Theme_Base_ToolbarTheme)
+        screen_product_total_items_label.startAnimation(topToBottom)
+        screen_product_total_items_text.startAnimation(topToBottom)
+        screen_product_picked_text.startAnimation(topToBottom)
+        screen_product_picked_label.startAnimation(topToBottom)
+
+        screen_product_header_titles_layout.startAnimation(topToBottom)
+
+        layout_main_recyclerview.startAnimation(bottomToTop)
     }
 
     private fun setRecyclerView() {

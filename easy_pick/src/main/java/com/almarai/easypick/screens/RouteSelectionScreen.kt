@@ -1,15 +1,8 @@
 package com.almarai.easypick.screens
 
-import android.content.res.Resources
-import android.graphics.Color
-import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
-import android.util.TypedValue
 import android.view.*
-import androidx.appcompat.app.AppCompatActivity
-import androidx.appcompat.widget.Toolbar
-import androidx.core.graphics.BlendModeColorFilterCompat
-import androidx.core.graphics.BlendModeCompat
+import android.view.animation.AnimationUtils
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
@@ -18,7 +11,6 @@ import androidx.navigation.Navigation
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.almarai.data.easy_pick_models.Route
-import com.almarai.easypick.MainActivity
 import com.almarai.easypick.R
 import com.almarai.easypick.adapters.route.RoutesAdapter
 import com.almarai.easypick.view_models.RouteSelectionViewModel
@@ -33,9 +25,13 @@ class RouteSelectionScreen(
     private lateinit var routesViewModel: RouteSelectionViewModel
     private val adapter by lazy { RoutesAdapter() }
 
-    lateinit var navController: NavController
+    private lateinit var navController: NavController
 
-//    val viewModel: RouteSelectionViewModel by viewModels { viewModelFactory }
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+
+        routesViewModel = ViewModelProvider(this).get(RouteSelectionViewModel::class.java)
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -48,8 +44,6 @@ class RouteSelectionScreen(
         super.onViewCreated(view, savedInstanceState)
         navController = Navigation.findNavController(view)
 
-        routesViewModel = ViewModelProvider(this).get(RouteSelectionViewModel::class.java)
-
         init()
     }
 
@@ -60,7 +54,7 @@ class RouteSelectionScreen(
         setHasOptionsMenu(true)
 
         animateUI()
-        setToolbarTheme()
+
         adapter.setValues(listOf())
 
         routesViewModel.mutableRoutes.observe(viewLifecycleOwner, Observer { list ->
@@ -103,43 +97,19 @@ class RouteSelectionScreen(
     }
 
     private fun animateUI() {
+        val bottomToTop = AnimationUtils.loadAnimation(activity, R.anim.bottom_to_top)
+        val topToBottom = AnimationUtils.loadAnimation(activity, R.anim.top_to_bottom)
 
-    }
+        screen_route_selection_background_image.startAnimation(topToBottom)
 
-    private fun setToolbarTheme() {
-//        // Get the primary text color of the theme
-//        val typedValue = TypedValue()
-//        val theme: Resources.Theme = requireActivity().theme
-//        theme.resolveAttribute(android.R.attr.textColorPrimary, typedValue, true)
-//        val arr = requireActivity().obtainStyledAttributes(
-//            typedValue.data, intArrayOf(
-//                android.R.attr.colorPrimary
-//            )
-//        )
-//        val primaryColor = arr.getColor(0, -1)
-//
-//
-//        (activity as AppCompatActivity).supportActionBar?.setBackgroundDrawable(
-//            ColorDrawable(primaryColor)
-//        )
-//
-//        val toolbar: Toolbar =
-//            (activity as MainActivity).findViewById(R.id.toolbar)
-//
-//        toolbar.setTitleTextColor(resources.getColor(android.R.color.white, theme))
-//
-//        val upArrow = resources.getDrawable(R.drawable.ic_arrow_back, theme)
-//        upArrow.colorFilter = BlendModeColorFilterCompat.createBlendModeColorFilterCompat(
-//            Color.parseColor(
-//                "#FFFFFF"
-//            ), BlendModeCompat.SRC_ATOP
-//        )
-//
-//        (activity as MainActivity).supportActionBar?.setHomeAsUpIndicator(upArrow)
-//
-//        arr.recycle()
-//
-//        requireActivity().actionBar?.themedContext?.setTheme(R.style.Theme_Base_ToolbarTheme)
+        screen_route_selection_serviced_label.startAnimation(topToBottom)
+        screen_route_selection_serviced_text.startAnimation(topToBottom)
+        screen_route_selection_serving_text.startAnimation(topToBottom)
+        screen_route_selection_serving_label.startAnimation(topToBottom)
+
+        screen_routes_header_titles_layout.startAnimation(topToBottom)
+
+        layout_main_recyclerview.startAnimation(bottomToTop)
     }
 
     private fun setRecyclerView() {

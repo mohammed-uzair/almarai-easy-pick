@@ -1,7 +1,10 @@
 package com.almarai.easypick.screens
 
 import android.os.Bundle
-import android.view.*
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
+import android.view.animation.AnimationUtils
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
@@ -17,16 +20,17 @@ class FilterScreen : Fragment() {
 
     private lateinit var viewModel: LoginScreenViewModel
 
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+
+        viewModel = ViewModelProvider(this).get(LoginScreenViewModel::class.java)
+    }
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         return inflater.inflate(R.layout.screen_filter, container, false)
-    }
-
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
-        viewModel = ViewModelProvider(this).get(LoginScreenViewModel::class.java)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -44,5 +48,17 @@ class FilterScreen : Fragment() {
     private fun init() {
         //Set screen title
         val title = String.format(Locale.ENGLISH, getString(R.string.title_filter), "Route")
+
+        animateUI()
+    }
+
+    private fun animateUI() {
+        val bottomToTop = AnimationUtils.loadAnimation(activity, R.anim.bottom_to_top)
+        val topToBottom = AnimationUtils.loadAnimation(activity, R.anim.top_to_bottom)
+
+        screen_filter_background_image.startAnimation(topToBottom)
+
+        screen_filter_no_filter_radio.startAnimation(topToBottom)
+        screen_filter_items_root.startAnimation(bottomToTop)
     }
 }

@@ -1,17 +1,21 @@
 package com.almarai.easypick
 
-import android.R.id
+import android.content.Context
 import android.content.SharedPreferences
+import android.content.res.Configuration
 import android.os.Bundle
 import android.view.MenuItem
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import androidx.preference.PreferenceManager
+import com.almarai.easypick.utils.APP_SELECTED_LANGUAGE
+import com.almarai.easypick.utils.AppLanguage
 import com.google.firebase.analytics.FirebaseAnalytics
 import kotlinx.android.synthetic.main.toolbar.*
 import org.koin.androidx.fragment.android.setupKoinFragmentFactory
 import org.koin.core.KoinComponent
+import java.util.*
 
 
 class MainActivity : AppCompatActivity(), KoinComponent {
@@ -23,6 +27,7 @@ class MainActivity : AppCompatActivity(), KoinComponent {
         super.onCreate(savedInstanceState)
 
         setAppTheme()
+        setAppLanguage()
 
         setContentView(R.layout.fragment_container)
 
@@ -53,6 +58,36 @@ class MainActivity : AppCompatActivity(), KoinComponent {
         }
     }
 
+    private fun setAppLanguage() {
+        sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this)
+        val appTheme = sharedPreferences.getString(
+            getString(R.string.app_language),
+            getString(R.string.english_app_language)
+        )
+
+        var languageCode = "en"
+        when (appTheme) {
+            getString(R.string.english_app_language) -> {
+                APP_SELECTED_LANGUAGE = AppLanguage.English
+                languageCode = "en"
+            }
+            getString(R.string.arabic_app_language) -> {
+                APP_SELECTED_LANGUAGE = AppLanguage.Arabic
+                languageCode = "ar"
+            }
+        }
+
+        val locale = Locale(languageCode)
+        Locale.setDefault(locale)
+        val config = Configuration()
+
+        config.locale = locale
+        baseContext.resources.updateConfiguration(
+            config,
+            baseContext.resources.displayMetrics
+        )
+    }
+
     private fun init() {
         setSupportActionBar(toolbar as Toolbar)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
@@ -70,5 +105,23 @@ class MainActivity : AppCompatActivity(), KoinComponent {
             }
         }
         return super.onOptionsItemSelected(item)
+    }
+
+    fun setLocale(context: Context) {
+        val locale: Locale
+//        val session = Sessions(context)
+        //Log.e("Lan",session.getLanguage());
+        //Log.e("Lan",session.getLanguage());
+        locale = Locale("ar")
+
+        val config =
+            Configuration(context.resources.configuration)
+        Locale.setDefault(locale)
+        config.setLocale(locale)
+
+        context.resources.updateConfiguration(
+            config,
+            context.resources.displayMetrics
+        )
     }
 }

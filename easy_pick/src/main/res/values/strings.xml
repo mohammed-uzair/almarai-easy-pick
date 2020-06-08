@@ -1,6 +1,6 @@
 <resources>
-    <string name="app_name">Easy Pick</string>
-    <string name="app_description">Picking Products Made Easy</string>
+    <string name="app_name" translatable="false">Easy Pick</string>
+    <string name="app_description" translatable="false">Picking Products Made Easy</string>
 
     <!--region Screen Titles-->
     <string name="title_route_selection">Routes</string>
@@ -46,9 +46,9 @@
 
     <string name="item_number">Item #</string>
     <string name="item_description">Item Description</string>
-    <string name="truck_stock">TS</string>
-    <string name="fresh_load">FL</string>
-    <string name="total_stock">TLS</string>
+    <string name="truck_stock" translatable="false">TS</string>
+    <string name="fresh_load" translatable="false">FL</string>
+    <string name="total_stock" translatable="false">TLS</string>
     <!--endregion-->
 
     <!--region Common-->
@@ -73,12 +73,17 @@
     <!--endregion-->
 
     <!--region Other labels-->
-    <string name="love_from_almarai"><![CDATA[<font color=#000000> Made with <font color=#F50909> \u2764 <font color=#000000> from <font color=#58AA61> ALMARAI]]></string>
+    <string name="love_from_almarai" translatable="false"><![CDATA[<font color=#000000> Made with <font color=#F50909> \u2764 <font color=#000000> from <font color=#58AA61> ALMARAI]]></string>
     <string name="server_ip">Server IP</string>
     <string name="server_port">Server Port</string>
+    <string name="sales_date">Sales Date</string>
     <string name="dept_code">Depot Code</string>
     <string name="preference">Preference</string>
     <string name="sheets_of_papers_saved">Sheets of papers saved</string>
+    <string name="user_name">User Name</string>
+    <string name="password">Password</string>
+    <string name="not_same_user">Not the same user ? Logout</string>
+    <string name="user_greeting">Hello,</string>
     <!--endregion-->
 
     <!--region Route Products Preferences-->
@@ -93,16 +98,16 @@
 
     <!--region Setting Screen Titles-->
     <string name="general">General</string>
-    <string name="app_theme">App Theme</string>
-    <string name="app_language">App Language</string>
+    <string name="app_theme" translatable="false">App Theme</string>
+    <string name="app_language" translatable="false">App Language</string>
 
-    <string name="base_app_theme">base</string>
-    <string name="light_app_theme">light</string>
-    <string name="dark_app_theme">dark</string>
-    <string name="night_app_theme">night</string>
+    <string name="base_app_theme" translatable="false">base</string>
+    <string name="light_app_theme" translatable="false">light</string>
+    <string name="dark_app_theme" translatable="false">dark</string>
+    <string name="night_app_theme" translatable="false">night</string>
 
-    <string name="english_app_language">english</string>
-    <string name="arabic_app_language">arabic</string>
+    <string name="english_app_language" translatable="false">english</string>
+    <string name="arabic_app_language" translatable="false">arabic</string>
     <!--endregion-->
 
 </resources>

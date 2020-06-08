@@ -16,7 +16,7 @@
         app:layout_constraintGuide_percent="0.4" />
 
     <ImageView
-        android:id="@+id/screen_network_config_background_image"
+        android:id="@+id/screen_home_background_image"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:contentDescription="@string/image_description_theme_background"
@@ -28,7 +28,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <com.airbnb.lottie.LottieAnimationView
-        android:id="@+id/screen_network_config_animation"
+        android:id="@+id/screen_home_animation"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:src="@drawable/ic_temp_home_background"
