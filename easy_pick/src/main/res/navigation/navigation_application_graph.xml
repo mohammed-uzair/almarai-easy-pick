@@ -108,6 +108,10 @@
             app:exitAnim="@anim/anim_screen_slide_out_left"
             app:popEnterAnim="@anim/anim_screen_slide_in_left"
             app:popExitAnim="@anim/anim_screen_slide_out_right" />
+        <argument
+            android:name="SELECTED_ROUTE_NUMBER"
+            app:argType="integer"
+            android:defaultValue="0" />
     </fragment>
     <fragment
         android:id="@+id/homeScreen"

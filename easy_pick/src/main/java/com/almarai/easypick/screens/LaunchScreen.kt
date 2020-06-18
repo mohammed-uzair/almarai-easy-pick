@@ -1,38 +1,21 @@
 package com.almarai.easypick.screens
 
 import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import android.view.animation.AnimationUtils
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.text.HtmlCompat
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
 import com.almarai.easypick.R
-import com.almarai.easypick.view_models.LaunchScreenViewModel
+import com.almarai.easypick.view_models.LaunchViewModel
 import com.almarai.repository.utils.AppDataConfiguration
 import kotlinx.android.synthetic.main.screen_launch.*
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
-class LaunchScreen : Fragment() {
+class LaunchScreen : Fragment(R.layout.screen_launch) {
+    private val viewModel: LaunchViewModel by viewModel()
     private lateinit var navController: NavController
-
-    private lateinit var viewModel: LaunchScreenViewModel
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-
-        viewModel = ViewModelProvider(this).get(LaunchScreenViewModel::class.java)
-    }
-
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        return inflater.inflate(R.layout.screen_launch, container, false)
-    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -49,12 +32,6 @@ class LaunchScreen : Fragment() {
     private fun init() {
         //Hide the toolbar
         (activity as AppCompatActivity).supportActionBar?.hide()
-
-        screen_launch_made_with_love_text.text =
-            HtmlCompat.fromHtml(
-                getString(R.string.love_from_almarai),
-                HtmlCompat.FROM_HTML_MODE_LEGACY
-            )
 
         animateUI()
 

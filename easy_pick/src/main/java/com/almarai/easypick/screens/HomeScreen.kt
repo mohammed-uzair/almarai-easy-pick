@@ -1,35 +1,19 @@
 package com.almarai.easypick.screens
 
 import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import android.view.animation.AnimationUtils
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
 import com.almarai.easypick.R
-import com.almarai.easypick.view_models.HomeScreenViewModel
+import com.almarai.easypick.view_models.HomeViewModel
 import kotlinx.android.synthetic.main.screen_home.*
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
-class HomeScreen : Fragment(), View.OnClickListener {
+class HomeScreen : Fragment(R.layout.screen_home), View.OnClickListener {
+    private val viewModel: HomeViewModel by viewModel()
     private lateinit var navController: NavController
-
-    private lateinit var viewModel: HomeScreenViewModel
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-
-        viewModel = ViewModelProvider(this).get(HomeScreenViewModel::class.java)
-    }
-
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        return inflater.inflate(R.layout.screen_home, container, false)
-    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -59,7 +43,7 @@ class HomeScreen : Fragment(), View.OnClickListener {
             R.id.home_screen_data_configuration_button -> navController.navigate(R.id.action_homeScreen_to_dataConfigurationScreen)
             R.id.home_screen_settings_button -> navController.navigate(R.id.action_homeScreen_to_settingsScreen)
             R.id.home_screen_statistics_button -> navController.navigate(R.id.action_homeScreen_to_statisticsScreen)
-//            R.id.home_screen_exit_app_button -> navController.navigate(R.id.action_homeScreen_to_routeSelectionScreen)
+//            R.id.home_screen_exit_app_button -> navController.navigate(R.id.action_homeScreen_to_testScreen)
         }
     }
 

@@ -1,25 +1,20 @@
 package com.almarai.repository.implementations
 
-import androidx.lifecycle.MutableLiveData
-import com.almarai.data.easy_pick_models.Product
-import com.almarai.data_source.web.interfaces.WebProductsDataSource
+import com.almarai.easypick.data_source.web.interfaces.WebProductsDataSource
 import com.almarai.repository.api.ProductsRepository
 
 class ProductsRepositoryImplementation(private val webProductsDataSource: WebProductsDataSource) :
     ProductsRepository {
-    override fun getAllProducts(
+    override suspend fun getAllProducts(
         depotCode: Int,
         salesDate: String,
         routeNumber: Int,
-        routesPreferences: Int,
-        mutableItems: MutableLiveData<List<Product>>
-    ) {
+        routesPreferences: Int
+    ) =
         webProductsDataSource.getAllProducts(
             depotCode,
             salesDate,
             routeNumber,
-            routesPreferences,
-            mutableItems
+            routesPreferences
         )
-    }
 }

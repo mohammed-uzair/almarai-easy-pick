@@ -3,7 +3,7 @@ package com.almarai.repository.implementations
 import com.almarai.data.easy_pick_models.DataConfiguration
 import com.almarai.data.easy_pick_models.NetworkConfiguration
 import com.almarai.data.easy_pick_models.User
-import com.almarai.data_source.shared_preference.interfaces.SharedPreferenceDataSource
+import com.almarai.easypick.data_source.shared_preference.interfaces.SharedPreferenceDataSource
 import com.almarai.repository.api.ApplicationRepository
 import com.almarai.repository.utils.AppDataConfiguration
 import com.almarai.repository.utils.SharedPreferencesKeys.Companion.DATA_CONFIGURATION_DEPOT_CODE

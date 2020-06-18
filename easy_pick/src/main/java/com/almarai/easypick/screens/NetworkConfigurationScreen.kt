@@ -1,37 +1,21 @@
 package com.almarai.easypick.screens
 
 import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import android.view.animation.AnimationUtils
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
 import com.almarai.data.easy_pick_models.NetworkConfiguration
 import com.almarai.easypick.R
-import com.almarai.easypick.view_models.NetworkConfigurationScreenViewModel
+import com.almarai.easypick.view_models.NetworkConfigurationViewModel
 import com.almarai.repository.utils.AppDataConfiguration
 import kotlinx.android.synthetic.main.screen_network_configuration.*
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
-class NetworkConfigurationScreen : Fragment() {
+class NetworkConfigurationScreen : Fragment(R.layout.screen_network_configuration) {
+    private val viewModel: NetworkConfigurationViewModel by viewModel()
     private lateinit var navController: NavController
-
-    private lateinit var viewModel: NetworkConfigurationScreenViewModel
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-
-        viewModel = ViewModelProvider(this).get(NetworkConfigurationScreenViewModel::class.java)
-    }
-
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        return inflater.inflate(R.layout.screen_network_configuration, container, false)
-    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)

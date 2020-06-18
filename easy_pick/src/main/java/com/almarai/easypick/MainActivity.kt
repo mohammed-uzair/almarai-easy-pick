@@ -3,20 +3,20 @@ package com.almarai.easypick
 import android.content.Context
 import android.content.SharedPreferences
 import android.content.res.Configuration
+import android.os.Build
 import android.os.Bundle
 import android.view.MenuItem
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import androidx.preference.PreferenceManager
-import com.almarai.easypick.utils.APP_SELECTED_LANGUAGE
-import com.almarai.easypick.utils.AppLanguage
+import com.almarai.easypick.utils.*
 import com.google.firebase.analytics.FirebaseAnalytics
+import kotlinx.android.synthetic.main.fragment_container.*
 import kotlinx.android.synthetic.main.toolbar.*
 import org.koin.androidx.fragment.android.setupKoinFragmentFactory
 import org.koin.core.KoinComponent
 import java.util.*
-
 
 class MainActivity : AppCompatActivity(), KoinComponent {
     private lateinit var sharedPreferences: SharedPreferences
@@ -27,7 +27,6 @@ class MainActivity : AppCompatActivity(), KoinComponent {
         super.onCreate(savedInstanceState)
 
         setAppTheme()
-        setAppLanguage()
 
         setContentView(R.layout.fragment_container)
 
@@ -35,6 +34,17 @@ class MainActivity : AppCompatActivity(), KoinComponent {
         mFirebaseAnalytics = FirebaseAnalytics.getInstance(this)
 
         init()
+    }
+
+    override fun onBackPressed() {
+        hideAlert()
+
+        super.onBackPressed()
+    }
+
+    override fun attachBaseContext(newContext: Context) {
+        //Delegate to super to apply
+        super.attachBaseContext(setAppLanguage(newContext))
     }
 
     override fun onWindowFocusChanged(hasFocus: Boolean) {
@@ -52,26 +62,35 @@ class MainActivity : AppCompatActivity(), KoinComponent {
         )
 
         when (appTheme) {
-            getString(R.string.base_app_theme), getString(R.string.light_app_theme) -> setTheme(R.style.Theme_Base_LightAppTheme)
-            getString(R.string.dark_app_theme) -> setTheme(R.style.Theme_Base_DarkAppTheme)
-            getString(R.string.night_app_theme) -> setTheme(R.style.Theme_Base_NightAppTheme)
+            getString(R.string.base_app_theme), getString(R.string.light_app_theme) -> {
+                setTheme(R.style.Theme_Base_LightAppTheme)
+                APP_SELECTED_THEME = AppTheme.Light
+            }
+            getString(R.string.dark_app_theme) -> {
+                setTheme(R.style.Theme_Base_DarkAppTheme)
+                APP_SELECTED_THEME = AppTheme.Dark
+            }
+            getString(R.string.night_app_theme) -> {
+                setTheme(R.style.Theme_Base_NightAppTheme)
+                APP_SELECTED_THEME = AppTheme.Night
+            }
         }
     }
 
-    private fun setAppLanguage() {
-        sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this)
-        val appTheme = sharedPreferences.getString(
-            getString(R.string.app_language),
-            getString(R.string.english_app_language)
+    private fun setAppLanguage(newContext: Context): Context {
+        sharedPreferences = PreferenceManager.getDefaultSharedPreferences(newContext)
+        val appLanguage = sharedPreferences.getString(
+            newContext.getString(R.string.app_language),
+            newContext.getString(R.string.english_app_language)
         )
 
         var languageCode = "en"
-        when (appTheme) {
-            getString(R.string.english_app_language) -> {
+        when (appLanguage) {
+            newContext.getString(R.string.english_app_language) -> {
                 APP_SELECTED_LANGUAGE = AppLanguage.English
                 languageCode = "en"
             }
-            getString(R.string.arabic_app_language) -> {
+            newContext.getString(R.string.arabic_app_language) -> {
                 APP_SELECTED_LANGUAGE = AppLanguage.Arabic
                 languageCode = "ar"
             }
@@ -81,15 +100,18 @@ class MainActivity : AppCompatActivity(), KoinComponent {
         Locale.setDefault(locale)
         val config = Configuration()
 
-        config.locale = locale
-        baseContext.resources.updateConfiguration(
-            config,
-            baseContext.resources.displayMetrics
-        )
+        config.setLocale(locale)
+
+        //Workaround for platform bug on SDK <26(O - Oreo)
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            config.fontScale = 0f
+        }
+
+        return newContext.createConfigurationContext(config)
     }
 
     private fun init() {
-        setSupportActionBar(toolbar as Toolbar)
+        setSupportActionBar(fragment_container_toolbar as Toolbar)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
         val bundle = Bundle()
@@ -105,23 +127,5 @@ class MainActivity : AppCompatActivity(), KoinComponent {
             }
         }
         return super.onOptionsItemSelected(item)
-    }
-
-    fun setLocale(context: Context) {
-        val locale: Locale
-//        val session = Sessions(context)
-        //Log.e("Lan",session.getLanguage());
-        //Log.e("Lan",session.getLanguage());
-        locale = Locale("ar")
-
-        val config =
-            Configuration(context.resources.configuration)
-        Locale.setDefault(locale)
-        config.setLocale(locale)
-
-        context.resources.updateConfiguration(
-            config,
-            context.resources.displayMetrics
-        )
     }
 }

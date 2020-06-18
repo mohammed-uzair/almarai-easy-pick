@@ -19,12 +19,32 @@
         android:id="@+id/screen_statistics_background_image"
         android:layout_width="0dp"
         android:layout_height="0dp"
+        android:contentDescription="@string/image_description_theme_background"
         android:scaleType="fitXY"
         android:src="@drawable/ic_other_screens_background"
         app:layout_constraintBottom_toTopOf="@id/screen_network_config_guideline_for_background_theme"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <com.airbnb.lottie.LottieAnimationView
+        android:id="@+id/screen_statistics_animation"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="@dimen/_10sdp"
+        android:layout_marginBottom="@dimen/_50sdp"
+        android:scaleType="fitXY"
+        android:src="@drawable/ic_settings"
+        app:layout_constraintBottom_toTopOf="@+id/screen_network_config_guideline_for_background_theme"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/screen_statistics_physical_pages_saved_text_summary_text"
+        app:layout_constraintTop_toTopOf="parent"
+        app:lottie_autoPlay="true"
+        app:lottie_loop="true"
+        app:lottie_rawRes="@raw/anim_chat"
+        tools:src="@drawable/ic_settings" />
 
     <TextView
         android:id="@+id/screen_statistics_physical_pages_saved_text"
@@ -32,6 +52,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/_15sdp"
         android:layout_marginTop="@dimen/_15sdp"
+        android:textColor="?colorTitle"
         android:textSize="40sp"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
@@ -44,6 +65,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:text="@string/sheets_of_papers_saved"
+        android:textColor="?colorSubTitle"
         android:textSize="16sp"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="@id/screen_statistics_physical_pages_saved_text"

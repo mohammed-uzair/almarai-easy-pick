@@ -16,12 +16,11 @@
         app:layout_constraintGuide_percent="0.5" />
 
     <ImageView
-        android:id="@+id/screen_data_config_background_image"
         android:layout_width="0dp"
         android:layout_height="0dp"
+        android:background="?colorBackgroundScreenHeader"
         android:contentDescription="@string/image_description_theme_background"
         android:scaleType="fitXY"
-        android:src="@drawable/ic_other_screens_background"
         app:layout_constraintBottom_toTopOf="@id/screen_data_config_guideline_for_background_theme"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -31,15 +30,26 @@
         android:id="@+id/screen_data_config_animation"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:scaleType="centerCrop"
-        android:src="@drawable/ic_temp_data_configuration_background"
+        android:scaleX="1.2"
         app:layout_constraintBottom_toTopOf="@id/screen_data_config_guideline_for_background_theme"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:lottie_autoPlay="true"
         app:lottie_loop="true"
-        tools:src="@drawable/ic_temp_data_configuration_background" />
+        tools:src="@drawable/ic_calendar" />
+
+    <ImageView
+        android:id="@+id/screen_data_config_background_image"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:contentDescription="@string/image_description_theme_background"
+        android:scaleType="fitXY"
+        android:src="@drawable/ic_data_configuration_background"
+        app:layout_constraintBottom_toTopOf="@id/screen_data_config_guideline_for_background_theme"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <com.almarai.alm_ui.AlmEditText
         android:id="@+id/screen_data_config_sales_date_edit_text"

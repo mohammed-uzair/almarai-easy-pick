@@ -41,7 +41,7 @@
     <string name="items_picked">Picked</string>
     <string name="total_items">Items</string>
 
-    <string name="route_number">Route #</string>
+    <string name="route_number_header">Route #</string>
     <string name="route_description">Route Description</string>
 
     <string name="item_number">Item #</string>
@@ -72,20 +72,6 @@
     <string name="image_description_back_button">Back Button Image</string>
     <!--endregion-->
 
-    <!--region Other labels-->
-    <string name="love_from_almarai" translatable="false"><![CDATA[<font color=#000000> Made with <font color=#F50909> \u2764 <font color=#000000> from <font color=#58AA61> ALMARAI]]></string>
-    <string name="server_ip">Server IP</string>
-    <string name="server_port">Server Port</string>
-    <string name="sales_date">Sales Date</string>
-    <string name="dept_code">Depot Code</string>
-    <string name="preference">Preference</string>
-    <string name="sheets_of_papers_saved">Sheets of papers saved</string>
-    <string name="user_name">User Name</string>
-    <string name="password">Password</string>
-    <string name="not_same_user">Not the same user ? Logout</string>
-    <string name="user_greeting">Hello,</string>
-    <!--endregion-->
-
     <!--region Route Products Preferences-->
     <string-array name="route_product_type_preferences">
         <item>No Preference</item>
@@ -108,6 +94,48 @@
 
     <string name="english_app_language" translatable="false">english</string>
     <string name="arabic_app_language" translatable="false">arabic</string>
+    <!--endregion-->
+
+    <!--region Alerts-->
+    <string name="loading">Please wait, loading…</string>
+    <string name="no_data_available">Empty data, no data available</string>
+    <string name="no_data_found">Error, nothing found</string>
+    <!--endregion-->
+
+    <!--region Other labels-->
+    <string name="server_ip">Server IP</string>
+    <string name="made_with">Made with</string>
+    <string name="love" translatable="false">  ❤️</string>
+    <string name="almarai"> Almarai </string>
+    <string name="from"> from </string>
+    <string name="server_port">Server Port</string>
+    <string name="sales_date">Sales Date</string>
+    <string name="dept_code">Depot Code</string>
+    <string name="preference">Preference</string>
+    <string name="sheets_of_papers_saved">Sheets of papers saved</string>
+    <string name="user_name">User Name</string>
+    <string name="password">Password</string>
+    <string name="not_same_user">Not the same user ? Logout</string>
+    <string name="user_greeting">Hello,</string>
+
+    <string name="no_filter">No Filter</string>
+    <string name="sort_in">Sort In</string>
+    <string name="ascending">Ascending</string>
+    <string name="descending">Descending</string>
+    <string name="with">With</string>
+    <string name="route_number">Route Number</string>
+    <string name="status_not_served">Status Not Served</string>
+    <string name="filter_by">Filter By</string>
+    <string name="all">All</string>
+    <string name="dairy">Dairy</string>
+    <string name="poultry">Poultry</string>
+    <string name="bakery">Bakery</string>
+    <string name="ipnc" translatable="false">IPNC</string>
+    <string name="non_ipnc" translatable="false">Non IPNC</string>
+    <string name="tc" translatable="false">TC</string>
+    <string name="non_tc" translatable="false">Non TC</string>
+    <string name="customer_only">Customer Only</string>
+    <string name="allow_multiple_filters">Allow Multiple Filters</string>
     <!--endregion-->
 
 </resources>

@@ -1,37 +1,21 @@
 package com.almarai.easypick.screens
 
 import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import android.view.animation.AnimationUtils
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
 import com.almarai.easypick.R
-import com.almarai.easypick.view_models.LoginScreenViewModel
+import com.almarai.easypick.view_models.LoginViewModel
 import kotlinx.android.synthetic.main.screen_filter.*
+import org.koin.androidx.viewmodel.ext.android.viewModel
 import java.util.*
 
-class FilterScreen : Fragment() {
-    lateinit var navController: NavController
-
-    private lateinit var viewModel: LoginScreenViewModel
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-
-        viewModel = ViewModelProvider(this).get(LoginScreenViewModel::class.java)
-    }
-
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        return inflater.inflate(R.layout.screen_filter, container, false)
-    }
+class FilterScreen : Fragment(R.layout.screen_filter) {
+    private val viewModel: LoginViewModel by viewModel()
+    private lateinit var navController: NavController
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)

@@ -9,12 +9,15 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.core.widget.ImageViewCompat
-import androidx.navigation.Navigation
+import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.almarai.data.easy_pick_models.Route
+import com.almarai.data.easy_pick_models.RouteStatus
 import com.almarai.easypick.R
+import com.almarai.easypick.screens.RouteSelectionScreenDirections
 import com.almarai.easypick.utils.APP_SELECTED_LANGUAGE
 import com.almarai.easypick.utils.AppLanguage
+import com.almarai.easypick.utils.exhaustive
 
 class RoutesAdapter : RecyclerView.Adapter<RoutesAdapter.ViewHolder>() {
     private var list: List<Route>? = null
@@ -34,11 +37,14 @@ class RoutesAdapter : RecyclerView.Adapter<RoutesAdapter.ViewHolder>() {
             routeDescription = view.findViewById(R.id.item_route_description_text)
 
             view.setOnClickListener {
-                Toast.makeText(it.context, "Route Clicked ${routeNumber.text}", Toast.LENGTH_SHORT)
+                val selectedRouteNumber: Int = routeNumber.text.toString().toInt()
+
+                Toast.makeText(it.context, "Route Clicked $selectedRouteNumber", Toast.LENGTH_SHORT)
                     .show()
 
-                Navigation.findNavController(view)
-                    .navigate(R.id.action_routeSelectionScreen_to_productListScreen)
+                val action = RouteSelectionScreenDirections
+                    .actionRouteSelectionScreenToProductListScreen(selectedRouteNumber)
+                view.findNavController().navigate(action)
             }
         }
     }
@@ -62,22 +68,22 @@ class RoutesAdapter : RecyclerView.Adapter<RoutesAdapter.ViewHolder>() {
             AppLanguage.Arabic -> holder.routeDescription.text = route.descriptionArabic
         }
 
-        when (route.serviceStatus) {
-            0 -> ImageViewCompat.setImageTintList(
+        when (route.serviceCurrentStatus) {
+            is RouteStatus.NotServed -> ImageViewCompat.setImageTintList(
                 holder.routeStatus, ColorStateList.valueOf(
                     ContextCompat.getColor(holder.itemView.context, R.color.green)
                 )
             )
-            1 -> ImageViewCompat.setImageTintList(
+            is RouteStatus.Serving -> ImageViewCompat.setImageTintList(
                 holder.routeStatus, ColorStateList.valueOf(
                     ContextCompat.getColor(holder.itemView.context, R.color.blue)
                 )
             )
-            2 -> ImageViewCompat.setImageTintList(
+            is RouteStatus.Served -> ImageViewCompat.setImageTintList(
                 holder.routeStatus, ColorStateList.valueOf(
                     ContextCompat.getColor(holder.itemView.context, R.color.red)
                 )
             )
-        }
+        }.exhaustive
     }
 }

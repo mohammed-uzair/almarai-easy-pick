@@ -1,40 +1,38 @@
 package com.almarai.easypick.screens
 
 import android.os.Bundle
-import android.view.*
+import android.view.Menu
+import android.view.MenuInflater
+import android.view.MenuItem
+import android.view.View
 import android.view.animation.AnimationUtils
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
+import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.almarai.data.easy_pick_models.Product
+import com.almarai.data.easy_pick_models.Result
+import com.almarai.data.easy_pick_models.RouteStatus
+import com.almarai.data.easy_pick_models.exhaustive
 import com.almarai.easypick.R
 import com.almarai.easypick.adapters.item.ItemsAdapter
+import com.almarai.easypick.utils.Alert
+import com.almarai.easypick.utils.hideAlert
+import com.almarai.easypick.utils.showAlert
 import com.almarai.easypick.view_models.ProductListViewModel
 import kotlinx.android.synthetic.main.main_recycler_view.*
 import kotlinx.android.synthetic.main.screen_product.*
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
-class ProductListScreen : Fragment() {
-    private lateinit var productListViewModel: ProductListViewModel
-    private val adapter by lazy { ItemsAdapter() }
-
+class ProductListScreen : Fragment(R.layout.screen_product) {
+    private val productListViewModel: ProductListViewModel by viewModel()
     private lateinit var navController: NavController
+    private val adapter by lazy { ItemsAdapter() }
+    private val args: ProductListScreenArgs by navArgs()
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-
-        productListViewModel = ViewModelProvider(this).get(ProductListViewModel::class.java)
-    }
-
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        return inflater.inflate(R.layout.screen_product, container, false)
-    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -52,9 +50,14 @@ class ProductListScreen : Fragment() {
         animateUI()
         adapter.setValues(listOf())
 
-        productListViewModel.mutableItems.observe(viewLifecycleOwner, Observer { list ->
-            //If the list is empty
-            if (list.isNotEmpty()) showDataUi(list) else showNoDataUi()
+        productListViewModel.products.observe(viewLifecycleOwner, Observer {
+            it?.let { result ->
+                when (result) {
+                    is Result.Fetching -> showAlert(Alert.Loading)
+                    is Result.Success -> showDataUi(result.data)
+                    is Result.Error -> showAlert(Alert.Error)
+                }.exhaustive
+            }
         })
 
         setRecyclerView()
@@ -67,15 +70,31 @@ class ProductListScreen : Fragment() {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
             R.id.menu_item_action_filter -> navController.navigate(R.id.action_productListScreen_to_filterScreen)
-            R.id.menu_item_action_save -> navController.popBackStack()
+            R.id.menu_item_action_save -> {
+                val saveStateHandle = navController.previousBackStackEntry?.savedStateHandle
+
+                //Set the result
+                saveStateHandle?.set(
+                    "ROUTE_PROCESSED",
+                    Pair(args.SELECTEDROUTENUMBER, RouteStatus.Served)
+                )
+
+                navController.popBackStack()
+            }
         }
 
         return super.onOptionsItemSelected(item)
     }
 
     private fun showDataUi(list: List<Product>) {
-//        no_event_found_layout.visibility = View.GONE
-//        device_events_layout.visibility = View.VISIBLE
+        //If the received data is empty
+        if (list.isEmpty()) {
+            showAlert(Alert.NoDataAvailable)
+            return
+        }
+
+        //Hide the alert
+        hideAlert()
 
         adapter.setValues(list)
         adapter.notifyDataSetChanged()
@@ -85,12 +104,6 @@ class ProductListScreen : Fragment() {
         screen_product_total_items_text.text = "${itemServiceDetails.totalItems}"
         screen_product_picked_text.text = itemServiceDetails.servedItems.toString()
     }
-
-    private fun showNoDataUi() {
-//        no_event_found_layout.visibility = View.VISIBLE
-//        device_events_layout.visibility = View.GONE
-    }
-
 
     private fun animateUI() {
         val bottomToTop = AnimationUtils.loadAnimation(activity, R.anim.bottom_to_top)

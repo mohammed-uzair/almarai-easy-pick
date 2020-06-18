@@ -30,7 +30,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/_36sdp"
         android:layout_marginEnd="@dimen/_36sdp"
-        android:text="No Filter"
+        android:text="@string/no_filter"
         android:textColor="?colorTitle"
         app:layout_constraintBottom_toBottomOf="@+id/screen_filter_background_image"
         app:layout_constraintStart_toStartOf="parent"
@@ -58,7 +58,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:gravity="start"
-                android:text="Sort In"
+                android:text="@string/sort_in"
                 android:textStyle="bold"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -74,13 +74,13 @@
                 <RadioButton
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Ascending"
+                    android:text="@string/ascending"
                     android:textColor="?attr/colorText" />
 
                 <RadioButton
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Descending"
+                    android:text="@string/descending"
                     android:textColor="?attr/colorText" />
 
             </RadioGroup>
@@ -91,7 +91,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/_15sdp"
                 android:gravity="start"
-                android:text="With"
+                android:text="@string/with"
                 android:textStyle="bold"
                 app:layout_constraintStart_toStartOf="@id/screen_filter_sort_order_group"
                 app:layout_constraintTop_toBottomOf="@id/screen_filter_sort_order_group" />
@@ -107,19 +107,19 @@
                 <RadioButton
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Route Number"
+                    android:text="@string/route_number"
                     android:textColor="?attr/colorText" />
 
                 <RadioButton
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Route Description"
+                    android:text="@string/route_description"
                     android:textColor="?attr/colorText" />
 
                 <RadioButton
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Status Not Served"
+                    android:text="@string/status_not_served"
                     android:textColor="?attr/colorText" />
 
             </RadioGroup>
@@ -139,7 +139,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/_15sdp"
                 android:gravity="start"
-                android:text="Filter By"
+                android:text="@string/filter_by"
                 android:textStyle="bold"
                 app:layout_constraintStart_toStartOf="@id/screen_filter_view2"
                 app:layout_constraintTop_toBottomOf="@id/screen_filter_view2" />
@@ -150,7 +150,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="4dp"
                 android:switchPadding="@dimen/_15sdp"
-                android:text="All"
+                android:text="@string/all"
                 android:textColor="?attr/colorText"
                 app:layout_constraintHorizontal_bias="0.174"
                 app:layout_constraintStart_toStartOf="parent"
@@ -161,7 +161,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/_10sdp"
-                android:text="Dairy"
+                android:text="@string/dairy"
                 android:textColor="?attr/colorText"
                 app:layout_constraintEnd_toStartOf="@id/screen_filter_filter_by_bakery_checkbox"
                 app:layout_constraintHorizontal_bias="0.5"
@@ -173,7 +173,7 @@
                 android:id="@+id/screen_filter_filter_by_bakery_checkbox"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Dairy"
+                android:text="@string/poultry"
                 android:textColor="?attr/colorText"
                 app:layout_constraintBottom_toBottomOf="@id/screen_filter_filter_by_dairy_checkbox"
                 app:layout_constraintEnd_toStartOf="@+id/screen_filter_filter_by_poultry_checkbox"
@@ -185,7 +185,7 @@
                 android:id="@+id/screen_filter_filter_by_poultry_checkbox"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Dairy"
+                android:text="@string/bakery"
                 android:textColor="?attr/colorText"
                 app:layout_constraintBottom_toBottomOf="@id/screen_filter_filter_by_bakery_checkbox"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -208,7 +208,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/_5sdp"
                 android:switchPadding="@dimen/_15sdp"
-                android:text="All"
+                android:text="@string/all"
                 android:textColor="?attr/colorText"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/screen_filter_view3" />
@@ -218,47 +218,47 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/_10sdp"
-                android:text="TC"
+                android:text="@string/tc"
                 android:textColor="?attr/colorText"
-                app:layout_constraintEnd_toEndOf="@+id/screen_filter_filter_by_non_ipnc_checkbox"
+                app:layout_constraintEnd_toEndOf="@+id/screen_filter_filter_by_non_tc_checkbox"
                 app:layout_constraintHorizontal_chainStyle="spread_inside"
-                app:layout_constraintStart_toStartOf="@+id/screen_filter_filter_by_non_ipnc_checkbox"
+                app:layout_constraintStart_toStartOf="@+id/screen_filter_filter_by_non_tc_checkbox"
                 app:layout_constraintTop_toBottomOf="@id/screen_filter_filter_by_all_route_switch" />
 
             <CheckBox
                 android:id="@+id/screen_filter_filter_by_ipnc_checkbox"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:text="IPNC"
+                android:text="@string/ipnc"
                 android:textColor="?attr/colorText"
                 app:layout_constraintBottom_toBottomOf="@id/screen_filter_filter_by_tc_checkbox"
-                app:layout_constraintEnd_toEndOf="@+id/screen_filter_filter_by_non_tc_checkbox"
-                app:layout_constraintStart_toStartOf="@+id/screen_filter_filter_by_non_tc_checkbox"
+                app:layout_constraintEnd_toEndOf="@+id/screen_filter_filter_by_non_ipnc_checkbox"
+                app:layout_constraintStart_toStartOf="@+id/screen_filter_filter_by_non_ipnc_checkbox"
                 app:layout_constraintTop_toTopOf="@id/screen_filter_filter_by_tc_checkbox" />
 
             <CheckBox
-                android:id="@+id/screen_filter_filter_by_non_tc_checkbox"
+                android:id="@+id/screen_filter_filter_by_non_ipnc_checkbox"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Non TC"
+                android:text="@string/non_ipnc"
                 android:textColor="?attr/colorText"
-                app:layout_constraintEnd_toStartOf="@id/screen_filter_filter_by_non_ipnc_checkbox"
+                app:layout_constraintEnd_toStartOf="@id/screen_filter_filter_by_non_tc_checkbox"
                 app:layout_constraintHorizontal_bias="0.5"
                 app:layout_constraintHorizontal_chainStyle="spread_inside"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/screen_filter_filter_by_tc_checkbox" />
 
             <CheckBox
-                android:id="@+id/screen_filter_filter_by_non_ipnc_checkbox"
+                android:id="@+id/screen_filter_filter_by_non_tc_checkbox"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Non IPNC"
+                android:text="@string/non_tc"
                 android:textColor="?attr/colorText"
-                app:layout_constraintBottom_toBottomOf="@id/screen_filter_filter_by_non_tc_checkbox"
+                app:layout_constraintBottom_toBottomOf="@id/screen_filter_filter_by_non_ipnc_checkbox"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.5"
-                app:layout_constraintStart_toEndOf="@id/screen_filter_filter_by_non_tc_checkbox"
-                app:layout_constraintTop_toTopOf="@id/screen_filter_filter_by_non_tc_checkbox" />
+                app:layout_constraintStart_toEndOf="@id/screen_filter_filter_by_non_ipnc_checkbox"
+                app:layout_constraintTop_toTopOf="@id/screen_filter_filter_by_non_ipnc_checkbox" />
 
             <View
                 android:id="@+id/screen_filter_view4"
@@ -267,7 +267,7 @@
                 android:layout_marginTop="@dimen/_15sdp"
                 android:background="?colorFilterScreenDivider"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/screen_filter_filter_by_non_tc_checkbox" />
+                app:layout_constraintTop_toBottomOf="@id/screen_filter_filter_by_non_ipnc_checkbox" />
 
             <Switch
                 android:id="@+id/screen_filter_customer_only_switch"
@@ -275,7 +275,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/_20sdp"
                 android:switchPadding="@dimen/_15sdp"
-                android:text="Customer Only"
+                android:text="@string/customer_only"
                 android:textColor="?attr/colorText"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/screen_filter_view4" />
@@ -286,7 +286,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/_15sdp"
                 android:switchPadding="@dimen/_15sdp"
-                android:text="Allow Multiple Filters"
+                android:text="@string/allow_multiple_filters"
                 android:textColor="?attr/colorText"
                 app:layout_constraintStart_toStartOf="@id/screen_filter_customer_only_switch"
                 app:layout_constraintTop_toBottomOf="@id/screen_filter_customer_only_switch"

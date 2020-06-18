@@ -1,38 +1,23 @@
 package com.almarai.easypick.screens
 
 import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import android.view.animation.AnimationUtils
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
 import com.almarai.data.easy_pick_models.DataConfiguration
 import com.almarai.easypick.R
-import com.almarai.easypick.view_models.DataConfigurationScreenViewModel
+import com.almarai.easypick.utils.APP_SELECTED_THEME
+import com.almarai.easypick.utils.AppTheme
+import com.almarai.easypick.view_models.DataConfigurationViewModel
 import com.almarai.repository.utils.AppDataConfiguration
 import kotlinx.android.synthetic.main.screen_data_configuration.*
-import kotlinx.android.synthetic.main.screen_network_configuration.*
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
-class DataConfigurationScreen : Fragment() {
+class DataConfigurationScreen : Fragment(R.layout.screen_data_configuration) {
+    private val viewModel: DataConfigurationViewModel by viewModel()
     private lateinit var navController: NavController
-
-    private lateinit var viewModel: DataConfigurationScreenViewModel
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-
-        viewModel = ViewModelProvider(this).get(DataConfigurationScreenViewModel::class.java)
-    }
-
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        return inflater.inflate(R.layout.screen_data_configuration, container, false)
-    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -104,5 +89,10 @@ class DataConfigurationScreen : Fragment() {
         screen_data_config_sales_date_edit_text.startAnimation(bottomToTop)
         screen_data_config_depot_code_edit_text.startAnimation(bottomToTop)
         screen_data_config_route_preference_edit_text.startAnimation(bottomToTop)
+
+        when (APP_SELECTED_THEME) {
+            is AppTheme.Light -> screen_data_config_animation.setAnimation(R.raw.anim_data_configuration_day)
+            is AppTheme.Dark, AppTheme.Night -> screen_data_config_animation.setAnimation(R.raw.anim_data_configuration_night)
+        }
     }
 }

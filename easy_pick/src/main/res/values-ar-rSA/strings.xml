@@ -21,7 +21,7 @@
     <string name="total_routes">الطرق</string>
     <string name="items_picked">تم الاختيار</string>
     <string name="total_items">العناصر</string>
-    <string name="route_number">طريق #</string>
+    <string name="route_number_header">طريق #</string>
     <string name="route_description">وصف المسار</string>
     <string name="item_number">بند #</string>
     <string name="item_description">وصف السلعة</string>
@@ -48,4 +48,24 @@
     <string name="not_same_user">ليس المستخدم نفسه؟ تسجيل خروج</string>
     <string name="user_greeting">مرحبا،</string>
     <string name="general">جنرال لواء</string>
+    <string name="loading">يرجى الانتظار ، جارٍ التحميل ...</string>
+    <string name="no_data_available">بيانات فارغة ، لا توجد بيانات متاحة</string>
+    <string name="no_data_found">خطأ ، لم يتم العثور على شيء</string>
+    <string name="no_filter">لا يوجد عامل تصفية</string>
+    <string name="sort_in">فرز في</string>
+    <string name="ascending">تصاعدي</string>
+    <string name="descending">تنازلي</string>
+    <string name="with">مع</string>
+    <string name="status_not_served">لم يتم عرض الحالة</string>
+    <string name="filter_by">لم يتم عرض الحالة</string>
+    <string name="all">الكل</string>
+    <string name="dairy">منتجات الألبان</string>
+    <string name="poultry">دواجن</string>
+    <string name="customer_only">العملاء فقط</string>
+    <string name="allow_multiple_filters">السماح بفلاتر متعددة</string>
+    <string name="route_number">رقم المسار</string>
+    <string name="bakery">مخبز</string>
+    <string name="made_with">مصنوع من</string>
+    <string name="almarai">المراعي</string>
+    <string name="from">من عند</string>
 </resources>

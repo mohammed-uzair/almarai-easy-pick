@@ -1,19 +1,29 @@
 package com.almarai.easypick.view_models
 
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import com.almarai.data.easy_pick_models.Product
+import com.almarai.data.easy_pick_models.Result
+import com.almarai.data.easy_pick_models.ERROR_OCCURRED
 import com.almarai.repository.api.ProductsRepository
-import org.koin.core.KoinComponent
-import org.koin.core.inject
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
-class ProductListViewModel : ViewModel(), KoinComponent {
-    private val repository: ProductsRepository by inject()
-
-    val mutableItems = MutableLiveData<List<Product>>()
+class ProductListViewModel(private val repository: ProductsRepository) : ViewModel() {
+    private val _products = MutableLiveData<Result<List<Product>>>()
+    val products: LiveData<Result<List<Product>>> = _products
 
     init {
-        repository.getAllProducts(1, "", 0, 0, mutableItems)
+        viewModelScope.launch(Dispatchers.IO) {
+            _products.postValue(Result.Fetching)
+            try {
+                _products.postValue(Result.Success(repository.getAllProducts(1, "", 0)))
+            } catch (exception: Exception) {
+                _products.postValue(Result.Error(exception.message ?: ERROR_OCCURRED))
+            }
+        }
     }
 
     fun getRouteServiceDetails(list: List<Product>): ItemsDetail {

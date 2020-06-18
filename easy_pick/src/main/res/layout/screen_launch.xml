@@ -89,20 +89,42 @@
         app:layout_constraintStart_toStartOf="parent"
         tools:text="124786" />
 
-    <TextView
+    <LinearLayout
         android:id="@+id/screen_launch_made_with_love_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/_20sdp"
-        android:layout_marginBottom="@dimen/_8sdp"
-        android:textColor="?colorText"
-        android:textSize="12sp"
-        app:layout_constraintBottom_toTopOf="@id/screen_launch_launch_button"
+        android:layout_marginBottom="@dimen/_10sdp"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toTopOf="@+id/screen_launch_launch_button"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/screen_launch_guideline_for_background_image"
-        app:layout_constraintVertical_bias="1.0"
-        tools:text="Made with \u2764from ALMARAI" />
+        app:layout_constraintStart_toStartOf="parent">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/made_with" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_2sdp"
+            android:text="@string/love" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_2sdp"
+            android:text="@string/from" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_2sdp"
+            android:text="@string/almarai"
+            android:textColor="?colorAccent"
+            android:textStyle="bold" />
+
+    </LinearLayout>
 
     <Button
         android:id="@+id/screen_launch_launch_button"

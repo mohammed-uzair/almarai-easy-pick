@@ -1,44 +1,35 @@
 package com.almarai.easypick.screens
 
 import android.os.Bundle
-import android.view.*
+import android.view.Menu
+import android.view.MenuInflater
+import android.view.MenuItem
+import android.view.View
 import android.view.animation.AnimationUtils
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.almarai.data.easy_pick_models.Result
 import com.almarai.data.easy_pick_models.Route
+import com.almarai.data.easy_pick_models.RouteStatus
+import com.almarai.data.easy_pick_models.exhaustive
 import com.almarai.easypick.R
 import com.almarai.easypick.adapters.route.RoutesAdapter
+import com.almarai.easypick.utils.Alert
+import com.almarai.easypick.utils.hideAlert
+import com.almarai.easypick.utils.showAlert
 import com.almarai.easypick.view_models.RouteSelectionViewModel
 import kotlinx.android.synthetic.main.main_recycler_view.*
 import kotlinx.android.synthetic.main.screen_route_selection.*
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
-
-class RouteSelectionScreen(
-//    private val adapter: RoutesAdapter
-) : Fragment() {
-    //     Lazy Inject ViewModel
-    private lateinit var routesViewModel: RouteSelectionViewModel
-    private val adapter by lazy { RoutesAdapter() }
-
+class RouteSelectionScreen : Fragment(R.layout.screen_route_selection) {
+    private val routesViewModel: RouteSelectionViewModel by viewModel()
     private lateinit var navController: NavController
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-
-        routesViewModel = ViewModelProvider(this).get(RouteSelectionViewModel::class.java)
-    }
-
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        return inflater.inflate(R.layout.screen_route_selection, container, false)
-    }
+    private val adapter by lazy { RoutesAdapter() }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -57,12 +48,28 @@ class RouteSelectionScreen(
 
         adapter.setValues(listOf())
 
-        routesViewModel.mutableRoutes.observe(viewLifecycleOwner, Observer { list ->
-            //If the list is empty
-            if (list.isNotEmpty()) showDataUi(list) else showNoDataUi()
+        routesViewModel.routes.observe(viewLifecycleOwner, Observer {
+            it?.let { result ->
+                when (result) {
+                    is Result.Fetching -> showAlert(Alert.Loading)
+                    is Result.Success -> showDataUi(result.data)
+                    is Result.Error -> showAlert(Alert.Error)
+                }.exhaustive
+            }
         })
 
         setRecyclerView()
+
+        navController.currentBackStackEntry
+            ?.savedStateHandle
+            ?.getLiveData<Pair<Int, RouteStatus>>("ROUTE_PROCESSED")
+            ?.observe(
+                viewLifecycleOwner,
+                Observer { result ->
+                    routesViewModel.updateRouteProcessed(result)
+
+                    adapter.notifyDataSetChanged()
+                })
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
@@ -78,8 +85,14 @@ class RouteSelectionScreen(
     }
 
     private fun showDataUi(list: List<Route>) {
-//        no_event_found_layout.visibility = View.GONE
-//        device_events_layout.visibility = View.VISIBLE
+        //If the received data is empty
+        if (list.isEmpty()) {
+            showAlert(Alert.NoDataAvailable)
+            return
+        }
+
+        //Hide the alert
+        hideAlert()
 
         adapter.setValues(list)
         adapter.notifyDataSetChanged()
@@ -89,11 +102,6 @@ class RouteSelectionScreen(
         requireActivity().title = "Routes ${list.size}"
         screen_route_selection_serviced_text.text = routeServiceDetails.servedRoute.toString()
         screen_route_selection_serving_text.text = routeServiceDetails.servingRoutes.toString()
-    }
-
-    private fun showNoDataUi() {
-//        no_event_found_layout.visibility = View.VISIBLE
-//        device_events_layout.visibility = View.GONE
     }
 
     private fun animateUI() {
