@@ -68,4 +68,6 @@
     <string name="made_with">වලින් සාදා ඇත</string>
     <string name="almarai">තණබිම්</string>
     <string name="from">සිට</string>
+    <string name="title_filter_routes">මාර්ග පෙරණය</string>
+    <string name="title_filter_products">නිෂ්පාදන පෙරණය</string>
 </resources>

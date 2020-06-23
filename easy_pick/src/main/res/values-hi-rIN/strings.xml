@@ -68,4 +68,6 @@
     <string name="made_with">से बना</string>
     <string name="almarai">चरागाह</string>
     <string name="from">से</string>
+    <string name="title_filter_routes">फ़िल्टर फ़िल्टर</string>
+    <string name="title_filter_products">उत्पाद फ़िल्टर</string>
 </resources>

@@ -68,4 +68,6 @@
     <string name="made_with"> کا بنا ہوا</string>
     <string name="almarai"> چراگاہ</string>
     <string name="from"> سے</string>
+    <string name="title_filter_routes">روٹس فلٹر</string>
+    <string name="title_filter_products">مصنوعات فلٹر</string>
 </resources>

@@ -11,6 +11,13 @@ android {
     buildToolsVersion "29.0.3"
 
     defaultConfig {
+        //Creates a placeholder property for common application name and intent to use in the manifest.
+        def appName = "Easy Pick"
+        manifestPlaceholders = [appName: appName]
+
+        //Add a new build config field for common application name into the BuildConfig class.
+        buildConfigField("String", "APP_NAME", "\"${appName}\"")
+
         applicationId "com.almarai.easypick"
         minSdkVersion 23
         targetSdkVersion 29

@@ -18,10 +18,8 @@ import com.almarai.data.easy_pick_models.Result
 import com.almarai.data.easy_pick_models.RouteStatus
 import com.almarai.data.easy_pick_models.util.exhaustive
 import com.almarai.easypick.R
-import com.almarai.easypick.adapters.item.ItemsAdapter
-import com.almarai.easypick.utils.Alert
-import com.almarai.easypick.utils.hideAlert
-import com.almarai.easypick.utils.showAlert
+import com.almarai.easypick.adapters.item.ProductsAdapter
+import com.almarai.easypick.utils.*
 import com.almarai.easypick.view_models.ProductListViewModel
 import kotlinx.android.synthetic.main.main_recycler_view.*
 import kotlinx.android.synthetic.main.screen_product.*
@@ -30,9 +28,8 @@ import org.koin.androidx.viewmodel.ext.android.viewModel
 class ProductListScreen : Fragment(R.layout.screen_product) {
     private val productListViewModel: ProductListViewModel by viewModel()
     private lateinit var navController: NavController
-    private val adapter by lazy { ItemsAdapter() }
+    private val adapter by lazy { ProductsAdapter() }
     private val args: ProductListScreenArgs by navArgs()
-
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -69,14 +66,20 @@ class ProductListScreen : Fragment(R.layout.screen_product) {
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
-            R.id.menu_item_action_filter -> navController.navigate(R.id.action_productListScreen_to_filterScreen)
+            R.id.menu_route_action_filter -> {
+                val action = ProductListScreenDirections
+                    .actionProductListScreenToFilterScreen(
+                        FilterScreenSource.ProductListScreen
+                    )
+                navController.navigate(action)
+            }
             R.id.menu_item_action_save -> {
                 val saveStateHandle = navController.previousBackStackEntry?.savedStateHandle
 
                 //Set the result
                 saveStateHandle?.set(
-                    "ROUTE_PROCESSED",
-                    Pair(args.SELECTEDROUTENUMBER, RouteStatus.Served)
+                    BundleKeys.ROUTE_PROCESSED,
+                    Pair(args.SelectedRouteNumber, RouteStatus.Served)
                 )
 
                 navController.popBackStack()

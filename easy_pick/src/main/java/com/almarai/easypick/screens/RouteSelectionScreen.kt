@@ -10,6 +10,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
+import androidx.navigation.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.almarai.data.easy_pick_models.Result
@@ -19,6 +20,7 @@ import com.almarai.data.easy_pick_models.util.exhaustive
 import com.almarai.easypick.R
 import com.almarai.easypick.adapters.route.RoutesAdapter
 import com.almarai.easypick.utils.Alert
+import com.almarai.easypick.utils.FilterScreenSource
 import com.almarai.easypick.utils.hideAlert
 import com.almarai.easypick.utils.showAlert
 import com.almarai.easypick.view_models.RouteSelectionViewModel
@@ -78,7 +80,13 @@ class RouteSelectionScreen : Fragment(R.layout.screen_route_selection) {
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
-            R.id.menu_route_action_filter -> navController.navigate(R.id.action_routeSelectionScreen_to_filterScreen)
+            R.id.menu_route_action_filter -> {
+                val action = RouteSelectionScreenDirections
+                    .actionRouteSelectionScreenToFilterScreen(
+                        FilterScreenSource.RouteSelectionScreenScreen
+                    )
+                navController.navigate(action)
+            }
         }
 
         return super.onOptionsItemSelected(item)

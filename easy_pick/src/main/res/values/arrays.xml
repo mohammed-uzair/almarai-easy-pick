@@ -12,28 +12,38 @@
     </string-array>
 
     <string-array name="app_language_entities">
-        <item>English</item>
-        <item>عربى</item>
-        <item>हिन्दी</item>
-        <item>தமிழ்</item>
-        <item>اردو</item>
-        <item>नेपाली</item>
-        <item>සිංහල</item>
-        <item>Tiếng Việt</item>
-        <item>پښتو</item>
-        <item>Pilipino</item>
+        <item>English(English)</item>
+        <item>(Arabic)عربى</item>
+        <item>কুঠী(Bangla)</item>
+        <item>Pilipino(Filipino)</item>
+        <item>हिन्दी(Hindi)</item>
+        <item>Dari intonec(Indonesian)</item>
+        <item>ಕನ್ನಡ(Kannada)</item>
+        <item>മലയാളം(Malayalam)</item>
+        <item>नेपाली(Nepali)</item>
+        <item>(Pashto)پښتو</item>
+        <item>සිංහල(Sinhala)</item>
+        <item>தமிழ்(Tamil)</item>
+        <item>తెలుగు(Telugu)</item>
+        <item>(Urdu)اردو</item>
+        <item>Tiếng Việt(Vietnamese)</item>
     </string-array>
 
     <string-array name="app_language_values">
         <item>english</item>
         <item>arabic</item>
-        <item>hindi</item>
-        <item>tamil</item>
-        <item>urdu</item>
-        <item>nepali</item>
-        <item>sinhala</item>
-        <item>vietnamese</item>
-        <item>pashto</item>
+        <item>bangla</item>
         <item>filipino</item>
+        <item>hindi</item>
+        <item>indonesian</item>
+        <item>kannada</item>
+        <item>malayalam</item>
+        <item>nepali</item>
+        <item>pashto</item>
+        <item>sinhala</item>
+        <item>tamil</item>
+        <item>telugu</item>
+        <item>urdu</item>
+        <item>vietnamese</item>
     </string-array>
 </resources>

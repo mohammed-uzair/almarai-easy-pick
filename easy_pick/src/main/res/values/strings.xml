@@ -12,7 +12,8 @@
     <string name="title_login">Login</string>
     <string name="title_home">Home</string>
     <string name="title_item_list">Items</string>
-    <string name="title_filter">Filter %s</string>
+    <string name="title_filter_routes">Routes Filter</string>
+    <string name="title_filter_products">Products Filter</string>
     <!--endregion-->
 
     <!--region Menu Titles-->
@@ -94,14 +95,19 @@
 
     <string name="english_app_language" translatable="false">english</string>
     <string name="arabic_app_language" translatable="false">arabic</string>
-    <string name="hindi_app_language" translatable="false">hindi</string>
-    <string name="tamil_app_language" translatable="false">tamil</string>
-    <string name="urdu_app_language" translatable="false">urdu</string>
-    <string name="nepali_app_language" translatable="false">nepali</string>
-    <string name="sinhala_app_language" translatable="false">sinhala</string>
-    <string name="vietnamese_app_language" translatable="false">vietnamese</string>
-    <string name="pashto_app_language" translatable="false">pashto</string>
+    <string name="bangla_app_language" translatable="false">bangla</string>
     <string name="filipino_app_language" translatable="false">filipino</string>
+    <string name="hindi_app_language" translatable="false">hindi</string>
+    <string name="indonesian_app_language" translatable="false">indonesian</string>
+    <string name="kannada_app_language" translatable="false">kannada</string>
+    <string name="malayalam_app_language" translatable="false">malayalam</string>
+    <string name="nepali_app_language" translatable="false">nepali</string>
+    <string name="pashto_app_language" translatable="false">pashto</string>
+    <string name="sinhala_app_language" translatable="false">sinhala</string>
+    <string name="tamil_app_language" translatable="false">tamil</string>
+    <string name="telugu_app_language" translatable="false">telugu</string>
+    <string name="urdu_app_language" translatable="false">urdu</string>
+    <string name="vietnamese_app_language" translatable="false">vietnamese</string>
     <!--endregion-->
 
     <!--region Alerts-->

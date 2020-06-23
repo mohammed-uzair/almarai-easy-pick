@@ -68,4 +68,6 @@
     <string name="made_with">செய்யப்பட்ட</string>
     <string name="almarai">மேய்ச்சல்</string>
     <string name="from">இருந்து</string>
+    <string name="title_filter_routes">வழிகள் வடிகட்டி</string>
+    <string name="title_filter_products">தயாரிப்புகள் வடிகட்டி</string>
 </resources>

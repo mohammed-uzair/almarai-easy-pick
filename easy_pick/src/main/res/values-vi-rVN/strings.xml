@@ -68,4 +68,6 @@
     <string name="made_with">làm bằng</string>
     <string name="almarai">Đồng cỏ</string>
     <string name="from">từ</string>
+    <string name="title_filter_routes">Bộ lọc định tuyến</string>
+    <string name="title_filter_products">Bộ lọc sản phẩm</string>
 </resources>

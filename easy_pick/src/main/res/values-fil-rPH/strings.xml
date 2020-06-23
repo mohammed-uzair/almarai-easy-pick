@@ -68,4 +68,6 @@
     <string name="made_with">gawa sa</string>
     <string name="almarai">Pastulan</string>
     <string name="from">mula sa</string>
+    <string name="title_filter_routes">Filter ng Mga Ruta</string>
+    <string name="title_filter_products">Mga Filter ng Produkto</string>
 </resources>

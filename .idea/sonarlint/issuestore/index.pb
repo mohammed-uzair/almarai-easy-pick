@@ -253,16 +253,12 @@ d
 4easy_pick/src/main/res/layout/fragment_container.xml,3/4/34ae0211dcc2cbe05043d3edc8f4b7ef3b54e6d6
 c
 3easy_pick/src/main/res/layout/main_alert_dialog.xml,5/b/5b8c8ed71d68b8dcbd00b036a48eae97f06aba4c
-_
-/easy_pick/src/main/res/layout/screen_filter.xml,0/5/05dac105397ba295596f28a9b7f42cf2cb2747d3
 c
 3easy_pick/src/main/res/layout/screen_statistics.xml,0/3/03ee987757d1de91b18b875b2dd4a1cf6691ceb8
 h
 8easy_pick/src/main/res/mipmap-anydpi-v26/ic_launcher.xml,e/6/e6d7af54c448684f26ee26170a82ce67e7071718
 n
 >easy_pick/src/main/res/mipmap-anydpi-v26/ic_launcher_round.xml,6/9/69bd07cb95cbb355da891405d13dd905cb8c954c
-r
-Beasy_pick/src/main/res/navigation/navigation_application_graph.xml,a/8/a86bef89feb97520181ec201a6618fb8184a815f
 Y
 )easy_pick/src/main/res/raw/anim_chat.json,2/b/2b4cac6ecf5eeb5aae1fd220bf73c352b5747a8a
 k

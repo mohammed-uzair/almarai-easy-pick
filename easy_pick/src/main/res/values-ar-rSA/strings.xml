@@ -68,4 +68,6 @@
     <string name="made_with">مصنوع من</string>
     <string name="almarai">المراعي</string>
     <string name="from">من عند</string>
+    <string name="title_filter_routes">تصفية المسارات</string>
+    <string name="title_filter_products">تصفية المنتجات</string>
 </resources>

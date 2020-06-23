@@ -7,15 +7,17 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
+import androidx.navigation.fragment.navArgs
 import com.almarai.easypick.R
+import com.almarai.easypick.utils.FilterScreenSource
+import com.almarai.easypick.utils.setTitle
 import com.almarai.easypick.view_models.FilterViewModel
-import com.almarai.easypick.view_models.LoginViewModel
 import kotlinx.android.synthetic.main.screen_filter.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
-import java.util.*
 
 class FilterScreen : Fragment(R.layout.screen_filter) {
     private val viewModel: FilterViewModel by viewModel()
+    private val args: FilterScreenArgs by navArgs()
     private lateinit var navController: NavController
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -32,7 +34,10 @@ class FilterScreen : Fragment(R.layout.screen_filter) {
 
     private fun init() {
         //Set screen title
-        val title = String.format(Locale.ENGLISH, getString(R.string.title_filter), "Route")
+        if (args.FilterSource == FilterScreenSource.ProductListScreen)
+            setTitle(R.string.title_filter_products)
+        else
+            setTitle(R.string.title_filter_routes)
 
         animateUI()
     }

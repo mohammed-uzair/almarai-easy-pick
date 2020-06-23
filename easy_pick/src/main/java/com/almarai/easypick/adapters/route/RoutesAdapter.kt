@@ -6,7 +6,6 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
-import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.core.widget.ImageViewCompat
 import androidx.navigation.findNavController
@@ -37,13 +36,10 @@ class RoutesAdapter : RecyclerView.Adapter<RoutesAdapter.ViewHolder>() {
             routeDescription = view.findViewById(R.id.item_route_description_text)
 
             view.setOnClickListener {
-                val selectedRouteNumber: Int = routeNumber.text.toString().toInt()
-
-                Toast.makeText(it.context, "Route Clicked $selectedRouteNumber", Toast.LENGTH_SHORT)
-                    .show()
-
                 val action = RouteSelectionScreenDirections
-                    .actionRouteSelectionScreenToProductListScreen(selectedRouteNumber)
+                    .actionRouteSelectionScreenToProductListScreen(
+                        routeNumber.text.toString().toInt()
+                    )
                 view.findNavController().navigate(action)
             }
         }
@@ -64,9 +60,9 @@ class RoutesAdapter : RecyclerView.Adapter<RoutesAdapter.ViewHolder>() {
 
         //Check the selected language
         when (APP_SELECTED_LANGUAGE) {
-            AppLanguage.English -> holder.routeDescription.text = route.description
             AppLanguage.Arabic -> holder.routeDescription.text = route.descriptionArabic
-        }
+            else -> holder.routeDescription.text = route.description
+        }.exhaustive
 
         when (route.serviceCurrentStatus) {
             is RouteStatus.NotServed -> ImageViewCompat.setImageTintList(

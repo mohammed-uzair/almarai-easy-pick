@@ -68,4 +68,6 @@
     <string name="made_with">बनेको</string>
     <string name="almarai">चराउने</string>
     <string name="from">बाट</string>
+    <string name="title_filter_routes">मार्गहरू फिल्टर</string>
+    <string name="title_filter_products">उत्पाद फिल्टर</string>
 </resources>

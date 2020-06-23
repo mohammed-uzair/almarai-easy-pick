@@ -11,8 +11,9 @@ import com.almarai.data.easy_pick_models.Product
 import com.almarai.easypick.R
 import com.almarai.easypick.utils.APP_SELECTED_LANGUAGE
 import com.almarai.easypick.utils.AppLanguage
+import com.almarai.easypick.utils.exhaustive
 
-class ItemsAdapter : RecyclerView.Adapter<ItemsAdapter.ViewHolder>() {
+class ProductsAdapter : RecyclerView.Adapter<ProductsAdapter.ViewHolder>() {
     private var list: List<Product>? = null
 
     fun setValues(list: List<Product>) {
@@ -20,23 +21,23 @@ class ItemsAdapter : RecyclerView.Adapter<ItemsAdapter.ViewHolder>() {
     }
 
     inner class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
-        val itemStatus: ImageView
-        val itemNumber: TextView
-        val itemDescription: TextView
+        val productStatus: ImageView
+        val productNumber: TextView
+        val productDescription: TextView
         val truckStock: TextView
         val freshLoad: TextView
         val totalStock: TextView
 
         init {
-            itemStatus = view.findViewById(R.id.item_item_status_image)
-            itemNumber = view.findViewById(R.id.item_item_number_text)
-            itemDescription = view.findViewById(R.id.item_item_description_text)
+            productStatus = view.findViewById(R.id.item_item_status_image)
+            productNumber = view.findViewById(R.id.item_item_number_text)
+            productDescription = view.findViewById(R.id.item_item_description_text)
             truckStock = view.findViewById(R.id.item_item_truck_stock)
             freshLoad = view.findViewById(R.id.item_item_fresh_load)
             totalStock = view.findViewById(R.id.item_item_total_stock)
 
             view.setOnClickListener {
-                Toast.makeText(it.context, "Item Clicked ${itemNumber.text}", Toast.LENGTH_SHORT)
+                Toast.makeText(it.context, "Item Clicked ${productNumber.text}", Toast.LENGTH_SHORT)
                     .show()
             }
         }
@@ -54,13 +55,13 @@ class ItemsAdapter : RecyclerView.Adapter<ItemsAdapter.ViewHolder>() {
         val item = list!![holder.bindingAdapterPosition]
 
 //        holder.itemStatus.text = route.itemNumber.toString()
-        holder.itemNumber.text = item.itemNumber.toString()
+        holder.productNumber.text = item.itemNumber.toString()
 
         //Check the selected language
         when (APP_SELECTED_LANGUAGE) {
-            AppLanguage.English -> holder.itemDescription.text = item.itemDescription
-            AppLanguage.Arabic -> holder.itemDescription.text = item.itemDescriptionArabic
-        }
+            AppLanguage.Arabic -> holder.productDescription.text = item.itemDescriptionArabic
+            else -> holder.productDescription.text = item.itemDescription
+        }.exhaustive
 
         holder.truckStock.text = item.truckStock
         holder.freshLoad.text = item.freshLoad

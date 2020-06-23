@@ -68,4 +68,6 @@
     <string name="made_with">جوړ شوی</string>
     <string name="almarai">څړځاي</string>
     <string name="from">له</string>
+    <string name="title_filter_routes">د لارې چاterونه</string>
+    <string name="title_filter_products">د توکو چاter</string>
 </resources>
