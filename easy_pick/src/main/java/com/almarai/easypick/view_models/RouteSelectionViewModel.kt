@@ -7,7 +7,7 @@ import androidx.lifecycle.viewModelScope
 import com.almarai.data.easy_pick_models.Result
 import com.almarai.data.easy_pick_models.Route
 import com.almarai.data.easy_pick_models.RouteStatus
-import com.almarai.data.easy_pick_models.ERROR_OCCURRED
+import com.almarai.data.easy_pick_models.util.ERROR_OCCURRED
 import com.almarai.repository.api.RoutesRepository
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch

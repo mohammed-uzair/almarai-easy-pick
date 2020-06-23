@@ -8,13 +8,14 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
 import com.almarai.easypick.R
+import com.almarai.easypick.view_models.FilterViewModel
 import com.almarai.easypick.view_models.LoginViewModel
 import kotlinx.android.synthetic.main.screen_filter.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import java.util.*
 
 class FilterScreen : Fragment(R.layout.screen_filter) {
-    private val viewModel: LoginViewModel by viewModel()
+    private val viewModel: FilterViewModel by viewModel()
     private lateinit var navController: NavController
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

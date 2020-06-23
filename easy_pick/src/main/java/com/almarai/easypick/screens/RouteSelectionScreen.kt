@@ -15,7 +15,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.almarai.data.easy_pick_models.Result
 import com.almarai.data.easy_pick_models.Route
 import com.almarai.data.easy_pick_models.RouteStatus
-import com.almarai.data.easy_pick_models.exhaustive
+import com.almarai.data.easy_pick_models.util.exhaustive
 import com.almarai.easypick.R
 import com.almarai.easypick.adapters.route.RoutesAdapter
 import com.almarai.easypick.utils.Alert

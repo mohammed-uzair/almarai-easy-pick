@@ -13,11 +13,27 @@
 
     <string-array name="app_language_entities">
         <item>English</item>
-        <item>Arabic</item>
+        <item>عربى</item>
+        <item>हिन्दी</item>
+        <item>தமிழ்</item>
+        <item>اردو</item>
+        <item>नेपाली</item>
+        <item>සිංහල</item>
+        <item>Tiếng Việt</item>
+        <item>پښتو</item>
+        <item>Pilipino</item>
     </string-array>
 
     <string-array name="app_language_values">
         <item>english</item>
         <item>arabic</item>
+        <item>hindi</item>
+        <item>tamil</item>
+        <item>urdu</item>
+        <item>nepali</item>
+        <item>sinhala</item>
+        <item>vietnamese</item>
+        <item>pashto</item>
+        <item>filipino</item>
     </string-array>
 </resources>

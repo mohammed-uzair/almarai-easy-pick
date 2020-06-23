@@ -3,7 +3,7 @@
     <!--region Theme Colors-->
     <!--region Base Theme Colors-->
     <color name="baseColorAccent">#59AB61</color>
-    <color name="baseColorStatusBar">#F2F2F2</color>
+    <color name="baseColorStatusBar">#59AB61</color>
     <color name="baseColorToolbar">#F2F2F2</color>
     <color name="baseColorNavigationBar">#F2F2F2</color>
 
@@ -34,7 +34,7 @@
 
     <!--region Light Theme Colors-->
     <color name="lightColorAccent">#59AB61</color>
-    <color name="lightColorStatusBar">#F2F2F2</color>
+    <color name="lightColorStatusBar">#59AB61</color>
     <color name="lightColorToolbar">#F2F2F2</color>
     <color name="lightColorNavigationBar">#F2F2F2</color>
 

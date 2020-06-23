@@ -48,7 +48,7 @@
     <string name="not_same_user">ليس المستخدم نفسه؟ تسجيل خروج</string>
     <string name="user_greeting">مرحبا،</string>
     <string name="general">جنرال لواء</string>
-    <string name="loading">يرجى الانتظار ، جارٍ التحميل ...</string>
+    <string name="loading">يرجى الانتظار ، جارٍ التحميل …</string>
     <string name="no_data_available">بيانات فارغة ، لا توجد بيانات متاحة</string>
     <string name="no_data_found">خطأ ، لم يتم العثور على شيء</string>
     <string name="no_filter">لا يوجد عامل تصفية</string>

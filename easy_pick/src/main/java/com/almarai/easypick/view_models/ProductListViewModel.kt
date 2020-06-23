@@ -6,7 +6,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.almarai.data.easy_pick_models.Product
 import com.almarai.data.easy_pick_models.Result
-import com.almarai.data.easy_pick_models.ERROR_OCCURRED
+import com.almarai.data.easy_pick_models.util.ERROR_OCCURRED
 import com.almarai.repository.api.ProductsRepository
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch

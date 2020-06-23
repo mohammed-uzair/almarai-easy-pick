@@ -94,6 +94,14 @@
 
     <string name="english_app_language" translatable="false">english</string>
     <string name="arabic_app_language" translatable="false">arabic</string>
+    <string name="hindi_app_language" translatable="false">hindi</string>
+    <string name="tamil_app_language" translatable="false">tamil</string>
+    <string name="urdu_app_language" translatable="false">urdu</string>
+    <string name="nepali_app_language" translatable="false">nepali</string>
+    <string name="sinhala_app_language" translatable="false">sinhala</string>
+    <string name="vietnamese_app_language" translatable="false">vietnamese</string>
+    <string name="pashto_app_language" translatable="false">pashto</string>
+    <string name="filipino_app_language" translatable="false">filipino</string>
     <!--endregion-->
 
     <!--region Alerts-->

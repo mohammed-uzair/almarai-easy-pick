@@ -9,7 +9,7 @@ import androidx.navigation.NavController
 import androidx.navigation.Navigation
 import com.almarai.data.easy_pick_models.Result
 import com.almarai.data.easy_pick_models.Statistics
-import com.almarai.data.easy_pick_models.exhaustive
+import com.almarai.data.easy_pick_models.util.exhaustive
 import com.almarai.easypick.R
 import com.almarai.easypick.utils.Alert
 import com.almarai.easypick.utils.hideAlert

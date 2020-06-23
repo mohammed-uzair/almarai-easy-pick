@@ -4,7 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.almarai.data.easy_pick_models.ERROR_OCCURRED
+import com.almarai.data.easy_pick_models.util.ERROR_OCCURRED
 import com.almarai.data.easy_pick_models.Result
 import com.almarai.data.easy_pick_models.Statistics
 import com.almarai.repository.api.StatisticsRepository

@@ -94,6 +94,38 @@ class MainActivity : AppCompatActivity(), KoinComponent {
                 APP_SELECTED_LANGUAGE = AppLanguage.Arabic
                 languageCode = "ar"
             }
+            newContext.getString(R.string.hindi_app_language) -> {
+                APP_SELECTED_LANGUAGE = AppLanguage.Hindi
+                languageCode = "hi"
+            }
+            newContext.getString(R.string.tamil_app_language) -> {
+                APP_SELECTED_LANGUAGE = AppLanguage.Tamil
+                languageCode = "ta"
+            }
+            newContext.getString(R.string.urdu_app_language) -> {
+                APP_SELECTED_LANGUAGE = AppLanguage.Urdu
+                languageCode = "ur"
+            }
+            newContext.getString(R.string.nepali_app_language) -> {
+                APP_SELECTED_LANGUAGE = AppLanguage.Nepali
+                languageCode = "ne"
+            }
+            newContext.getString(R.string.sinhala_app_language) -> {
+                APP_SELECTED_LANGUAGE = AppLanguage.Sinhala
+                languageCode = "si"
+            }
+            newContext.getString(R.string.vietnamese_app_language) -> {
+                APP_SELECTED_LANGUAGE = AppLanguage.Vietnamese
+                languageCode = "vi"
+            }
+            newContext.getString(R.string.pashto_app_language) -> {
+                APP_SELECTED_LANGUAGE = AppLanguage.Pashto
+                languageCode = "ps"
+            }
+            newContext.getString(R.string.filipino_app_language) -> {
+                APP_SELECTED_LANGUAGE = AppLanguage.Filipino
+                languageCode = "fil"
+            }
         }
 
         val locale = Locale(languageCode)
