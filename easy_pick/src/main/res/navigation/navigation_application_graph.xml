@@ -110,8 +110,8 @@
             app:popExitAnim="@anim/anim_screen_slide_out_right" />
         <argument
             android:name="Selected_Route_Number"
-            app:argType="integer"
-            android:defaultValue="0" />
+            android:defaultValue="0"
+            app:argType="integer" />
     </fragment>
     <fragment
         android:id="@+id/homeScreen"
@@ -185,11 +185,15 @@
         android:id="@+id/filterScreen"
         android:name="com.almarai.easypick.screens.FilterScreen"
         android:label="FilterScreen"
-        tools:layout="@layout/screen_filter" >
+        tools:layout="@layout/screen_filter">
         <argument
             android:name="Filter_Source"
-            app:argType="com.almarai.easypick.utils.FilterScreenSource"
-            android:defaultValue="RouteSelectionScreenScreen" />
+            android:defaultValue="RouteSelectionScreenScreen"
+            app:argType="com.almarai.easypick.utils.FilterScreenSource" />
+        <argument
+            android:name="Filter_Model"
+            app:argType="com.almarai.data.easy_pick_models.filter.Filter"
+            app:nullable="true" />
     </fragment>
     <fragment
         android:id="@+id/statisticsScreen"

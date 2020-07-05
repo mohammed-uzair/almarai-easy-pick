@@ -1,19 +1,38 @@
 package com.almarai.easypick.screens
 
 import android.os.Bundle
+import android.view.LayoutInflater
 import android.view.View
+import android.view.ViewGroup
 import android.view.animation.AnimationUtils
+import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
 import com.almarai.easypick.R
+import com.almarai.easypick.databinding.ScreenHomeBinding
 import com.almarai.easypick.view_models.HomeViewModel
-import kotlinx.android.synthetic.main.screen_home.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
-class HomeScreen : Fragment(R.layout.screen_home), View.OnClickListener {
+class HomeScreen : Fragment(), View.OnClickListener {
     private val viewModel: HomeViewModel by viewModel()
     private lateinit var navController: NavController
+    private lateinit var screenHomeBinding: ScreenHomeBinding
+
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
+        screenHomeBinding =
+            DataBindingUtil.inflate(inflater, R.layout.screen_home, container, false)
+        screenHomeBinding.apply {
+            lifecycleOwner = this@HomeScreen
+            viewModel = this@HomeScreen.viewModel
+        }
+
+        return screenHomeBinding.root
+    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -28,12 +47,12 @@ class HomeScreen : Fragment(R.layout.screen_home), View.OnClickListener {
 
         animateUI()
 
-        home_screen_routes_button.setOnClickListener(this)
-        home_screen_network_configuration_button.setOnClickListener(this)
-        home_screen_data_configuration_button.setOnClickListener(this)
-        home_screen_settings_button.setOnClickListener(this)
-        home_screen_statistics_button.setOnClickListener(this)
-        home_screen_exit_app_button.setOnClickListener(this)
+        screenHomeBinding.homeScreenRoutesButton.setOnClickListener(this)
+        screenHomeBinding.homeScreenNetworkConfigurationButton.setOnClickListener(this)
+        screenHomeBinding.homeScreenDataConfigurationButton.setOnClickListener(this)
+        screenHomeBinding.homeScreenSettingsButton.setOnClickListener(this)
+        screenHomeBinding.homeScreenStatisticsButton.setOnClickListener(this)
+        screenHomeBinding.homeScreenExitAppButton.setOnClickListener(this)
     }
 
     override fun onClick(v: View?) {
@@ -52,14 +71,14 @@ class HomeScreen : Fragment(R.layout.screen_home), View.OnClickListener {
         val rightToLeft = AnimationUtils.loadAnimation(activity, R.anim.right_to_left)
         val leftToRight = AnimationUtils.loadAnimation(activity, R.anim.left_to_right)
 
-        screen_home_background_image.startAnimation(topToBottom)
-        screen_home_animation.startAnimation(topToBottom)
+        screenHomeBinding.screenHomeBackgroundImage.startAnimation(topToBottom)
+        screenHomeBinding.screenHomeAnimation.startAnimation(topToBottom)
 
-        home_screen_routes_button.startAnimation(leftToRight)
-        home_screen_data_configuration_button.startAnimation(leftToRight)
-        home_screen_statistics_button.startAnimation(leftToRight)
-        home_screen_network_configuration_button.startAnimation(rightToLeft)
-        home_screen_settings_button.startAnimation(rightToLeft)
-        home_screen_exit_app_button.startAnimation(rightToLeft)
+        screenHomeBinding.homeScreenRoutesButton.startAnimation(leftToRight)
+        screenHomeBinding.homeScreenDataConfigurationButton.startAnimation(leftToRight)
+        screenHomeBinding.homeScreenStatisticsButton.startAnimation(leftToRight)
+        screenHomeBinding.homeScreenNetworkConfigurationButton.startAnimation(rightToLeft)
+        screenHomeBinding.homeScreenSettingsButton.startAnimation(rightToLeft)
+        screenHomeBinding.homeScreenExitAppButton.startAnimation(rightToLeft)
     }
 }

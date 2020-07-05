@@ -1,4 +1,4 @@
-package com.almarai.easypick.utils
+package com.almarai.easypick.extensions
 
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
@@ -8,24 +8,21 @@ import com.almarai.easypick.R
 import kotlinx.android.synthetic.main.fragment_container.*
 import kotlinx.android.synthetic.main.main_alert_dialog.*
 
-val <T> T.exhaustive: T
-    get() = this
-
 sealed class Alert {
     object Loading : Alert()
     object Error : Alert()
     object NoDataAvailable : Alert()
 }
 
-internal fun Fragment.showAlert(alertType: Alert, message: String = "") {
-    (requireActivity() as MainActivity).showAlert(alertType, message)
+internal fun Fragment.showViewStateAlert(alertType: Alert, message: String = "") {
+    (requireActivity() as MainActivity).showViewStateAlert(alertType, message)
 }
 
-internal fun Fragment.hideAlert() {
-    (requireActivity() as MainActivity).hideAlert()
+internal fun Fragment.hideViewStateAlert() {
+    (requireActivity() as MainActivity).hideViewStateAlert()
 }
 
-internal fun AppCompatActivity.showAlert(alertType: Alert, message: String = "") {
+internal fun AppCompatActivity.showViewStateAlert(alertType: Alert, message: String = "") {
     val mainActivity = this as MainActivity
 
     //Hide the root fragment view
@@ -37,7 +34,7 @@ internal fun AppCompatActivity.showAlert(alertType: Alert, message: String = "")
     //Set the animation to the required one
     var text = message
     when (alertType) {
-        Alert.Loading -> {
+        is Alert.Loading -> {
             if (text.isEmpty()) {
                 text = getString(R.string.loading)
             }
@@ -47,9 +44,9 @@ internal fun AppCompatActivity.showAlert(alertType: Alert, message: String = "")
             mainActivity.alert_animation.post { mainActivity.alert_animation.playAnimation() }
 
             //Set the message
-            mainActivity.alert_text.text = text.trim()
+            mainActivity.alert_text_details.text = text.trim()
         }
-        Alert.Error -> {
+        is Alert.Error -> {
             if (text.isEmpty()) {
                 text = getString(R.string.no_data_found)
             }
@@ -59,9 +56,9 @@ internal fun AppCompatActivity.showAlert(alertType: Alert, message: String = "")
             mainActivity.alert_animation.post { mainActivity.alert_animation.playAnimation() }
 
             //Set the message
-            mainActivity.alert_text.text = text.trim()
+            mainActivity.alert_text_details.text = text.trim()
         }
-        Alert.NoDataAvailable -> {
+        is Alert.NoDataAvailable -> {
             if (text.isEmpty()) {
                 text = getString(R.string.no_data_available)
             }
@@ -71,17 +68,21 @@ internal fun AppCompatActivity.showAlert(alertType: Alert, message: String = "")
             mainActivity.alert_animation.post { mainActivity.alert_animation.playAnimation() }
 
             //Set the message
-            mainActivity.alert_text.text = text.trim()
+            mainActivity.alert_text_details.text = text.trim()
         }
     }.exhaustive
 }
 
-internal fun AppCompatActivity.hideAlert() {
+internal fun AppCompatActivity.hideViewStateAlert() {
     val mainActivity = this as MainActivity
 
-    //Show the alert view as visible
-    mainActivity.main_alert_dialog_root.visibility = View.GONE
+    //Hide the view state alert
+    if (mainActivity.main_alert_dialog_root.visibility == View.VISIBLE)
+        mainActivity.main_alert_dialog_root.visibility = View.GONE
 
-    //Hide the root fragment view
-    mainActivity.fragment_container_host_fragment.visibility = View.VISIBLE
+    //Show the root fragment container
+    if (mainActivity.fragment_container_host_fragment.visibility == View.GONE ||
+        mainActivity.fragment_container_host_fragment.visibility == View.INVISIBLE
+    )
+        mainActivity.fragment_container_host_fragment.visibility = View.VISIBLE
 }

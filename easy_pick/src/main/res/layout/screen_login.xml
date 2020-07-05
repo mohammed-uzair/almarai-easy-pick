@@ -67,7 +67,7 @@
 
     <com.almarai.alm_ui.AlmEditText
         android:id="@+id/screen_login_user_name_edit_text"
-        style="@style/EditTextStyle"
+        style="@style/EditTextLayoutStyle"
         android:drawableStart="@drawable/ic_server"
         android:hint="@string/user_name"
         android:maxLength="4"
@@ -80,7 +80,7 @@
 
     <com.almarai.alm_ui.AlmEditText
         android:id="@+id/screen_login_user_password_edit_text"
-        style="@style/EditTextStyle"
+        style="@style/EditTextLayoutStyle"
         android:drawableStart="@drawable/ic_server"
         android:hint="@string/user_name"
         android:inputType="textPassword"

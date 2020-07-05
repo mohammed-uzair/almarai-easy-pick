@@ -6,6 +6,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.almarai.data.easy_pick_models.Product
 import com.almarai.data.easy_pick_models.Result
+import com.almarai.data.easy_pick_models.filter.Filter
 import com.almarai.data.easy_pick_models.util.ERROR_OCCURRED
 import com.almarai.repository.api.ProductsRepository
 import kotlinx.coroutines.Dispatchers
@@ -13,7 +14,10 @@ import kotlinx.coroutines.launch
 
 class ProductListViewModel(private val repository: ProductsRepository) : ViewModel() {
     private val _products = MutableLiveData<Result<List<Product>>>()
-    val products: LiveData<Result<List<Product>>> = _products
+    internal var filterModel: Filter? = null
+    internal val products: LiveData<Result<List<Product>>> = _products
+    val totalItems: MutableLiveData<Int> = MutableLiveData(0)
+    val itemsPicked: MutableLiveData<Int> = MutableLiveData(0)
 
     init {
         viewModelScope.launch(Dispatchers.IO) {
@@ -26,9 +30,12 @@ class ProductListViewModel(private val repository: ProductsRepository) : ViewMod
         }
     }
 
-    fun getRouteServiceDetails(list: List<Product>): ItemsDetail {
-        return ItemsDetail(123, 24, list.size)
+    fun setRouteServiceDetails(list: List<Product>) {
+        val itemDetails = ItemsDetail(23, list.size)
+
+        totalItems.value = itemDetails.totalItems
+        itemsPicked.value = itemDetails.pickedItems
     }
 }
 
-data class ItemsDetail(val servedItems: Int, val servingItems: Int, val totalItems: Int)
+data class ItemsDetail(val pickedItems: Int, val totalItems: Int)

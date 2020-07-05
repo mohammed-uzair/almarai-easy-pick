@@ -1,21 +1,41 @@
 package com.almarai.easypick.screens
 
 import android.os.Bundle
+import android.view.LayoutInflater
 import android.view.View
+import android.view.ViewGroup
 import android.view.animation.AnimationUtils
 import androidx.appcompat.app.AppCompatActivity
+import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
 import com.almarai.easypick.R
+import com.almarai.easypick.databinding.ScreenLaunchBinding
 import com.almarai.easypick.view_models.LaunchViewModel
 import com.almarai.repository.utils.AppDataConfiguration
 import kotlinx.android.synthetic.main.screen_launch.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
-class LaunchScreen : Fragment(R.layout.screen_launch) {
+class LaunchScreen : Fragment() {
     private val viewModel: LaunchViewModel by viewModel()
     private lateinit var navController: NavController
+    private lateinit var screenLaunchBinding: ScreenLaunchBinding
+
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
+        screenLaunchBinding =
+            DataBindingUtil.inflate(inflater, R.layout.screen_launch, container, false)
+        screenLaunchBinding.apply {
+            lifecycleOwner = this@LaunchScreen
+            viewModel = this@LaunchScreen.viewModel
+        }
+
+        return screenLaunchBinding.root
+    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)

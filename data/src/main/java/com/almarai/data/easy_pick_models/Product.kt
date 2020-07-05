@@ -2,6 +2,7 @@ package com.almarai.data.easy_pick_models
 
 import android.os.Parcelable
 import kotlinx.android.parcel.Parcelize
+import kotlinx.android.parcel.RawValue
 
 @Parcelize
 data class Product(
@@ -15,4 +16,11 @@ data class Product(
     val actualQuantity: Int = 0,
     val editedCrates: Int = 0,
     val editedPieces: Int = 0
-) : Parcelable
+) : Parcelable {
+    var status: @RawValue ProductStatus = ProductStatus.NotPicked
+}
+
+sealed class ProductStatus {
+    object Picked : ProductStatus()
+    object NotPicked : ProductStatus()
+}

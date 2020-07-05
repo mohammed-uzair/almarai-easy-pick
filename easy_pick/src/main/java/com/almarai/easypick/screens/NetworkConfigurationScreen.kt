@@ -1,21 +1,44 @@
 package com.almarai.easypick.screens
 
 import android.os.Bundle
+import android.view.LayoutInflater
 import android.view.View
+import android.view.ViewGroup
 import android.view.animation.AnimationUtils
+import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
-import com.almarai.data.easy_pick_models.NetworkConfiguration
 import com.almarai.easypick.R
+import com.almarai.easypick.databinding.ScreenNetworkConfigurationBinding
 import com.almarai.easypick.view_models.NetworkConfigurationViewModel
 import com.almarai.repository.utils.AppDataConfiguration
-import kotlinx.android.synthetic.main.screen_network_configuration.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
-class NetworkConfigurationScreen : Fragment(R.layout.screen_network_configuration) {
+class NetworkConfigurationScreen : Fragment() {
     private val viewModel: NetworkConfigurationViewModel by viewModel()
     private lateinit var navController: NavController
+    private lateinit var screenNetworkConfigurationBinding: ScreenNetworkConfigurationBinding
+
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
+        screenNetworkConfigurationBinding =
+            DataBindingUtil.inflate(
+                inflater,
+                R.layout.screen_network_configuration,
+                container,
+                false
+            )
+        screenNetworkConfigurationBinding.apply {
+            lifecycleOwner = this@NetworkConfigurationScreen
+            viewModel = this@NetworkConfigurationScreen.viewModel
+        }
+
+        return screenNetworkConfigurationBinding.root
+    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -28,19 +51,10 @@ class NetworkConfigurationScreen : Fragment(R.layout.screen_network_configuratio
         //Set screen title
         activity?.title = getString(R.string.title_network_configuration)
 
-        setUIData()
-
         animateUI()
 
-        screen_network_config_save_button.setOnClickListener {
-            if (validateData()) {
-                viewModel.saveNetworkConfiguration(
-                    NetworkConfiguration(
-                        screen_network_config_server_ip_edit_text.text.toString().trim(),
-                        screen_network_config_port_edit_text.text.toString().trim()
-                    )
-                )
-
+        screenNetworkConfigurationBinding.screenNetworkConfigSaveButton.setOnClickListener {
+            if (viewModel.saveNetworkConfiguration()) {
                 when (viewModel.checkAppDataConfigurations()) {
                     AppDataConfiguration.DataConfiguration ->
                         navController.navigate(R.id.action_networkConfigurationScreen_to_dataConfigurationScreen)
@@ -51,31 +65,22 @@ class NetworkConfigurationScreen : Fragment(R.layout.screen_network_configuratio
         }
     }
 
-    private fun setUIData() {
-        val networkConfiguration = viewModel.getNetworkConfiguration()
-        screen_network_config_server_ip_edit_text.setText(networkConfiguration.serverIpAddress)
-        screen_network_config_port_edit_text.setText(networkConfiguration.serverPort)
-    }
-
-    private fun validateData(): Boolean {
-        validateIpAddress()
-        return true
-    }
-
-    private fun validateIpAddress() {
-
-    }
-
     private fun animateUI() {
         val bottomToTop = AnimationUtils.loadAnimation(activity, R.anim.bottom_to_top)
         val topToBottom = AnimationUtils.loadAnimation(activity, R.anim.top_to_bottom)
 
-        screen_network_config_background_image.startAnimation(topToBottom)
-        screen_network_config_animation.startAnimation(topToBottom)
+        screenNetworkConfigurationBinding.screenNetworkConfigBackgroundImage.startAnimation(
+            topToBottom
+        )
+        screenNetworkConfigurationBinding.screenNetworkConfigAnimation.startAnimation(topToBottom)
 
-        screen_network_config_save_button.startAnimation(bottomToTop)
+        screenNetworkConfigurationBinding.screenNetworkConfigSaveButton.startAnimation(bottomToTop)
 
-        screen_network_config_server_ip_edit_text.startAnimation(bottomToTop)
-        screen_network_config_port_edit_text.startAnimation(bottomToTop)
+        screenNetworkConfigurationBinding.screenNetworkConfigServerIpEditTextLayout.startAnimation(
+            bottomToTop
+        )
+        screenNetworkConfigurationBinding.screenNetworkConfigPortEditTextLayout.startAnimation(
+            bottomToTop
+        )
     }
 }

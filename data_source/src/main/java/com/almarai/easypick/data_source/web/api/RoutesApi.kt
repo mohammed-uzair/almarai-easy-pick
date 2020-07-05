@@ -5,6 +5,7 @@ import kotlinx.coroutines.flow.Flow
 import retrofit2.http.GET
 
 interface RoutesApi {
-    @GET("B48qYZYN")
+//    @GET("B48qYZYN")
+    @GET("Routes")
     suspend fun getAllRoutes(): List<Route>
 }

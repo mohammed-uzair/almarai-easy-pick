@@ -4,4 +4,5 @@
     <color name="red">#D55D39</color>
     <color name="green">#59AB61</color>
     <color name="blue">#6C63FF</color>
+    <color name="button_ripple_color">#F2F2F2</color>
 </resources>

@@ -59,7 +59,7 @@ class ApplicationRepositoryImplementation(private val sharedPreferenceDataSource
 
         sharedPreferenceDataSource.setSharedPreference(
             DATA_CONFIGURATION_ROUTE_PREFERENCE,
-            dataConfiguration.routePreference
+            dataConfiguration.routeGroup
         )
 
         sharedPreferenceDataSource.setSharedPreference(DATA_CONFIGURATION_STATUS, true)
@@ -69,7 +69,7 @@ class ApplicationRepositoryImplementation(private val sharedPreferenceDataSource
         val salesDate =
             sharedPreferenceDataSource.getSharedPreferenceString(DATA_CONFIGURATION_SALES_DATE)
         val depotCode =
-            sharedPreferenceDataSource.getSharedPreferenceInt(DATA_CONFIGURATION_DEPOT_CODE)
+            sharedPreferenceDataSource.getSharedPreferenceString(DATA_CONFIGURATION_DEPOT_CODE)
         val routePreference =
             sharedPreferenceDataSource.getSharedPreferenceString(DATA_CONFIGURATION_ROUTE_PREFERENCE)
 

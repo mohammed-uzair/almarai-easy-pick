@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <!--region Base App Theme-->
-    <style name="Theme.Base" parent="Theme.AppCompat.Light.NoActionBar">
+    <style name="Theme.Base" parent="Theme.MaterialComponents.Light.NoActionBar">
         <item name="colorPrimaryDark">@color/baseColorStatusBar</item>
+        <item name="colorPrimary">@color/baseColorStatusBar</item>
         <item name="colorAccent">@color/baseColorAccent</item>
 
         <item name="colorStatusBar">@color/baseColorStatusBar</item>
@@ -20,6 +21,7 @@
         <item name="colorSubTitle">@color/baseColorSubTitle</item>
 
         <item name="colorText">@color/baseColorText</item>
+        <item name="android:textColorSecondary">@color/baseColorText</item>
         <item name="colorButton">@color/baseColorButton</item>
 
         <item name="colorHomeMenuIcons">@color/baseColorHomeMenuIcons</item>
@@ -35,6 +37,8 @@
 
         <item name="android:textViewStyle">@style/PrimaryTextStyle</item>
         <item name="styleButton">@style/PrimaryButtonStyle</item>
+
+        <item name="dialogCornerRadius">@dimen/_10sdp</item>
     </style>
     <!--endregion-->
 
@@ -45,7 +49,6 @@
     <!--region Dark Theme-->
     <style name="Theme.Base.DarkAppTheme">
         <item name="colorPrimaryDark">@color/darkColorStatusBar</item>
-        <item name="colorAccent">@color/darkColorAccent</item>
 
         <item name="colorStatusBar">@color/darkColorStatusBar</item>
         <item name="colorToolbar">@color/darkColorToolbar</item>
@@ -62,7 +65,7 @@
         <item name="colorSubTitle">@color/darkColorSubTitle</item>
 
         <item name="colorText">@color/darkColorText</item>
-        <item name="colorButton">@color/darkColorButton</item>
+        <item name="android:textColorSecondary">@color/darkColorText</item>
 
         <item name="colorHomeMenuIcons">@color/darkColorHomeMenuIcons</item>
         <item name="colorHomeMenuDivider">@color/darkColorHomeMenuDivider</item>
@@ -72,15 +75,12 @@
         <item name="colorListHeaderTitle">@color/darkColorListHeaderTitle</item>
         <item name="colorListItemBackground">@color/darkColorListItemBackground</item>
         <item name="colorListItemDivider">@color/darkColorListItemDivider</item>
-
-        <item name="colorFilterScreenDivider">@color/darkColorFilterScreenDivider</item>
     </style>
     <!--endregion-->
 
     <!--region Night Theme-->
     <style name="Theme.Base.NightAppTheme">
         <item name="colorPrimaryDark">@color/nightColorStatusBar</item>
-        <item name="colorAccent">@color/nightColorAccent</item>
 
         <item name="colorStatusBar">@color/nightColorStatusBar</item>
         <item name="colorToolbar">@color/nightColorToolbar</item>
@@ -97,7 +97,7 @@
         <item name="colorSubTitle">@color/nightColorSubTitle</item>
 
         <item name="colorText">@color/nightColorText</item>
-        <item name="colorButton">@color/nightColorButton</item>
+        <item name="android:textColorSecondary">@color/nightColorText</item>
 
         <item name="colorHomeMenuIcons">@color/nightColorHomeMenuIcons</item>
         <item name="colorHomeMenuDivider">@color/nightColorHomeMenuDivider</item>
@@ -108,7 +108,8 @@
         <item name="colorListItemBackground">@color/nightColorListItemBackground</item>
         <item name="colorListItemDivider">@color/nightColorListItemDivider</item>
 
-        <item name="colorFilterScreenDivider">@color/nightColorFilterScreenDivider</item>
+        <item name="textColorAlertDialogListItem">@color/nightColorText</item>
+        <item name="preferenceTheme">@style/PreferenceThemeNight</item>
     </style>
     <!--endregion-->
 

@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <TextView
+        android:id="@+id/partial_poq_product_details_pop_up_excess_shortage_label"
+        style="@style/AlmTextSingleLineBold"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Something"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/partial_poq_product_details_pop_up_excess_shortage_txt"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintHorizontal_chainStyle="spread_inside"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/partial_poq_product_details_pop_up_excess_shortage_txt"
+        style="@style/AlmTextSingleLineBold"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="5"
+        android:gravity="center"
+        android:textSize="@dimen/_16sdp"
+        app:layout_constraintBaseline_toBaselineOf="@id/partial_poq_product_details_pop_up_excess_shortage_label"
+        app:layout_constraintEnd_toStartOf="@id/partial_poq_product_details_pop_up_wd_label"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@id/partial_poq_product_details_pop_up_excess_shortage_label"
+        tools:text="1/2" />
+
+    <TextView
+        android:id="@+id/partial_poq_product_details_pop_up_wd_label"
+        style="@style/AlmTextSingleLineBold"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="WD"
+        app:layout_constraintBaseline_toBaselineOf="@id/partial_poq_product_details_pop_up_excess_shortage_txt"
+        app:layout_constraintEnd_toStartOf="@id/partial_poq_product_details_pop_up_wd_txt"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@id/partial_poq_product_details_pop_up_excess_shortage_txt" />
+
+    <TextView
+        android:id="@+id/partial_poq_product_details_pop_up_wd_txt"
+        style="@style/AlmTextSingleLineBold"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="5"
+        android:gravity="center"
+        android:textSize="@dimen/_16sdp"
+        app:layout_constraintBaseline_toBaselineOf="@id/partial_poq_product_details_pop_up_wd_label"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@id/partial_poq_product_details_pop_up_wd_label"
+        tools:text="1/10" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

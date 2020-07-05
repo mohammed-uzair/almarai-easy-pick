@@ -22,13 +22,6 @@ class SettingsScreen : PreferenceFragmentCompat(), Preference.OnPreferenceChange
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        val typedValue = TypedValue()
-        val theme = requireContext().theme
-        theme.resolveAttribute(R.attr.colorBackgroundScreenBody, typedValue, true)
-        @ColorInt val color = typedValue.data
-
-        view.setBackgroundColor(color)
-
         navController = Navigation.findNavController(view)
 
         super.onViewCreated(view, savedInstanceState)
