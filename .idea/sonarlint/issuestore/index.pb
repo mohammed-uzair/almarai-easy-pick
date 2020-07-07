@@ -248,8 +248,6 @@ Gdata/src/main/java/com/almarai/data/easy_pick_models/util/Extensions.kt,7/c/7c
 r
 Beasy_pick/src/main/java/com/almarai/easypick/utils/Connectivity.kt,4/0/403d40360a7ee4f543762c064df32af947698478
 `
-0easy_pick/src/main/res/values-ar-rSA/strings.xml,b/4/b4342ad26622ae11410f2f6c2faea14d6db76416
-`
 0easy_pick/src/main/res/values-bn-rBD/strings.xml,f/6/f63b96648130f99f402ddfa9a6c41009fa6e38bd
 a
 1easy_pick/src/main/res/values-fil-rPH/strings.xml,2/8/2827b09516b6134bc754111bb05619ee08bfb73e
@@ -337,14 +335,10 @@ _
 /easy_pick/src/main/res/layout/screen_filter.xml,0/5/05dac105397ba295596f28a9b7f42cf2cb2747d3
 ]
 -easy_pick/src/main/res/layout/screen_home.xml,b/7/b7af443e5cd56ecfb252b27c0e538b59ce8fe611
-_
-/easy_pick/src/main/res/layout/screen_launch.xml,2/8/28f812590ec7cf8d3cb65acc0f49ed942a0fb162
 `
 0easy_pick/src/main/res/layout/screen_product.xml,3/6/36c83619e6533bd1e09865ced4d0f700f8969290
 h
 8easy_pick/src/main/res/layout/screen_route_selection.xml,a/1/a19b6259c0c3319a8490acea2763b4e9a636837f
-r
-Beasy_pick/src/main/res/navigation/navigation_application_graph.xml,a/8/a86bef89feb97520181ec201a6618fb8184a815f
 X
 (easy_pick/src/main/res/values/arrays.xml,f/2/f24c1902febc3aadc8cf52b37bcb8b4d6b6d20ac
 f

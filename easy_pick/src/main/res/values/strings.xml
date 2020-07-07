@@ -1,5 +1,4 @@
 <resources>
-    <string name="appName" translatable="false">Easy Pick</string>
     <string name="app_description" translatable="false">Picking Products Made Easy</string>
 
     <!--region Screen Titles-->

@@ -10,6 +10,7 @@ import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
+import com.almarai.easypick.BuildConfig
 import com.almarai.easypick.R
 import com.almarai.easypick.databinding.ScreenLaunchBinding
 import com.almarai.easypick.view_models.LaunchViewModel
@@ -51,6 +52,8 @@ class LaunchScreen : Fragment() {
     private fun init() {
         //Hide the toolbar
         (activity as AppCompatActivity).supportActionBar?.hide()
+
+        screenLaunchBinding.screenLaunchAppNameText.text = BuildConfig.APP_NAME
 
         animateUI()
 

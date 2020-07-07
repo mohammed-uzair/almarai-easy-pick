@@ -6,13 +6,23 @@ apply plugin: 'com.google.gms.google-services'
 apply plugin: 'com.google.firebase.crashlytics'
 apply plugin: "androidx.navigation.safeargs.kotlin"
 
+//Locate your keystore file path
+def keystorePropertiesFile = rootProject.file("keystore.properties")
+
+//Keystore properties reference
+def keystoreProperties = new Properties()
+
+//Assign your keystore file to the keystore reference
+keystoreProperties.load(new FileInputStream(keystorePropertiesFile))
+
 android {
+    def appName = "Easy Pick"
+
     compileSdkVersion 29
     buildToolsVersion "29.0.3"
 
     defaultConfig {
         //Creates a placeholder property for common application name and intent to use in the manifest.
-        def appName = "Easy Pick"
         manifestPlaceholders = [appName: appName]
 
         //Add a new build config field for common application name into the BuildConfig class.
@@ -31,9 +41,55 @@ android {
         enabled true
     }
 
-    buildTypes {
+    signingConfigs {
         release {
+            keyAlias keystoreProperties['RELEASE_KEY_ALIAS']
+            keyPassword keystoreProperties['RELEASE_KEY_PASSWORD']
+            storeFile file(keystoreProperties['RELEASE_STORE_FILE'])
+            storePassword keystoreProperties['RELEASE_STORE_PASSWORD']
+        }
+
+        debug {}
+    }
+
+    /*Specify the build types here as release and debug*/
+    buildTypes {
+        //Modify the output package name(Should be like -> SARASLite_debug_100310)
+        applicationVariants.all { variant ->
+            variant.outputs.all {
+                outputFileName =
+                        "${appName}_${variant.buildType.name}_${defaultConfig.versionName}.apk"
+            }
+        }
+
+        Development {
+            signingConfig signingConfigs.debug
+
+            splits.abi.enable = false
+            splits.density.enable = false
+
+            debuggable true
+            shrinkResources false
             minifyEnabled false
+        }
+
+        UAT {
+            signingConfig signingConfigs.release
+
+            splits.abi.enable = false
+            splits.density.enable = false
+
+            debuggable true
+            shrinkResources true
+            minifyEnabled true
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+
+        release {
+            signingConfig signingConfigs.release
+            debuggable false
+            shrinkResources true
+            minifyEnabled true
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
@@ -46,6 +102,19 @@ android {
     tasks.withType(org.jetbrains.kotlin.gradle.tasks.KotlinCompile).all {
         kotlinOptions {
             jvmTarget = "1.8"
+        }
+    }
+
+    /* Some times, when javac fails due to Dagger, the entire gradle build halts,
+     * and therefore you get errors crossing 100, most of these errors are not actually errors.
+     * we cannot be able to see the actual error, thus increasing the XmaXerrs counts will show us more
+     * errors in the terminal and thus our actual error can also be found there
+     * For now we are increasing the max error output buffer to 500*/
+    allprojects {
+        afterEvaluate {
+            tasks.withType(JavaCompile.class) {
+                options.compilerArgs << "-Xmaxerrs" << "500"
+            }
         }
     }
 }
@@ -114,7 +183,7 @@ dependencies {
 
     // Add the Firebase Crashlytics SDK.
     implementation 'com.google.firebase:firebase-crashlytics:17.1.0'
-    
+
     // jetpack navigation components
     def nav_version = '2.3.0-beta01'
     implementation "androidx.navigation:navigation-fragment-ktx:$nav_version"

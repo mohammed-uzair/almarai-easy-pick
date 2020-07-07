@@ -2,6 +2,15 @@ apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 
+//Locate your keystore file path
+def keystorePropertiesFile = rootProject.file("keystore.properties")
+
+//Keystore properties reference
+def keystoreProperties = new Properties()
+
+//Assign your keystore file to the keystore reference
+keystoreProperties.load(new FileInputStream(keystorePropertiesFile))
+
 android {
 //    resourcePrefix 'alm_ui_'
     compileSdkVersion 29
@@ -17,10 +26,57 @@ android {
         consumerProguardFiles 'consumer-rules.pro'
     }
 
-    buildTypes {
+    signingConfigs {
         release {
+            keyAlias keystoreProperties['RELEASE_KEY_ALIAS']
+            keyPassword keystoreProperties['RELEASE_KEY_PASSWORD']
+            storeFile file(keystoreProperties['RELEASE_STORE_FILE'])
+            storePassword keystoreProperties['RELEASE_STORE_PASSWORD']
+        }
+
+        debug{}
+    }
+
+    /*Specify the build types here as release and debug*/
+    buildTypes {
+        Development {
+            signingConfig signingConfigs.debug
+
+            splits.abi.enable = false
+            splits.density.enable = false
+
+            debuggable true
             minifyEnabled false
+        }
+
+        UAT {
+            signingConfig signingConfigs.release
+
+            splits.abi.enable = false
+            splits.density.enable = false
+
+            debuggable true
+            minifyEnabled true
+
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+
+        release {
+            signingConfig signingConfigs.release
+            debuggable false
+            minifyEnabled true
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    compileOptions {
+        sourceCompatibility = '1.8'
+        targetCompatibility = '1.8'
+    }
+
+    tasks.withType(org.jetbrains.kotlin.gradle.tasks.KotlinCompile).all {
+        kotlinOptions {
+            jvmTarget = "1.8"
         }
     }
 }

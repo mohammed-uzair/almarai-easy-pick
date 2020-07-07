@@ -10,7 +10,7 @@ class LaunchViewModel(private val applicationRepository: ApplicationRepository) 
         const val TAG = "LaunchViewModel"
     }
 
-    val appVersionNumber = MutableLiveData<String>(BuildConfig.VERSION_NAME)
+    val appVersionName = MutableLiveData<String>(BuildConfig.VERSION_NAME)
 
     fun checkAppDataConfigurations() = applicationRepository.checkAppDataIsConfigured()
 }
