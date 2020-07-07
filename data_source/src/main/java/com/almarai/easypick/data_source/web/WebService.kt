@@ -6,7 +6,8 @@ import com.almarai.easypick.data_source.web.api.StatisticsApi
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
-private const val BASE_URL = "https://pastebin.com/raw/"
+//private const val BASE_URL = "https://pastebin.com/raw/"
+private var BASE_URL = "http://192.168.1.237:8080/"
 
 class WebService {
     private fun getRetrofit() = Retrofit.Builder()
@@ -14,7 +15,7 @@ class WebService {
         .addConverterFactory(GsonConverterFactory.create())
         .build()
 
-    val routesApi = getRetrofit().create(RoutesApi::class.java)
-    val productsApi = getRetrofit().create(ProductsApi::class.java)
-    val statisticsApi = getRetrofit().create(StatisticsApi::class.java)
+    val routesApi: RoutesApi = getRetrofit().create(RoutesApi::class.java)
+    val productsApi: ProductsApi = getRetrofit().create(ProductsApi::class.java)
+    val statisticsApi: StatisticsApi = getRetrofit().create(StatisticsApi::class.java)
 }

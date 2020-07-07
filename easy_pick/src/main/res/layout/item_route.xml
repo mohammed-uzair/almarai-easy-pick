@@ -1,38 +1,119 @@
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/item_route_root"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:background="?attr/colorListItemBackground"
-    android:orientation="horizontal"
-    android:weightSum="6">
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <ImageView
-        android:id="@+id/item_route_status_image"
-        style="@style/AlmGridItemsTextView"
-        android:layout_width="0dp"
-        android:layout_height="match_parent"
-        android:layout_weight="1"
-        android:contentDescription="@string/image_description_status_route"
-        android:src="@drawable/ic_status"
-        tools:text="TC" />
+    <data>
 
-    <TextView
-        android:id="@+id/item_route_number_text"
-        style="@style/AlmGridItemsTextView"
-        android:layout_width="0dp"
-        android:layout_height="match_parent"
-        android:layout_weight="2"
-        android:gravity="center"
-        tools:text="123456" />
+        <variable
+            name="route"
+            type="com.almarai.data.easy_pick_models.Route" />
 
-    <TextView
-        android:id="@+id/item_route_description_text"
-        style="@style/AlmGridItemsTextView"
-        android:layout_width="0dp"
-        android:layout_height="match_parent"
-        android:layout_weight="3"
-        android:gravity="center|start"
-        tools:text="Customer Name" />
+    </data>
 
-</LinearLayout>
+    <androidx.constraintlayout.widget.ConstraintLayout xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_2sdp">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/item_route_detail_root"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_10sdp"
+            android:background="@drawable/list_item_card"
+            android:paddingStart="@dimen/_15sdp"
+            android:paddingTop="@dimen/_5sdp"
+            android:paddingEnd="0dp"
+            android:paddingBottom="@dimen/_5sdp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <TextView
+                android:id="@+id/item_route_number_text"
+                style="@style/AlmTextSingleLineBold"
+                android:text="@{String.valueOf(route.number)}"
+                android:textSize="18sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="124" />
+
+            <View
+                android:id="@+id/item_route_splitter"
+                android:layout_width="@dimen/_8sdp"
+                android:layout_height="@dimen/_2sdp"
+                android:layout_marginStart="@dimen/_8sdp"
+                android:background="?colorText"
+                app:layout_constraintBottom_toBottomOf="@+id/item_route_number_text"
+                app:layout_constraintStart_toEndOf="@+id/item_route_number_text"
+                app:layout_constraintTop_toTopOf="@+id/item_route_number_text" />
+
+            <TextView
+                android:id="@+id/item_route_description_text"
+                style="@style/AlmTextSingleLineBold"
+                android:layout_marginStart="@dimen/_8sdp"
+                android:textSize="18sp"
+                app:layout_constraintBaseline_toBaselineOf="@+id/item_route_number_text"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toEndOf="@+id/item_route_splitter"
+                app:routeDescription="@{route}"
+                tools:text="Al Kharj Road" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <ImageView
+            android:id="@+id/item_route_status_image"
+            android:layout_width="@dimen/_15sdp"
+            android:layout_height="@dimen/_15sdp"
+            android:layout_marginStart="@dimen/_5sdp"
+            android:layout_marginTop="@dimen/_4sdp"
+            android:contentDescription="@string/image_description_status_route"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:routeStatus="@{route.serviceCurrentStatus}"
+            tools:src="@drawable/ic_status" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <!--<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"-->
+    <!--    xmlns:tools="http://schemas.android.com/tools"-->
+    <!--    android:id="@+id/item_route_root"-->
+    <!--    android:layout_width="match_parent"-->
+    <!--    android:layout_height="wrap_content"-->
+    <!--    android:background="?attr/colorListItemBackground"-->
+    <!--    android:orientation="horizontal"-->
+    <!--    android:weightSum="6">-->
+
+    <!--    <ImageView-->
+    <!--        android:id="@+id/item_route_status_image"-->
+    <!--        style="@style/AlmGridItemsTextView"-->
+    <!--        android:layout_width="0dp"-->
+    <!--        android:layout_height="match_parent"-->
+    <!--        android:layout_weight="1"-->
+    <!--        android:contentDescription="@string/image_description_status_route"-->
+    <!--        android:src="@drawable/ic_status"-->
+    <!--        tools:text="TC" />-->
+
+    <!--    <TextView-->
+    <!--        android:id="@+id/item_route_number_text"-->
+    <!--        style="@style/AlmGridItemsTextView"-->
+    <!--        android:layout_width="0dp"-->
+    <!--        android:layout_height="match_parent"-->
+    <!--        android:layout_weight="2"-->
+    <!--        android:gravity="center"-->
+    <!--        tools:text="123456" />-->
+
+    <!--    <TextView-->
+    <!--        android:id="@+id/item_route_description_text"-->
+    <!--        style="@style/AlmGridItemsTextView"-->
+    <!--        android:layout_width="0dp"-->
+    <!--        android:layout_height="match_parent"-->
+    <!--        android:layout_weight="3"-->
+    <!--        android:gravity="center|start"-->
+    <!--        tools:text="Customer Name" />-->
+
+    <!--</LinearLayout>-->
+
+</layout>

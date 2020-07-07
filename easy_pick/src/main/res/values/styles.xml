@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources>
+<resources xmlns:android="http://schemas.android.com/apk/res/android">
     <!--region Text View Styles-->
     <style name="PrimaryTextStyle" parent="android:Widget.Material.TextView">
         <item name="android:layout_width">wrap_content</item>
@@ -12,20 +12,47 @@
     <!--endregion-->
 
     <!--region Edit Text Style-->
-    <style name="EditTextStyle" parent="android:Widget.Material.EditText">
+    <style name="EditTextLayoutStyle" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox">
         <item name="android:layout_width">0dp</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:layout_gravity">center_vertical</item>
-        <item name="android:layout_marginStart">@dimen/_24sdp</item>
-        <item name="android:layout_marginTop">@dimen/_20sdp</item>
-        <item name="android:layout_marginEnd">@dimen/_24sdp</item>
-        <item name="android:background">@drawable/rounded_edit_text</item>
+        <item name="android:layout_marginTop">@dimen/_8sdp</item>
         <item name="android:drawablePadding">@dimen/_16sdp</item>
         <item name="android:imeOptions">actionNext</item>
         <item name="android:padding">@dimen/_10sdp</item>
         <item name="android:selectAllOnFocus">true</item>
         <item name="android:textColor">?attr/colorText</item>
         <item name="android:textColorHint">?attr/colorText</item>
+        <item name="boxCornerRadiusBottomEnd">@dimen/_8sdp</item>
+        <item name="suffixTextColor">?colorAccent</item>
+        <item name="startIconTint">?colorAccent</item>
+        <item name="boxCornerRadiusBottomStart">0dp</item>
+        <item name="boxCornerRadiusTopEnd">0dp</item>
+        <item name="boxCornerRadiusTopStart">@dimen/_8sdp</item>
+        <item name="boxStrokeColor">@color/text_input_box_stroke</item>
+        <item name="hintTextColor">?colorAccent</item>
+    </style>
+    <!--endregion-->
+
+    <!--region Dropdown Style-->
+    <style name="DropdownLayoutStyle" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_gravity">center_vertical</item>
+        <item name="android:layout_marginTop">@dimen/_8sdp</item>
+        <item name="android:drawablePadding">@dimen/_16sdp</item>
+        <item name="android:imeOptions">actionNext</item>
+        <item name="android:padding">@dimen/_10sdp</item>
+        <item name="android:selectAllOnFocus">true</item>
+        <item name="android:textColor">?attr/colorText</item>
+        <item name="android:textColorHint">?attr/colorText</item>
+        <item name="boxCornerRadiusBottomEnd">@dimen/_8sdp</item>
+        <item name="startIconTint">?colorAccent</item>
+        <item name="boxCornerRadiusBottomStart">0dp</item>
+        <item name="boxCornerRadiusTopEnd">0dp</item>
+        <item name="boxCornerRadiusTopStart">@dimen/_8sdp</item>
+        <item name="boxStrokeColor">@color/text_input_box_stroke</item>
+        <item name="hintTextColor">?colorAccent</item>
     </style>
     <!--endregion-->
 
@@ -36,8 +63,8 @@
         <item name="android:layout_marginBottom">@dimen/_16sdp</item>
         <item name="android:background">@drawable/primary_button</item>
         <item name="android:elevation">@dimen/_8sdp</item>
-        <item name="android:focusable">true</item>
         <item name="android:gravity">center</item>
+        <item name="rippleColor">@color/button_ripple_color</item>
         <item name="android:paddingStart">@dimen/_70sdp</item>
         <item name="android:paddingEnd">@dimen/_70sdp</item>
         <item name="android:stateListAnimator">@null</item>
@@ -48,15 +75,15 @@
         <item name="android:translationZ">@dimen/_5sdp</item>
     </style>
 
-    <style name="HomeButtonStyle" parent="android:Widget.Material.Button.Borderless">
+    <style name="HomeButtonStyle" parent="Widget.MaterialComponents.Button.TextButton">
         <item name="android:layout_width">0dp</item>
         <item name="android:layout_height">0dp</item>
         <item name="android:padding">@dimen/_15sdp</item>
+        <item name="android:insetTop">0dp</item>
+        <item name="rippleColor">@color/button_ripple_color</item>
+        <item name="android:insetBottom">0dp</item>
         <item name="android:textColor">?attr/colorText</item>
-        <item name="android:focusable">true</item>
-        <item name="android:background">@drawable/home_button</item>
         <item name="android:gravity">center</item>
-        <item name="android:stateListAnimator">@null</item>
     </style>
     <!--endregion-->
 
@@ -89,6 +116,34 @@
         <item name="android:textColor">?colorListHeaderTitle</item>
         <item name="android:gravity">center</item>
         <item name="android:background">?colorListHeaderBackground</item>
+    </style>
+
+    <style name="AlmTextSingleLineBold" parent="android:Widget.Material.TextView">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textColor">?colorText</item>
+        <item name="android:textSize">@dimen/alm_text_size</item>
+        <item name="android:maxLines">1</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+    <!--endregion-->
+
+    <!--region Alert Dialog Style-->
+    <style name="ThemeOverlay.App.MaterialAlertDialog" parent="ThemeOverlay.MaterialComponents.MaterialAlertDialog">
+        <item name="colorPrimary">?colorPrimary</item>
+        <item name="colorSecondary">?colorPrimaryDark</item>
+        <item name="colorSurface">?colorBackgroundScreenHeader</item>
+        <item name="colorOnSurface">@android:color/transparent</item>
+    </style>
+
+    <style name="PreferenceThemeNight" parent="@style/Theme.AppCompat.Light.DarkActionBar">
+        <item name="android:background">?colorBackgroundScreenHeader</item>
+    </style>
+    <!--endregion-->
+
+    <!--region Date Picker Styles-->
+    <style name="ThemeMaterialCalendar" parent="ThemeOverlay.MaterialComponents.MaterialCalendar">
+        <item name="colorPrimary">?colorDatePicker</item>
     </style>
     <!--endregion-->
 </resources>

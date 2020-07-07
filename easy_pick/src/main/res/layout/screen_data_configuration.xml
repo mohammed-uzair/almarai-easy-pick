@@ -1,99 +1,137 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/screen_data_config_root"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="?attr/colorBackgroundScreenBody"
-    tools:context=".screens.LoginScreen">
+    xmlns:tools="http://schemas.android.com/tools">
 
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/screen_data_config_guideline_for_background_theme"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.5" />
+    <data>
 
-    <ImageView
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:background="?colorBackgroundScreenHeader"
-        android:contentDescription="@string/image_description_theme_background"
-        android:scaleType="fitXY"
-        app:layout_constraintBottom_toTopOf="@id/screen_data_config_guideline_for_background_theme"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        <variable
+            name="viewModel"
+            type="com.almarai.easypick.view_models.DataConfigurationViewModel" />
+    </data>
 
-    <com.airbnb.lottie.LottieAnimationView
-        android:id="@+id/screen_data_config_animation"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:scaleX="1.2"
-        app:layout_constraintBottom_toTopOf="@id/screen_data_config_guideline_for_background_theme"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:lottie_autoPlay="true"
-        app:lottie_loop="true"
-        tools:src="@drawable/ic_calendar" />
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/screen_data_config_root"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="?attr/colorBackgroundScreenBody"
+        tools:context=".screens.LoginScreen">
 
-    <ImageView
-        android:id="@+id/screen_data_config_background_image"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:contentDescription="@string/image_description_theme_background"
-        android:scaleType="fitXY"
-        android:src="@drawable/ic_data_configuration_background"
-        app:layout_constraintBottom_toTopOf="@id/screen_data_config_guideline_for_background_theme"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/screen_data_config_guideline_for_background_theme"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.5" />
 
-    <com.almarai.alm_ui.AlmEditText
-        android:id="@+id/screen_data_config_sales_date_edit_text"
-        style="@style/EditTextStyle"
-        android:drawableStart="@drawable/ic_calendar"
-        android:hint="@string/sales_date"
-        app:layout_constraintEnd_toEndOf="@id/screen_data_config_save_button"
-        app:layout_constraintStart_toStartOf="@id/screen_data_config_save_button"
-        app:layout_constraintTop_toTopOf="@id/screen_data_config_guideline_for_background_theme"
-        app:type="alphanumeric">
+        <ImageView
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:background="?colorBackgroundScreenHeader"
+            android:contentDescription="@string/image_description_theme_background"
+            android:scaleType="fitXY"
+            app:layout_constraintBottom_toTopOf="@id/screen_data_config_guideline_for_background_theme"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
-        <requestFocus />
-    </com.almarai.alm_ui.AlmEditText>
+        <com.airbnb.lottie.LottieAnimationView
+            android:id="@+id/screen_data_config_animation"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:scaleX="1.2"
+            app:layout_constraintBottom_toTopOf="@id/screen_data_config_guideline_for_background_theme"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:lottie_autoPlay="true"
+            app:lottie_loop="true"
+            tools:src="@drawable/ic_calendar" />
 
-    <com.almarai.alm_ui.AlmEditText
-        android:id="@+id/screen_data_config_depot_code_edit_text"
-        style="@style/EditTextStyle"
-        android:drawableStart="@drawable/ic_depot"
-        android:hint="@string/dept_code"
-        app:layout_constraintEnd_toEndOf="@id/screen_data_config_save_button"
-        app:layout_constraintStart_toStartOf="@id/screen_data_config_save_button"
-        app:layout_constraintTop_toBottomOf="@id/screen_data_config_sales_date_edit_text"
-        app:type="number_positive" />
+        <ImageView
+            android:id="@+id/screen_data_config_background_image"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:contentDescription="@string/image_description_theme_background"
+            android:scaleType="fitXY"
+            android:src="@drawable/ic_data_configuration_background"
+            app:layout_constraintBottom_toTopOf="@id/screen_data_config_guideline_for_background_theme"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
-    <androidx.appcompat.widget.AppCompatSpinner
-        android:id="@+id/screen_data_config_route_preference_edit_text"
-        style="@style/EditTextStyle"
-        android:drawableStart="@drawable/ic_route"
-        android:entries="@array/route_product_type_preferences"
-        android:gravity="start"
-        android:hint="@string/preference"
-        app:layout_constraintBottom_toTopOf="@id/screen_data_config_save_button"
-        app:layout_constraintEnd_toEndOf="@id/screen_data_config_save_button"
-        app:layout_constraintStart_toStartOf="@id/screen_data_config_save_button"
-        app:layout_constraintTop_toBottomOf="@id/screen_data_config_depot_code_edit_text"
-        app:layout_constraintVertical_bias="0.0"
-        app:type="number_positive" />
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/screen_data_config_sales_date_edit_text_layout"
+            style="@style/EditTextLayoutStyle"
+            android:hint="@string/sales_date"
+            app:helperText="@string/sales_days_variance"
+            app:layout_constraintEnd_toEndOf="@id/screen_data_config_save_button"
+            app:layout_constraintStart_toStartOf="@id/screen_data_config_save_button"
+            app:layout_constraintTop_toTopOf="@id/screen_data_config_guideline_for_background_theme"
+            app:startIconDrawable="@drawable/ic_calendar">
 
-    <Button
-        android:id="@+id/screen_data_config_save_button"
-        style="@style/PrimaryButtonStyle"
-        android:text="@string/button_save"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+            <com.almarai.alm_ui.AlmEditText
+                android:id="@+id/screen_data_config_sales_date_edit_text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:focusable="false"
+                android:text="@={viewModel.salesDate}"
+                android:textColor="?colorText"
+                app:type="alphanumeric" />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/screen_data_config_depot_code_edit_text_layout"
+            style="@style/EditTextLayoutStyle"
+            android:hint="@string/dept_code"
+            app:layout_constraintEnd_toEndOf="@id/screen_data_config_save_button"
+            app:layout_constraintStart_toStartOf="@id/screen_data_config_save_button"
+            app:layout_constraintTop_toBottomOf="@id/screen_data_config_sales_date_edit_text_layout"
+            app:startIconDrawable="@drawable/ic_depot">
+
+            <com.almarai.alm_ui.AlmEditText
+                android:id="@+id/screen_data_config_depot_code_edit_text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:maxLength="6"
+                android:selectAllOnFocus="true"
+                android:text="@={viewModel.depotCode}"
+                android:textColor="?colorText"
+                app:type="number_positive" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/screen_data_config_route_preference_spinner_layout"
+            style="@style/DropdownLayoutStyle"
+            android:layout_height="0dp"
+            android:hint="@string/route_group"
+            app:layout_constraintBottom_toTopOf="@id/screen_data_config_save_button"
+            app:layout_constraintEnd_toEndOf="@id/screen_data_config_save_button"
+            app:layout_constraintStart_toStartOf="@id/screen_data_config_save_button"
+            app:layout_constraintTop_toBottomOf="@id/screen_data_config_depot_code_edit_text_layout"
+            app:startIconDrawable="@drawable/ic_route">
+
+            <AutoCompleteTextView
+                android:id="@+id/screen_data_config_route_preference_spinner"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="none"
+                android:labelFor="@id/screen_data_config_route_preference_spinner_layout"
+                android:textColor="?colorText"
+                tools:ignore="LabelFor" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <Button
+            android:id="@+id/screen_data_config_save_button"
+            style="@style/PrimaryButtonStyle"
+            android:text="@string/button_save"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>

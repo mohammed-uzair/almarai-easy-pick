@@ -1,311 +1,356 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="?colorBackgroundScreenBody">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/screen_filter_guideline_for_background_theme"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.1" />
+    <data>
 
-    <ImageView
-        android:id="@+id/screen_filter_background_image"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:contentDescription="@string/image_description_theme_background"
-        android:scaleType="fitXY"
-        android:src="@drawable/ic_other_screens_background"
-        app:layout_constraintBottom_toTopOf="@id/screen_filter_guideline_for_background_theme"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        <variable
+            name="viewModel"
+            type="com.almarai.easypick.view_models.FilterViewModel" />
 
-    <RadioButton
-        android:id="@+id/screen_filter_no_filter_radio"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/_36sdp"
-        android:layout_marginEnd="@dimen/_36sdp"
-        android:text="@string/no_filter"
-        android:textColor="?colorTitle"
-        app:layout_constraintBottom_toBottomOf="@+id/screen_filter_background_image"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.3" />
+    </data>
 
-    <ScrollView
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/screen_filter_guideline_for_background_theme">
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="?colorBackgroundScreenBody">
 
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/screen_filter_items_root"
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/screen_filter_guideline_for_background_theme"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.1" />
+
+        <ImageView
+            android:id="@+id/screen_filter_background_image"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:contentDescription="@string/image_description_theme_background"
+            android:scaleType="fitXY"
+            android:src="@drawable/ic_other_screens_background"
+            app:layout_constraintBottom_toTopOf="@id/screen_filter_guideline_for_background_theme"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <RadioButton
+            android:id="@+id/screen_filter_no_filter_radio"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/_36sdp"
             android:layout_marginEnd="@dimen/_36sdp"
-            android:paddingBottom="@dimen/_36sdp">
+            android:checked="@={viewModel.noFilter}"
+            android:text="@string/no_filter"
+            android:textColor="?colorTitle"
+            app:layout_constraintBottom_toBottomOf="@+id/screen_filter_background_image"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.3" />
 
-            <TextView
-                android:id="@+id/screen_filter_sort_order_label"
+        <ScrollView
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/screen_filter_guideline_for_background_theme">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/screen_filter_items_root"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:gravity="start"
-                android:text="@string/sort_in"
-                android:textStyle="bold"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                android:layout_marginStart="@dimen/_36sdp"
+                android:layout_marginEnd="@dimen/_36sdp"
+                android:paddingBottom="@dimen/_36sdp">
 
-            <RadioGroup
-                android:id="@+id/screen_filter_sort_order_group"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/_5sdp"
-                app:layout_constraintStart_toStartOf="@id/screen_filter_sort_order_label"
-                app:layout_constraintTop_toBottomOf="@id/screen_filter_sort_order_label">
-
-                <RadioButton
+                <TextView
+                    android:id="@+id/screen_filter_sort_order_label"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/ascending"
-                    android:textColor="?attr/colorText" />
+                    android:gravity="start"
+                    android:text="@string/sort_in"
+                    android:textStyle="bold"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
 
-                <RadioButton
+                <RadioGroup
+                    android:id="@+id/screen_filter_sort_order_group"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/descending"
-                    android:textColor="?attr/colorText" />
+                    android:layout_marginTop="@dimen/_5sdp"
+                    app:layout_constraintStart_toStartOf="@id/screen_filter_sort_order_label"
+                    app:layout_constraintTop_toBottomOf="@id/screen_filter_sort_order_label">
 
-            </RadioGroup>
+                    <RadioButton
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:checked="@={viewModel.sortOrderAscending}"
+                        android:text="@string/ascending"
+                        android:textColor="?attr/colorText" />
 
-            <TextView
-                android:id="@+id/screen_filter_with_label"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/_15sdp"
-                android:gravity="start"
-                android:text="@string/with"
-                android:textStyle="bold"
-                app:layout_constraintStart_toStartOf="@id/screen_filter_sort_order_group"
-                app:layout_constraintTop_toBottomOf="@id/screen_filter_sort_order_group" />
+                    <RadioButton
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:checked="@={viewModel.sortOrderDescending}"
+                        android:text="@string/descending"
+                        android:textColor="?attr/colorText" />
 
-            <RadioGroup
-                android:id="@+id/screen_filter_with_group"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/_5sdp"
-                app:layout_constraintStart_toStartOf="@id/screen_filter_with_label"
-                app:layout_constraintTop_toBottomOf="@id/screen_filter_with_label">
+                </RadioGroup>
 
-                <RadioButton
+                <TextView
+                    android:id="@+id/screen_filter_with_label"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/route_number"
-                    android:textColor="?attr/colorText" />
+                    android:layout_marginTop="@dimen/_15sdp"
+                    android:gravity="start"
+                    android:text="@string/with"
+                    android:textStyle="bold"
+                    app:layout_constraintStart_toStartOf="@id/screen_filter_sort_order_group"
+                    app:layout_constraintTop_toBottomOf="@id/screen_filter_sort_order_group" />
 
-                <RadioButton
+                <RadioGroup
+                    android:id="@+id/screen_filter_with_group"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/route_description"
-                    android:textColor="?attr/colorText" />
+                    android:layout_marginTop="@dimen/_5sdp"
+                    app:layout_constraintStart_toStartOf="@id/screen_filter_with_label"
+                    app:layout_constraintTop_toBottomOf="@id/screen_filter_with_label">
 
-                <RadioButton
+                    <RadioButton
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:checked="@={viewModel.sortWithXNumber}"
+                        android:text="@string/route_number"
+                        android:textColor="?attr/colorText" />
+
+                    <RadioButton
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:checked="@={viewModel.sortWithXDescription}"
+                        android:text="@string/route_description"
+                        android:textColor="?attr/colorText" />
+
+                    <RadioButton
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:checked="@={viewModel.statusServed}"
+                        android:text="@string/status_not_served"
+                        android:textColor="?attr/colorText" />
+
+                </RadioGroup>
+
+                <View
+                    android:id="@+id/screen_filter_view2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="1dp"
+                    android:layout_marginTop="@dimen/_15sdp"
+                    android:background="?colorFilterScreenDivider"
+                    app:layout_constraintStart_toStartOf="@id/screen_filter_with_group"
+                    app:layout_constraintTop_toBottomOf="@id/screen_filter_with_group" />
+
+                <TextView
+                    android:id="@+id/screen_filter_filter_by_label"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/status_not_served"
-                    android:textColor="?attr/colorText" />
+                    android:layout_marginTop="@dimen/_15sdp"
+                    android:gravity="start"
+                    android:text="@string/filter_by"
+                    android:textStyle="bold"
+                    app:layout_constraintStart_toStartOf="@id/screen_filter_view2"
+                    app:layout_constraintTop_toBottomOf="@id/screen_filter_view2" />
 
-            </RadioGroup>
+                <Switch
+                    android:id="@+id/screen_filter_filter_by_all_category_switch"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
+                    android:checked="@={viewModel.filterByAllSubCategory1}"
+                    android:switchPadding="@dimen/_15sdp"
+                    android:text="@string/all"
+                    android:textColor="?attr/colorText"
+                    app:layout_constraintHorizontal_bias="0.174"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/screen_filter_filter_by_label" />
 
-            <View
-                android:id="@+id/screen_filter_view2"
-                android:layout_width="wrap_content"
-                android:layout_height="1dp"
-                android:layout_marginTop="@dimen/_15sdp"
-                android:background="?colorFilterScreenDivider"
-                app:layout_constraintStart_toStartOf="@id/screen_filter_with_group"
-                app:layout_constraintTop_toBottomOf="@id/screen_filter_with_group" />
+                <CheckBox
+                    android:id="@+id/screen_filter_filter_by_dairy_checkbox"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    android:checked="@={viewModel.filterBySubCategory1Dairy}"
+                    android:ellipsize="end"
+                    android:maxLines="1"
+                    android:text="@string/dairy"
+                    android:textColor="?attr/colorText"
+                    app:layout_constraintEnd_toStartOf="@id/screen_filter_filter_by_bakery_checkbox"
+                    app:layout_constraintHorizontal_bias="0.5"
+                    app:layout_constraintHorizontal_chainStyle="spread_inside"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/screen_filter_filter_by_all_category_switch" />
 
-            <TextView
-                android:id="@+id/screen_filter_filter_by_label"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/_15sdp"
-                android:gravity="start"
-                android:text="@string/filter_by"
-                android:textStyle="bold"
-                app:layout_constraintStart_toStartOf="@id/screen_filter_view2"
-                app:layout_constraintTop_toBottomOf="@id/screen_filter_view2" />
+                <CheckBox
+                    android:id="@+id/screen_filter_filter_by_bakery_checkbox"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:checked="@={viewModel.filterBySubCategory1Poultry}"
+                    android:ellipsize="end"
+                    android:maxLines="1"
+                    android:text="@string/poultry"
+                    android:textColor="?attr/colorText"
+                    app:layout_constraintBottom_toBottomOf="@id/screen_filter_filter_by_dairy_checkbox"
+                    app:layout_constraintEnd_toStartOf="@+id/screen_filter_filter_by_poultry_checkbox"
+                    app:layout_constraintHorizontal_bias="0.5"
+                    app:layout_constraintStart_toEndOf="@id/screen_filter_filter_by_dairy_checkbox"
+                    app:layout_constraintTop_toTopOf="@id/screen_filter_filter_by_dairy_checkbox" />
 
-            <Switch
-                android:id="@+id/screen_filter_filter_by_all_category_switch"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="4dp"
-                android:switchPadding="@dimen/_15sdp"
-                android:text="@string/all"
-                android:textColor="?attr/colorText"
-                app:layout_constraintHorizontal_bias="0.174"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/screen_filter_filter_by_label" />
+                <CheckBox
+                    android:id="@+id/screen_filter_filter_by_poultry_checkbox"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:checked="@={viewModel.filterBySubCategory1Bakery}"
+                    android:ellipsize="end"
+                    android:maxLines="1"
+                    android:text="@string/bakery"
+                    android:textColor="?attr/colorText"
+                    app:layout_constraintBottom_toBottomOf="@id/screen_filter_filter_by_bakery_checkbox"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.5"
+                    app:layout_constraintStart_toEndOf="@id/screen_filter_filter_by_bakery_checkbox"
+                    app:layout_constraintTop_toTopOf="@id/screen_filter_filter_by_bakery_checkbox" />
 
-            <CheckBox
-                android:id="@+id/screen_filter_filter_by_dairy_checkbox"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/_10sdp"
-                android:ellipsize="end"
-                android:maxLines="1"
-                android:text="@string/dairy"
-                android:textColor="?attr/colorText"
-                app:layout_constraintEnd_toStartOf="@id/screen_filter_filter_by_bakery_checkbox"
-                app:layout_constraintHorizontal_bias="0.5"
-                app:layout_constraintHorizontal_chainStyle="spread_inside"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/screen_filter_filter_by_all_category_switch" />
+                <View
+                    android:id="@+id/screen_filter_view3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="1dp"
+                    android:layout_marginTop="@dimen/_15sdp"
+                    android:background="?colorFilterScreenDivider"
+                    app:layout_constraintStart_toStartOf="@id/screen_filter_filter_by_dairy_checkbox"
+                    app:layout_constraintTop_toBottomOf="@id/screen_filter_filter_by_dairy_checkbox" />
 
-            <CheckBox
-                android:id="@+id/screen_filter_filter_by_bakery_checkbox"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:ellipsize="end"
-                android:maxLines="1"
-                android:text="@string/poultry"
-                android:textColor="?attr/colorText"
-                app:layout_constraintBottom_toBottomOf="@id/screen_filter_filter_by_dairy_checkbox"
-                app:layout_constraintEnd_toStartOf="@+id/screen_filter_filter_by_poultry_checkbox"
-                app:layout_constraintHorizontal_bias="0.5"
-                app:layout_constraintStart_toEndOf="@id/screen_filter_filter_by_dairy_checkbox"
-                app:layout_constraintTop_toTopOf="@id/screen_filter_filter_by_dairy_checkbox" />
+                <Switch
+                    android:id="@+id/screen_filter_filter_by_all_route_switch"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_5sdp"
+                    android:checked="@={viewModel.filterByAllSubCategory2}"
+                    android:switchPadding="@dimen/_15sdp"
+                    android:text="@string/all"
+                    android:textColor="?attr/colorText"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/screen_filter_view3" />
 
-            <CheckBox
-                android:id="@+id/screen_filter_filter_by_poultry_checkbox"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:ellipsize="end"
-                android:maxLines="1"
-                android:text="@string/bakery"
-                android:textColor="?attr/colorText"
-                app:layout_constraintBottom_toBottomOf="@id/screen_filter_filter_by_bakery_checkbox"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.5"
-                app:layout_constraintStart_toEndOf="@id/screen_filter_filter_by_bakery_checkbox"
-                app:layout_constraintTop_toTopOf="@id/screen_filter_filter_by_bakery_checkbox" />
+                <CheckBox
+                    android:id="@+id/screen_filter_filter_by_tc_checkbox"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    android:checked="@={viewModel.filterBySubCategory2Tc}"
+                    android:text="@string/tc"
+                    android:textColor="?attr/colorText"
+                    app:layout_constraintEnd_toEndOf="@+id/screen_filter_filter_by_non_tc_checkbox"
+                    app:layout_constraintHorizontal_chainStyle="spread_inside"
+                    app:layout_constraintStart_toStartOf="@+id/screen_filter_filter_by_non_tc_checkbox"
+                    app:layout_constraintTop_toBottomOf="@id/screen_filter_filter_by_all_route_switch" />
 
-            <View
-                android:id="@+id/screen_filter_view3"
-                android:layout_width="wrap_content"
-                android:layout_height="1dp"
-                android:layout_marginTop="@dimen/_15sdp"
-                android:background="?colorFilterScreenDivider"
-                app:layout_constraintStart_toStartOf="@id/screen_filter_filter_by_dairy_checkbox"
-                app:layout_constraintTop_toBottomOf="@id/screen_filter_filter_by_dairy_checkbox" />
+                <CheckBox
+                    android:id="@+id/screen_filter_filter_by_ipnc_checkbox"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:checked="@={viewModel.filterBySubCategory2IPNC}"
+                    android:text="@string/ipnc"
+                    android:textColor="?attr/colorText"
+                    app:layout_constraintBottom_toBottomOf="@id/screen_filter_filter_by_tc_checkbox"
+                    app:layout_constraintEnd_toEndOf="@+id/screen_filter_filter_by_non_ipnc_checkbox"
+                    app:layout_constraintStart_toStartOf="@+id/screen_filter_filter_by_non_ipnc_checkbox"
+                    app:layout_constraintTop_toTopOf="@id/screen_filter_filter_by_tc_checkbox" />
 
-            <Switch
-                android:id="@+id/screen_filter_filter_by_all_route_switch"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/_5sdp"
-                android:switchPadding="@dimen/_15sdp"
-                android:text="@string/all"
-                android:textColor="?attr/colorText"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/screen_filter_view3" />
+                <CheckBox
+                    android:id="@+id/screen_filter_filter_by_non_ipnc_checkbox"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:checked="@={viewModel.filterBySubCategory2NonIPNC}"
+                    android:text="@string/non_ipnc"
+                    android:textColor="?attr/colorText"
+                    app:layout_constraintEnd_toStartOf="@id/screen_filter_filter_by_non_tc_checkbox"
+                    app:layout_constraintHorizontal_bias="0.5"
+                    app:layout_constraintHorizontal_chainStyle="spread_inside"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/screen_filter_filter_by_tc_checkbox" />
 
-            <CheckBox
-                android:id="@+id/screen_filter_filter_by_tc_checkbox"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/_10sdp"
-                android:text="@string/tc"
-                android:textColor="?attr/colorText"
-                app:layout_constraintEnd_toEndOf="@+id/screen_filter_filter_by_non_tc_checkbox"
-                app:layout_constraintHorizontal_chainStyle="spread_inside"
-                app:layout_constraintStart_toStartOf="@+id/screen_filter_filter_by_non_tc_checkbox"
-                app:layout_constraintTop_toBottomOf="@id/screen_filter_filter_by_all_route_switch" />
+                <CheckBox
+                    android:id="@+id/screen_filter_filter_by_non_tc_checkbox"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:checked="@={viewModel.filterBySubCategory2NonTc}"
+                    android:text="@string/non_tc"
+                    android:textColor="?attr/colorText"
+                    app:layout_constraintBottom_toBottomOf="@id/screen_filter_filter_by_non_ipnc_checkbox"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.5"
+                    app:layout_constraintStart_toEndOf="@id/screen_filter_filter_by_non_ipnc_checkbox"
+                    app:layout_constraintTop_toTopOf="@id/screen_filter_filter_by_non_ipnc_checkbox" />
 
-            <CheckBox
-                android:id="@+id/screen_filter_filter_by_ipnc_checkbox"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:text="@string/ipnc"
-                android:textColor="?attr/colorText"
-                app:layout_constraintBottom_toBottomOf="@id/screen_filter_filter_by_tc_checkbox"
-                app:layout_constraintEnd_toEndOf="@+id/screen_filter_filter_by_non_ipnc_checkbox"
-                app:layout_constraintStart_toStartOf="@+id/screen_filter_filter_by_non_ipnc_checkbox"
-                app:layout_constraintTop_toTopOf="@id/screen_filter_filter_by_tc_checkbox" />
+                <View
+                    android:id="@+id/screen_filter_view4"
+                    android:layout_width="wrap_content"
+                    android:layout_height="1dp"
+                    android:layout_marginTop="@dimen/_15sdp"
+                    android:background="?colorFilterScreenDivider"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/screen_filter_filter_by_non_ipnc_checkbox" />
 
-            <CheckBox
-                android:id="@+id/screen_filter_filter_by_non_ipnc_checkbox"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/non_ipnc"
-                android:textColor="?attr/colorText"
-                app:layout_constraintEnd_toStartOf="@id/screen_filter_filter_by_non_tc_checkbox"
-                app:layout_constraintHorizontal_bias="0.5"
-                app:layout_constraintHorizontal_chainStyle="spread_inside"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/screen_filter_filter_by_tc_checkbox" />
+                <Switch
+                    android:id="@+id/screen_filter_customer_only_switch"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_20sdp"
+                    android:checked="@={viewModel.customerOnly}"
+                    android:ellipsize="end"
+                    android:maxLines="1"
+                    android:switchPadding="@dimen/_15sdp"
+                    android:text="@string/customer_only"
+                    android:textColor="?attr/colorText"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/screen_filter_view4" />
 
-            <CheckBox
-                android:id="@+id/screen_filter_filter_by_non_tc_checkbox"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/non_tc"
-                android:textColor="?attr/colorText"
-                app:layout_constraintBottom_toBottomOf="@id/screen_filter_filter_by_non_ipnc_checkbox"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.5"
-                app:layout_constraintStart_toEndOf="@id/screen_filter_filter_by_non_ipnc_checkbox"
-                app:layout_constraintTop_toTopOf="@id/screen_filter_filter_by_non_ipnc_checkbox" />
+                <Switch
+                    android:id="@+id/screen_filter_allow_multiple_filters_switch"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_15sdp"
+                    android:checked="@={viewModel.allowMultipleFilters}"
+                    android:ellipsize="end"
+                    android:maxLines="1"
+                    android:switchPadding="@dimen/_15sdp"
+                    android:text="@string/allow_multiple_filters"
+                    android:textColor="?attr/colorText"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="@id/screen_filter_customer_only_switch"
+                    app:layout_constraintTop_toBottomOf="@id/screen_filter_customer_only_switch"
+                    app:switchPadding="8dp" />
 
-            <View
-                android:id="@+id/screen_filter_view4"
-                android:layout_width="wrap_content"
-                android:layout_height="1dp"
-                android:layout_marginTop="@dimen/_15sdp"
-                android:background="?colorFilterScreenDivider"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/screen_filter_filter_by_non_ipnc_checkbox" />
+                <Switch
+                    android:id="@+id/screen_filter_persist_filters_switch"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_15sdp"
+                    android:checked="@={viewModel.persistFilters}"
+                    android:ellipsize="end"
+                    android:maxLines="1"
+                    android:switchPadding="@dimen/_15sdp"
+                    android:text="@string/persist_filters"
+                    android:textColor="?attr/colorText"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="@id/screen_filter_customer_only_switch"
+                    app:layout_constraintTop_toBottomOf="@+id/screen_filter_allow_multiple_filters_switch"
+                    app:switchPadding="8dp" />
 
-            <Switch
-                android:id="@+id/screen_filter_customer_only_switch"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/_20sdp"
-                android:ellipsize="end"
-                android:maxLines="1"
-                android:switchPadding="@dimen/_15sdp"
-                android:text="@string/customer_only"
-                android:textColor="?attr/colorText"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/screen_filter_view4" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
 
-            <Switch
-                android:id="@+id/screen_filter_allow_multiple_filters_switch"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/_15sdp"
-                android:ellipsize="end"
-                android:maxLines="1"
-                android:switchPadding="@dimen/_15sdp"
-                android:text="@string/allow_multiple_filters"
-                android:textColor="?attr/colorText"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="@id/screen_filter_customer_only_switch"
-                app:layout_constraintTop_toBottomOf="@id/screen_filter_customer_only_switch"
-                app:switchPadding="8dp" />
+        </ScrollView>
 
-        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
-    </ScrollView>
-
-</androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

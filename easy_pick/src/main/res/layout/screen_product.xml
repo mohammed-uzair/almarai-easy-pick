@@ -1,153 +1,169 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/screen_product_root"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="?colorListBackground"
-    tools:context=".screens.LoginScreen">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/screen_product_guideline_for_background_theme"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.32" />
+    <data>
 
-    <ImageView
-        android:id="@+id/screen_product_background_image"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_marginBottom="@dimen/_30sdp"
-        android:contentDescription="@string/image_description_theme_background"
-        android:scaleType="fitXY"
-        android:src="@drawable/ic_other_screens_background"
-        app:layout_constraintBottom_toTopOf="@id/screen_product_guideline_for_background_theme"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        <variable
+            name="viewModel"
+            type="com.almarai.easypick.view_models.ProductListViewModel" />
 
-    <TextView
-        android:id="@+id/screen_product_total_items_label"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/_20sdp"
-        android:text="@string/total_items"
-        android:textColor="?colorTitle"
-        android:textSize="30sp"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+    </data>
 
-    <TextView
-        android:id="@+id/screen_product_total_items_text"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/_16sdp"
-        android:textColor="?colorTitle"
-        android:textSize="50sp"
-        android:textStyle="bold"
-        app:layout_constraintBaseline_toBaselineOf="@+id/screen_product_total_items_label"
-        app:layout_constraintStart_toEndOf="@id/screen_product_total_items_label"
-        tools:text="347" />
-
-    <TextView
-        android:id="@+id/screen_product_picked_text"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/_16sdp"
-        android:layout_marginEnd="@dimen/_16sdp"
-        android:textColor="?colorTitle"
-        android:textSize="50sp"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toStartOf="@id/screen_product_picked_label"
-        app:layout_constraintTop_toBottomOf="@id/screen_product_total_items_label"
-        tools:text="128" />
-
-    <TextView
-        android:id="@+id/screen_product_picked_label"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/items_picked"
-        android:textColor="?colorTitle"
-        android:textSize="30sp"
-        android:textStyle="bold"
-        app:layout_constraintBaseline_toBaselineOf="@+id/screen_product_picked_text"
-        app:layout_constraintEnd_toEndOf="@id/screen_product_total_items_label" />
-
-    <LinearLayout
-        android:id="@+id/screen_product_header_titles_layout"
+    <androidx.constraintlayout.widget.ConstraintLayout xmlns:tools="http://schemas.android.com/tools"
+        android:id="@+id/screen_product_root"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:weightSum="14"
-        app:layout_constraintBottom_toTopOf="@id/screen_product_guideline_for_background_theme"
-        app:layout_constraintEnd_toEndOf="parent">
+        android:layout_height="match_parent"
+        android:background="?colorListBackground"
+        tools:context=".screens.LoginScreen">
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/screen_product_guideline_for_background_theme"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.25" />
 
         <ImageView
-            android:id="@+id/screen_product_status_label"
-            style="@style/AlmGridTitleTextView"
+            android:id="@+id/screen_product_background_image"
             android:layout_width="0dp"
-            android:layout_height="@dimen/_25sdp"
-            android:layout_weight="1"
-            android:contentDescription="@string/image_description_status_route" />
+            android:layout_height="0dp"
+            android:contentDescription="@string/image_description_theme_background"
+            android:scaleType="fitXY"
+            android:src="@drawable/ic_other_screens_background"
+            app:layout_constraintBottom_toTopOf="@id/screen_product_guideline_for_background_theme"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
-            android:id="@+id/screen_product_number_label"
-            style="@style/AlmGridTitleTextView"
+            android:id="@+id/screen_product_total_items_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_20sdp"
+            android:text="@string/total_items"
+            android:textColor="?colorTitle"
+            android:textSize="30sp"
+            android:textStyle="bold"
+            android:transitionName="shared_element_container"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/screen_product_total_items_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_16sdp"
+            android:text="@{String.valueOf(viewModel.totalItems)}"
+            android:textColor="?colorTitle"
+            android:textSize="50sp"
+            android:textStyle="bold"
+            app:layout_constraintBaseline_toBaselineOf="@+id/screen_product_total_items_label"
+            app:layout_constraintStart_toEndOf="@id/screen_product_total_items_label"
+            tools:text="347" />
+
+        <TextView
+            android:id="@+id/screen_product_picked_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_16sdp"
+            android:layout_marginEnd="@dimen/_16sdp"
+            android:text="@{String.valueOf(viewModel.itemsPicked)}"
+            android:textColor="?colorTitle"
+            android:textSize="50sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toStartOf="@id/screen_product_picked_label"
+            app:layout_constraintTop_toBottomOf="@id/screen_product_total_items_label"
+            tools:text="128" />
+
+        <TextView
+            android:id="@+id/screen_product_picked_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/items_picked"
+            android:textColor="?colorTitle"
+            android:textSize="30sp"
+            android:textStyle="bold"
+            app:layout_constraintBaseline_toBaselineOf="@+id/screen_product_picked_text"
+            app:layout_constraintEnd_toEndOf="@id/screen_product_total_items_label" />
+
+        <!--<LinearLayout
+            android:id="@+id/screen_product_header_titles_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:weightSum="14"
+            app:layout_constraintBottom_toTopOf="@id/screen_product_guideline_for_background_theme"
+            app:layout_constraintEnd_toEndOf="parent">
+
+            <ImageView
+                android:id="@+id/screen_product_status_label"
+                style="@style/AlmGridTitleTextView"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/_25sdp"
+                android:layout_weight="1"
+                android:contentDescription="@string/image_description_status_route" />
+
+            <TextView
+                android:id="@+id/screen_product_number_label"
+                style="@style/AlmGridTitleTextView"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="2"
+                android:gravity="center"
+                android:text="@string/item_number" />
+
+            <TextView
+                android:id="@+id/screen_product_description_label"
+                style="@style/AlmGridTitleTextView"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="5"
+                android:gravity="center"
+                android:text="@string/item_description" />
+
+            <TextView
+                android:id="@+id/screen_product_truck_stock_label"
+                style="@style/AlmGridTitleTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_weight="2"
+                android:gravity="center"
+                android:text="@string/truck_stock" />
+
+            <TextView
+                android:id="@+id/screen_product_fresh_load_label"
+                style="@style/AlmGridTitleTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_weight="2"
+                android:gravity="center"
+                android:text="@string/fresh_load" />
+
+            <TextView
+                android:id="@+id/screen_product_total_load_label"
+                style="@style/AlmGridTitleTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_weight="2"
+                android:gravity="center"
+                android:text="@string/total_stock" />
+
+        </LinearLayout>-->
+
+        <include
+            android:id="@+id/recycler_view"
+            layout="@layout/main_recycler_view"
             android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="2"
-            android:gravity="center"
-            android:text="@string/item_number" />
+            android:layout_height="0dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@id/screen_product_guideline_for_background_theme"
+            app:layout_constraintVertical_bias="1.0" />
 
-        <TextView
-            android:id="@+id/screen_product_description_label"
-            style="@style/AlmGridTitleTextView"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="5"
-            android:gravity="center"
-            android:text="@string/item_description" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
-        <TextView
-            android:id="@+id/screen_product_truck_stock_label"
-            style="@style/AlmGridTitleTextView"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_weight="2"
-            android:gravity="center"
-            android:text="@string/truck_stock" />
-
-        <TextView
-            android:id="@+id/screen_product_fresh_load_label"
-            style="@style/AlmGridTitleTextView"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_weight="2"
-            android:gravity="center"
-            android:text="@string/fresh_load" />
-
-        <TextView
-            android:id="@+id/screen_product_total_load_label"
-            style="@style/AlmGridTitleTextView"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_weight="2"
-            android:gravity="center"
-            android:text="@string/total_stock" />
-
-    </LinearLayout>
-
-    <include
-        layout="@layout/main_recycler_view"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@id/screen_product_guideline_for_background_theme" />
-
-</androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

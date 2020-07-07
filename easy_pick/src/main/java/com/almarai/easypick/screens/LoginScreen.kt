@@ -1,19 +1,39 @@
 package com.almarai.easypick.screens
 
 import android.os.Bundle
+import android.view.LayoutInflater
 import android.view.View
+import android.view.ViewGroup
 import android.view.animation.AnimationUtils
+import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
 import com.almarai.easypick.R
+import com.almarai.easypick.databinding.ScreenLoginBinding
 import com.almarai.easypick.view_models.LoginViewModel
-import kotlinx.android.synthetic.main.screen_login.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
-class LoginScreen : Fragment(R.layout.screen_login) {
+class LoginScreen : Fragment() {
     private val viewModel: LoginViewModel by viewModel()
-    lateinit var navController: NavController
+    private lateinit var navController: NavController
+    private lateinit var screenLoginBinding: ScreenLoginBinding
+
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
+        screenLoginBinding =
+            DataBindingUtil.inflate(inflater, R.layout.screen_data_configuration, container, false)
+        screenLoginBinding.apply {
+            lifecycleOwner = this@LoginScreen
+            viewModel = this@LoginScreen.viewModel
+        }
+
+        return screenLoginBinding.root
+    }
+
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -37,15 +57,16 @@ class LoginScreen : Fragment(R.layout.screen_login) {
         val bottomToTop = AnimationUtils.loadAnimation(activity, R.anim.bottom_to_top)
         val topToBottom = AnimationUtils.loadAnimation(activity, R.anim.top_to_bottom)
 
-        screen_login_background_image.startAnimation(topToBottom)
-        screen_login_greetings_text.startAnimation(topToBottom)
-        screen_login_user_name_text.startAnimation(topToBottom)
-        screen_login_animation.startAnimation(topToBottom)
+        screenLoginBinding.screenLoginBackgroundImage.startAnimation(topToBottom)
+        screenLoginBinding.screenLoginGreetingsText.startAnimation(topToBottom)
+        screenLoginBinding.screenLoginUserNameText.startAnimation(topToBottom)
+        screenLoginBinding.screenLoginAnimation.startAnimation(topToBottom)
 
-        screen_login_user_name_edit_text.startAnimation(bottomToTop)
-        screen_login_user_password_edit_text.startAnimation(bottomToTop)
+        screenLoginBinding.screenLoginUserPasswordEditTextLayout.startAnimation(bottomToTop)
+        screenLoginBinding.screenLoginUserPasswordEditTextLayout.startAnimation(bottomToTop)
 
-        screen_login_not_same_user_text.startAnimation(bottomToTop)
-        screen_login_button.startAnimation(bottomToTop)
+        screenLoginBinding.screenLoginNotSameUserText.startAnimation(bottomToTop)
+        screenLoginBinding.screenLoginLogoutText.startAnimation(bottomToTop)
+        screenLoginBinding.screenLoginButton.startAnimation(bottomToTop)
     }
 }

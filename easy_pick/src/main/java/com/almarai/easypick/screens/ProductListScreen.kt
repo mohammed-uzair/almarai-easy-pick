@@ -1,35 +1,63 @@
 package com.almarai.easypick.screens
 
 import android.os.Bundle
-import android.view.Menu
-import android.view.MenuInflater
-import android.view.MenuItem
-import android.view.View
+import android.view.*
 import android.view.animation.AnimationUtils
+import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import com.almarai.data.easy_pick_models.Product
 import com.almarai.data.easy_pick_models.Result
 import com.almarai.data.easy_pick_models.RouteStatus
+import com.almarai.data.easy_pick_models.filter.Filter
 import com.almarai.data.easy_pick_models.util.exhaustive
 import com.almarai.easypick.R
 import com.almarai.easypick.adapters.item.ProductsAdapter
-import com.almarai.easypick.utils.*
+import com.almarai.easypick.databinding.ScreenProductBinding
+import com.almarai.easypick.extensions.Alert
+import com.almarai.easypick.extensions.hideViewStateAlert
+import com.almarai.easypick.extensions.showViewStateAlert
+import com.almarai.easypick.utils.BundleKeys
+import com.almarai.easypick.utils.FilterScreenSource
 import com.almarai.easypick.view_models.ProductListViewModel
-import kotlinx.android.synthetic.main.main_recycler_view.*
-import kotlinx.android.synthetic.main.screen_product.*
+import com.google.android.material.transition.MaterialContainerTransform
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
-class ProductListScreen : Fragment(R.layout.screen_product) {
+class ProductListScreen : Fragment() {
     private val productListViewModel: ProductListViewModel by viewModel()
     private lateinit var navController: NavController
     private val adapter by lazy { ProductsAdapter() }
     private val args: ProductListScreenArgs by navArgs()
+    private lateinit var screenProductBinding: ScreenProductBinding
+
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
+        screenProductBinding =
+            DataBindingUtil.inflate(inflater, R.layout.screen_product, container, false)
+        screenProductBinding.apply {
+            lifecycleOwner = this@ProductListScreen
+            viewModel = this@ProductListScreen.productListViewModel
+        }
+
+        return screenProductBinding.root
+    }
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+
+        val transformation = MaterialContainerTransform().apply {
+            fadeMode = MaterialContainerTransform.FADE_MODE_CROSS
+            duration = 500
+        }
+        sharedElementEnterTransition = transformation
+    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -50,14 +78,28 @@ class ProductListScreen : Fragment(R.layout.screen_product) {
         productListViewModel.products.observe(viewLifecycleOwner, Observer {
             it?.let { result ->
                 when (result) {
-                    is Result.Fetching -> showAlert(Alert.Loading)
+                    is Result.Fetching -> showViewStateAlert(Alert.Loading)
                     is Result.Success -> showDataUi(result.data)
-                    is Result.Error -> showAlert(Alert.Error)
+                    is Result.Error -> showViewStateAlert(Alert.Error)
                 }.exhaustive
             }
         })
 
         setRecyclerView()
+
+        val savedStateHandle = navController.currentBackStackEntry?.savedStateHandle
+
+        savedStateHandle?.getLiveData<Filter>(BundleKeys.FILTER_MODEL)?.observe(
+            viewLifecycleOwner,
+            Observer { result ->
+                productListViewModel.filterModel = result
+
+                //Filter the list
+
+
+                //Notify the adapter
+                adapter.notifyDataSetChanged()
+            })
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
@@ -69,7 +111,8 @@ class ProductListScreen : Fragment(R.layout.screen_product) {
             R.id.menu_route_action_filter -> {
                 val action = ProductListScreenDirections
                     .actionProductListScreenToFilterScreen(
-                        FilterScreenSource.ProductListScreen
+                        FilterScreenSource.ProductListScreen,
+                        productListViewModel.filterModel
                     )
                 navController.navigate(action)
             }
@@ -92,40 +135,37 @@ class ProductListScreen : Fragment(R.layout.screen_product) {
     private fun showDataUi(list: List<Product>) {
         //If the received data is empty
         if (list.isEmpty()) {
-            showAlert(Alert.NoDataAvailable)
+            showViewStateAlert(Alert.NoDataAvailable)
             return
         }
 
         //Hide the alert
-        hideAlert()
+        hideViewStateAlert()
 
         adapter.setValues(list)
         adapter.notifyDataSetChanged()
 
-        val itemServiceDetails = productListViewModel.getRouteServiceDetails(list)
-
-        screen_product_total_items_text.text = "${itemServiceDetails.totalItems}"
-        screen_product_picked_text.text = itemServiceDetails.servedItems.toString()
+        productListViewModel.setRouteServiceDetails(list)
     }
 
     private fun animateUI() {
         val bottomToTop = AnimationUtils.loadAnimation(activity, R.anim.bottom_to_top)
         val topToBottom = AnimationUtils.loadAnimation(activity, R.anim.top_to_bottom)
 
-        screen_product_background_image.startAnimation(topToBottom)
+        screenProductBinding.screenProductBackgroundImage.startAnimation(topToBottom)
 
-        screen_product_total_items_label.startAnimation(topToBottom)
-        screen_product_total_items_text.startAnimation(topToBottom)
-        screen_product_picked_text.startAnimation(topToBottom)
-        screen_product_picked_label.startAnimation(topToBottom)
+        screenProductBinding.screenProductTotalItemsLabel.startAnimation(topToBottom)
+        screenProductBinding.screenProductTotalItemsText.startAnimation(topToBottom)
+        screenProductBinding.screenProductPickedLabel.startAnimation(topToBottom)
+        screenProductBinding.screenProductPickedText.startAnimation(topToBottom)
 
-        screen_product_header_titles_layout.startAnimation(topToBottom)
+//        screen_product_header_titles_layout.startAnimation(topToBottom)
 
-        layout_main_recyclerview.startAnimation(bottomToTop)
+        screenProductBinding.recyclerView.layoutMainRecyclerview.startAnimation(bottomToTop)
     }
 
     private fun setRecyclerView() {
-        val recyclerView = layout_main_recyclerview as RecyclerView
+        val recyclerView = screenProductBinding.recyclerView.layoutMainRecyclerview
         recyclerView.animation = null
         recyclerView.setHasFixedSize(true)
         recyclerView.layoutManager = LinearLayoutManager(activity)

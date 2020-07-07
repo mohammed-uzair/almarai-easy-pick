@@ -29,4 +29,5 @@
 
     <attr name="styleTextView" format="reference" />
     <attr name="styleButton" format="reference" />
+    <attr name="colorDatePicker" format="color" />
 </resources>

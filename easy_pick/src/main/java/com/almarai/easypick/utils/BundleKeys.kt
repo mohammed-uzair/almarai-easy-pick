@@ -7,5 +7,6 @@ import androidx.annotation.StringDef
 annotation class BundleKeys {
     companion object {
         const val ROUTE_PROCESSED = "ROUTE_PROCESSED"
+        const val FILTER_MODEL = "FILTER_MODEL"
     }
 }

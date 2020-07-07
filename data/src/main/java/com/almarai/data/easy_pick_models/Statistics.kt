@@ -4,11 +4,10 @@ import android.os.Parcelable
 import kotlinx.android.parcel.Parcelize
 
 @Parcelize
-data class Statistics(val physicalPagesSavedCount: Long = 0) : Parcelable
+data class StatisticsData(val date: Float, val papersSaved: Long) : Parcelable
 
-//https://pastebin.com/raw/sFKTen9b
-/*
-{
-    "physicalPagesSavedCount": 12309
-}
- */
+@Parcelize
+data class Statistics(
+    val numberOfPhysicalPapersSaved: Long,
+    val statisticsData: List<StatisticsData>
+) : Parcelable

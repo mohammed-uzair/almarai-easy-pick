@@ -46,4 +46,15 @@
         <item>urdu</item>
         <item>vietnamese</item>
     </string-array>
+
+    <!--region Route Products Preferences-->
+    <string-array name="route_product_type_preferences">
+        <item>No Preference</item>
+        <item>Bakery</item>
+        <item>Poultry</item>
+        <item>Dairy</item>
+        <item>IPNC</item>
+        <item>Non IPNC</item>
+    </string-array>
+    <!--endregion-->
 </resources>

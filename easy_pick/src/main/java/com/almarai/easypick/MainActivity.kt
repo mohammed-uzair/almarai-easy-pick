@@ -9,17 +9,24 @@ import android.view.MenuItem
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
+import androidx.databinding.DataBindingUtil
 import androidx.preference.PreferenceManager
+import com.almarai.easypick.databinding.FragmentContainerBinding
+import com.almarai.easypick.extensions.OnBackPressListener
+import com.almarai.easypick.extensions.exhaustive
+import com.almarai.easypick.extensions.hideViewStateAlert
 import com.almarai.easypick.utils.*
 import com.google.firebase.analytics.FirebaseAnalytics
-import kotlinx.android.synthetic.main.fragment_container.*
 import org.koin.androidx.fragment.android.setupKoinFragmentFactory
 import org.koin.core.KoinComponent
-import java.util.Locale
+import java.util.*
 
 class MainActivity : AppCompatActivity(), KoinComponent {
     private lateinit var sharedPreferences: SharedPreferences
     private lateinit var mFirebaseAnalytics: FirebaseAnalytics
+    lateinit var screenMainBinding: FragmentContainerBinding
+
+    internal var backPressListener: OnBackPressListener? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         setupKoinFragmentFactory()
@@ -27,7 +34,10 @@ class MainActivity : AppCompatActivity(), KoinComponent {
 
         setAppTheme()
 
-        setContentView(R.layout.fragment_container)
+        screenMainBinding = DataBindingUtil.setContentView(this, R.layout.fragment_container)
+        screenMainBinding.apply {
+            lifecycleOwner = this@MainActivity
+        }
 
         // Obtain the FirebaseAnalytics instance.
         mFirebaseAnalytics = FirebaseAnalytics.getInstance(this)
@@ -36,9 +46,9 @@ class MainActivity : AppCompatActivity(), KoinComponent {
     }
 
     override fun onBackPressed() {
-        hideAlert()
+        hideViewStateAlert()
 
-        super.onBackPressed()
+        backPressListener?.onBackPressed() ?: super.onBackPressed()
     }
 
     override fun attachBaseContext(newContext: Context) {
@@ -62,16 +72,16 @@ class MainActivity : AppCompatActivity(), KoinComponent {
 
         when (appTheme) {
             getString(R.string.base_app_theme), getString(R.string.light_app_theme) -> {
-                setTheme(R.style.Theme_Base_LightAppTheme)
                 APP_SELECTED_THEME = AppTheme.Light
+                setTheme(R.style.Theme_Base_LightAppTheme)
             }
             getString(R.string.dark_app_theme) -> {
-                setTheme(R.style.Theme_Base_DarkAppTheme)
                 APP_SELECTED_THEME = AppTheme.Dark
+                setTheme(R.style.Theme_Base_DarkAppTheme)
             }
             getString(R.string.night_app_theme) -> {
-                setTheme(R.style.Theme_Base_NightAppTheme)
                 APP_SELECTED_THEME = AppTheme.Night
+                setTheme(R.style.Theme_Base_NightAppTheme)
             }
         }
     }
@@ -83,7 +93,7 @@ class MainActivity : AppCompatActivity(), KoinComponent {
             newContext.getString(R.string.english_app_language)
         )
 
-        var languageCode = "en"
+        val languageCode: String
         when (appLanguage) {
             newContext.getString(R.string.arabic_app_language) -> {
                 APP_SELECTED_LANGUAGE = AppLanguage.Arabic
@@ -177,7 +187,7 @@ class MainActivity : AppCompatActivity(), KoinComponent {
     }
 
     private fun init() {
-        setSupportActionBar(fragment_container_toolbar as Toolbar)
+        setSupportActionBar(screenMainBinding.fragmentContainerToolbar.toolbar)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
         val bundle = Bundle()

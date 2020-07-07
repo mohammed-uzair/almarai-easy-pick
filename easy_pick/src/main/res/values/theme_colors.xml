@@ -30,6 +30,7 @@
     <color name="baseColorListItemDivider">#59AB61</color>
 
     <color name="baseColorFilterScreenDivider">#59AB61</color>
+    <color name="baseColorDatePicker">#59AB61</color>
     <!--endregion-->
 
     <!--region Light Theme Colors-->
@@ -92,6 +93,7 @@
     <color name="darkColorListItemDivider">#59AB61</color>
 
     <color name="darkColorFilterScreenDivider">#59AB61</color>
+    <color name="darkColorDatePicker">#3C4053</color>
     <!--endregion-->
 
     <!--region Night Theme Colors-->
@@ -123,6 +125,7 @@
     <color name="nightColorListItemDivider">#000000</color>
 
     <color name="nightColorFilterScreenDivider">#59AB61</color>
+    <color name="nightColorDatePicker">#202020</color>
     <!--endregion-->
     <!--endregion-->
 </resources>

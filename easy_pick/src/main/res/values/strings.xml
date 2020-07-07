@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name" translatable="false">Easy Pick</string>
+    <string name="appName" translatable="false">Easy Pick</string>
     <string name="app_description" translatable="false">Picking Products Made Easy</string>
 
     <!--region Screen Titles-->
@@ -73,16 +73,6 @@
     <string name="image_description_back_button">Back Button Image</string>
     <!--endregion-->
 
-    <!--region Route Products Preferences-->
-    <string-array name="route_product_type_preferences">
-        <item>No Preference</item>
-        <item>Bakery</item>
-        <item>Poultry</item>
-        <item>Dairy</item>
-        <item>IPNC</item>
-        <item>Non IPNC</item>
-    </string-array>
-
     <!--region Setting Screen Titles-->
     <string name="general">General</string>
     <string name="app_theme" translatable="false">App Theme</string>
@@ -116,6 +106,18 @@
     <string name="no_data_found">Error, nothing found</string>
     <!--endregion-->
 
+    <!--region Fetching-->
+    <string name="fetching_routes">Fetching all routes, please wait…</string>
+    <string name="fetching_items">Fetching all items, please wait…</string>
+    <string name="fetching_statistics">Fetching statistics data, please wait…</string>
+    <!--endregion-->
+
+    <!--region No Data Available-->
+    <string name="no_data_available_routes">We couldn\'t find any routes on this depot, please try again after some time, also please check the depot code or the server IP.</string>
+    <string name="no_data_available_items">We couldn\'t find any items on this route, please try again after some time, or check for other routes.</string>
+    <string name="no_data_available_statistics">No statistics data available for the selected range, please select a range within the deployment of this app as the least start date and today\'s date, also please check for the device date if its synced.</string>
+    <!--endregion-->
+
     <!--region Other labels-->
     <string name="server_ip">Server IP</string>
     <string name="made_with">Made with</string>
@@ -124,12 +126,17 @@
     <string name="from"> from </string>
     <string name="server_port">Server Port</string>
     <string name="sales_date">Sales Date</string>
+    <string name="date_range">Date Range</string>
     <string name="dept_code">Depot Code</string>
+    <string name="route_group">Route Group</string>
+    <string name="sales_days_variance">+- 2 Days</string>
     <string name="preference">Preference</string>
-    <string name="sheets_of_papers_saved">Sheets of papers saved</string>
+    <string name="sheets_of_papers_saved">Sheets of paper saved</string>
     <string name="user_name">User Name</string>
     <string name="password">Password</string>
-    <string name="not_same_user">Not the same user ? Logout</string>
+    <string name="not_same_user">Not the same user ? </string>
+    <string name="logout">Logout</string>
+    <string name="login">Log In!</string>
     <string name="user_greeting">Hello,</string>
 
     <string name="no_filter">No Filter</string>
@@ -145,11 +152,13 @@
     <string name="poultry">Poultry</string>
     <string name="bakery">Bakery</string>
     <string name="ipnc" translatable="false">IPNC</string>
+    <string name="upc" translatable="false">UPC</string>
     <string name="non_ipnc" translatable="false">Non IPNC</string>
     <string name="tc" translatable="false">TC</string>
     <string name="non_tc" translatable="false">Non TC</string>
     <string name="customer_only">Customer Only</string>
     <string name="allow_multiple_filters">Allow Multiple Filters</string>
+    <string name="persist_filters">Persist Filters</string>
     <!--endregion-->
 
 </resources>

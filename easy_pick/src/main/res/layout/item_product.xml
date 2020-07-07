@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <variable
+            name="product"
+            type="com.almarai.data.easy_pick_models.Product" />
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_2sdp">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/item_product_detail_root"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_15sdp"
+            android:background="@drawable/list_item_card"
+            android:paddingStart="@dimen/_15sdp"
+            android:paddingTop="@dimen/_5sdp"
+            android:paddingEnd="0dp"
+            android:paddingBottom="@dimen/_5sdp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <TextView
+                android:id="@+id/item_product_number_text"
+                style="@style/AlmTextSingleLineBold"
+                android:text="@{String.valueOf(product.itemNumber)}"
+                android:textSize="18sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="124406" />
+
+            <View
+                android:id="@+id/item_product_splitter"
+                android:layout_width="@dimen/_8sdp"
+                android:layout_height="@dimen/_2sdp"
+                android:layout_marginStart="@dimen/_8sdp"
+                android:background="?colorText"
+                app:layout_constraintBottom_toBottomOf="@+id/item_product_number_text"
+                app:layout_constraintStart_toEndOf="@+id/item_product_number_text"
+                app:layout_constraintTop_toTopOf="@+id/item_product_number_text" />
+
+            <TextView
+                android:id="@+id/item_product_description_text"
+                style="@style/AlmTextSingleLineBold"
+                android:layout_marginStart="@dimen/_8sdp"
+                android:textSize="18sp"
+                app:productDescription="@{product}"
+                app:layout_constraintBaseline_toBaselineOf="@+id/item_product_number_text"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toEndOf="@+id/item_product_splitter"
+                tools:text="My Product Name" />
+
+            <TextView
+                android:id="@+id/item_product_truck_stock"
+                style="@style/AlmTextSingleLineBold"
+                android:layout_marginTop="@dimen/_8sdp"
+                android:text="@{product.truckStock}"
+                app:layout_constraintStart_toStartOf="@+id/item_product_number_text"
+                app:layout_constraintTop_toBottomOf="@+id/item_product_number_text"
+                tools:text="12/21" />
+
+            <TextView
+                android:id="@+id/item_product_fresh_load"
+                style="@style/AlmTextSingleLineBold"
+                android:layout_marginStart="@dimen/_16sdp"
+                android:gravity="end"
+                android:text="@{product.freshLoad}"
+                app:layout_constraintBaseline_toBaselineOf="@+id/item_product_truck_stock"
+                app:layout_constraintStart_toEndOf="@+id/item_product_truck_stock"
+                tools:text="112/2" />
+
+            <TextView
+                android:id="@+id/item_product_total_stock"
+                style="@style/AlmTextSingleLineBold"
+                android:layout_marginStart="@dimen/_16sdp"
+                android:text="@{product.totalStock}"
+                app:layout_constraintBaseline_toBaselineOf="@+id/item_product_fresh_load"
+                app:layout_constraintStart_toEndOf="@+id/item_product_fresh_load"
+                tools:text="21/10" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <ImageView
+            android:id="@+id/item_product_status_image"
+            android:layout_width="@dimen/_22sdp"
+            android:layout_height="@dimen/_22sdp"
+            android:layout_marginStart="@dimen/_5sdp"
+            tools:src="@drawable/ic_status"
+            android:layout_marginTop="@dimen/_5sdp"
+            android:contentDescription="@string/image_description_status_route"
+            app:productStatus="@{product.status}"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>
