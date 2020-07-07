@@ -29,7 +29,7 @@
         <item name="boxCornerRadiusBottomStart">0dp</item>
         <item name="boxCornerRadiusTopEnd">0dp</item>
         <item name="boxCornerRadiusTopStart">@dimen/_8sdp</item>
-        <item name="boxStrokeColor">?colorAccent</item>
+        <item name="boxStrokeColor">@color/text_input_box_stroke</item>
         <item name="hintTextColor">?colorAccent</item>
     </style>
     <!--endregion-->
@@ -51,7 +51,7 @@
         <item name="boxCornerRadiusBottomStart">0dp</item>
         <item name="boxCornerRadiusTopEnd">0dp</item>
         <item name="boxCornerRadiusTopStart">@dimen/_8sdp</item>
-        <item name="boxStrokeColor">?colorAccent</item>
+        <item name="boxStrokeColor">@color/text_input_box_stroke</item>
         <item name="hintTextColor">?colorAccent</item>
     </style>
     <!--endregion-->
@@ -143,16 +143,7 @@
 
     <!--region Date Picker Styles-->
     <style name="ThemeMaterialCalendar" parent="ThemeOverlay.MaterialComponents.MaterialCalendar">
-        <item name="colorPrimary">?colorBackgroundScreenHeader</item>
+        <item name="colorPrimary">?colorDatePicker</item>
     </style>
-
-    <!--    <style name="ThemeMaterialCalendarButton" parent="Widget.MaterialComponents.Button.TextButton.Dialog">-->
-    <!--        <item name="android:textColor">?colorText</item>-->
-    <!--    </style>-->
-
-    <!--    <style name="ThemeMaterialCalendarTextButton" parent="Widget.MaterialComponents.Button.TextButton.Dialog.Flush">-->
-    <!--        <item name="android:textColor">?themeTextColorPrimary</item>-->
-    <!--        <item name="iconTint">?themeTextColorPrimary</item>-->
-    <!--    </style>-->
     <!--endregion-->
 </resources>

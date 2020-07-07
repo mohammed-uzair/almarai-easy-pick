@@ -21,7 +21,6 @@ import com.almarai.easypick.utils.BundleKeys
 import com.almarai.easypick.utils.FilterScreenSource
 import com.almarai.easypick.utils.setTitle
 import com.almarai.easypick.view_models.FilterViewModel
-import kotlinx.android.synthetic.main.screen_filter.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class FilterScreen : Fragment() {
@@ -98,10 +97,10 @@ class FilterScreen : Fragment() {
         val bottomToTop = AnimationUtils.loadAnimation(activity, R.anim.bottom_to_top)
         val topToBottom = AnimationUtils.loadAnimation(activity, R.anim.top_to_bottom)
 
-        screen_filter_background_image.startAnimation(topToBottom)
+        screenFilterBinding.screenFilterBackgroundImage.startAnimation(topToBottom)
 
-        screen_filter_no_filter_radio.startAnimation(topToBottom)
-        screen_filter_items_root.startAnimation(bottomToTop)
+        screenFilterBinding.screenFilterNoFilterRadio.startAnimation(topToBottom)
+        screenFilterBinding.screenFilterItemsRoot.startAnimation(bottomToTop)
     }
 
     private fun addObservers() {

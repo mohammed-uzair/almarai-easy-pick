@@ -35,6 +35,8 @@ import com.github.mikephil.charting.data.LineDataSet
 import com.github.mikephil.charting.formatter.ValueFormatter
 import com.github.mikephil.charting.interfaces.datasets.ILineDataSet
 import com.google.android.material.datepicker.*
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import java.text.NumberFormat
 import java.util.*
@@ -43,10 +45,14 @@ import kotlin.collections.ArrayList
 class StatisticsScreen : Fragment(R.layout.screen_statistics) {
     private val viewModel: StatisticsViewModel by viewModel()
     private lateinit var navController: NavController
-    private val calendar = Calendar.getInstance()
     private lateinit var screenStatisticsBinding: ScreenStatisticsBinding
-    private var startDate: String = ""
-    private var endDate: String = ""
+
+    private var selectedChartType: ChartType = ChartType.Line
+    private val calendar = Calendar.getInstance()
+    private var startDate: Long = DateUtil.getPastDate(STATISTICS_CONSTRAINT_INITIAL_DAYS_PERIOD)
+    private var endDate: Long = DateUtil.getCurrentDateInMillis()
+
+    private lateinit var statisticsData: List<StatisticsData>
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -74,14 +80,8 @@ class StatisticsScreen : Fragment(R.layout.screen_statistics) {
         //Set screen title
         activity?.title = getString(R.string.title_statistics)
 
-        val startDate = DateUtil.getDate(
-            DateUtil.getPastDate(STATISTICS_CONSTRAINT_INITIAL_DAYS_PERIOD),
-            AppDateTimeFormat.formatDDMMYYYY
-        )
-        val endDate = DateUtil.getDate(calendar.timeInMillis, AppDateTimeFormat.formatDDMMYYYY)
-        screenStatisticsBinding.screenStatisticsDateRangeText.setText("$startDate - $endDate")
-
         animateUI()
+        setDateInRangePicker()
 
         viewModel.statistics.observe(viewLifecycleOwner, Observer {
             it?.let { result ->
@@ -98,6 +98,19 @@ class StatisticsScreen : Fragment(R.layout.screen_statistics) {
         }
 
         viewModel.getStatistics(startDate, endDate)
+
+        screenStatisticsBinding.screenStatisticsPhysicalPagesSavedText.setOnClickListener {
+//            selectedChartType = ChartType.Pie
+            closeChart()
+
+            // Make some wanted delay for the animations to complete
+            Thread.sleep(500)
+            openChart()
+        }
+    }
+
+    private fun setDateInRangePicker() {
+        viewModel.datePicker.value = "$startDate - $endDate"
     }
 
     private fun showDataUi(statistics: Statistics) {
@@ -109,61 +122,109 @@ class StatisticsScreen : Fragment(R.layout.screen_statistics) {
 
         viewModel.physicalPagesSaved.value = commaAddedPagesCount
 
-        setChartAttributes(statistics.statisticsData)
+        statisticsData = statistics.statisticsData
+        openChart()
     }
 
-    private fun setChartAttributes(listOfEntries: List<StatisticsData>) {
+    private fun openChart() {
+        when (selectedChartType) {
+            is ChartType.Line -> setLineChartAttributes()
+            is ChartType.Bar -> setBarChartAttributes()
+            is ChartType.Pie -> setPieChartAttributes()
+        }.exhaustive
+
+        screenStatisticsBinding.screenStatisticsChartLayout.visibility = View.VISIBLE
+
+        //Animate and show the chart layout
+        screenStatisticsBinding.screenStatisticsChartLayout.startAnimation(
+            AnimationUtils.loadAnimation(
+                activity,
+                R.anim.card_bottom_up
+            )
+        )
+    }
+
+    private fun closeChart() {
+//        CoroutineScope(Co).launch {
+//
+//        }
+        //Close the chart in animation
+        screenStatisticsBinding.screenStatisticsChartLayout.startAnimation(
+            AnimationUtils.loadAnimation(
+                activity,
+                R.anim.card_up_bottom
+            )
+        )
+
+        screenStatisticsBinding.screenStatisticsChartLayout.visibility = View.GONE
+
+        //Clear all the chart data
         screenStatisticsBinding.screenStatisticsChart.invalidate()
+    }
 
-        screenStatisticsBinding.screenStatisticsChart.isDragEnabled = true
-        screenStatisticsBinding.screenStatisticsChart.setScaleEnabled(true)
+    //region Charts Attributes
+    private fun setLineChartAttributes() {
+        //Get the Theme specific color
+        val typedValue = TypedValue()
+        val theme = requireContext().theme
+        theme.resolveAttribute(R.attr.colorTitle, typedValue, true)
+        @ColorInt val color = typedValue.data
 
+        //Set the chart data
         val entries = ArrayList<Entry>()
-        for (entry in listOfEntries) {
+        for (entry in statisticsData) {
             entries.add(Entry(entry.date, entry.papersSaved.toFloat()))
         }
 
         val lineDataSet = LineDataSet(entries, "")
-        lineDataSet.color = ContextCompat.getColor(requireContext(), android.R.color.white)
+
         lineDataSet.setDrawCircles(false)
         lineDataSet.setDrawValues(false)
+
         lineDataSet.lineWidth = 4f
         lineDataSet.mode = LineDataSet.Mode.CUBIC_BEZIER
-//        lineDataSet.setDrawFilled(true)
-//        lineDataSet.fillColor = (ContextCompat.getColor(requireContext(), android.R.color.white))
-//        lineDataSet.fillAlpha = 50
+        lineDataSet.color = color
+
+        lineDataSet.setDrawFilled(true)
+        lineDataSet.fillColor = (ContextCompat.getColor(requireContext(), android.R.color.white))
+        lineDataSet.fillAlpha = 10
 
         val dataSets: ArrayList<ILineDataSet> = ArrayList()
         dataSets.add(lineDataSet)
 
         val lineData = LineData(dataSets)
 
-        screenStatisticsBinding.screenStatisticsChart.data = lineData
-        val legends = screenStatisticsBinding.screenStatisticsChart.legend
-        legends.isEnabled = false
-        screenStatisticsBinding.screenStatisticsChart.xAxis.valueFormatter = MyXAxisFormatter()
+        //Set all the chart UI changes
+        //X-Axis label formatter
+        screenStatisticsBinding.screenStatisticsChart.xAxis.valueFormatter =
+            object : ValueFormatter() {
+                override fun getAxisLabel(value: Float, axis: AxisBase?) =
+                    DateUtil.getDate(value.toLong(), AppDateTimeFormat.formatDDMMYYYY)
+            }
+
+        screenStatisticsBinding.screenStatisticsChart.legend.isEnabled = false
+        screenStatisticsBinding.screenStatisticsChart.isDragEnabled = true
+        screenStatisticsBinding.screenStatisticsChart.setScaleEnabled(true)
         screenStatisticsBinding.screenStatisticsChart.xAxis.position = XAxis.XAxisPosition.BOTTOM
-        screenStatisticsBinding.screenStatisticsChart.xAxis.textColor =
-            ContextCompat.getColor(requireContext(), android.R.color.white)
+        screenStatisticsBinding.screenStatisticsChart.xAxis.textColor = color
+        screenStatisticsBinding.screenStatisticsChart.xAxis.setLabelCount(4, true)
         screenStatisticsBinding.screenStatisticsChart.xAxis.setDrawLabels(true)
-        screenStatisticsBinding.screenStatisticsChart.axisLeft.axisLineColor =
-            ContextCompat.getColor(requireContext(), android.R.color.white)
-        screenStatisticsBinding.screenStatisticsChart.axisLeft.textColor =
-            ContextCompat.getColor(requireContext(), android.R.color.white)
+        screenStatisticsBinding.screenStatisticsChart.xAxis.setDrawGridLines(false)
+        screenStatisticsBinding.screenStatisticsChart.axisLeft.axisLineColor = color
+        screenStatisticsBinding.screenStatisticsChart.axisLeft.textColor = color
         screenStatisticsBinding.screenStatisticsChart.axisLeft.setDrawGridLines(false)
         screenStatisticsBinding.screenStatisticsChart.description.isEnabled = false
         screenStatisticsBinding.screenStatisticsChart.setHardwareAccelerationEnabled(true)
-
-        //Get the Theme specific color
-        val typedValue = TypedValue()
-        val theme = requireContext().theme
-        theme.resolveAttribute(R.attr.colorBackgroundScreenHeader, typedValue, true)
-        @ColorInt val color = typedValue.data
-
-        screenStatisticsBinding.screenStatisticsChart.setBackgroundColor(color)
         screenStatisticsBinding.screenStatisticsChart.axisRight.isEnabled = false
-//        screen_statistics_chart.animateX(4000, Easing.EaseInSine)
+
+        //Set the data
+        screenStatisticsBinding.screenStatisticsChart.data = lineData
     }
+
+    private fun setBarChartAttributes() {}
+
+    private fun setPieChartAttributes() {}
+    //endregion
 
     private fun showDateRangePicker() {
         //Set dialog theme, half screen popup
@@ -174,20 +235,10 @@ class StatisticsScreen : Fragment(R.layout.screen_statistics) {
         val constraintsBuilder = CalendarConstraints.Builder()
         val validators: ArrayList<CalendarConstraints.DateValidator> = ArrayList()
 
-        if (startDate.isEmpty()) {
-            startDate = DateUtil.getDate(
-                DateUtil.getPastDate(
-                    STATISTICS_CONSTRAINT_INITIAL_DAYS_PERIOD
-                ), AppDateTimeFormat.formatDDMMYYYY
-            )
-
-            endDate = DateUtil.getCurrentDate(AppDateTimeFormat.formatDDMMYYYY)
-        }
-
         materialDatePickerBuilder.setSelection(
             androidx.core.util.Pair(
-                DateUtil.getDate(startDate, AppDateTimeFormat.formatDDMMYYYY),
-                DateUtil.getDate(endDate, AppDateTimeFormat.formatDDMMYYYY)
+                startDate,
+                endDate
             )
         )
 
@@ -211,9 +262,10 @@ class StatisticsScreen : Fragment(R.layout.screen_statistics) {
         picker.show(activity?.supportFragmentManager!!, picker.toString())
 
         picker.addOnPositiveButtonClickListener {
-            startDate = DateUtil.getDate(it.first, AppDateTimeFormat.formatDDMMYYYY)
-            endDate = DateUtil.getDate(it.second, AppDateTimeFormat.formatDDMMYYYY)
-            screenStatisticsBinding.screenStatisticsDateRangeText.setText("$startDate - $endDate")
+            startDate = it.first ?: startDate
+            endDate = it.second ?: endDate
+
+            setDateInRangePicker()
 
             viewModel.getStatistics(startDate, endDate)
         }
@@ -221,9 +273,7 @@ class StatisticsScreen : Fragment(R.layout.screen_statistics) {
 
     private fun animateUI() {
         val topToBottom = AnimationUtils.loadAnimation(activity, R.anim.top_to_bottom)
-        val bottomToTop = AnimationUtils.loadAnimation(activity, R.anim.bottom_card_up)
 
-        screenStatisticsBinding.screenStatisticsChartLayout.startAnimation(bottomToTop)
         screenStatisticsBinding.screenStatisticsBackgroundImage.startAnimation(topToBottom)
         screenStatisticsBinding.screenStatisticsPhysicalPagesSavedText.startAnimation(topToBottom)
         screenStatisticsBinding.screenStatisticsPhysicalPagesSavedTextSummaryText.startAnimation(
@@ -231,8 +281,9 @@ class StatisticsScreen : Fragment(R.layout.screen_statistics) {
         )
     }
 
-    class MyXAxisFormatter : ValueFormatter() {
-        override fun getAxisLabel(value: Float, axis: AxisBase?) =
-            DateUtil.getDate(value.toLong(), AppDateTimeFormat.formatDDMMYYYY)
+    sealed class ChartType {
+        object Line : ChartType()
+        object Bar : ChartType()
+        object Pie : ChartType()
     }
 }

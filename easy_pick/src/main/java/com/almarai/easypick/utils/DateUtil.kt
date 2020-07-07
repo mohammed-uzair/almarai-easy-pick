@@ -53,12 +53,7 @@ object DateUtil {
      *
      * @return Formatted date string
      */
-    fun getCurrentDateInMillis(@AppDateTimeFormat format: String?): Long {
-        val dateFormat: DateFormat =
-            SimpleDateFormat(format, APP_LOCALE)
-        val calendar = Calendar.getInstance(APP_LOCALE)
-        return calendar.timeInMillis
-    }
+    fun getCurrentDateInMillis() = Calendar.getInstance(APP_LOCALE).timeInMillis
 
     fun getDate(millis: Long?, @AppDateTimeFormat format: String): String {
         val dateFormat: DateFormat =

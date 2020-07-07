@@ -134,7 +134,9 @@
     <string name="sheets_of_papers_saved">Sheets of paper saved</string>
     <string name="user_name">User Name</string>
     <string name="password">Password</string>
-    <string name="not_same_user">Not the same user ? Logout</string>
+    <string name="not_same_user">Not the same user ? </string>
+    <string name="logout">Logout</string>
+    <string name="login">Log In!</string>
     <string name="user_greeting">Hello,</string>
 
     <string name="no_filter">No Filter</string>

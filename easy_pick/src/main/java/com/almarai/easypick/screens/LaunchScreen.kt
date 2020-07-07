@@ -14,7 +14,6 @@ import com.almarai.easypick.R
 import com.almarai.easypick.databinding.ScreenLaunchBinding
 import com.almarai.easypick.view_models.LaunchViewModel
 import com.almarai.repository.utils.AppDataConfiguration
-import kotlinx.android.synthetic.main.screen_launch.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class LaunchScreen : Fragment() {
@@ -55,7 +54,7 @@ class LaunchScreen : Fragment() {
 
         animateUI()
 
-        screen_launch_launch_button.setOnClickListener {
+        screenLaunchBinding.screenLaunchLaunchButton.setOnClickListener {
             when (viewModel.checkAppDataConfigurations()) {
                 AppDataConfiguration.NetworkConfiguration ->
                     navController.navigate(R.id.action_launchScreen_to_networkConfigurationScreen)
@@ -71,14 +70,14 @@ class LaunchScreen : Fragment() {
         val bottomToTop = AnimationUtils.loadAnimation(activity, R.anim.bottom_to_top)
         val topToBottom = AnimationUtils.loadAnimation(activity, R.anim.top_to_bottom)
 
-        screen_launch_animation.startAnimation(bottomToTop)
+        screenLaunchBinding.screenLaunchAnimation.startAnimation(bottomToTop)
 
-        screen_launch_launch_button.startAnimation(bottomToTop)
-        screen_launch_made_with_love_text.startAnimation(bottomToTop)
-        screen_launch_employee_code_text.startAnimation(bottomToTop)
+        screenLaunchBinding.screenLaunchLaunchButton.startAnimation(bottomToTop)
+        screenLaunchBinding.screenLaunchMadeWithLoveText.startAnimation(bottomToTop)
+        screenLaunchBinding.screenLaunchEmployeeCodeText.startAnimation(bottomToTop)
 
-        screen_launch_app_name_text.startAnimation(topToBottom)
-        screen_launch_app_description_text.startAnimation(topToBottom)
-        screen_launch_app_version_text.startAnimation(topToBottom)
+        screenLaunchBinding.screenLaunchAppNameText.startAnimation(topToBottom)
+        screenLaunchBinding.screenLaunchAppDescriptionText.startAnimation(topToBottom)
+        screenLaunchBinding.screenLaunchAppVersionText.startAnimation(topToBottom)
     }
 }

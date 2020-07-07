@@ -57,8 +57,7 @@
             app:layout_constraintEnd_toEndOf="@id/screen_network_config_save_button"
             app:layout_constraintStart_toStartOf="@+id/screen_network_config_save_button"
             app:layout_constraintTop_toTopOf="@id/screen_network_config_guideline_for_background_theme"
-            app:startIconDrawable="@drawable/ic_server"
-            app:suffixText=":">
+            app:startIconDrawable="@drawable/ic_server">
 
             <com.almarai.alm_ui.AlmEditText
                 android:id="@+id/screen_network_config_server_ip_edit_text"

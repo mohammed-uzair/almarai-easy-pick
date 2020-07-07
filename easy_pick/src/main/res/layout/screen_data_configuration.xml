@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <data>
 
@@ -10,7 +11,6 @@
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        xmlns:tools="http://schemas.android.com/tools"
         android:id="@+id/screen_data_config_root"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -94,9 +94,9 @@
                 android:id="@+id/screen_data_config_depot_code_edit_text"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@={viewModel.depotCode}"
-                android:selectAllOnFocus="true"
                 android:maxLength="6"
+                android:selectAllOnFocus="true"
+                android:text="@={viewModel.depotCode}"
                 android:textColor="?colorText"
                 app:type="number_positive" />
 
@@ -113,20 +113,14 @@
             app:layout_constraintTop_toBottomOf="@id/screen_data_config_depot_code_edit_text_layout"
             app:startIconDrawable="@drawable/ic_route">
 
-<!--            <AutoCompleteTextView-->
-<!--                android:id="@+id/screen_data_config_route_preference_spinner"-->
-<!--                android:layout_width="match_parent"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:inputType="none"-->
-<!--                select-->
-<!--                android:labelFor="@id/screen_data_config_route_preference_spinner_layout"-->
-<!--                android:textColor="?colorText" />-->
-
-            <Spinner
+            <AutoCompleteTextView
                 android:id="@+id/screen_data_config_route_preference_spinner"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                />
+                android:inputType="none"
+                android:labelFor="@id/screen_data_config_route_preference_spinner_layout"
+                android:textColor="?colorText"
+                tools:ignore="LabelFor" />
 
         </com.google.android.material.textfield.TextInputLayout>
 

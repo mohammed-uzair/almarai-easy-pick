@@ -5,6 +5,6 @@ import com.almarai.repository.api.StatisticsRepository
 
 class StatisticsRepositoryImplementation(private val webStatisticsDataSource: WebStatisticsDataSource) :
     StatisticsRepository {
-    override suspend fun getStatistics(depotCode: Int, fromDate: String, toDate: String) =
+    override suspend fun getStatistics(depotCode: Int, fromDate: Long, toDate: Long) =
         webStatisticsDataSource.getStatistics(depotCode, fromDate, toDate)
 }

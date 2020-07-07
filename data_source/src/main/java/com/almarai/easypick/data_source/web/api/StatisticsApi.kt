@@ -8,7 +8,7 @@ interface StatisticsApi {
     //    @GET("sFKTen9b")
     @GET("Statistics")
     suspend fun getStatistics(
-        @Query("fromDate") fromDate: String,
-        @Query("toDate") toDate: String
+        @Query("fromDate") fromDate: Long,
+        @Query("toDate") toDate: Long
     ): Statistics
 }

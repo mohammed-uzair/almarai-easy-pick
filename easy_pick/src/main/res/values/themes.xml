@@ -39,6 +39,7 @@
         <item name="styleButton">@style/PrimaryButtonStyle</item>
 
         <item name="dialogCornerRadius">@dimen/_10sdp</item>
+        <item name="colorDatePicker">@color/baseColorDatePicker</item>
     </style>
     <!--endregion-->
 
@@ -75,6 +76,8 @@
         <item name="colorListHeaderTitle">@color/darkColorListHeaderTitle</item>
         <item name="colorListItemBackground">@color/darkColorListItemBackground</item>
         <item name="colorListItemDivider">@color/darkColorListItemDivider</item>
+
+        <item name="colorDatePicker">@color/darkColorDatePicker</item>
     </style>
     <!--endregion-->
 
@@ -110,6 +113,8 @@
 
         <item name="textColorAlertDialogListItem">@color/nightColorText</item>
         <item name="preferenceTheme">@style/PreferenceThemeNight</item>
+
+        <item name="colorDatePicker">@color/nightColorDatePicker</item>
     </style>
     <!--endregion-->
 

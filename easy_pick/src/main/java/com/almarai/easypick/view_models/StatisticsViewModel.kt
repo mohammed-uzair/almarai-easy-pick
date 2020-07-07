@@ -15,8 +15,9 @@ class StatisticsViewModel(private val repository: StatisticsRepository) : ViewMo
     private val _statistics = MutableLiveData<Result<Statistics>>()
     val statistics: LiveData<Result<Statistics>> = _statistics
     val physicalPagesSaved: MutableLiveData<String> = MutableLiveData()
+    val datePicker: MutableLiveData<String> = MutableLiveData()
 
-    fun getStatistics(fromDate:String, toDate:String) {
+    fun getStatistics(fromDate:Long, toDate:Long) {
         viewModelScope.launch(Dispatchers.IO) {
             _statistics.postValue(Result.Fetching)
             try {

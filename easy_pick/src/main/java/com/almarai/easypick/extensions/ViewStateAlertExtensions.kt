@@ -5,8 +5,6 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import com.almarai.easypick.MainActivity
 import com.almarai.easypick.R
-import kotlinx.android.synthetic.main.fragment_container.*
-import kotlinx.android.synthetic.main.main_alert_dialog.*
 
 sealed class Alert {
     object Loading : Alert()
@@ -26,13 +24,16 @@ internal fun AppCompatActivity.showViewStateAlert(alertType: Alert, message: Str
     val mainActivity = this as MainActivity
 
     //Hide the root fragment view
-    mainActivity.fragment_container_host_fragment.visibility = View.GONE
+    mainActivity.screenMainBinding.fragmentContainerHostFragment.visibility = View.GONE
 
     //Show the alert view as visible
-    mainActivity.main_alert_dialog_root.visibility = View.VISIBLE
+    mainActivity.screenMainBinding.fragmentContainerAlert.mainAlertDialogRoot.visibility =
+        View.VISIBLE
 
     //Set the animation to the required one
     var text = message
+
+    val binding = mainActivity.screenMainBinding.fragmentContainerAlert
     when (alertType) {
         is Alert.Loading -> {
             if (text.isEmpty()) {
@@ -40,11 +41,11 @@ internal fun AppCompatActivity.showViewStateAlert(alertType: Alert, message: Str
             }
 
             //Set the animation
-            mainActivity.alert_animation.setAnimation(R.raw.anim_loading)
-            mainActivity.alert_animation.post { mainActivity.alert_animation.playAnimation() }
+            binding.alertAnimation.setAnimation(R.raw.anim_loading)
+            binding.alertAnimation.post { binding.alertAnimation.playAnimation() }
 
             //Set the message
-            mainActivity.alert_text_details.text = text.trim()
+            binding.alertTextDetails.text = text.trim()
         }
         is Alert.Error -> {
             if (text.isEmpty()) {
@@ -52,11 +53,11 @@ internal fun AppCompatActivity.showViewStateAlert(alertType: Alert, message: Str
             }
 
             //Set the animation
-            mainActivity.alert_animation.setAnimation(R.raw.anim_error)
-            mainActivity.alert_animation.post { mainActivity.alert_animation.playAnimation() }
+            binding.alertAnimation.setAnimation(R.raw.anim_error)
+            binding.alertAnimation.post { binding.alertAnimation.playAnimation() }
 
             //Set the message
-            mainActivity.alert_text_details.text = text.trim()
+            binding.alertTextDetails.text = text.trim()
         }
         is Alert.NoDataAvailable -> {
             if (text.isEmpty()) {
@@ -64,25 +65,27 @@ internal fun AppCompatActivity.showViewStateAlert(alertType: Alert, message: Str
             }
 
             //Set the animation
-            mainActivity.alert_animation.setAnimation(R.raw.anim_no_data_available)
-            mainActivity.alert_animation.post { mainActivity.alert_animation.playAnimation() }
+            binding.alertAnimation.setAnimation(R.raw.anim_no_data_available)
+            binding.alertAnimation.post { binding.alertAnimation.playAnimation() }
 
             //Set the message
-            mainActivity.alert_text_details.text = text.trim()
+            binding.alertTextDetails.text = text.trim()
         }
     }.exhaustive
 }
 
 internal fun AppCompatActivity.hideViewStateAlert() {
     val mainActivity = this as MainActivity
+    val binding = mainActivity.screenMainBinding.fragmentContainerAlert
 
     //Hide the view state alert
-    if (mainActivity.main_alert_dialog_root.visibility == View.VISIBLE)
-        mainActivity.main_alert_dialog_root.visibility = View.GONE
+    if (mainActivity.screenMainBinding.fragmentContainerAlert.mainAlertDialogRoot.visibility == View.VISIBLE)
+        mainActivity.screenMainBinding.fragmentContainerAlert.mainAlertDialogRoot.visibility =
+            View.GONE
 
     //Show the root fragment container
-    if (mainActivity.fragment_container_host_fragment.visibility == View.GONE ||
-        mainActivity.fragment_container_host_fragment.visibility == View.INVISIBLE
+    if (mainActivity.screenMainBinding.fragmentContainerHostFragment.visibility == View.GONE ||
+        mainActivity.screenMainBinding.fragmentContainerHostFragment.visibility == View.INVISIBLE
     )
-        mainActivity.fragment_container_host_fragment.visibility = View.VISIBLE
+        mainActivity.screenMainBinding.fragmentContainerHostFragment.visibility = View.VISIBLE
 }

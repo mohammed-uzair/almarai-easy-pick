@@ -1,111 +1,151 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/network_config_screen_root"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="?attr/colorBackgroundScreenBody"
-    tools:context=".screens.LoginScreen">
+    xmlns:tools="http://schemas.android.com/tools">
 
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/screen_network_config_guideline_for_background_theme"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.5" />
+    <data>
 
-    <ImageView
-        android:id="@+id/screen_login_background_image"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:contentDescription="@string/image_description_theme_background"
-        android:scaleType="fitXY"
-        android:src="@drawable/ic_other_screens_background"
-        app:layout_constraintBottom_toTopOf="@+id/screen_network_config_guideline_for_background_theme"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        <variable
+            name="viewModel"
+            type="com.almarai.easypick.view_models.LoginViewModel" />
+    </data>
 
-    <TextView
-        android:id="@+id/screen_login_greetings_text"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/_40sdp"
-        android:layout_marginTop="@dimen/_30sdp"
-        android:text="@string/user_greeting"
-        android:textColor="?attr/colorAccent"
-        android:textSize="30sp"
-        android:textStyle="bold"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <TextView
-        android:id="@+id/screen_login_user_name_text"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Log In!"
-        android:textColor="?attr/colorAccent"
-        android:textSize="50sp"
-        android:textStyle="bold"
-        app:layout_constraintStart_toStartOf="@+id/screen_login_greetings_text"
-        app:layout_constraintTop_toBottomOf="@+id/screen_login_greetings_text" />
-
-    <com.airbnb.lottie.LottieAnimationView
-        android:id="@+id/screen_login_animation"
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/network_config_screen_root"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="@dimen/_80sdp"
-        android:src="@drawable/ic_settings"
-        app:layout_constraintBottom_toTopOf="@+id/screen_network_config_guideline_for_background_theme"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:lottie_autoPlay="true"
-        app:lottie_loop="true"
-        app:lottie_rawRes="@raw/anim_network"
-        tools:src="@drawable/ic_settings" />
+        android:layout_height="match_parent"
+        android:background="?attr/colorBackgroundScreenBody"
+        tools:context=".screens.LoginScreen">
 
-    <com.almarai.alm_ui.AlmEditText
-        android:id="@+id/screen_login_user_name_edit_text"
-        style="@style/EditTextLayoutStyle"
-        android:drawableStart="@drawable/ic_server"
-        android:hint="@string/user_name"
-        android:maxLength="4"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/screen_network_config_guideline_for_background_theme">
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/screen_network_config_guideline_for_background_theme"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.5" />
 
-        <requestFocus />
-    </com.almarai.alm_ui.AlmEditText>
+        <ImageView
+            android:id="@+id/screen_login_background_image"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:contentDescription="@string/image_description_theme_background"
+            android:scaleType="fitXY"
+            android:src="@drawable/ic_other_screens_background"
+            app:layout_constraintBottom_toTopOf="@+id/screen_network_config_guideline_for_background_theme"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
-    <com.almarai.alm_ui.AlmEditText
-        android:id="@+id/screen_login_user_password_edit_text"
-        style="@style/EditTextLayoutStyle"
-        android:drawableStart="@drawable/ic_server"
-        android:hint="@string/user_name"
-        android:inputType="textPassword"
-        android:maxLength="4"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/screen_login_user_name_edit_text" />
+        <TextView
+            android:id="@+id/screen_login_greetings_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_40sdp"
+            android:layout_marginTop="@dimen/_30sdp"
+            android:text="@string/user_greeting"
+            android:textColor="?attr/colorAccent"
+            android:textSize="30sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
-    <TextView
-        android:id="@+id/screen_login_not_same_user_text"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="@dimen/_15sdp"
-        android:text="@string/not_same_user"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@+id/screen_login_button"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        <TextView
+            android:id="@+id/screen_login_user_name_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@{viewModel.userName.isEmpty() ? @string/login : viewModel.userName}"
+            android:textColor="?attr/colorAccent"
+            android:textSize="50sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="@+id/screen_login_greetings_text"
+            app:layout_constraintTop_toBottomOf="@+id/screen_login_greetings_text" />
 
-    <Button
-        android:id="@+id/screen_login_button"
-        style="@style/PrimaryButtonStyle"
-        android:text="@string/button_login"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        <com.airbnb.lottie.LottieAnimationView
+            android:id="@+id/screen_login_animation"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/_80sdp"
+            android:src="@drawable/ic_settings"
+            app:layout_constraintBottom_toTopOf="@+id/screen_network_config_guideline_for_background_theme"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:lottie_autoPlay="true"
+            app:lottie_loop="true"
+            app:lottie_rawRes="@raw/anim_network"
+            tools:src="@drawable/ic_settings" />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/screen_login_user_username_edit_text_layout"
+            style="@style/EditTextLayoutStyle"
+            android:hint="@string/user_name"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/screen_network_config_guideline_for_background_theme"
+            app:startIconDrawable="@drawable/ic_user">
+
+            <com.almarai.alm_ui.AlmEditText
+                android:id="@+id/screen_login_user_username_edit_text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:focusable="@{viewModel.userName.isEmpty() ? true : false}"
+                android:selectAllOnFocus="true"
+                android:text="@{viewModel.userName}"
+                android:textColor="?colorText" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/screen_login_user_password_edit_text_layout"
+            style="@style/EditTextLayoutStyle"
+            android:hint="@string/password"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/screen_login_user_username_edit_text_layout"
+            app:startIconDrawable="@drawable/ic_password">
+
+            <com.almarai.alm_ui.AlmEditText
+                android:id="@+id/screen_login_user_password_edit_text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="textPassword"
+                android:selectAllOnFocus="true"
+                android:textColor="?colorText" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <TextView
+            android:id="@+id/screen_login_not_same_user_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/_30sdp"
+            android:text="@string/not_same_user"
+            android:textStyle="bold"
+            android:layout_marginBottom="@dimen/_10sdp"
+            app:layout_constraintBottom_toTopOf="@+id/screen_login_button"
+            app:layout_constraintEnd_toEndOf="@+id/screen_login_button"
+            app:layout_constraintStart_toStartOf="@+id/screen_login_button" />
+
+        <TextView
+            android:id="@+id/screen_login_logout_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/logout"
+            android:layout_marginStart="@dimen/_5sdp"
+            android:textColor="@color/red"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="@+id/screen_login_not_same_user_text"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/screen_login_not_same_user_text"
+            app:layout_constraintTop_toTopOf="@+id/screen_login_not_same_user_text" />
+
+        <Button
+            android:id="@+id/screen_login_button"
+            style="@style/PrimaryButtonStyle"
+            android:text="@string/button_login"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>
