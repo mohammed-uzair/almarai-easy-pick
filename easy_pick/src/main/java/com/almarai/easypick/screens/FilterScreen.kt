@@ -9,6 +9,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
 import androidx.navigation.fragment.navArgs
@@ -21,6 +22,8 @@ import com.almarai.easypick.utils.BundleKeys
 import com.almarai.easypick.utils.FilterScreenSource
 import com.almarai.easypick.utils.setTitle
 import com.almarai.easypick.view_models.FilterViewModel
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class FilterScreen : Fragment() {
@@ -59,7 +62,7 @@ class FilterScreen : Fragment() {
     private fun init() {
         animateUI()
 
-        addObservers()
+        getBundleArguments()
 
         setOnBackPressListener(object : OnBackPressListener {
             override fun onBackPressed() {
@@ -74,12 +77,14 @@ class FilterScreen : Fragment() {
             }
         })
 
-        getBundleArguments()
-    }
+        addObservers()
 
-    override fun onSaveInstanceState(bundle: Bundle) {
-        bundle.putParcelable(BundleKeys.FILTER_MODEL, viewModel.getFilterModel())
-        super.onSaveInstanceState(bundle)
+        //A little hack for views not adjusting in time, was causing a time miss match errors
+        viewLifecycleOwner.lifecycleScope.launch {
+            delay(300)
+            val filterModel = args.FilterModel
+            if (filterModel != null) viewModel.setFilterModel(filterModel)
+        }
     }
 
     private fun getBundleArguments() {
@@ -88,9 +93,6 @@ class FilterScreen : Fragment() {
             setTitle(R.string.title_filter_products)
         else
             setTitle(R.string.title_filter_routes)
-
-        val filterModel = args.FilterModel
-        if (filterModel != null) viewModel.setFilterModel(filterModel)
     }
 
     private fun animateUI() {
@@ -118,15 +120,40 @@ class FilterScreen : Fragment() {
             Observer { viewModel.toggleSubCategory2(it) })
 
         viewModel.sortOrderAscending.observe(viewLifecycleOwner,
-            Observer { if (it) viewModel.unCheckNoFilter() else if (viewModel.noFilter.value == false) viewModel.checkNoFilterState() })
+            Observer {
+                if (it) {
+                    viewModel.unCheckNoFilter()
+                    viewModel.checkSortWith()
+                } else if (viewModel.noFilter.value == false) viewModel.checkNoFilterState()
+            })
         viewModel.sortOrderDescending.observe(viewLifecycleOwner,
-            Observer { if (it) viewModel.unCheckNoFilter() else if (viewModel.noFilter.value == false) viewModel.checkNoFilterState() })
+            Observer {
+                if (it) {
+                    viewModel.unCheckNoFilter()
+                    viewModel.checkSortWith()
+                } else if (viewModel.noFilter.value == false) viewModel.checkNoFilterState()
+            })
         viewModel.sortWithXNumber.observe(viewLifecycleOwner,
-            Observer { if (it) viewModel.unCheckNoFilter() else if (viewModel.noFilter.value == false) viewModel.checkNoFilterState() })
+            Observer {
+                if (it) {
+                    viewModel.unCheckNoFilter()
+                    viewModel.checkSortIn()
+                } else if (viewModel.noFilter.value == false) viewModel.checkNoFilterState()
+            })
         viewModel.sortWithXDescription.observe(viewLifecycleOwner,
-            Observer { if (it) viewModel.unCheckNoFilter() else if (viewModel.noFilter.value == false) viewModel.checkNoFilterState() })
+            Observer {
+                if (it) {
+                    viewModel.unCheckNoFilter()
+                    viewModel.checkSortIn()
+                } else if (viewModel.noFilter.value == false) viewModel.checkNoFilterState()
+            })
         viewModel.statusServed.observe(viewLifecycleOwner,
-            Observer { if (it) viewModel.unCheckNoFilter() else if (viewModel.noFilter.value == false) viewModel.checkNoFilterState() })
+            Observer {
+                if (it) {
+                    viewModel.unCheckNoFilter()
+                    viewModel.checkSortIn()
+                } else if (viewModel.noFilter.value == false) viewModel.checkNoFilterState()
+            })
         viewModel.filterBySubCategory1Dairy.observe(viewLifecycleOwner,
             Observer { if (it) viewModel.unCheckNoFilter() else if (viewModel.noFilter.value == false) viewModel.checkNoFilterState() })
         viewModel.filterBySubCategory1Poultry.observe(viewLifecycleOwner,
@@ -136,10 +163,6 @@ class FilterScreen : Fragment() {
         viewModel.filterBySubCategory2IPNC.observe(viewLifecycleOwner,
             Observer { if (it) viewModel.unCheckNoFilter() else if (viewModel.noFilter.value == false) viewModel.checkNoFilterState() })
         viewModel.filterBySubCategory2NonIPNC.observe(viewLifecycleOwner,
-            Observer { if (it) viewModel.unCheckNoFilter() else if (viewModel.noFilter.value == false) viewModel.checkNoFilterState() })
-        viewModel.filterBySubCategory2Tc.observe(viewLifecycleOwner,
-            Observer { if (it) viewModel.unCheckNoFilter() else if (viewModel.noFilter.value == false) viewModel.checkNoFilterState() })
-        viewModel.filterBySubCategory2NonTc.observe(viewLifecycleOwner,
             Observer { if (it) viewModel.unCheckNoFilter() else if (viewModel.noFilter.value == false) viewModel.checkNoFilterState() })
         viewModel.customerOnly.observe(viewLifecycleOwner,
             Observer { if (it) viewModel.unCheckNoFilter() else if (viewModel.noFilter.value == false) viewModel.checkNoFilterState() })

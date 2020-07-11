@@ -21,6 +21,7 @@
         <item name="colorSubTitle">@color/baseColorSubTitle</item>
 
         <item name="colorText">@color/baseColorText</item>
+        <item name="colorTextDialog">@color/baseColorTextDialog</item>
         <item name="android:textColorSecondary">@color/baseColorText</item>
         <item name="colorButton">@color/baseColorButton</item>
 
@@ -66,6 +67,7 @@
         <item name="colorSubTitle">@color/darkColorSubTitle</item>
 
         <item name="colorText">@color/darkColorText</item>
+        <item name="colorTextDialog">@color/darkColorTextDialog</item>
         <item name="android:textColorSecondary">@color/darkColorText</item>
 
         <item name="colorHomeMenuIcons">@color/darkColorHomeMenuIcons</item>
@@ -100,6 +102,7 @@
         <item name="colorSubTitle">@color/nightColorSubTitle</item>
 
         <item name="colorText">@color/nightColorText</item>
+        <item name="colorTextDialog">@color/nightColorTextDialog</item>
         <item name="android:textColorSecondary">@color/nightColorText</item>
 
         <item name="colorHomeMenuIcons">@color/nightColorHomeMenuIcons</item>

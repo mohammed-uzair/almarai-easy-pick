@@ -10,5 +10,5 @@ class WebProductsDataSourceImplementation(private val webService: WebService) :
         salesDate: String,
         routeNumber: Int,
         routesPreferences: Int
-    ) = webService.productsApi.getAllProducts()
+    ) = webService.productsApi.getAllProducts(routeNumber)
 }

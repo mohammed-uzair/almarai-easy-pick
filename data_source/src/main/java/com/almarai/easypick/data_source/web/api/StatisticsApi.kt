@@ -6,7 +6,7 @@ import retrofit2.http.Query
 
 interface StatisticsApi {
     //    @GET("sFKTen9b")
-    @GET("Statistics")
+    @GET("statistics")
     suspend fun getStatistics(
         @Query("fromDate") fromDate: Long,
         @Query("toDate") toDate: Long

@@ -37,21 +37,21 @@ fun TextView.bindRouteDescription(route: Route?) {
 fun TextView.bindProductDescription(product: Product?) {
     if (product != null) {
         text = when (APP_SELECTED_LANGUAGE) {
-            AppLanguage.English -> product.itemDescription
-            AppLanguage.Arabic -> product.itemDescriptionArabic
-            AppLanguage.Bangla -> product.itemDescription
-            AppLanguage.Filipino -> product.itemDescription
-            AppLanguage.Hindi -> product.itemDescription
-            AppLanguage.Indonesian -> product.itemDescription
-            AppLanguage.Kannada -> product.itemDescription
-            AppLanguage.Malayalam -> product.itemDescription
-            AppLanguage.Nepali -> product.itemDescription
-            AppLanguage.Pashto -> product.itemDescription
-            AppLanguage.Sinhala -> product.itemDescription
-            AppLanguage.Tamil -> product.itemDescription
-            AppLanguage.Telugu -> product.itemDescription
-            AppLanguage.Urdu -> product.itemDescription
-            AppLanguage.Vietnamese -> product.itemDescription
+            AppLanguage.English -> product.description
+            AppLanguage.Arabic -> product.descriptionArabic
+            AppLanguage.Bangla -> product.description
+            AppLanguage.Filipino -> product.description
+            AppLanguage.Hindi -> product.description
+            AppLanguage.Indonesian -> product.description
+            AppLanguage.Kannada -> product.description
+            AppLanguage.Malayalam -> product.description
+            AppLanguage.Nepali -> product.description
+            AppLanguage.Pashto -> product.description
+            AppLanguage.Sinhala -> product.description
+            AppLanguage.Tamil -> product.description
+            AppLanguage.Telugu -> product.description
+            AppLanguage.Urdu -> product.description
+            AppLanguage.Vietnamese -> product.description
         }.exhaustive
     } else {
         text = ""

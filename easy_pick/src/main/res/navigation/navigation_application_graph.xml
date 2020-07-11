@@ -112,6 +112,9 @@
             android:name="Selected_Route_Number"
             android:defaultValue="0"
             app:argType="integer" />
+        <action
+            android:id="@+id/action_productListScreen_to_productDetailsDialog"
+            app:destination="@id/productDetailsDialog" />
     </fragment>
     <fragment
         android:id="@+id/homeScreen"
@@ -192,7 +195,7 @@
             app:argType="com.almarai.easypick.utils.FilterScreenSource" />
         <argument
             android:name="Filter_Model"
-            app:argType="com.almarai.data.easy_pick_models.filter.Filter"
+            app:argType="com.almarai.data.easy_pick_models.filter.Filters"
             app:nullable="true" />
     </fragment>
     <fragment
@@ -204,4 +207,9 @@
         android:id="@+id/settingsScreen"
         android:name="com.almarai.easypick.screens.SettingsScreen"
         android:label="SettingsScreen" />
+    <dialog
+        android:id="@+id/productDetailsDialog"
+        android:name="com.almarai.easypick.screens.ProductDetailsDialog"
+        android:label="ProductDetailsDialog"
+        tools:layout="@layout/dialog_product_detail" />
 </navigation>

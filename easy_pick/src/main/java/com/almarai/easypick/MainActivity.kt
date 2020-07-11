@@ -3,6 +3,8 @@ package com.almarai.easypick
 import android.content.Context
 import android.content.SharedPreferences
 import android.content.res.Configuration
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
 import android.os.Build
 import android.os.Bundle
 import android.view.MenuItem
@@ -48,6 +50,11 @@ class MainActivity : AppCompatActivity(), KoinComponent {
         hideViewStateAlert()
 
         backPressListener?.onBackPressed() ?: super.onBackPressed()
+    }
+
+    override fun attachBaseContext(newContext: Context) {
+        //Delegate to super to apply
+        super.attachBaseContext(setAppLanguage(newContext))
     }
 
     override fun onWindowFocusChanged(hasFocus: Boolean) {

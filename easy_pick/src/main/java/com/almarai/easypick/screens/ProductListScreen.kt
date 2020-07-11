@@ -6,6 +6,7 @@ import android.view.animation.AnimationUtils
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
 import androidx.navigation.fragment.navArgs
@@ -13,7 +14,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.almarai.data.easy_pick_models.Product
 import com.almarai.data.easy_pick_models.Result
 import com.almarai.data.easy_pick_models.RouteStatus
-import com.almarai.data.easy_pick_models.filter.Filter
+import com.almarai.data.easy_pick_models.filter.Filters
 import com.almarai.data.easy_pick_models.util.exhaustive
 import com.almarai.easypick.R
 import com.almarai.easypick.adapters.item.ProductsAdapter
@@ -22,9 +23,12 @@ import com.almarai.easypick.extensions.Alert
 import com.almarai.easypick.extensions.hideViewStateAlert
 import com.almarai.easypick.extensions.showViewStateAlert
 import com.almarai.easypick.utils.BundleKeys
+import com.almarai.easypick.utils.FilterFunnel
 import com.almarai.easypick.utils.FilterScreenSource
 import com.almarai.easypick.view_models.ProductListViewModel
 import com.google.android.material.transition.MaterialContainerTransform
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class ProductListScreen : Fragment() {
@@ -33,6 +37,7 @@ class ProductListScreen : Fragment() {
     private val adapter by lazy { ProductsAdapter() }
     private val args: ProductListScreenArgs by navArgs()
     private lateinit var screenProductBinding: ScreenProductBinding
+    private lateinit var products: List<Product>
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -73,7 +78,7 @@ class ProductListScreen : Fragment() {
         setHasOptionsMenu(true)
 
         animateUI()
-        adapter.setValues(listOf())
+        adapter.products = listOf()
 
         productListViewModel.products.observe(viewLifecycleOwner, Observer {
             it?.let { result ->
@@ -89,16 +94,23 @@ class ProductListScreen : Fragment() {
 
         val savedStateHandle = navController.currentBackStackEntry?.savedStateHandle
 
-        savedStateHandle?.getLiveData<Filter>(BundleKeys.FILTER_MODEL)?.observe(
+        savedStateHandle?.getLiveData<Filters>(BundleKeys.FILTER_MODEL)?.observe(
             viewLifecycleOwner,
             Observer { result ->
-                productListViewModel.filterModel = result
+                productListViewModel.filtersModel = result
 
                 //Filter the list
-
+                FilterFunnel(adapter, result).filterProducts(products)
 
                 //Notify the adapter
                 adapter.notifyDataSetChanged()
+
+                //The filter list might take some time to filter, so add some lag to it
+                viewLifecycleOwner.lifecycleScope.launch {
+                    delay(700)
+                    productListViewModel.setRouteServiceDetails(adapter.products)
+                    productListViewModel.isFiltered.value = products.size != adapter.products.size
+                }
             })
     }
 
@@ -108,15 +120,15 @@ class ProductListScreen : Fragment() {
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
-            R.id.menu_route_action_filter -> {
+            R.id.menu_product_action_filter -> {
                 val action = ProductListScreenDirections
                     .actionProductListScreenToFilterScreen(
                         FilterScreenSource.ProductListScreen,
-                        productListViewModel.filterModel
+                        productListViewModel.filtersModel
                     )
                 navController.navigate(action)
             }
-            R.id.menu_item_action_save -> {
+            R.id.menu_product_action_save -> {
                 val saveStateHandle = navController.previousBackStackEntry?.savedStateHandle
 
                 //Set the result
@@ -142,7 +154,8 @@ class ProductListScreen : Fragment() {
         //Hide the alert
         hideViewStateAlert()
 
-        adapter.setValues(list)
+        products = list
+        adapter.products = list
         adapter.notifyDataSetChanged()
 
         productListViewModel.setRouteServiceDetails(list)
@@ -156,6 +169,7 @@ class ProductListScreen : Fragment() {
 
         screenProductBinding.screenProductTotalItemsLabel.startAnimation(topToBottom)
         screenProductBinding.screenProductTotalItemsText.startAnimation(topToBottom)
+        screenProductBinding.screenProductFiltered.startAnimation(topToBottom)
         screenProductBinding.screenProductPickedLabel.startAnimation(topToBottom)
         screenProductBinding.screenProductPickedText.startAnimation(topToBottom)
 

@@ -7,7 +7,7 @@ import androidx.lifecycle.viewModelScope
 import com.almarai.data.easy_pick_models.Result
 import com.almarai.data.easy_pick_models.Route
 import com.almarai.data.easy_pick_models.RouteStatus
-import com.almarai.data.easy_pick_models.filter.Filter
+import com.almarai.data.easy_pick_models.filter.Filters
 import com.almarai.data.easy_pick_models.util.ERROR_OCCURRED
 import com.almarai.data.easy_pick_models.util.exhaustive
 import com.almarai.repository.api.RoutesRepository
@@ -17,11 +17,12 @@ import kotlinx.coroutines.launch
 class RouteSelectionViewModel(private val repository: RoutesRepository) : ViewModel() {
     private val _routes = MutableLiveData<Result<List<Route>>>()
     val routes: LiveData<Result<List<Route>>> = _routes
-    internal var filterModel: Filter? = null
+    internal var filtersModel: Filters? = null
     val totalRoutes: MutableLiveData<Int> = MutableLiveData(0)
     val routesServed: MutableLiveData<Int> = MutableLiveData(0)
     val routesServing: MutableLiveData<Int> = MutableLiveData(0)
     val notServed: MutableLiveData<Int> = MutableLiveData(0)
+    val isFiltered = MutableLiveData(false)
 
     init {
         viewModelScope.launch(Dispatchers.IO) {

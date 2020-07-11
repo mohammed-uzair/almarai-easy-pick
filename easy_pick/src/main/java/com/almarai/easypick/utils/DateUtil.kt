@@ -182,4 +182,16 @@ object DateUtil {
 
         return calender.timeInMillis
     }
+
+    fun getDaysMonthsYears() {
+        val startDate: Calendar = GregorianCalendar(2019, Calendar.MAY, 19)
+        val endDate: Calendar = GregorianCalendar()
+        endDate.time = Date()
+
+        val yearsInBetween = endDate[Calendar.YEAR] - startDate[Calendar.YEAR]
+        val monthsDiff = endDate[Calendar.MONTH] - startDate[Calendar.MONTH]
+
+        val months = yearsInBetween * 12 + monthsDiff.toLong()
+        val years = yearsInBetween.toLong()
+    }
 }

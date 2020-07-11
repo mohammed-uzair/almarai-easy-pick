@@ -12,14 +12,14 @@
         tools:ignore="AlwaysShowAction" />
 
     <item
-        android:id="@+id/menu_item_action_filter"
+        android:id="@+id/menu_product_action_filter"
         android:icon="@drawable/ic_filter"
         android:title="@string/menu_title_filter"
         app:showAsAction="always|collapseActionView"
         tools:ignore="AlwaysShowAction" />
 
     <item
-        android:id="@+id/menu_item_action_save"
+        android:id="@+id/menu_product_action_save"
         android:icon="@drawable/ic_save"
         android:orderInCategory="3"
         android:title="@string/menu_title_save"

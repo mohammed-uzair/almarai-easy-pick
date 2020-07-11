@@ -131,10 +131,10 @@ class StatisticsScreen : Fragment(R.layout.screen_statistics) {
             is ChartType.Pie -> setPieChartAttributes()
         }.exhaustive
 
-        screenStatisticsBinding.screenStatisticsChartLayout.visibility = View.VISIBLE
+        screenStatisticsBinding.screenStatisticsChart.visibility = View.VISIBLE
 
         //Animate and show the chart layout
-        screenStatisticsBinding.screenStatisticsChartLayout.startAnimation(
+        screenStatisticsBinding.screenStatisticsChart.startAnimation(
             AnimationUtils.loadAnimation(
                 activity,
                 R.anim.card_bottom_up
@@ -147,14 +147,14 @@ class StatisticsScreen : Fragment(R.layout.screen_statistics) {
 //
 //        }
         //Close the chart in animation
-        screenStatisticsBinding.screenStatisticsChartLayout.startAnimation(
+        screenStatisticsBinding.screenStatisticsChart.startAnimation(
             AnimationUtils.loadAnimation(
                 activity,
                 R.anim.card_up_bottom
             )
         )
 
-        screenStatisticsBinding.screenStatisticsChartLayout.visibility = View.GONE
+        screenStatisticsBinding.screenStatisticsChart.visibility = View.GONE
 
         //Clear all the chart data
         screenStatisticsBinding.screenStatisticsChart.invalidate()
@@ -214,6 +214,7 @@ class StatisticsScreen : Fragment(R.layout.screen_statistics) {
         screenStatisticsBinding.screenStatisticsChart.description.isEnabled = false
         screenStatisticsBinding.screenStatisticsChart.setHardwareAccelerationEnabled(true)
         screenStatisticsBinding.screenStatisticsChart.axisRight.isEnabled = false
+        screenStatisticsBinding.screenStatisticsChart.setExtraOffsets(5f, 5f, 15f, 20f)
 
         //Set the data
         screenStatisticsBinding.screenStatisticsChart.data = lineData

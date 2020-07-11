@@ -6,6 +6,6 @@ import retrofit2.http.GET
 
 interface RoutesApi {
 //    @GET("B48qYZYN")
-    @GET("Routes")
+    @GET("routes")
     suspend fun getAllRoutes(): List<Route>
 }

@@ -3,30 +3,23 @@ package com.almarai.easypick.adapters.item
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.view.animation.AnimationUtils
-import android.widget.Toast
 import androidx.databinding.DataBindingUtil
+import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.almarai.data.easy_pick_models.Product
 import com.almarai.easypick.R
 import com.almarai.easypick.databinding.ItemProductBinding
 
 class ProductsAdapter : RecyclerView.Adapter<ProductsAdapter.ViewHolder>() {
-    private var list: List<Product>? = null
-
-    fun setValues(list: List<Product>) {
-        this.list = list
-    }
+    lateinit var products: List<Product>
 
     inner class ViewHolder(private val productBinding: ItemProductBinding) :
         RecyclerView.ViewHolder(productBinding.root) {
         init {
             productBinding.root.setOnClickListener {
-                Toast.makeText(
-                    it.context,
-                    "Product Clicked ${productBinding.itemProductNumberText.text}",
-                    Toast.LENGTH_SHORT
-                )
-                    .show()
+                //Load the product details dialog
+                it.findNavController()
+                    .navigate(R.id.action_productListScreen_to_productDetailsDialog)
             }
         }
 
@@ -56,7 +49,7 @@ class ProductsAdapter : RecyclerView.Adapter<ProductsAdapter.ViewHolder>() {
             )
         )
 
-    override fun getItemCount() = list!!.size
+    override fun getItemCount() = products.size
     override fun onBindViewHolder(holder: ViewHolder, position: Int) =
-        holder.setData(list?.get(holder.layoutPosition))
+        holder.setData(products[holder.layoutPosition])
 }

@@ -12,11 +12,7 @@ import com.almarai.easypick.databinding.ItemRouteBinding
 import com.almarai.easypick.screens.RouteSelectionScreenDirections
 
 class RoutesAdapter : RecyclerView.Adapter<RoutesAdapter.ViewHolder>() {
-    private var list: List<Route>? = null
-
-    fun setValues(list: List<Route>) {
-        this.list = list
-    }
+    lateinit var routes: List<Route>
 
     inner class ViewHolder(private val routeBinding: ItemRouteBinding) :
         RecyclerView.ViewHolder(routeBinding.root) {
@@ -58,6 +54,6 @@ class RoutesAdapter : RecyclerView.Adapter<RoutesAdapter.ViewHolder>() {
             )
         )
 
-    override fun getItemCount() = list!!.size
-    override fun onBindViewHolder(holder: ViewHolder, position: Int) = holder.setData(list?.get(holder.layoutPosition))
+    override fun getItemCount() = routes!!.size
+    override fun onBindViewHolder(holder: ViewHolder, position: Int) = holder.setData(routes?.get(holder.layoutPosition))
 }

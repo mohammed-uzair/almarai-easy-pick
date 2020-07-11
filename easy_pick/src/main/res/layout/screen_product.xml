@@ -1,8 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+
+        <import type="android.view.View" />
 
         <variable
             name="viewModel"
@@ -10,7 +13,7 @@
 
     </data>
 
-    <androidx.constraintlayout.widget.ConstraintLayout xmlns:tools="http://schemas.android.com/tools"
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/screen_product_root"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -33,8 +36,10 @@
             android:src="@drawable/ic_other_screens_background"
             app:layout_constraintBottom_toTopOf="@id/screen_product_guideline_for_background_theme"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="1.0" />
 
         <TextView
             android:id="@+id/screen_product_total_items_label"
@@ -62,6 +67,17 @@
             app:layout_constraintBaseline_toBaselineOf="@+id/screen_product_total_items_label"
             app:layout_constraintStart_toEndOf="@id/screen_product_total_items_label"
             tools:text="347" />
+
+        <TextView
+            android:id="@+id/screen_product_filtered"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/_5sdp"
+            android:text="F"
+            android:textColor="?colorTitle"
+            android:visibility="@{viewModel.isFiltered ? View.VISIBLE : View.GONE}"
+            app:layout_constraintBottom_toBottomOf="@+id/screen_product_total_items_text"
+            app:layout_constraintStart_toEndOf="@+id/screen_product_total_items_text" />
 
         <TextView
             android:id="@+id/screen_product_picked_text"

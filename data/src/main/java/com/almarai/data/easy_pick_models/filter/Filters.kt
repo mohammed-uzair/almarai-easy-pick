@@ -4,8 +4,8 @@ import android.os.Parcelable
 import kotlinx.android.parcel.Parcelize
 
 @Parcelize
-data class Filter(
-    val noFilter: Boolean = true,
+data class Filters(
+    val noFilter: Boolean = false,
     val sortOrderAscending: Boolean = false,
     val sortOrderDescending: Boolean = false,
     val sortWithXNumber: Boolean = false,
@@ -18,8 +18,6 @@ data class Filter(
     val filterByAllSubCategory2: Boolean = false,
     val filterBySubCategory2IPNC: Boolean = false,
     val filterBySubCategory2NonIPNC: Boolean = false,
-    val filterBySubCategory2Tc: Boolean = false,
-    val filterBySubCategory2NonTc: Boolean = false,
     val customerOnly: Boolean = false,
     val allowMultipleFilters: Boolean = false,
     val persistFilters: Boolean = false

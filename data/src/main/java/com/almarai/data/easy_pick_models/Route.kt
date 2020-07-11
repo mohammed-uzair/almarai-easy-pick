@@ -50,8 +50,6 @@ enum class GroupType {
     Dairy,
     IPNC,
     NonIPNC,
-    Tc,
-    NonTc,
     Customer
 }
 

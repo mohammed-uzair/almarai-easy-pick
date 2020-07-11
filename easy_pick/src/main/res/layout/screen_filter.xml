@@ -241,55 +241,29 @@
                     app:layout_constraintTop_toBottomOf="@id/screen_filter_view3" />
 
                 <CheckBox
-                    android:id="@+id/screen_filter_filter_by_tc_checkbox"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/_10sdp"
-                    android:checked="@={viewModel.filterBySubCategory2Tc}"
-                    android:text="@string/tc"
-                    android:textColor="?attr/colorText"
-                    app:layout_constraintEnd_toEndOf="@+id/screen_filter_filter_by_non_tc_checkbox"
-                    app:layout_constraintHorizontal_chainStyle="spread_inside"
-                    app:layout_constraintStart_toStartOf="@+id/screen_filter_filter_by_non_tc_checkbox"
-                    app:layout_constraintTop_toBottomOf="@id/screen_filter_filter_by_all_route_switch" />
-
-                <CheckBox
                     android:id="@+id/screen_filter_filter_by_ipnc_checkbox"
-                    android:layout_width="0dp"
+                    android:layout_width="158dp"
                     android:layout_height="wrap_content"
                     android:checked="@={viewModel.filterBySubCategory2IPNC}"
                     android:text="@string/ipnc"
                     android:textColor="?attr/colorText"
-                    app:layout_constraintBottom_toBottomOf="@id/screen_filter_filter_by_tc_checkbox"
-                    app:layout_constraintEnd_toEndOf="@+id/screen_filter_filter_by_non_ipnc_checkbox"
-                    app:layout_constraintStart_toStartOf="@+id/screen_filter_filter_by_non_ipnc_checkbox"
-                    app:layout_constraintTop_toTopOf="@id/screen_filter_filter_by_tc_checkbox" />
+                    app:layout_constraintBaseline_toBaselineOf="@+id/screen_filter_filter_by_non_ipnc_checkbox"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.5"
+                    app:layout_constraintStart_toEndOf="@+id/screen_filter_filter_by_non_ipnc_checkbox" />
 
                 <CheckBox
                     android:id="@+id/screen_filter_filter_by_non_ipnc_checkbox"
-                    android:layout_width="wrap_content"
+                    android:layout_width="157dp"
                     android:layout_height="wrap_content"
                     android:checked="@={viewModel.filterBySubCategory2NonIPNC}"
                     android:text="@string/non_ipnc"
                     android:textColor="?attr/colorText"
-                    app:layout_constraintEnd_toStartOf="@id/screen_filter_filter_by_non_tc_checkbox"
+                    app:layout_constraintEnd_toStartOf="@+id/screen_filter_filter_by_ipnc_checkbox"
                     app:layout_constraintHorizontal_bias="0.5"
                     app:layout_constraintHorizontal_chainStyle="spread_inside"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/screen_filter_filter_by_tc_checkbox" />
-
-                <CheckBox
-                    android:id="@+id/screen_filter_filter_by_non_tc_checkbox"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:checked="@={viewModel.filterBySubCategory2NonTc}"
-                    android:text="@string/non_tc"
-                    android:textColor="?attr/colorText"
-                    app:layout_constraintBottom_toBottomOf="@id/screen_filter_filter_by_non_ipnc_checkbox"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.5"
-                    app:layout_constraintStart_toEndOf="@id/screen_filter_filter_by_non_ipnc_checkbox"
-                    app:layout_constraintTop_toTopOf="@id/screen_filter_filter_by_non_ipnc_checkbox" />
+                    app:layout_constraintTop_toBottomOf="@+id/screen_filter_filter_by_all_route_switch" />
 
                 <View
                     android:id="@+id/screen_filter_view4"

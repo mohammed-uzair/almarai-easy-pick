@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <data>
 
@@ -10,7 +11,7 @@
 
     </data>
 
-    <androidx.constraintlayout.widget.ConstraintLayout xmlns:tools="http://schemas.android.com/tools"
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/_2sdp">
@@ -27,65 +28,76 @@
             android:paddingBottom="@dimen/_5sdp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="1.0">
 
             <TextView
                 android:id="@+id/item_product_number_text"
                 style="@style/AlmTextSingleLineBold"
-                android:text="@{String.valueOf(product.itemNumber)}"
+                android:text="@{String.valueOf(product.number)}"
                 android:textSize="18sp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 tools:text="124406" />
 
-            <View
-                android:id="@+id/item_product_splitter"
-                android:layout_width="@dimen/_8sdp"
-                android:layout_height="@dimen/_2sdp"
-                android:layout_marginStart="@dimen/_8sdp"
-                android:background="?colorText"
-                app:layout_constraintBottom_toBottomOf="@+id/item_product_number_text"
-                app:layout_constraintStart_toEndOf="@+id/item_product_number_text"
-                app:layout_constraintTop_toTopOf="@+id/item_product_number_text" />
+            <!--            <View-->
+            <!--                android:id="@+id/item_product_splitter"-->
+            <!--                android:layout_width="@dimen/_8sdp"-->
+            <!--                android:layout_height="@dimen/_2sdp"-->
+            <!--                android:layout_marginStart="@dimen/_8sdp"-->
+            <!--                android:background="?colorText"-->
+            <!--                app:layout_constraintBottom_toBottomOf="@+id/item_product_number_text"-->
+            <!--                app:layout_constraintStart_toEndOf="@+id/item_product_number_text"-->
+            <!--                app:layout_constraintTop_toTopOf="@+id/item_product_number_text" />-->
 
             <TextView
                 android:id="@+id/item_product_description_text"
                 style="@style/AlmTextSingleLineBold"
-                android:layout_marginStart="@dimen/_8sdp"
-                android:textSize="18sp"
-                app:productDescription="@{product}"
+                android:layout_marginStart="@dimen/_10sdp"
+                android:textSize="16sp"
+                android:textStyle="normal"
                 app:layout_constraintBaseline_toBaselineOf="@+id/item_product_number_text"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintStart_toEndOf="@+id/item_product_splitter"
-                tools:text="My Product Name" />
+                app:layout_constraintStart_toEndOf="@+id/item_product_number_text"
+                app:productDescription="@{product}"
+                tools:text="Double chocolate milk shake 500ml" />
 
             <TextView
                 android:id="@+id/item_product_truck_stock"
                 style="@style/AlmTextSingleLineBold"
-                android:layout_marginTop="@dimen/_8sdp"
+                android:layout_width="wrap_content"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:drawablePadding="@dimen/_10sdp"
                 android:text="@{product.truckStock}"
-                app:layout_constraintStart_toStartOf="@+id/item_product_number_text"
+                app:layout_constraintEnd_toStartOf="@+id/item_product_fresh_load"
+                app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/item_product_number_text"
                 tools:text="12/21" />
 
             <TextView
                 android:id="@+id/item_product_fresh_load"
                 style="@style/AlmTextSingleLineBold"
-                android:layout_marginStart="@dimen/_16sdp"
+                android:layout_width="wrap_content"
+                android:drawablePadding="@dimen/_10sdp"
                 android:gravity="end"
                 android:text="@{product.freshLoad}"
                 app:layout_constraintBaseline_toBaselineOf="@+id/item_product_truck_stock"
+                app:layout_constraintEnd_toStartOf="@+id/item_product_total_stock"
+                app:layout_constraintHorizontal_bias="0.5"
                 app:layout_constraintStart_toEndOf="@+id/item_product_truck_stock"
                 tools:text="112/2" />
 
             <TextView
                 android:id="@+id/item_product_total_stock"
                 style="@style/AlmTextSingleLineBold"
+                android:layout_width="wrap_content"
                 android:layout_marginStart="@dimen/_16sdp"
+                android:drawablePadding="@dimen/_10sdp"
                 android:text="@{product.totalStock}"
                 app:layout_constraintBaseline_toBaselineOf="@+id/item_product_fresh_load"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.5"
                 app:layout_constraintStart_toEndOf="@+id/item_product_fresh_load"
                 tools:text="21/10" />
 
@@ -96,12 +108,13 @@
             android:layout_width="@dimen/_22sdp"
             android:layout_height="@dimen/_22sdp"
             android:layout_marginStart="@dimen/_5sdp"
-            tools:src="@drawable/ic_status"
             android:layout_marginTop="@dimen/_5sdp"
             android:contentDescription="@string/image_description_status_route"
-            app:productStatus="@{product.status}"
+            android:src="@drawable/ic_status"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            app:productStatus="@{product.status}"
+            tools:src="@drawable/ic_status" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

@@ -8,6 +8,6 @@ interface WebProductsDataSource {
         depotCode: Int,
         salesDate: String,
         routeNumber: Int,
-        routesPreferences: Int = 0
+        routesPreferences: Int
     ):List<Product>
 }

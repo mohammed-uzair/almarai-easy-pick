@@ -70,6 +70,7 @@
             android:layout_marginStart="@dimen/_5sdp"
             android:layout_marginTop="@dimen/_4sdp"
             android:contentDescription="@string/image_description_status_route"
+            android:src="@drawable/ic_status"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:routeStatus="@{route.serviceCurrentStatus}"

@@ -66,6 +66,7 @@
 
     <!--region Images Descriptions-->
     <string name="image_description_launch_background">Launch Screen Background</string>
+    <string name="image_description_filtered_list">Filtered List</string>
     <string name="image_description_theme_background">Theme Background</string>
     <string name="image_description_status_route">Route Status</string>
     <string name="image_description_status_item">Item Picked Status</string>

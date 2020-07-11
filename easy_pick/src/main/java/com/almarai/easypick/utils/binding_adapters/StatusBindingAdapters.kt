@@ -15,17 +15,17 @@ fun ImageView.bindRouteStatus(status: RouteStatus) {
     when (status) {
         is RouteStatus.NotServed -> ImageViewCompat.setImageTintList(
             this, ColorStateList.valueOf(
-                ContextCompat.getColor(this.context, R.color.green)
+                ContextCompat.getColor(context, R.color.green)
             )
         )
         is RouteStatus.Serving -> ImageViewCompat.setImageTintList(
             this, ColorStateList.valueOf(
-                ContextCompat.getColor(this.context, R.color.blue)
+                ContextCompat.getColor(context, R.color.blue)
             )
         )
         is RouteStatus.Served -> ImageViewCompat.setImageTintList(
             this, ColorStateList.valueOf(
-                ContextCompat.getColor(this.context, R.color.red)
+                ContextCompat.getColor(context, R.color.red)
             )
         )
     }.exhaustive
@@ -36,12 +36,12 @@ fun ImageView.bindProductStatus(status: ProductStatus) {
     when (status) {
         is ProductStatus.Picked -> ImageViewCompat.setImageTintList(
             this, ColorStateList.valueOf(
-                ContextCompat.getColor(this.context, R.color.green)
+                ContextCompat.getColor(context, R.color.blue)
             )
         )
         is ProductStatus.NotPicked -> ImageViewCompat.setImageTintList(
             this, ColorStateList.valueOf(
-                ContextCompat.getColor(this.context, R.color.blue)
+                ContextCompat.getColor(context, R.color.green)
             )
         )
     }.exhaustive

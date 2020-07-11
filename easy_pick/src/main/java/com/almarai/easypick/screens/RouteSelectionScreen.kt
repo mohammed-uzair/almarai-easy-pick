@@ -6,6 +6,7 @@ import android.view.animation.AnimationUtils
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -13,7 +14,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.almarai.data.easy_pick_models.Result
 import com.almarai.data.easy_pick_models.Route
 import com.almarai.data.easy_pick_models.RouteStatus
-import com.almarai.data.easy_pick_models.filter.Filter
+import com.almarai.data.easy_pick_models.filter.Filters
 import com.almarai.data.easy_pick_models.util.exhaustive
 import com.almarai.easypick.R
 import com.almarai.easypick.adapters.route.RoutesAdapter
@@ -22,8 +23,11 @@ import com.almarai.easypick.extensions.Alert
 import com.almarai.easypick.extensions.hideViewStateAlert
 import com.almarai.easypick.extensions.showViewStateAlert
 import com.almarai.easypick.utils.BundleKeys
+import com.almarai.easypick.utils.FilterFunnel
 import com.almarai.easypick.utils.FilterScreenSource
 import com.almarai.easypick.view_models.RouteSelectionViewModel
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class RouteSelectionScreen : Fragment() {
@@ -31,6 +35,7 @@ class RouteSelectionScreen : Fragment() {
     private lateinit var navController: NavController
     private val adapter by lazy { RoutesAdapter() }
     private lateinit var screenRouteSelectionBinding: ScreenRouteSelectionBinding
+    private lateinit var routes: List<Route>
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -62,12 +67,15 @@ class RouteSelectionScreen : Fragment() {
 
         animateUI()
 
-        adapter.setValues(listOf())
+        adapter.routes = listOf()
 
         routesViewModel.routes.observe(viewLifecycleOwner, Observer {
             it?.let { result ->
                 when (result) {
-                    is Result.Fetching -> showViewStateAlert(Alert.Loading, getString(R.string.no_data_available))
+                    is Result.Fetching -> showViewStateAlert(
+                        Alert.Loading,
+                        getString(R.string.no_data_available)
+                    )
                     is Result.Success -> showDataUi(result.data)
                     is Result.Error -> showViewStateAlert(Alert.Error)
                 }.exhaustive
@@ -86,16 +94,23 @@ class RouteSelectionScreen : Fragment() {
                 if (position != RecyclerView.NO_POSITION) adapter.notifyItemChanged(position)
             })
 
-        savedStateHandle?.getLiveData<Filter>(BundleKeys.FILTER_MODEL)?.observe(
+        savedStateHandle?.getLiveData<Filters>(BundleKeys.FILTER_MODEL)?.observe(
             viewLifecycleOwner,
             Observer { result ->
-                routesViewModel.filterModel = result
+                routesViewModel.filtersModel = result
 
                 //Filter the list
-
+                FilterFunnel(adapter, result).filterRoutes(routes)
 
                 //Notify the adapter
                 adapter.notifyDataSetChanged()
+
+                //The filter list might take some time to filter, so add some lag to it
+                viewLifecycleOwner.lifecycleScope.launch {
+                    delay(700)
+                    routesViewModel.setRouteServiceDetails(adapter.routes)
+                    routesViewModel.isFiltered.value = routes.size != adapter.routes.size
+                }
             })
     }
 
@@ -109,7 +124,7 @@ class RouteSelectionScreen : Fragment() {
                 val action = RouteSelectionScreenDirections
                     .actionRouteSelectionScreenToFilterScreen(
                         FilterScreenSource.RouteSelectionScreenScreen,
-                        routesViewModel.filterModel
+                        routesViewModel.filtersModel
                     )
                 navController.navigate(action)
             }
@@ -128,7 +143,8 @@ class RouteSelectionScreen : Fragment() {
         //Hide the alert
         hideViewStateAlert()
 
-        adapter.setValues(list)
+        routes = list
+        adapter.routes = list
         adapter.notifyDataSetChanged()
 
         routesViewModel.setRouteServiceDetails(list)
@@ -142,6 +158,7 @@ class RouteSelectionScreen : Fragment() {
 
         screenRouteSelectionBinding.screenRouteSelectionServicedLabel.startAnimation(topToBottom)
         screenRouteSelectionBinding.screenRouteSelectionServicedText.startAnimation(topToBottom)
+        screenRouteSelectionBinding.screenProductFiltered.startAnimation(topToBottom)
         screenRouteSelectionBinding.screenRouteSelectionServingLabel.startAnimation(topToBottom)
         screenRouteSelectionBinding.screenRouteSelectionServingText.startAnimation(topToBottom)
 

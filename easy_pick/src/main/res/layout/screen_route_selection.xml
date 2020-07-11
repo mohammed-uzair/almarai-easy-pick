@@ -5,6 +5,8 @@
 
     <data>
 
+        <import type="android.view.View" />
+
         <variable
             name="viewModel"
             type="com.almarai.easypick.view_models.RouteSelectionViewModel" />
@@ -62,6 +64,17 @@
             app:layout_constraintBaseline_toBaselineOf="@+id/screen_route_selection_serviced_label"
             app:layout_constraintStart_toEndOf="@id/screen_route_selection_serviced_label"
             tools:text="47" />
+
+        <TextView
+            android:id="@+id/screen_product_filtered"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/_5sdp"
+            android:text="F"
+            android:textColor="?colorTitle"
+            android:visibility="@{viewModel.isFiltered ? View.VISIBLE : View.GONE}"
+            app:layout_constraintBottom_toBottomOf="@+id/screen_route_selection_serviced_text"
+            app:layout_constraintStart_toEndOf="@+id/screen_route_selection_serviced_text" />
 
         <TextView
             android:id="@+id/screen_route_selection_serving_text"
