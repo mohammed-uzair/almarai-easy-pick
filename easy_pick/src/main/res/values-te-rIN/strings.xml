@@ -35,7 +35,7 @@
     <string name="image_description_launch_background">వాల్‌పేపర్‌ను ఆన్ చేయండి</string>
     <string name="image_description_theme_background">థీమ్ నేపథ్యం</string>
     <string name="image_description_status_route">ట్రాక్ స్థానం</string>
-    <string name="image_description_status_item">అంశం ఎంపిక యొక్క స్థితి</string>
+    <string name="image_description_status_product">అంశం ఎంపిక యొక్క స్థితి</string>
     <string name="image_description_back_button">వెనుక బటన్ యొక్క చిత్రం</string>
     <string name="server_ip">IP సర్వర్</string>
     <string name="server_port">సర్వర్ పోర్ట్</string>

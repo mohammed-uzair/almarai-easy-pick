@@ -35,7 +35,7 @@
     <string name="image_description_launch_background">वॉलपेपर चालू करें</string>
     <string name="image_description_theme_background">थीम पृष्ठभूमि</string>
     <string name="image_description_status_route">ट्रैक की स्थिति</string>
-    <string name="image_description_status_item">आइटम चयन की स्थिति</string>
+    <string name="image_description_status_product">आइटम चयन की स्थिति</string>
     <string name="image_description_back_button">बैक बटन की छवि</string>
     <string name="server_ip">आईपी सर्वर</string>
     <string name="server_port">सर्वर पोर्ट</string>

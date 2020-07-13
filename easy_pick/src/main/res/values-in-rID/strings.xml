@@ -35,7 +35,7 @@
     <string name="image_description_launch_background">Nyalakan wallpaper</string>
     <string name="image_description_theme_background">Latar belakang tema</string>
     <string name="image_description_status_route">Lacak posisi</string>
-    <string name="image_description_status_item">Status pemilihan barang</string>
+    <string name="image_description_status_product">Status pemilihan barang</string>
     <string name="image_description_back_button">Gambar tombol kembali</string>
     <string name="server_ip">Server IP</string>
     <string name="server_port">Port server</string>

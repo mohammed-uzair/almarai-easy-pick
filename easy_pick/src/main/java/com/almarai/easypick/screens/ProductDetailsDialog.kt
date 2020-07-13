@@ -4,26 +4,47 @@ import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.view.*
+import androidx.appcompat.widget.SearchView
+import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.DialogFragment
-import androidx.fragment.app.Fragment
+import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.navArgs
+import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.almarai.business.CratesPieces
+import com.almarai.data.easy_pick_models.Product
+import com.almarai.data.easy_pick_models.ProductStatus
 import com.almarai.easypick.R
+import com.almarai.easypick.adapters.item.ProductsAdapter
+import com.almarai.easypick.databinding.DialogProductDetailBinding
+import com.almarai.easypick.extensions.hideKeyboard
 import com.almarai.easypick.extensions.positionDialogAtBottom
+import com.almarai.easypick.utils.AlertTones.playTone
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 
 
-class ProductDetailsDialog : DialogFragment() {
-    private var fragment: Fragment? = null
-    private var recyclerView: RecyclerView? = null
+class ProductDetailsDialog(private val productsAdapter: ProductsAdapter) : DialogFragment(),
+    View.OnKeyListener {
     private var indexPos = 0
-    private lateinit var viewq: View
-//    private var customerInvoiceAdapter_asrm: SalesAdapterDefault? = null
+    private val args: ProductDetailsDialogArgs by navArgs()
+    private lateinit var products: List<Product>
+    private lateinit var dialogProductDetailsBinding: DialogProductDetailBinding
 
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
+        inflater: LayoutInflater,
+        container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        viewq = inflater.inflate(R.layout.dialog_product_detail, container)
-        return viewq
+        dialogProductDetailsBinding =
+            DataBindingUtil.inflate(inflater, R.layout.dialog_product_detail, container, false)
+        dialogProductDetailsBinding.apply {
+            lifecycleOwner = this@ProductDetailsDialog
+            dialogProductDetailsBinding.product = Product()
+            dialogProductDetailsBinding.productDialog = this@ProductDetailsDialog
+        }
+
+        return dialogProductDetailsBinding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -37,15 +58,10 @@ class ProductDetailsDialog : DialogFragment() {
 
         //Avoid default color, use our custom color what we define
         dialog?.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+
+
         init()
     }
-
-//    override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
-//        // Set a theme on the dialog builder constructor!
-//        val builder: AlertDialog.Builder =
-//            AlertDialog.Builder(requireContext(), R.style.DialogStyle)
-//        return builder.create()
-//    }
 
     override fun onActivityCreated(arg0: Bundle?) {
         super.onActivityCreated(arg0)
@@ -53,7 +69,8 @@ class ProductDetailsDialog : DialogFragment() {
     }
 
     private fun init() {
-        //Init
+        products = productsAdapter.products
+        indexPos = args.SelectedProductPosition
     }
 
     override fun onResume() {
@@ -72,51 +89,138 @@ class ProductDetailsDialog : DialogFragment() {
 
         //Place the first view from the list with index position
         setProductValues()
+
+        //Set the key listener
+        dialogProductDetailsBinding.dialogProductDetailCratesEditText.setOnKeyListener(this@ProductDetailsDialog)
+        dialogProductDetailsBinding.dialogProductDetailPiecesEditText.setOnKeyListener(this@ProductDetailsDialog)
     }
 
     private fun setProductValues() {
-//        if (indexPos > RecyclerView.NO_POSITION && indexPos < salesProductDetailModelList!!.size) {
-//            val salesProductDetailModel: SalesProductDetailModel =
-//                salesProductDetailModelList!![indexPos]
-//
-//            //Get the next item from the list
-//            salesProductDetailModelList!!.size
-//            //Check if this product is a batch product, show the batch details popup
-//            if (salesProductDetailModel.BatchEntryEnabled === ENABLED) {
-//                //We don't want to show the batch product
-//                ++indexPos
-//
-//                //Get the next item from the list
-//                setProductValues()
-//
-//                /*//This is a batch product
-//                customerInvoiceAdapter_asrm.openBatchDialog(fragment,
-//                        customerInvoiceAdapter_asrm,
-//                        indexPos,
-//                        salesProductDetailModel.ItemNumber,
-//                        salesProductDetailModel.UnitsPerCase,
-//                        salesProductDetailModel.crates,
-//                        salesProductDetailModel.pieces,
-//                        salesProductDetailModel.Description,
-//                        salesProductDetailModel.batchDetails);
-//
-//                //Dismiss the current dialog, to avoid over drawn of dialogs.
-//                this.dismiss();*/
-//            } else {
-//                itemDescription!!.text = String.format(
-//                    "%s - %s", String.valueOf(salesProductDetailModel.ItemNumber),
-//                    salesProductDetailModel.Description
-//                )
-//                wd.setText(String.valueOf(salesProductDetailModel.WtdSalesQty))
-//                upcText.setText(String.valueOf(salesProductDetailModel.UnitsPerCase))
-//                cratesText.setText(String.valueOf(salesProductDetailModel.crates))
-//                piecesText.setText(String.valueOf(salesProductDetailModel.pieces))
-//                piecesText!!.requestFocus()
-//                piecesText!!.setSelection(0, piecesText!!.text.length)
-//            }
-//        } else {
-//            //The user might have reached the end of the list, dismiss the dialog
-//            this.dismiss()
-//        }
+        if (indexPos > RecyclerView.NO_POSITION && indexPos < products.size) {
+            dialogProductDetailsBinding.product = products[indexPos]
+
+            lifecycleScope.launch {
+                // Hack
+                delay(300)
+                dialogProductDetailsBinding.dialogProductDetailPiecesEditText.selectAll()
+            }
+        } else {
+            //The user might have reached the end of the list, dismiss the dialog
+            this.dismiss()
+
+            selectAllOnSearchView()
+        }
+    }
+
+    private fun selectAllOnSearchView() {
+        val currentFocus = requireActivity().currentFocus
+        if (currentFocus is SearchView.SearchAutoComplete) {
+            //User is in gotham mode
+            currentFocus.selectAll()
+
+            hideKeyboard()
+        }
+    }
+
+    override fun onKey(v: View, keyCode: Int, event: KeyEvent): Boolean {
+        return if (event.action == KeyEvent.ACTION_DOWN) {
+            when (event.keyCode) {
+                KeyEvent.KEYCODE_ENTER -> {
+                    return when (v.id) {
+                        R.id.dialog_product_detail_crates_edit_text -> {
+                            if (dialogProductDetailsBinding.dialogProductDetailCratesEditText.text.toString()
+                                    .isEmpty()
+                            ) {
+                                dialogProductDetailsBinding.dialogProductDetailCratesEditText.setText(
+                                    "0"
+                                )
+                            }
+                            v.focusSearch(View.FOCUS_RIGHT).requestFocus()
+                            true
+                        }
+                        R.id.dialog_product_detail_pieces_edit_text -> {
+                            if (dialogProductDetailsBinding.dialogProductDetailPiecesEditText.text.toString()
+                                    .isEmpty()
+                            ) {
+                                dialogProductDetailsBinding.dialogProductDetailPiecesEditText.setText(
+                                    "0"
+                                )
+                            }
+                            updateProductPickedStatus()
+
+                            //Make the alert sound
+                            playTone(true)
+
+                            indexPos++
+                            setProductValues()
+
+                            false
+                        }
+                        else -> false
+                    }
+                }
+
+                KeyEvent.KEYCODE_DPAD_UP -> {
+                    --indexPos
+                    showItemInList(indexPos - 1)
+                    setProductValues()
+                    true
+                }
+                KeyEvent.KEYCODE_DPAD_DOWN -> {
+                    showItemInList(indexPos)
+                    indexPos++
+                    setProductValues()
+                    true
+                }
+                else -> false
+            }
+        } else false
+    }
+
+    private fun updateProductPickedStatus() {
+        val product = products[indexPos]
+        val cratesPieces = CratesPieces.calculateTotalCratesAndPieces(
+            dialogProductDetailsBinding.dialogProductDetailCratesEditText.text.toString().toInt(),
+            dialogProductDetailsBinding.dialogProductDetailPiecesEditText.text.toString().toInt(),
+            product.upc
+        )
+
+        if (product.status == ProductStatus.NotPicked) {
+            //Update the items picked count
+            val itemsPicked: Int = productsAdapter.productViewModel.itemsPicked.value ?: 0
+            productsAdapter.productViewModel.itemsPicked.value = itemsPicked + 1
+        }
+
+        //Update the array list and the recycler view
+        products[indexPos].apply {
+            editedCrates = cratesPieces.crates
+            editedPieces = cratesPieces.pieces
+            totalStock = "${cratesPieces.crates}/${cratesPieces.pieces}"
+            status = ProductStatus.Picked
+        }
+
+        //Notify the adapter
+        productsAdapter.notifyItemChanged(indexPos)
+
+        showItemInList(indexPos)
+    }
+
+    private fun showItemInList(index: Int) {
+        //Init
+        val dialogOffset = calculateDialogOffset()
+
+        //Scroll to specified item from the list, and display above this dialog
+        val layoutManager = productsAdapter.recyclerView.layoutManager as LinearLayoutManager
+        layoutManager.scrollToPositionWithOffset(index, dialogOffset)
+    }
+
+    private fun calculateDialogOffset(): Int {
+        val dialogHeight = dialog?.window?.decorView?.height ?: 286//Custom height
+        val recyclerViewHeight = productsAdapter.recyclerView.height
+        val itemHeight =
+            productsAdapter.recyclerView.findViewHolderForAdapterPosition(indexPos - 1)?.itemView?.height
+                ?: 195//Custom aprox item card height
+
+        return recyclerViewHeight - (dialogHeight + itemHeight + 20)//~extra 20 pixels for adding all the views margin spaces
     }
 }

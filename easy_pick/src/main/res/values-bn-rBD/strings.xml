@@ -35,7 +35,7 @@
     <string name="image_description_launch_background">ওয়ালপেপার চালু করুন</string>
     <string name="image_description_theme_background">থিমের পটভূমি</string>
     <string name="image_description_status_route">ট্র্যাক অবস্থান</string>
-    <string name="image_description_status_item">আইটেম নির্বাচনের স্থিতি</string>
+    <string name="image_description_status_product">আইটেম নির্বাচনের স্থিতি</string>
     <string name="image_description_back_button">পিছনের বোতামটির চিত্র</string>
     <string name="server_ip">আইপি সার্ভার</string>
     <string name="server_port">সার্ভার পোর্ট</string>

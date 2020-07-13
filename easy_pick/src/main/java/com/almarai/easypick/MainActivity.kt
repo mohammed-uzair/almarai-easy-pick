@@ -3,8 +3,6 @@ package com.almarai.easypick
 import android.content.Context
 import android.content.SharedPreferences
 import android.content.res.Configuration
-import android.graphics.Color
-import android.graphics.drawable.ColorDrawable
 import android.os.Build
 import android.os.Bundle
 import android.view.MenuItem
@@ -13,9 +11,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.preference.PreferenceManager
 import com.almarai.easypick.databinding.FragmentContainerBinding
-import com.almarai.easypick.extensions.OnBackPressListener
-import com.almarai.easypick.extensions.exhaustive
-import com.almarai.easypick.extensions.hideViewStateAlert
+import com.almarai.easypick.extensions.*
 import com.almarai.easypick.utils.*
 import com.google.firebase.analytics.FirebaseAnalytics
 import org.koin.androidx.fragment.android.setupKoinFragmentFactory
@@ -30,6 +26,7 @@ class MainActivity : AppCompatActivity(), KoinComponent {
     internal var backPressListener: OnBackPressListener? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        //Todo - Move all starting logics to lifecycle callbacks
         setupKoinFragmentFactory()
         super.onCreate(savedInstanceState)
 
@@ -42,6 +39,8 @@ class MainActivity : AppCompatActivity(), KoinComponent {
 
         // Obtain the FirebaseAnalytics instance.
         mFirebaseAnalytics = FirebaseAnalytics.getInstance(this)
+
+        IS_HARDWARE_KEYBOARD_AVAILABLE = isHardwareKeyboardAvailable(this)
 
         init()
     }

@@ -6,6 +6,14 @@
     <data>
 
         <variable
+            name="adapter"
+            type="com.almarai.easypick.adapters.item.ProductsAdapter" />
+
+        <variable
+            name="position"
+            type="Integer" />
+
+        <variable
             name="product"
             type="com.almarai.data.easy_pick_models.Product" />
 
@@ -14,7 +22,8 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/_2sdp">
+        android:layout_marginTop="@dimen/_2sdp"
+        android:onClick="@{(view) -> adapter.showProductDetailsDialog(view, position)}">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/item_product_detail_root"
@@ -41,16 +50,6 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 tools:text="124406" />
-
-            <!--            <View-->
-            <!--                android:id="@+id/item_product_splitter"-->
-            <!--                android:layout_width="@dimen/_8sdp"-->
-            <!--                android:layout_height="@dimen/_2sdp"-->
-            <!--                android:layout_marginStart="@dimen/_8sdp"-->
-            <!--                android:background="?colorText"-->
-            <!--                app:layout_constraintBottom_toBottomOf="@+id/item_product_number_text"-->
-            <!--                app:layout_constraintStart_toEndOf="@+id/item_product_number_text"-->
-            <!--                app:layout_constraintTop_toTopOf="@+id/item_product_number_text" />-->
 
             <TextView
                 android:id="@+id/item_product_description_text"

@@ -1,34 +1,176 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="productDialog"
+            type="com.almarai.easypick.screens.ProductDetailsDialog" />
+
+        <variable
+            name="product"
+            type="com.almarai.data.easy_pick_models.Product" />
+
+    </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@drawable/card"
-        android:orientation="vertical"
-        android:padding="@dimen/_8sdp">
+        android:orientation="vertical">
 
-        <include
-            android:id="@+id/included_partial_product_header_detail_pop_up"
-            layout="@layout/main_product_header_detail"
-            android:layout_width="match_parent"
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.20" />
 
-        <include
-            android:id="@+id/included_partial_product_extra_detail_pop_up"
-            layout="@layout/main_product_extra_detail"
-            android:layout_width="match_parent"
+        <ImageView
+            android:id="@+id/dialog_product_detail_picked_status"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:contentDescription="@string/image_description_status_route"
+            android:src="@drawable/card1"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/guideline"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:productStatus="@{product.status}" />
+
+        <TextView
+            android:id="@+id/dialog_product_detail_number"
+            style="@style/AlmTextSingleLineBoldDialog"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/_10sdp"
-            android:layout_marginBottom="@dimen/_5sdp"
+            android:text="@{String.valueOf(product.number)}"
+            android:textColor="@android:color/white"
+            android:textSize="18sp"
+            app:layout_constraintEnd_toStartOf="@+id/guideline"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="7124" />
+
+        <TextView
+            android:id="@+id/dialog_product_detail_upc_text"
+            style="@style/AlmTextSingleLineBoldDialog"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="@{String.valueOf(product.upc)}"
+            android:textColor="@android:color/white"
+            android:textSize="16sp"
+            app:layout_constraintBottom_toTopOf="@+id/dialog_product_detail_upc_label"
+            app:layout_constraintEnd_toStartOf="@+id/guideline"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/dialog_product_detail_crates_edit_text"
+            tools:text="40" />
+
+        <TextView
+            android:id="@+id/dialog_product_detail_upc_label"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/_10sdp"
+            android:text="@string/upc"
+            android:textColor="@android:color/white"
+            android:textSize="10sp"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="@+id/included_partial_product_header_detail_pop_up"
-            app:layout_constraintStart_toStartOf="@+id/included_partial_product_header_detail_pop_up"
-            app:layout_constraintTop_toBottomOf="@+id/included_partial_product_header_detail_pop_up" />
+            app:layout_constraintEnd_toStartOf="@+id/guideline"
+            app:layout_constraintStart_toStartOf="parent"
+            tools:ignore="SmallSp" />
+
+        <TextView
+            android:id="@+id/dialog_product_detail_description"
+            style="@style/AlmTextSingleLineBoldDialog"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_10sdp"
+            android:layout_marginEnd="@dimen/_5sdp"
+            android:gravity="start"
+            android:textColor="?colorText"
+            android:textSize="16sp"
+            app:layout_constraintBaseline_toBaselineOf="@+id/dialog_product_detail_number"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/guideline"
+            app:productDescription="@{product}"
+            tools:text="Double Chocolate Milk Shake 250ml" />
+
+        <com.almarai.alm_ui.AlmEditText
+            android:id="@+id/dialog_product_detail_crates_edit_text"
+            style="@style/AlmTextSingleLineBoldDialog"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:background="@drawable/alm_underline"
+            android:drawableStart="@drawable/ic_crate"
+            android:ems="3"
+            android:gravity="center"
+            android:imeOptions="actionNext"
+            android:selectAllOnFocus="true"
+            android:text="@{String.valueOf(product.editedCrates)}"
+            android:textSize="@dimen/_16sdp"
+            app:layout_constraintEnd_toStartOf="@+id/dialog_product_detail_pieces_edit_text"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="@+id/dialog_product_detail_description"
+            app:layout_constraintTop_toBottomOf="@+id/dialog_product_detail_description"
+            app:type="number_positive"
+            tools:text="10" />
+
+        <com.almarai.alm_ui.AlmEditText
+            android:id="@+id/dialog_product_detail_pieces_edit_text"
+            style="@style/AlmTextSingleLineBoldDialog"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_5sdp"
+            android:background="@drawable/alm_underline"
+            android:drawableStart="@drawable/ic_piece"
+            android:ems="3"
+            android:gravity="center"
+            android:imeOptions="actionDone"
+            android:selectAllOnFocus="true"
+            android:text="@{String.valueOf(product.editedPieces)}"
+            android:textSize="@dimen/_16sdp"
+            app:layout_constraintBaseline_toBaselineOf="@+id/dialog_product_detail_crates_edit_text"
+            app:layout_constraintEnd_toEndOf="@+id/dialog_product_detail_description"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/dialog_product_detail_crates_edit_text"
+            app:type="number_positive"
+            tools:text="10">
+
+            <requestFocus />
+        </com.almarai.alm_ui.AlmEditText>
+
+        <TextView
+            android:id="@+id/dialog_product_detail_truck_stock"
+            android:layout_width="148dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_15sdp"
+            android:drawableStart="@drawable/ic_container_truck"
+            android:text="@{product.truckStock}"
+            android:textColor="?colorText"
+            android:textSize="14sp"
+            app:layout_constraintEnd_toStartOf="@+id/dialog_product_detail_fresh_load"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="@+id/dialog_product_detail_crates_edit_text"
+            app:layout_constraintTop_toBottomOf="@+id/dialog_product_detail_crates_edit_text"
+            tools:text="10/12" />
+
+        <TextView
+            android:id="@+id/dialog_product_detail_fresh_load"
+            android:layout_width="149dp"
+            android:layout_height="wrap_content"
+            android:drawableStart="@drawable/ic_crate"
+            android:text="@{product.freshLoad}"
+            android:textColor="?colorText"
+            android:textSize="14sp"
+            app:layout_constraintBaseline_toBaselineOf="@+id/dialog_product_detail_truck_stock"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/dialog_product_detail_truck_stock"
+            tools:text="10/12" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

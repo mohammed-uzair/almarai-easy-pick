@@ -35,7 +35,7 @@
     <string name="image_description_launch_background">I-on ang wallpaper</string>
     <string name="image_description_theme_background">Background ng tema</string>
     <string name="image_description_status_route">Kondisyon ng subaybayan</string>
-    <string name="image_description_status_item">Ang katayuan ng pagpili ng item</string>
+    <string name="image_description_status_product">Ang katayuan ng pagpili ng item</string>
     <string name="image_description_back_button">Imahe ng back button</string>
     <string name="server_ip">IP server</string>
     <string name="server_port">Port ng server</string>

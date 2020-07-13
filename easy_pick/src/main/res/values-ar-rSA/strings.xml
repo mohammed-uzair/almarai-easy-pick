@@ -35,7 +35,7 @@
     <string name="image_description_launch_background">تشغيل خلفية الشاشة</string>
     <string name="image_description_theme_background">خلفية الموضوع</string>
     <string name="image_description_status_route">حالة المسار</string>
-    <string name="image_description_status_item">حالة اختيار العنصر</string>
+    <string name="image_description_status_product">حالة اختيار العنصر</string>
     <string name="image_description_back_button">صورة زر العودة</string>
     <string name="server_ip">خادم IP</string>
     <string name="server_port">منفذ الخادم</string>

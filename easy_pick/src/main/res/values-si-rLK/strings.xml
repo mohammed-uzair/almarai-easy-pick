@@ -35,7 +35,7 @@
     <string name="image_description_launch_background">බිතුපත සක්‍රිය කරන්න</string>
     <string name="image_description_theme_background">තේමා පසුබිම</string>
     <string name="image_description_status_route">ධාවන පථයේ තත්වය</string>
-    <string name="image_description_status_item">අයිතමය තේරීමේ තත්වය</string>
+    <string name="image_description_status_product">අයිතමය තේරීමේ තත්වය</string>
     <string name="image_description_back_button">පසුපස බොත්තමෙහි රූපය</string>
     <string name="server_ip">IP සේවාදායකය</string>
     <string name="server_port">සේවාදායක වරාය</string>

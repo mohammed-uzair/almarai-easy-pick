@@ -1,8 +1,12 @@
 package com.almarai.easypick.screens
 
+import android.app.Activity
 import android.os.Bundle
+import android.text.InputType
 import android.view.*
 import android.view.animation.AnimationUtils
+import android.view.inputmethod.InputMethodManager
+import androidx.appcompat.widget.SearchView
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
@@ -21,6 +25,7 @@ import com.almarai.easypick.adapters.route.RoutesAdapter
 import com.almarai.easypick.databinding.ScreenRouteSelectionBinding
 import com.almarai.easypick.extensions.Alert
 import com.almarai.easypick.extensions.hideViewStateAlert
+import com.almarai.easypick.extensions.setSearchView
 import com.almarai.easypick.extensions.showViewStateAlert
 import com.almarai.easypick.utils.BundleKeys
 import com.almarai.easypick.utils.FilterFunnel
@@ -30,7 +35,7 @@ import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
-class RouteSelectionScreen : Fragment() {
+class RouteSelectionScreen : Fragment(), SearchView.OnQueryTextListener {
     private val routesViewModel: RouteSelectionViewModel by viewModel()
     private lateinit var navController: NavController
     private val adapter by lazy { RoutesAdapter() }
@@ -116,6 +121,10 @@ class RouteSelectionScreen : Fragment() {
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         inflater.inflate(R.menu.menu_routes_screen, menu)
+        (menu.findItem(R.id.menu_route_action_search).actionView as SearchView).setSearchView(
+            this,
+            R.string.hint_search_route, InputType.TYPE_CLASS_TEXT
+        )
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
@@ -127,6 +136,16 @@ class RouteSelectionScreen : Fragment() {
                         routesViewModel.filtersModel
                     )
                 navController.navigate(action)
+            }
+            R.id.menu_route_action_search -> {
+                viewLifecycleOwner.lifecycleScope.launch {
+                    delay(100)
+
+                    //Close the keyboard on load
+                    val imm: InputMethodManager =
+                        requireContext().getSystemService(Activity.INPUT_METHOD_SERVICE) as InputMethodManager
+                    imm.hideSoftInputFromWindow(item.actionView.windowToken, 0)
+                }
             }
         }
 
@@ -162,17 +181,26 @@ class RouteSelectionScreen : Fragment() {
         screenRouteSelectionBinding.screenRouteSelectionServingLabel.startAnimation(topToBottom)
         screenRouteSelectionBinding.screenRouteSelectionServingText.startAnimation(topToBottom)
 
-//        screen_routes_header_titles_layout.startAnimation(topToBottom)
-
         screenRouteSelectionBinding.recyclerView.layoutMainRecyclerview.startAnimation(bottomToTop)
     }
 
     private fun setRecyclerView() {
-        val recyclerView =
-            screenRouteSelectionBinding.recyclerView.layoutMainRecyclerview
+        val recyclerView = screenRouteSelectionBinding.recyclerView.layoutMainRecyclerview
         recyclerView.animation = null
         recyclerView.setHasFixedSize(true)
         recyclerView.layoutManager = LinearLayoutManager(activity)
-        recyclerView.adapter = adapter
+        recyclerView.adapter = this.adapter
+    }
+
+    override fun onQueryTextSubmit(query: String): Boolean {
+        //Show the product details dialog
+
+        return false
+    }
+
+    override fun onQueryTextChange(newText: String): Boolean {
+        //Filter the list
+        FilterFunnel(adapter, Filters()).searchRoutes(newText, routes)
+        return false
     }
 }

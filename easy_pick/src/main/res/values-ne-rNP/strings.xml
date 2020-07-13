@@ -35,7 +35,7 @@
     <string name="image_description_launch_background">वालपेपर खोल्नुहोस्</string>
     <string name="image_description_theme_background">विषयवस्तु पृष्ठभूमि</string>
     <string name="image_description_status_route">स्थिति ट्र्याक गर्नुहोस्</string>
-    <string name="image_description_status_item">वस्तु चयन को स्थिति</string>
+    <string name="image_description_status_product">वस्तु चयन को स्थिति</string>
     <string name="image_description_back_button">पछाडि बटन को छवि</string>
     <string name="server_ip">आईपी सर्भर</string>
     <string name="server_port">सर्भर पोर्ट</string>

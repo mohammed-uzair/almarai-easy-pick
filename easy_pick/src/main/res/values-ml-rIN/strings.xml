@@ -35,7 +35,7 @@
     <string name="image_description_launch_background">വാൾപേപ്പർ ഓണാക്കുക</string>
     <string name="image_description_theme_background">തീം പശ്ചാത്തലം</string>
     <string name="image_description_status_route">ട്രാക്ക് സ്ഥാനം</string>
-    <string name="image_description_status_item">ഇനം തിരഞ്ഞെടുക്കുന്നതിന്റെ നില</string>
+    <string name="image_description_status_product">ഇനം തിരഞ്ഞെടുക്കുന്നതിന്റെ നില</string>
     <string name="image_description_back_button">ബാക്ക് ബട്ടണിന്റെ ചിത്രം</string>
     <string name="server_ip">IP സെർവർ</string>
     <string name="server_port">സെർവർ പോർട്ട്</string>

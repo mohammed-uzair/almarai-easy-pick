@@ -35,7 +35,7 @@
     <string name="image_description_launch_background">وال پیپر واړوه</string>
     <string name="image_description_theme_background">د موضوع شالید</string>
     <string name="image_description_status_route">د ټریک حالت</string>
-    <string name="image_description_status_item">د توکي ټاکلو حالت</string>
+    <string name="image_description_status_product">د توکي ټاکلو حالت</string>
     <string name="image_description_back_button">د شاتنۍ ت buttonۍ عکس</string>
     <string name="server_ip">IP سرور</string>
     <string name="server_port">د سرور بندر</string>

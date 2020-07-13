@@ -130,7 +130,7 @@
         <item name="android:textStyle">bold</item>
     </style>
 
-    <style name="AlmTextSingleLineDialog" parent="AlmTextSingleLineBoldDialog">
+    <style name="AlmTextSingleLineDialog" parent="AlmTextSingleLine">
         <item name="android:textColor">?colorTextDialog</item>
     </style>
 

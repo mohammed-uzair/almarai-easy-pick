@@ -35,7 +35,7 @@
     <string name="image_description_launch_background">Bật hình nền</string>
     <string name="image_description_theme_background">Nền chủ đề</string>
     <string name="image_description_status_route">Theo dõi điều kiện</string>
-    <string name="image_description_status_item">Tình trạng của mục lựa chọn</string>
+    <string name="image_description_status_product">Tình trạng của mục lựa chọn</string>
     <string name="image_description_back_button">Hình ảnh của nút quay lại</string>
     <string name="server_ip">Máy chủ IP</string>
     <string name="server_port">Cổng máy chủ</string>

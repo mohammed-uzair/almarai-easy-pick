@@ -16,8 +16,8 @@ class FilterFunnel(
         private const val TAG = "FilterFunnel"
     }
 
-    private lateinit var routes: List<Route>
-    private lateinit var products: List<Product>
+    private lateinit var routesToFilterFrom: List<Route>
+    private lateinit var productsToFilterFrom: List<Product>
 
     private var filterProducts = false
     private var filterRoutes = false
@@ -26,12 +26,12 @@ class FilterFunnel(
         val filteredRoutes = ArrayList<Route>()
 
         if (shouldFilter()) {
-            for (route in routes) {
+            for (route in routesToFilterFrom) {
                 var isFilteredRoute = false
 
                 //region Filter Logic
                 if (filters.noFilter) {
-                    return routes
+                    return routesToFilterFrom
                 }
 
                 if (filters.filterBySubCategory1Bakery) {
@@ -95,7 +95,7 @@ class FilterFunnel(
                 //endregion
             }
         } else {
-            filteredRoutes.addAll(routes)
+            filteredRoutes.addAll(routesToFilterFrom)
         }
 
         //region Sorting Logic
@@ -112,12 +112,12 @@ class FilterFunnel(
     private fun filterAllProducts(): List<Product> {
         val filteredProducts = ArrayList<Product>()
 
-        for (product in products) {
+        for (product in productsToFilterFrom) {
             var isFilteredProduct = false
 
             //region Filter Logic
             if (filters.noFilter) {
-                return products
+                return productsToFilterFrom
             }
 
             if (filters.filterBySubCategory1Bakery) {
@@ -202,7 +202,7 @@ class FilterFunnel(
                 )
 
     fun filterRoutes(routes: List<Route>) {
-        this.routes = routes
+        this.routesToFilterFrom = routes
 
         filterProducts = false
         filterRoutes = true
@@ -211,7 +211,7 @@ class FilterFunnel(
     }
 
     fun filterProducts(products: List<Product>) {
-        this.products = products
+        this.productsToFilterFrom = products
 
         filterProducts = true
         filterRoutes = false
@@ -223,7 +223,26 @@ class FilterFunnel(
         override fun performFiltering(constraint: CharSequence?): FilterResults {
             val filterResults = FilterResults()
 
-            if (filterRoutes) filterResults.values = filterAllRoutes() else filterResults.values =
+            if (constraint != null) {
+                if (filterProducts) {
+                    if (constraint.isEmpty()) {
+                        filterResults.values = productsToFilterFrom
+                    } else {
+                        filterResults.values =
+                            searchAllProducts(constraint.toString())
+                    }
+                } else {
+                    if (constraint.isEmpty()) {
+                        filterResults.values = routesToFilterFrom
+                    } else {
+                        filterResults.values =
+                            searchAlRoutes(
+                                constraint.toString()
+                            )
+                    }
+                }
+            } else if (filterRoutes) filterResults.values =
+                filterAllRoutes() else filterResults.values =
                 filterAllProducts()
 
             return filterResults
@@ -242,5 +261,31 @@ class FilterFunnel(
                 adapter.notifyDataSetChanged()
             }
         }
+    }
+
+    fun searchAllProducts(newString: String) =
+        productsToFilterFrom.filter {
+            it.number.toString().contains(newString) or it.description.contains(newString)
+        }
+
+    fun searchAlRoutes(newString: String) = routesToFilterFrom.filter {
+        it.number.toString().contains(newString) or it.description.toLowerCase(APP_LOCALE)
+            .contains(newString.toLowerCase(APP_LOCALE))
+    }
+
+    fun searchProducts(newString: String, products: List<Product>) {
+        this.productsToFilterFrom = products
+        filterProducts = true
+        filterRoutes = false
+
+        filter.filter(newString)
+    }
+
+    fun searchRoutes(newString: String, routes: List<Route>) {
+        this.routesToFilterFrom = routes
+        filterProducts = false
+        filterRoutes = true
+
+        filter.filter(newString)
     }
 }

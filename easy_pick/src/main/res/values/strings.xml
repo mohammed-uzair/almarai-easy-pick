@@ -69,7 +69,7 @@
     <string name="image_description_filtered_list">Filtered List</string>
     <string name="image_description_theme_background">Theme Background</string>
     <string name="image_description_status_route">Route Status</string>
-    <string name="image_description_status_item">Item Picked Status</string>
+    <string name="image_description_status_product">Product Picked Status</string>
     <string name="image_description_back_button">Back Button Image</string>
     <!--endregion-->
 
@@ -159,6 +159,8 @@
     <string name="customer_only">Customer Only</string>
     <string name="allow_multiple_filters">Allow Multiple Filters</string>
     <string name="persist_filters">Persist Filters</string>
+    <string name="hint_search_product">Search Product</string>
+    <string name="hint_search_route">Search Route</string>
     <!--endregion-->
 
 </resources>

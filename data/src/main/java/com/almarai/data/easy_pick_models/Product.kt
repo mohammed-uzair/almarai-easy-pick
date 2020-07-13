@@ -6,17 +6,16 @@ import kotlinx.android.parcel.RawValue
 
 @Parcelize
 data class Product(
-    val id: Int,
+    val id: Int = 0,
     val number: Int = 0,
     val description: String = "NA",
     val descriptionArabic: String = "NA",
+    val upc: Int = 0,
     val truckStock: String = "NA",
     val freshLoad: String = "NA",
-    val totalStock: String = "NA",
+    var totalStock: String = "NA",
     val actualQuantity: Int = 0,
-    val editedCrates: Int = 0,
-    val editedPieces: Int = 0,
-    val group: List<GroupType>
+    val group: List<GroupType> = listOf()
 ) : Parcelable {
     var status: @RawValue ProductStatus = ProductStatus.NotPicked
         get() {
@@ -24,6 +23,9 @@ data class Product(
             if (field == null) field = ProductStatus.NotPicked
             return field
         }
+
+    var editedCrates: @RawValue Int = 0
+    var editedPieces: @RawValue Int = 0
 }
 
 sealed class ProductStatus {

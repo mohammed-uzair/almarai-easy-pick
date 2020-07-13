@@ -1,61 +1,74 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
-    <androidx.constraintlayout.widget.ConstraintLayout xmlns:tools="http://schemas.android.com/tools"
+    <data>
+
+        <variable
+            name="product"
+            type="com.almarai.data.easy_pick_models.Product" />
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="match_parent"
+        android:paddingTop="@dimen/_10sdp">
 
         <TextView
-            android:id="@+id/partial_poq_product_details_pop_up_excess_shortage_label"
-            style="@style/AlmTextSingleLineBoldDialog"
+            android:id="@+id/main_product_header_detail_upc_label"
+            style="@style/AlmTextSingleLineDialog"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Something"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@id/partial_poq_product_details_pop_up_excess_shortage_txt"
+            android:text="@string/upc"
+            app:layout_constraintEnd_toStartOf="@+id/main_product_header_detail_upc_text"
             app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintHorizontal_chainStyle="spread_inside"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
-            android:id="@+id/partial_poq_product_details_pop_up_excess_shortage_txt"
-            style="@style/AlmTextSingleLineBoldDialog"
+            android:id="@+id/main_product_header_detail_upc_text"
+            style="@style/AlmTextSingleLineDialog"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:ems="5"
             android:gravity="center"
             android:textSize="@dimen/_16sdp"
-            app:layout_constraintBaseline_toBaselineOf="@id/partial_poq_product_details_pop_up_excess_shortage_label"
-            app:layout_constraintEnd_toStartOf="@id/partial_poq_product_details_pop_up_wd_label"
+            app:layout_constraintBaseline_toBaselineOf="@+id/main_product_header_detail_upc_label"
+            app:layout_constraintEnd_toStartOf="@+id/main_product_header_detail_truck_stock_text"
             app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toEndOf="@id/partial_poq_product_details_pop_up_excess_shortage_label"
+            app:layout_constraintStart_toEndOf="@+id/main_product_header_detail_upc_label"
             tools:text="1/2" />
 
         <TextView
-            android:id="@+id/partial_poq_product_details_pop_up_wd_label"
-            style="@style/AlmTextSingleLineBoldDialog"
+            android:id="@+id/main_product_header_detail_truck_stock_text"
+            style="@style/AlmTextSingleLineDialog"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="WD"
-            app:layout_constraintBaseline_toBaselineOf="@id/partial_poq_product_details_pop_up_excess_shortage_txt"
-            app:layout_constraintEnd_toStartOf="@id/partial_poq_product_details_pop_up_wd_txt"
+            android:drawableStart="@drawable/ic_container_truck"
+            android:drawablePadding="@dimen/_10sdp"
+            android:text="@{product.truckStock}"
+            app:layout_constraintBaseline_toBaselineOf="@+id/main_product_header_detail_upc_text"
+            app:layout_constraintEnd_toStartOf="@+id/main_product_header_detail_fresh_load_text"
             app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toEndOf="@id/partial_poq_product_details_pop_up_excess_shortage_txt" />
+            app:layout_constraintStart_toEndOf="@+id/main_product_header_detail_upc_text"
+            tools:text="10/12" />
 
         <TextView
-            android:id="@+id/partial_poq_product_details_pop_up_wd_txt"
-            style="@style/AlmTextSingleLineBoldDialog"
+            android:id="@+id/main_product_header_detail_fresh_load_text"
+            style="@style/AlmTextSingleLineDialog"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:drawableStart="@drawable/ic_crates"
+            android:drawablePadding="@dimen/_10sdp"
             android:ems="5"
             android:gravity="center"
             android:textSize="@dimen/_16sdp"
-            app:layout_constraintBaseline_toBaselineOf="@id/partial_poq_product_details_pop_up_wd_label"
+            app:layout_constraintBaseline_toBaselineOf="@+id/main_product_header_detail_truck_stock_text"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toEndOf="@id/partial_poq_product_details_pop_up_wd_label"
+            app:layout_constraintStart_toEndOf="@+id/main_product_header_detail_truck_stock_text"
             tools:text="1/10" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>

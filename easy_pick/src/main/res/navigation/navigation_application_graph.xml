@@ -211,5 +211,10 @@
         android:id="@+id/productDetailsDialog"
         android:name="com.almarai.easypick.screens.ProductDetailsDialog"
         android:label="ProductDetailsDialog"
-        tools:layout="@layout/dialog_product_detail" />
+        tools:layout="@layout/dialog_product_detail" >
+        <argument
+            android:name="SelectedProductPosition"
+            app:argType="integer"
+            android:defaultValue="0" />
+    </dialog>
 </navigation>

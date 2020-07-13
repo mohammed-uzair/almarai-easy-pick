@@ -7,6 +7,7 @@
 
     <uses-permission android:name="android.permission.WAKE_LOCK" />
 
+    <!--Todo - Remove the network security configs-->
     <application
         android:name="com.almarai.AndroidApplication"
         android:allowBackup="true"

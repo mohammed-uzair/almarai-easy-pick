@@ -1,8 +1,12 @@
 package com.almarai.easypick.screens
 
+import android.app.Activity
 import android.os.Bundle
+import android.text.InputType
 import android.view.*
 import android.view.animation.AnimationUtils
+import android.view.inputmethod.InputMethodManager
+import androidx.appcompat.widget.SearchView
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
@@ -19,8 +23,9 @@ import com.almarai.data.easy_pick_models.util.exhaustive
 import com.almarai.easypick.R
 import com.almarai.easypick.adapters.item.ProductsAdapter
 import com.almarai.easypick.databinding.ScreenProductBinding
-import com.almarai.easypick.extensions.Alert
+import com.almarai.easypick.extensions.*
 import com.almarai.easypick.extensions.hideViewStateAlert
+import com.almarai.easypick.extensions.setSearchView
 import com.almarai.easypick.extensions.showViewStateAlert
 import com.almarai.easypick.utils.BundleKeys
 import com.almarai.easypick.utils.FilterFunnel
@@ -31,13 +36,13 @@ import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
-class ProductListScreen : Fragment() {
+class ProductListScreen(val adapter: ProductsAdapter) : Fragment(), SearchView.OnQueryTextListener {
     private val productListViewModel: ProductListViewModel by viewModel()
     private lateinit var navController: NavController
-    private val adapter by lazy { ProductsAdapter() }
     private val args: ProductListScreenArgs by navArgs()
     private lateinit var screenProductBinding: ScreenProductBinding
     private lateinit var products: List<Product>
+    private var searchView: SearchView? = null
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -79,6 +84,7 @@ class ProductListScreen : Fragment() {
 
         animateUI()
         adapter.products = listOf()
+        adapter.setProductScreenViewModel(productListViewModel)
 
         productListViewModel.products.observe(viewLifecycleOwner, Observer {
             it?.let { result ->
@@ -115,7 +121,11 @@ class ProductListScreen : Fragment() {
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
-        inflater.inflate(R.menu.menu_item_screen, menu)
+        inflater.inflate(R.menu.menu_product_screen, menu)
+        (menu.findItem(R.id.menu_product_action_search).actionView as SearchView).setSearchView(
+            this,
+            R.string.hint_search_product, InputType.TYPE_CLASS_TEXT
+        )
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
@@ -138,6 +148,13 @@ class ProductListScreen : Fragment() {
                 )
 
                 navController.popBackStack()
+            }
+            R.id.menu_product_action_search -> {
+                viewLifecycleOwner.lifecycleScope.launch {
+                    delay(100)
+
+                   hideKeyboard()
+                }
             }
         }
 
@@ -183,6 +200,33 @@ class ProductListScreen : Fragment() {
         recyclerView.animation = null
         recyclerView.setHasFixedSize(true)
         recyclerView.layoutManager = LinearLayoutManager(activity)
-        recyclerView.adapter = adapter
+        recyclerView.adapter = this.adapter
+    }
+
+    override fun onQueryTextSubmit(query: String): Boolean {
+        //Show the product details dialog
+        showProductDetail()
+
+        return false
+    }
+
+    private fun showProductDetail() {
+        if (adapter.products.size == 1) {
+            val view = adapter.recyclerView.findViewHolderForAdapterPosition(0)?.itemView
+
+            // Show this products details
+            if (view != null) {
+                adapter.showProductDetailsDialog(view, 0)
+            }
+        }
+    }
+
+    override fun onQueryTextChange(newText: String): Boolean {
+        //Hide the keyboard
+        hideKeyboard()
+
+        //Filter the list
+        FilterFunnel(adapter, Filters()).searchProducts(newText, products)
+        return false
     }
 }
