@@ -1,7 +1,7 @@
 package com.almarai.easypick.data_source.firebase.interfaces
 
 import androidx.lifecycle.MutableLiveData
-import com.almarai.data.easy_pick_models.Route
+import com.almarai.data.easy_pick_models.route.Route
 
 interface FirebaseRoutesDataSource {
     fun getAllRoutes(

@@ -3,12 +3,11 @@ package com.almarai.easypick.data_source.firebase.implementation
 import android.content.Context
 import android.util.Log
 import androidx.lifecycle.MutableLiveData
-import com.almarai.data.easy_pick_models.Route
+import com.almarai.data.easy_pick_models.route.Route
 import com.almarai.easypick.data_source.firebase.interfaces.FirebaseRoutesDataSource
 import com.google.firebase.FirebaseOptions
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.ktx.Firebase
-import com.google.firebase.ktx.app
 import com.google.firebase.ktx.initialize
 
 

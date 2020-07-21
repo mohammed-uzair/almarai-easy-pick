@@ -2,8 +2,8 @@ package com.almarai.easypick.utils.binding_adapters
 
 import android.widget.TextView
 import androidx.databinding.BindingAdapter
-import com.almarai.data.easy_pick_models.Product
-import com.almarai.data.easy_pick_models.Route
+import com.almarai.data.easy_pick_models.product.Product
+import com.almarai.data.easy_pick_models.route.Route
 import com.almarai.easypick.extensions.exhaustive
 import com.almarai.easypick.utils.APP_SELECTED_LANGUAGE
 import com.almarai.easypick.utils.AppLanguage

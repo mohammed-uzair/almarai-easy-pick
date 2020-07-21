@@ -49,8 +49,8 @@
     <string name="user_greeting">வணக்கம்,</string>
     <string name="general">பொது</string>
     <string name="loading">தயவுசெய்து காத்திருங்கள், ஏற்றுகிறது …</string>
-    <string name="no_data_available">வெற்று தரவு, தரவு எதுவும் கிடைக்கவில்லை</string>
-    <string name="no_data_found">பிழை, எதுவும் கிடைக்கவில்லை</string>
+    <string name="empty_data">வெற்று தரவு, தரவு எதுவும் கிடைக்கவில்லை</string>
+    <string name="error">பிழை, எதுவும் கிடைக்கவில்லை</string>
     <string name="no_filter">வடிகட்டி இல்லை</string>
     <string name="sort_in">உள்ளே வரிசைப்படுத்து</string>
     <string name="ascending">முற்போக்கானது</string>

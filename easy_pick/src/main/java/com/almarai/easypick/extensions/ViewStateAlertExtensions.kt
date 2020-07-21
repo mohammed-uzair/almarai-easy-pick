@@ -1,6 +1,7 @@
 package com.almarai.easypick.extensions
 
 import android.view.View
+import androidx.annotation.StringRes
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import com.almarai.easypick.MainActivity
@@ -12,7 +13,7 @@ sealed class Alert {
     object NoDataAvailable : Alert()
 }
 
-internal fun Fragment.showViewStateAlert(alertType: Alert, message: String = "") {
+internal fun Fragment.showViewStateAlert(alertType: Alert, @StringRes message: Int = -1) {
     (requireActivity() as MainActivity).showViewStateAlert(alertType, message)
 }
 
@@ -20,7 +21,7 @@ internal fun Fragment.hideViewStateAlert() {
     (requireActivity() as MainActivity).hideViewStateAlert()
 }
 
-internal fun AppCompatActivity.showViewStateAlert(alertType: Alert, message: String = "") {
+internal fun AppCompatActivity.showViewStateAlert(alertType: Alert, @StringRes message: Int = -1) {
     val mainActivity = this as MainActivity
 
     //Hide the root fragment view
@@ -31,7 +32,7 @@ internal fun AppCompatActivity.showViewStateAlert(alertType: Alert, message: Str
         View.VISIBLE
 
     //Set the animation to the required one
-    var text = message
+    var text = if (message == -1) "" else getString(message)
 
     val binding = mainActivity.screenMainBinding.fragmentContainerAlert
     when (alertType) {
@@ -49,7 +50,7 @@ internal fun AppCompatActivity.showViewStateAlert(alertType: Alert, message: Str
         }
         is Alert.Error -> {
             if (text.isEmpty()) {
-                text = getString(R.string.no_data_found)
+                text = getString(R.string.error)
             }
 
             //Set the animation
@@ -61,7 +62,7 @@ internal fun AppCompatActivity.showViewStateAlert(alertType: Alert, message: Str
         }
         is Alert.NoDataAvailable -> {
             if (text.isEmpty()) {
-                text = getString(R.string.no_data_available)
+                text = getString(R.string.empty_data)
             }
 
             //Set the animation
@@ -72,9 +73,17 @@ internal fun AppCompatActivity.showViewStateAlert(alertType: Alert, message: Str
             binding.alertTextDetails.text = text.trim()
         }
     }.exhaustive
+
+    supportActionBar?.hide()
+    binding.alertButton.setOnClickListener {
+        onBackPressed()
+        supportActionBar?.show()
+    }
 }
 
 internal fun AppCompatActivity.hideViewStateAlert() {
+    supportActionBar?.show()
+
     val mainActivity = this as MainActivity
     val binding = mainActivity.screenMainBinding.fragmentContainerAlert
 

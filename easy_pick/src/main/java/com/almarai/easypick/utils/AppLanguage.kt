@@ -1,6 +1,6 @@
 package com.almarai.easypick.utils
 
-import java.util.Locale
+import java.util.*
 
 sealed class AppLanguage {
     object English : AppLanguage()
@@ -21,4 +21,4 @@ sealed class AppLanguage {
 }
 
 var APP_SELECTED_LANGUAGE: AppLanguage = AppLanguage.English
-var APP_LOCALE: Locale = Locale.ENGLISH
+var APP_LOCALE: Locale = Locale.US

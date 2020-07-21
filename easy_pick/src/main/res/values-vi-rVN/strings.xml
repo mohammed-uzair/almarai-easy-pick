@@ -49,8 +49,8 @@
     <string name="user_greeting">Xin chào,</string>
     <string name="general">Chung</string>
     <string name="loading">Xin vui lòng chờ, tải …</string>
-    <string name="no_data_available">Dữ liệu trống, không có dữ liệu</string>
-    <string name="no_data_found">Lỗi, không tìm thấy gì</string>
+    <string name="empty_data">Dữ liệu trống, không có dữ liệu</string>
+    <string name="error">Lỗi, không tìm thấy gì</string>
     <string name="no_filter">Không có bộ lọc</string>
     <string name="sort_in">Sắp xếp vào</string>
     <string name="ascending">Cấp tiến</string>

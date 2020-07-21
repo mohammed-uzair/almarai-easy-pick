@@ -49,8 +49,8 @@
     <string name="user_greeting">हैलो,</string>
     <string name="general">सामान्य</string>
     <string name="loading">कृपया प्रतीक्षा करें, लोड हो रहा है …</string>
-    <string name="no_data_available">खाली डेटा, कोई डेटा उपलब्ध नहीं है</string>
-    <string name="no_data_found">त्रुटि, कुछ भी नहीं मिला</string>
+    <string name="empty_data">खाली डेटा, कोई डेटा उपलब्ध नहीं है</string>
+    <string name="error">त्रुटि, कुछ भी नहीं मिला</string>
     <string name="no_filter">कोई फिल्टर नहीं है</string>
     <string name="sort_in">में क्रमबद्ध करें</string>
     <string name="ascending">प्रगतिशील</string>

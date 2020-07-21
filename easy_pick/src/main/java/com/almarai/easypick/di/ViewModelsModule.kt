@@ -1,5 +1,6 @@
 package com.almarai.easypick.di
 
+import com.almarai.easypick.utils.alert_dialog.AlertDialogViewModel
 import com.almarai.easypick.view_models.*
 import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.dsl.module
@@ -14,4 +15,5 @@ val ViewModelsModule = module {
     viewModel { ProductListViewModel(get()) }
     viewModel { FilterViewModel(get()) }
     viewModel { StatisticsViewModel(get()) }
+    viewModel { AlertDialogViewModel() }
 }

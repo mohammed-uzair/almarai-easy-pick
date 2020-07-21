@@ -2,11 +2,17 @@ package com.almarai.easypick.utils
 
 import android.widget.Filterable
 import androidx.recyclerview.widget.RecyclerView
-import com.almarai.data.easy_pick_models.*
+import com.almarai.data.easy_pick_models.GroupType
 import com.almarai.data.easy_pick_models.filter.Filters
+import com.almarai.data.easy_pick_models.product.Product
+import com.almarai.data.easy_pick_models.product.ProductStatus
+import com.almarai.data.easy_pick_models.route.Route
+import com.almarai.data.easy_pick_models.route.RouteStatus
 import com.almarai.easypick.adapters.item.ProductsAdapter
 import com.almarai.easypick.adapters.route.RoutesAdapter
 import java.util.*
+
+const val FilterDifferentiation = "%"
 
 class FilterFunnel(
     private val adapter: RecyclerView.Adapter<*>? = null,
@@ -102,7 +108,7 @@ class FilterFunnel(
         when {
             filters.sortWithXNumber -> if (filters.sortOrderAscending) filteredRoutes.sortBy { it.number } else filteredRoutes.sortByDescending { it.number }
             filters.sortWithXDescription -> if (filters.sortOrderAscending) filteredRoutes.sortBy { it.description } else filteredRoutes.sortByDescending { it.description }
-            filters.statusServed -> if (filters.sortOrderAscending) filteredRoutes.sortBy { it.serviceStatus == RouteServiceStatus.NotServed } else filteredRoutes.sortBy { it.serviceStatus == RouteServiceStatus.Served }
+            filters.statusServed -> if (filters.sortOrderAscending) filteredRoutes.sortBy { it.serviceStatus == RouteStatus.NotServed } else filteredRoutes.sortBy { it.serviceStatus == RouteStatus.Served }
         }
         //endregion
 
@@ -184,7 +190,7 @@ class FilterFunnel(
             when {
                 filters.sortWithXNumber -> if (filters.sortOrderAscending) filteredProducts.sortBy { product.number } else filteredProducts.sortByDescending { product.number }
                 filters.sortWithXDescription -> if (filters.sortOrderAscending) filteredProducts.sortBy { product.description } else filteredProducts.sortByDescending { product.description }
-                filters.statusServed -> if (filters.sortOrderAscending) filteredProducts.sortBy { product.status == ProductStatus.NotPicked } else filteredProducts.sortBy { product.status == ProductStatus.Picked }
+                filters.statusServed -> if (filters.sortOrderAscending) filteredProducts.sortBy { product.productStatus == ProductStatus.NotPicked } else filteredProducts.sortBy { product.productStatus == ProductStatus.Picked }
             }
             //endregion
         }
@@ -207,7 +213,7 @@ class FilterFunnel(
         filterProducts = false
         filterRoutes = true
 
-        filter.filter("")
+        filter.filter(FilterDifferentiation)
     }
 
     fun filterProducts(products: List<Product>) {
@@ -216,14 +222,14 @@ class FilterFunnel(
         filterProducts = true
         filterRoutes = false
 
-        filter.filter("")
+        filter.filter(FilterDifferentiation)
     }
 
     override fun getFilter(): android.widget.Filter = object : android.widget.Filter() {
         override fun performFiltering(constraint: CharSequence?): FilterResults {
             val filterResults = FilterResults()
 
-            if (constraint != null) {
+            if (constraint != null && !constraint.startsWith(FilterDifferentiation)) {
                 if (filterProducts) {
                     if (constraint.isEmpty()) {
                         filterResults.values = productsToFilterFrom
@@ -236,7 +242,7 @@ class FilterFunnel(
                         filterResults.values = routesToFilterFrom
                     } else {
                         filterResults.values =
-                            searchAlRoutes(
+                            searchAllRoutes(
                                 constraint.toString()
                             )
                     }
@@ -268,7 +274,7 @@ class FilterFunnel(
             it.number.toString().contains(newString) or it.description.contains(newString)
         }
 
-    fun searchAlRoutes(newString: String) = routesToFilterFrom.filter {
+    fun searchAllRoutes(newString: String) = routesToFilterFrom.filter {
         it.number.toString().contains(newString) or it.description.toLowerCase(APP_LOCALE)
             .contains(newString.toLowerCase(APP_LOCALE))
     }

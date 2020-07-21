@@ -49,8 +49,8 @@
     <string name="user_greeting">ഹലോ,</string>
     <string name="general">ജനറൽ</string>
     <string name="loading">ദയവായി കാത്തിരിക്കുക, ലോഡുചെയ്യുന്നു…</string>
-    <string name="no_data_available">ശൂന്യമായ ഡാറ്റ, ഡാറ്റയൊന്നും ലഭ്യമല്ല</string>
-    <string name="no_data_found">പിശക്, ഒന്നും ലഭ്യമല്ല</string>
+    <string name="empty_data">ശൂന്യമായ ഡാറ്റ, ഡാറ്റയൊന്നും ലഭ്യമല്ല</string>
+    <string name="error">പിശക്, ഒന്നും ലഭ്യമല്ല</string>
     <string name="no_filter">ഫിൽട്ടർ ഇല്ല</string>
     <string name="sort_in">അകത്ത് അടുക്കുക</string>
     <string name="ascending">പുരോഗമന</string>

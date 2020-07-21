@@ -1,21 +1,23 @@
 package com.almarai.repository.implementations
 
+import com.almarai.business.Utils.AppDateTimeFormat
+import com.almarai.business.Utils.DateUtil.convertDateToMilliseconds
 import com.almarai.data.easy_pick_models.DataConfiguration
 import com.almarai.data.easy_pick_models.NetworkConfiguration
 import com.almarai.data.easy_pick_models.User
+import com.almarai.easypick.data_source.shared_preference.SharedPreferencesKeys.Companion.DATA_CONFIGURATION_STATUS
+import com.almarai.easypick.data_source.shared_preference.SharedPreferencesKeys.Companion.DEPOT_CODE
+import com.almarai.easypick.data_source.shared_preference.SharedPreferencesKeys.Companion.NETWORK_CONFIGURATION_SERVER_IP
+import com.almarai.easypick.data_source.shared_preference.SharedPreferencesKeys.Companion.NETWORK_CONFIGURATION_SERVER_PORT
+import com.almarai.easypick.data_source.shared_preference.SharedPreferencesKeys.Companion.NETWORK_CONFIGURATION_STATUS
+import com.almarai.easypick.data_source.shared_preference.SharedPreferencesKeys.Companion.ROUTE_PREFERENCE
+import com.almarai.easypick.data_source.shared_preference.SharedPreferencesKeys.Companion.SALES_DATE
+import com.almarai.easypick.data_source.shared_preference.SharedPreferencesKeys.Companion.USER_LOGGED_IN_STATUS
+import com.almarai.easypick.data_source.shared_preference.SharedPreferencesKeys.Companion.USER_LOGGED_USER_ID
+import com.almarai.easypick.data_source.shared_preference.SharedPreferencesKeys.Companion.USER_LOGGED_USER_NAME
 import com.almarai.easypick.data_source.shared_preference.interfaces.SharedPreferenceDataSource
 import com.almarai.repository.api.ApplicationRepository
 import com.almarai.repository.utils.AppDataConfiguration
-import com.almarai.repository.utils.SharedPreferencesKeys.Companion.DATA_CONFIGURATION_DEPOT_CODE
-import com.almarai.repository.utils.SharedPreferencesKeys.Companion.DATA_CONFIGURATION_ROUTE_PREFERENCE
-import com.almarai.repository.utils.SharedPreferencesKeys.Companion.DATA_CONFIGURATION_SALES_DATE
-import com.almarai.repository.utils.SharedPreferencesKeys.Companion.DATA_CONFIGURATION_STATUS
-import com.almarai.repository.utils.SharedPreferencesKeys.Companion.NETWORK_CONFIGURATION_SERVER_IP
-import com.almarai.repository.utils.SharedPreferencesKeys.Companion.NETWORK_CONFIGURATION_SERVER_PORT
-import com.almarai.repository.utils.SharedPreferencesKeys.Companion.NETWORK_CONFIGURATION_STATUS
-import com.almarai.repository.utils.SharedPreferencesKeys.Companion.USER_LOGGED_IN_STATUS
-import com.almarai.repository.utils.SharedPreferencesKeys.Companion.USER_LOGGED_USER_ID
-import com.almarai.repository.utils.SharedPreferencesKeys.Companion.USER_LOGGED_USER_NAME
 
 class ApplicationRepositoryImplementation(private val sharedPreferenceDataSource: SharedPreferenceDataSource) :
     ApplicationRepository {
@@ -47,18 +49,17 @@ class ApplicationRepositoryImplementation(private val sharedPreferenceDataSource
         )
 
     override fun setDataConfiguration(dataConfiguration: DataConfiguration) {
-        sharedPreferenceDataSource.setSharedPreference(
-            DATA_CONFIGURATION_SALES_DATE,
-            dataConfiguration.salesDate
+        val salesDate = convertDateToMilliseconds(
+            dataConfiguration.salesDate,
+            AppDateTimeFormat.formatDDMMYYYY
         )
 
-        sharedPreferenceDataSource.setSharedPreference(
-            DATA_CONFIGURATION_DEPOT_CODE,
-            dataConfiguration.depotCode
-        )
+        sharedPreferenceDataSource.setSharedPreference(SALES_DATE, salesDate.toString())
+
+        sharedPreferenceDataSource.setSharedPreference(DEPOT_CODE, dataConfiguration.depotCode)
 
         sharedPreferenceDataSource.setSharedPreference(
-            DATA_CONFIGURATION_ROUTE_PREFERENCE,
+            ROUTE_PREFERENCE,
             dataConfiguration.routeGroup
         )
 
@@ -67,11 +68,11 @@ class ApplicationRepositoryImplementation(private val sharedPreferenceDataSource
 
     override fun getDataConfiguration(): DataConfiguration {
         val salesDate =
-            sharedPreferenceDataSource.getSharedPreferenceString(DATA_CONFIGURATION_SALES_DATE)
+            sharedPreferenceDataSource.getSharedPreferenceString(SALES_DATE)
         val depotCode =
-            sharedPreferenceDataSource.getSharedPreferenceString(DATA_CONFIGURATION_DEPOT_CODE)
+            sharedPreferenceDataSource.getSharedPreferenceString(DEPOT_CODE)
         val routePreference =
-            sharedPreferenceDataSource.getSharedPreferenceString(DATA_CONFIGURATION_ROUTE_PREFERENCE)
+            sharedPreferenceDataSource.getSharedPreferenceString(ROUTE_PREFERENCE)
 
         return DataConfiguration(salesDate, depotCode, routePreference)
     }

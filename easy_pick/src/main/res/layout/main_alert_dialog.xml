@@ -3,77 +3,71 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
-<androidx.constraintlayout.widget.ConstraintLayout
-    android:id="@+id/main_alert_dialog_root"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:clipToPadding="false">
-
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideline"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.32" />
-
-
-    <com.airbnb.lottie.LottieAnimationView
-        android:id="@+id/alert_animation"
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/main_alert_dialog_root"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:gravity="top"
-        app:layout_constraintBottom_toTopOf="@+id/guideline"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:lottie_autoPlay="true"
-        app:lottie_loop="true"
-        app:lottie_rawRes="@raw/anim_error"
-        tools:src="@drawable/ic_settings" />
+        android:layout_height="match_parent"
+        android:clipToPadding="false"
+        android:padding="@dimen/_15sdp">
 
-    <androidx.cardview.widget.CardView
-        android:id="@+id/alert_details_layout"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:backgroundTint="?colorListHeaderBackground"
-        android:orientation="vertical"
-        app:cardCornerRadius="@dimen/_30sdp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/guideline">
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/alert_guideline"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.2" />
+
+        <com.airbnb.lottie.LottieAnimationView
+            android:id="@+id/alert_animation"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:gravity="top"
+            app:layout_constraintBottom_toTopOf="@+id/alert_text_title"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/alert_guideline"
+            app:lottie_autoPlay="true"
+            app:lottie_loop="true"
+            app:lottie_rawRes="@raw/anim_error"
+            tools:src="@drawable/ic_settings" />
 
         <TextView
             android:id="@+id/alert_text_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/_10sdp"
-            android:layout_marginTop="@dimen/_30sdp"
             android:gravity="start"
             android:maxLines="10"
-            android:text="@string/no_data_found"
+            android:text="@string/error"
             android:textColor="@color/green"
+            android:textSize="24sp"
             android:textStyle="bold"
-            tools:text="No Statistics Data Available" />
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="@string/empty_data" />
 
         <TextView
             android:id="@+id/alert_text_details"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/_10sdp"
-            android:layout_marginTop="@dimen/_60sdp"
-            android:gravity="start"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:gravity="center"
             android:maxLines="10"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/alert_text_title"
             tools:text="@string/no_data_available_statistics" />
 
-        <!--        <Button-->
-        <!--            android:layout_width="wrap_content"-->
-        <!--            android:layout_height="wrap_content"-->
-        <!--            android:layout_marginTop="@dimen/_20sdp"-->
-        <!--            android:text="Ok" />-->
-
-
-    </androidx.cardview.widget.CardView>
-</androidx.constraintlayout.widget.ConstraintLayout>
+        <Button
+            android:id="@+id/alert_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_25sdp"
+            android:text="@string/alert_button_ok"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/alert_text_details" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 </layout>

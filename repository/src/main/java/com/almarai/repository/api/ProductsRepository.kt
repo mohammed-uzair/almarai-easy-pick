@@ -1,13 +1,9 @@
 package com.almarai.repository.api
 
-import androidx.lifecycle.MutableLiveData
-import com.almarai.data.easy_pick_models.Product
+import com.almarai.data.easy_pick_models.product.Product
+import com.almarai.data.easy_pick_models.route.RouteStatus
 
 interface ProductsRepository {
-    suspend fun getAllProducts(
-        depotCode: Int,
-        salesDate: String,
-        routeNumber: Int,
-        routesPreferences: Int = 0
-    ):List<Product>
+    suspend fun getAllProducts(routeNumber: Int): List<Product>
+    suspend fun updateRouteData(routeNumber: Int, products:List<Product>): RouteStatus
 }

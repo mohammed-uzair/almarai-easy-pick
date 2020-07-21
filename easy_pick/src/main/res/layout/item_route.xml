@@ -6,7 +6,7 @@
 
         <variable
             name="route"
-            type="com.almarai.data.easy_pick_models.Route" />
+            type="com.almarai.data.easy_pick_models.route.Route" />
 
     </data>
 
@@ -73,7 +73,7 @@
             android:src="@drawable/ic_status"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:routeStatus="@{route.serviceCurrentStatus}"
+            app:routeStatus="@{route.serviceStatus}"
             tools:src="@drawable/ic_status" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>

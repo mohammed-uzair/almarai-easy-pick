@@ -24,8 +24,8 @@ import com.almarai.easypick.databinding.ScreenStatisticsBinding
 import com.almarai.easypick.extensions.Alert
 import com.almarai.easypick.extensions.hideViewStateAlert
 import com.almarai.easypick.extensions.showViewStateAlert
-import com.almarai.easypick.utils.AppDateTimeFormat
-import com.almarai.easypick.utils.DateUtil
+import com.almarai.business.Utils.AppDateTimeFormat
+import com.almarai.business.Utils.DateUtil
 import com.almarai.easypick.view_models.StatisticsViewModel
 import com.github.mikephil.charting.components.AxisBase
 import com.github.mikephil.charting.components.XAxis
@@ -40,7 +40,7 @@ import java.text.NumberFormat
 import java.util.*
 import kotlin.collections.ArrayList
 
-class StatisticsScreen : Fragment(R.layout.screen_statistics) {
+class StatisticsScreen : Fragment() {
     private val viewModel: StatisticsViewModel by viewModel()
     private lateinit var navController: NavController
     private lateinit var screenStatisticsBinding: ScreenStatisticsBinding

@@ -5,8 +5,8 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.almarai.data.easy_pick_models.DataConfiguration
-import com.almarai.easypick.utils.AppDateTimeFormat
-import com.almarai.easypick.utils.DateUtil
+import com.almarai.business.Utils.AppDateTimeFormat
+import com.almarai.business.Utils.DateUtil
 import com.almarai.repository.api.ApplicationRepository
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch

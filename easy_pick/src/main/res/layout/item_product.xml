@@ -15,7 +15,7 @@
 
         <variable
             name="product"
-            type="com.almarai.data.easy_pick_models.Product" />
+            type="com.almarai.data.easy_pick_models.product.Product" />
 
     </data>
 
@@ -25,12 +25,25 @@
         android:layout_marginTop="@dimen/_2sdp"
         android:onClick="@{(view) -> adapter.showProductDetailsDialog(view, position)}">
 
+        <View
+            android:id="@+id/item_product_selector"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginStart="@dimen/_14sdp"
+            android:background="@drawable/list_item_card1"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/item_product_detail_root"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/_15sdp"
-            android:background="@drawable/list_item_card"
+            android:layout_marginTop="@dimen/_1sdp"
+            android:layout_marginBottom="@dimen/_1sdp"
+            android:background="@drawable/test"
             android:paddingStart="@dimen/_15sdp"
             android:paddingTop="@dimen/_5sdp"
             android:paddingEnd="0dp"
@@ -112,7 +125,7 @@
             android:src="@drawable/ic_status"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:productStatus="@{product.status}"
+            app:productStatus="@{product.productStatus}"
             tools:src="@drawable/ic_status" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,5 +1,6 @@
 package com.almarai.easypick.screens
 
+import android.animation.AnimatorInflater
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View

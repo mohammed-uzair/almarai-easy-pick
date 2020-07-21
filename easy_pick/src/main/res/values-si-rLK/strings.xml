@@ -49,8 +49,8 @@
     <string name="user_greeting">හෙලෝ,</string>
     <string name="general">ජනරාල්</string>
     <string name="loading">කරුණාකර රැඳී සිටින්න, පූරණය වේ …</string>
-    <string name="no_data_available">හිස් දත්ත, දත්ත නොමැත</string>
-    <string name="no_data_found">දෝෂයක්, කිසිවක් සොයාගත නොහැකි විය</string>
+    <string name="empty_data">හිස් දත්ත, දත්ත නොමැත</string>
+    <string name="error">දෝෂයක්, කිසිවක් සොයාගත නොහැකි විය</string>
     <string name="no_filter">පෙරනයක් නොමැත</string>
     <string name="sort_in">වර්ග කරන්න</string>
     <string name="ascending">ප්‍රගතිශීලී</string>

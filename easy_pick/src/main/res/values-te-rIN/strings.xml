@@ -49,8 +49,8 @@
     <string name="user_greeting">హలో,</string>
     <string name="general">జనరల్</string>
     <string name="loading">దయచేసి వేచి ఉండండి, లోడ్ అవుతోంది…</string>
-    <string name="no_data_available">ఖాళీ డేటా, డేటా అందుబాటులో లేదు</string>
-    <string name="no_data_found">లోపం, ఏమీ అందుబాటులో లేదు</string>
+    <string name="empty_data">ఖాళీ డేటా, డేటా అందుబాటులో లేదు</string>
+    <string name="error">లోపం, ఏమీ అందుబాటులో లేదు</string>
     <string name="no_filter">ఫిల్టర్ లేదు</string>
     <string name="sort_in">లోపల క్రమబద్ధీకరించండి</string>
     <string name="ascending">ప్రోగ్రెసివ్</string>

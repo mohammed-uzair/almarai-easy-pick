@@ -49,8 +49,8 @@
     <string name="user_greeting">سلام،</string>
     <string name="general">عمومي</string>
     <string name="loading">مهرباني وکړئ انتظار وکړئ ، بار کول …</string>
-    <string name="no_data_available">تشې ډاټا ، هیڅ معلومات نشته</string>
-    <string name="no_data_found">تېروتنه ، هیڅ ونه موندل شوه</string>
+    <string name="empty_data">تشې ډاټا ، هیڅ معلومات نشته</string>
+    <string name="error">تېروتنه ، هیڅ ونه موندل شوه</string>
     <string name="no_filter">فلټر نشته</string>
     <string name="sort_in">برابرول په</string>
     <string name="ascending">پرمختګ کونکی</string>

@@ -11,7 +11,7 @@
 
         <variable
             name="product"
-            type="com.almarai.data.easy_pick_models.Product" />
+            type="com.almarai.data.easy_pick_models.product.Product" />
 
     </data>
 
@@ -39,7 +39,7 @@
             app:layout_constraintEnd_toStartOf="@+id/guideline"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:productStatus="@{product.status}" />
+            app:productStatus="@{product.productStatus}" />
 
         <TextView
             android:id="@+id/dialog_product_detail_number"
@@ -107,8 +107,8 @@
             android:background="@drawable/alm_underline"
             android:drawableStart="@drawable/ic_crate"
             android:ems="3"
-            android:gravity="center"
             android:imeOptions="actionNext"
+            android:gravity="center"
             android:selectAllOnFocus="true"
             android:text="@{String.valueOf(product.editedCrates)}"
             android:textSize="@dimen/_16sdp"

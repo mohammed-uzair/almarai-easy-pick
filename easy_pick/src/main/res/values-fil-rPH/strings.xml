@@ -49,8 +49,8 @@
     <string name="user_greeting">Kamusta,</string>
     <string name="general">Pangkalahatan</string>
     <string name="loading">Mangyaring maghintay, maglo-load …</string>
-    <string name="no_data_available">Walang laman ang data, walang magagamit na data</string>
-    <string name="no_data_found">Error, walang nahanap</string>
+    <string name="empty_data">Walang laman ang data, walang magagamit na data</string>
+    <string name="error">Error, walang nahanap</string>
     <string name="no_filter">Walang filter</string>
     <string name="sort_in">Pagsunud-sunurin ayon</string>
     <string name="ascending">Progresibo</string>

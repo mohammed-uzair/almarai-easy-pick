@@ -49,8 +49,8 @@
     <string name="user_greeting">ಹಲೋ,</string>
     <string name="general">ಜನರಲ್</string>
     <string name="loading">ದಯವಿಟ್ಟು ಕಾಯಿರಿ, ಲೋಡ್ ಆಗುತ್ತಿದೆ…</string>
-    <string name="no_data_available">ಖಾಲಿ ಡೇಟಾ, ಯಾವುದೇ ಡೇಟಾ ಲಭ್ಯವಿಲ್ಲ</string>
-    <string name="no_data_found">ದೋಷ, ಏನೂ ಲಭ್ಯವಿಲ್ಲ</string>
+    <string name="empty_data">ಖಾಲಿ ಡೇಟಾ, ಯಾವುದೇ ಡೇಟಾ ಲಭ್ಯವಿಲ್ಲ</string>
+    <string name="error">ದೋಷ, ಏನೂ ಲಭ್ಯವಿಲ್ಲ</string>
     <string name="no_filter">ಯಾವುದೇ ಫಿಲ್ಟರ್ ಇಲ್ಲ</string>
     <string name="sort_in">ಒಳಗೆ ವಿಂಗಡಿಸಿ</string>
     <string name="ascending">ಪ್ರಗತಿಶೀಲ</string>

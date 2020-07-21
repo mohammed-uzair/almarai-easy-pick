@@ -49,8 +49,8 @@
     <string name="user_greeting"> ہیلو،</string>
     <string name="general"> جنرل</string>
     <string name="loading"> براہ کرم انتظار کریں ، لوڈنگ…</string>
-    <string name="no_data_available"> خالی ڈیٹا ، کوئی ڈیٹا دستیاب نہیں ہے</string>
-    <string name="no_data_found"> خرابی ، کچھ نہیں ملا</string>
+    <string name="empty_data"> خالی ڈیٹا ، کوئی ڈیٹا دستیاب نہیں ہے</string>
+    <string name="error"> خرابی ، کچھ نہیں ملا</string>
     <string name="no_filter"> فلٹر نہیں ہے</string>
     <string name="sort_in"> ترتیب دیں</string>
     <string name="ascending"> ترقی پسند</string>

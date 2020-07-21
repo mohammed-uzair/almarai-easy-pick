@@ -49,8 +49,8 @@
     <string name="user_greeting">হ্যালো,</string>
     <string name="general">সাধারণ</string>
     <string name="loading">দয়া করে অপেক্ষা করুন, লোড হচ্ছে …</string>
-    <string name="no_data_available">খালি ডেটা, কোনও ডেটা উপলব্ধ নেই</string>
-    <string name="no_data_found">ত্রুটি, কিছুই উপলভ্য নয়</string>
+    <string name="empty_data">খালি ডেটা, কোনও ডেটা উপলব্ধ নেই</string>
+    <string name="error">ত্রুটি, কিছুই উপলভ্য নয়</string>
     <string name="no_filter">কোনও ফিল্টার নেই</string>
     <string name="sort_in">ভিতরে বাছাই করুন</string>
     <string name="ascending">প্রগতিশীল</string>

@@ -14,9 +14,9 @@ import androidx.navigation.Navigation
 import com.almarai.easypick.R
 import com.almarai.easypick.databinding.ScreenDataConfigurationBinding
 import com.almarai.easypick.utils.APP_SELECTED_THEME
-import com.almarai.easypick.utils.AppDateTimeFormat
+import com.almarai.business.Utils.AppDateTimeFormat
 import com.almarai.easypick.utils.AppTheme
-import com.almarai.easypick.utils.DateUtil
+import com.almarai.business.Utils.DateUtil
 import com.almarai.easypick.view_models.DataConfigurationViewModel
 import com.almarai.repository.utils.AppDataConfiguration
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -73,13 +73,12 @@ class DataConfigurationScreen : Fragment() {
             val calendarMonthOfYear = calendar.get(Calendar.MONTH)
             val calendarDayOfMonth = calendar.get(Calendar.DAY_OF_MONTH)
 
+            //Set the initial date
             val datePicker = DatePickerDialog(
                 requireContext(),
                 DatePickerDialog.OnDateSetListener { _, year, month, dayOfMonth ->
                     salesDate = "$dayOfMonth/$month/$year"
-                    screenDataConfigurationBinding.screenDataConfigSalesDateEditText.setText(
-                        salesDate
-                    )
+                    viewModel.salesDate.value = salesDate
                 },
                 calendarYear,
                 calendarMonthOfYear,

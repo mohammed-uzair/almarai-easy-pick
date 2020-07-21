@@ -4,6 +4,8 @@ import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.view.*
+import android.view.inputmethod.EditorInfo
+import android.widget.TextView
 import androidx.appcompat.widget.SearchView
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.DialogFragment
@@ -12,20 +14,21 @@ import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.almarai.business.CratesPieces
-import com.almarai.data.easy_pick_models.Product
-import com.almarai.data.easy_pick_models.ProductStatus
+import com.almarai.data.easy_pick_models.product.Product
+import com.almarai.data.easy_pick_models.product.ProductStatus
 import com.almarai.easypick.R
 import com.almarai.easypick.adapters.item.ProductsAdapter
 import com.almarai.easypick.databinding.DialogProductDetailBinding
 import com.almarai.easypick.extensions.hideKeyboard
 import com.almarai.easypick.extensions.positionDialogAtBottom
+import com.almarai.easypick.extensions.showFocus
 import com.almarai.easypick.utils.AlertTones.playTone
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
 
 class ProductDetailsDialog(private val productsAdapter: ProductsAdapter) : DialogFragment(),
-    View.OnKeyListener {
+    View.OnKeyListener, TextView.OnEditorActionListener {
     private var indexPos = 0
     private val args: ProductDetailsDialogArgs by navArgs()
     private lateinit var products: List<Product>
@@ -40,7 +43,8 @@ class ProductDetailsDialog(private val productsAdapter: ProductsAdapter) : Dialo
             DataBindingUtil.inflate(inflater, R.layout.dialog_product_detail, container, false)
         dialogProductDetailsBinding.apply {
             lifecycleOwner = this@ProductDetailsDialog
-            dialogProductDetailsBinding.product = Product()
+            dialogProductDetailsBinding.product =
+                Product()
             dialogProductDetailsBinding.productDialog = this@ProductDetailsDialog
         }
 
@@ -93,6 +97,7 @@ class ProductDetailsDialog(private val productsAdapter: ProductsAdapter) : Dialo
         //Set the key listener
         dialogProductDetailsBinding.dialogProductDetailCratesEditText.setOnKeyListener(this@ProductDetailsDialog)
         dialogProductDetailsBinding.dialogProductDetailPiecesEditText.setOnKeyListener(this@ProductDetailsDialog)
+        dialogProductDetailsBinding.dialogProductDetailPiecesEditText.setOnEditorActionListener(this@ProductDetailsDialog)
     }
 
     private fun setProductValues() {
@@ -139,20 +144,7 @@ class ProductDetailsDialog(private val productsAdapter: ProductsAdapter) : Dialo
                             true
                         }
                         R.id.dialog_product_detail_pieces_edit_text -> {
-                            if (dialogProductDetailsBinding.dialogProductDetailPiecesEditText.text.toString()
-                                    .isEmpty()
-                            ) {
-                                dialogProductDetailsBinding.dialogProductDetailPiecesEditText.setText(
-                                    "0"
-                                )
-                            }
-                            updateProductPickedStatus()
-
-                            //Make the alert sound
-                            playTone(true)
-
-                            indexPos++
-                            setProductValues()
+                            updateProduct()
 
                             false
                         }
@@ -177,6 +169,23 @@ class ProductDetailsDialog(private val productsAdapter: ProductsAdapter) : Dialo
         } else false
     }
 
+    private fun updateProduct() {
+        if (dialogProductDetailsBinding.dialogProductDetailPiecesEditText.text.toString()
+                .isEmpty()
+        ) {
+            dialogProductDetailsBinding.dialogProductDetailPiecesEditText.setText(
+                "0"
+            )
+        }
+        updateProductPickedStatus()
+
+        //Make the alert sound
+        playTone(true)
+
+        indexPos++
+        setProductValues()
+    }
+
     private fun updateProductPickedStatus() {
         val product = products[indexPos]
         val cratesPieces = CratesPieces.calculateTotalCratesAndPieces(
@@ -185,7 +194,7 @@ class ProductDetailsDialog(private val productsAdapter: ProductsAdapter) : Dialo
             product.upc
         )
 
-        if (product.status == ProductStatus.NotPicked) {
+        if (product.productStatus == ProductStatus.NotPicked) {
             //Update the items picked count
             val itemsPicked: Int = productsAdapter.productViewModel.itemsPicked.value ?: 0
             productsAdapter.productViewModel.itemsPicked.value = itemsPicked + 1
@@ -196,7 +205,7 @@ class ProductDetailsDialog(private val productsAdapter: ProductsAdapter) : Dialo
             editedCrates = cratesPieces.crates
             editedPieces = cratesPieces.pieces
             totalStock = "${cratesPieces.crates}/${cratesPieces.pieces}"
-            status = ProductStatus.Picked
+            productStatus = ProductStatus.Picked
         }
 
         //Notify the adapter
@@ -212,6 +221,7 @@ class ProductDetailsDialog(private val productsAdapter: ProductsAdapter) : Dialo
         //Scroll to specified item from the list, and display above this dialog
         val layoutManager = productsAdapter.recyclerView.layoutManager as LinearLayoutManager
         layoutManager.scrollToPositionWithOffset(index, dialogOffset)
+        productsAdapter.recyclerView.showFocus(index, lifecycleScope)
     }
 
     private fun calculateDialogOffset(): Int {
@@ -222,5 +232,13 @@ class ProductDetailsDialog(private val productsAdapter: ProductsAdapter) : Dialo
                 ?: 195//Custom aprox item card height
 
         return recyclerViewHeight - (dialogHeight + itemHeight + 20)//~extra 20 pixels for adding all the views margin spaces
+    }
+
+    override fun onEditorAction(v: TextView?, actionId: Int, event: KeyEvent?): Boolean {
+        if (actionId == EditorInfo.IME_ACTION_DONE) {
+            updateProduct()
+        }
+
+        return false
     }
 }

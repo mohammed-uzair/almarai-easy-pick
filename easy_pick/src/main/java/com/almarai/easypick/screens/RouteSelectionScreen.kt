@@ -1,6 +1,8 @@
 package com.almarai.easypick.screens
 
+import android.Manifest
 import android.app.Activity
+import android.content.Intent
 import android.os.Bundle
 import android.text.InputType
 import android.view.*
@@ -10,30 +12,31 @@ import androidx.appcompat.widget.SearchView
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
+import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.almarai.data.easy_pick_models.Result
-import com.almarai.data.easy_pick_models.Route
-import com.almarai.data.easy_pick_models.RouteStatus
 import com.almarai.data.easy_pick_models.filter.Filters
+import com.almarai.data.easy_pick_models.route.Route
+import com.almarai.data.easy_pick_models.route.RouteServiceStatus
+import com.almarai.data.easy_pick_models.route.RouteStatus
 import com.almarai.data.easy_pick_models.util.exhaustive
 import com.almarai.easypick.R
 import com.almarai.easypick.adapters.route.RoutesAdapter
 import com.almarai.easypick.databinding.ScreenRouteSelectionBinding
-import com.almarai.easypick.extensions.Alert
-import com.almarai.easypick.extensions.hideViewStateAlert
-import com.almarai.easypick.extensions.setSearchView
-import com.almarai.easypick.extensions.showViewStateAlert
+import com.almarai.easypick.extensions.*
 import com.almarai.easypick.utils.BundleKeys
 import com.almarai.easypick.utils.FilterFunnel
 import com.almarai.easypick.utils.FilterScreenSource
 import com.almarai.easypick.view_models.RouteSelectionViewModel
+import com.almarai.machine_learning.LiveBarcodeScanningActivity
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.viewModel
+import java.util.concurrent.ExecutorService
 
 class RouteSelectionScreen : Fragment(), SearchView.OnQueryTextListener {
     private val routesViewModel: RouteSelectionViewModel by viewModel()
@@ -42,11 +45,29 @@ class RouteSelectionScreen : Fragment(), SearchView.OnQueryTextListener {
     private lateinit var screenRouteSelectionBinding: ScreenRouteSelectionBinding
     private lateinit var routes: List<Route>
 
+
+//    private var preview: Preview? = null
+//
+//    //    private var imageCapture: ImageCapture? = null
+////    private var imageAnalyzer: ImageAnalysis? = null
+//    private var camera: Camera? = null
+
+    //    private lateinit var outputDirectory: File
+    private lateinit var cameraExecutor: ExecutorService
+
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+        return bindUIScreen(inflater, container)
+    }
+
+    private fun bindUIScreen(
+        inflater: LayoutInflater,
+        container: ViewGroup?
+    ): View {
         screenRouteSelectionBinding =
             DataBindingUtil.inflate(inflater, R.layout.screen_route_selection, container, false)
         screenRouteSelectionBinding.apply {
@@ -72,25 +93,34 @@ class RouteSelectionScreen : Fragment(), SearchView.OnQueryTextListener {
 
         animateUI()
 
-        adapter.routes = listOf()
-
-        routesViewModel.routes.observe(viewLifecycleOwner, Observer {
-            it?.let { result ->
-                when (result) {
-                    is Result.Fetching -> showViewStateAlert(
-                        Alert.Loading,
-                        getString(R.string.no_data_available)
-                    )
-                    is Result.Success -> showDataUi(result.data)
-                    is Result.Error -> showViewStateAlert(Alert.Error)
-                }.exhaustive
-            }
-        })
+        observeRoutes()
+        observeRoutesStatuses()
 
         setRecyclerView()
 
+        handleOtherScreenResults()
+
+        setRoutesRefreshListener()
+    }
+
+    private fun setRoutesRefreshListener() {
+        screenRouteSelectionBinding.screenRouteSelectionRefresh.setOnRefreshListener {
+            //Get only the routes status from data source
+            routesViewModel.getAllRouteStatus()
+
+            //Update the adapter for the data change
+            screenRouteSelectionBinding.screenRouteSelectionRefresh.isRefreshing = false
+        }
+    }
+
+    private fun handleOtherScreenResults() {
         val savedStateHandle = navController.currentBackStackEntry?.savedStateHandle
 
+        handleRouteProcessedFromProductsScreen(savedStateHandle)
+        handleFiltersFromFilterScreen(savedStateHandle)
+    }
+
+    private fun handleRouteProcessedFromProductsScreen(savedStateHandle: SavedStateHandle?) {
         savedStateHandle?.getLiveData<Pair<Int, RouteStatus>>(BundleKeys.ROUTE_PROCESSED)?.observe(
             viewLifecycleOwner,
             Observer { result ->
@@ -98,7 +128,9 @@ class RouteSelectionScreen : Fragment(), SearchView.OnQueryTextListener {
 
                 if (position != RecyclerView.NO_POSITION) adapter.notifyItemChanged(position)
             })
+    }
 
+    private fun handleFiltersFromFilterScreen(savedStateHandle: SavedStateHandle?) {
         savedStateHandle?.getLiveData<Filters>(BundleKeys.FILTER_MODEL)?.observe(
             viewLifecycleOwner,
             Observer { result ->
@@ -117,6 +149,35 @@ class RouteSelectionScreen : Fragment(), SearchView.OnQueryTextListener {
                     routesViewModel.isFiltered.value = routes.size != adapter.routes.size
                 }
             })
+    }
+
+    private fun observeRoutes() {
+        routesViewModel.routes.observe(viewLifecycleOwner, Observer {
+            it?.let { result ->
+                when (result) {
+                    is Result.Fetching -> showViewStateAlert(
+                        Alert.Loading,
+                        R.string.fetching_routes
+                    )
+                    is Result.Success -> showDataUi(result.data)
+                    is Result.Error -> showViewStateAlert(Alert.Error)
+                }.exhaustive
+            }
+        })
+    }
+
+    private fun observeRoutesStatuses() {
+        routesViewModel.routesServiceStatus.observe(viewLifecycleOwner, Observer {
+            it?.let { result ->
+                when (result) {
+                    is Result.Fetching -> screenRouteSelectionBinding.screenRouteSelectionRefresh.isRefreshing =
+                        true
+                    is Result.Success -> updateRoutesStatuses(result.data)
+                    is Result.Error -> screenRouteSelectionBinding.screenRouteSelectionRefresh.isRefreshing =
+                        false
+                }.exhaustive
+            }
+        })
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
@@ -147,15 +208,32 @@ class RouteSelectionScreen : Fragment(), SearchView.OnQueryTextListener {
                     imm.hideSoftInputFromWindow(item.actionView.windowToken, 0)
                 }
             }
+            R.id.menu_route_action_barcode_search -> {
+                startActivity(Intent(activity, LiveBarcodeScanningActivity::class.java))
+            }
         }
 
         return super.onOptionsItemSelected(item)
     }
 
+    private fun updateRoutesStatuses(list: List<RouteServiceStatus>) {
+        if (list.isNotEmpty()) {
+            //Update all routes status
+            list.forEach { route ->
+                routes.first { it.number == route.number }.serviceStatus = route.status
+            }
+
+            //Notify the adapter
+            adapter.notifyDataSetChanged()
+        }
+
+        screenRouteSelectionBinding.screenRouteSelectionRefresh.isRefreshing = false
+    }
+
     private fun showDataUi(list: List<Route>) {
         //If the received data is empty
         if (list.isEmpty()) {
-            showViewStateAlert(Alert.NoDataAvailable)
+            showViewStateAlert(Alert.NoDataAvailable, R.string.no_data_available_routes)
             return
         }
 
@@ -163,10 +241,12 @@ class RouteSelectionScreen : Fragment(), SearchView.OnQueryTextListener {
         hideViewStateAlert()
 
         routes = list
-        adapter.routes = list
+        adapter.setData(list, this, routesViewModel)
         adapter.notifyDataSetChanged()
 
         routesViewModel.setRouteServiceDetails(list)
+
+        setListFocus()
     }
 
     private fun animateUI() {
@@ -202,5 +282,88 @@ class RouteSelectionScreen : Fragment(), SearchView.OnQueryTextListener {
         //Filter the list
         FilterFunnel(adapter, Filters()).searchRoutes(newText, routes)
         return false
+    }
+
+    private fun setListFocus() =
+        screenRouteSelectionBinding.recyclerView.layoutMainRecyclerview
+            .showFocus(lifecycleScope = viewLifecycleOwner.lifecycleScope)
+
+    /* //region CameraX
+     private fun startCamera() {
+         val cameraProviderFuture =
+             androidx.camera.lifecycle.ProcessCameraProvider.getInstance(requireContext())
+
+         cameraProviderFuture.addListener(Runnable {
+             // Used to bind the lifecycle of cameras to the lifecycle owner
+             val cameraProvider: androidx.camera.lifecycle.ProcessCameraProvider =
+                 cameraProviderFuture.get()
+
+             // Preview
+             preview = Preview.Builder()
+                 .build()
+
+             // Select back camera
+             val cameraSelector =
+                 CameraSelector.Builder().requireLensFacing(CameraSelector.LENS_FACING_BACK)
+                     .build()
+
+             try {
+                 // Unbind use cases before rebinding
+                 cameraProvider.unbindAll()
+
+                 // Bind use cases to camera
+                 camera = cameraProvider.bindToLifecycle(
+                     this, cameraSelector, preview
+                 )
+                 preview?.setSurfaceProvider(screenRouteSelectionBinding.viewFinder.createSurfaceProvider())
+             } catch (exc: Exception) {
+                 Log.e(TAG, "Use case binding failed", exc)
+             }
+
+         }, ContextCompat.getMainExecutor(requireContext()))
+     }
+
+     private class YourImageAnalyzer(private val context: Context) : ImageAnalysis.Analyzer {
+         @SuppressLint("UnsafeExperimentalUsageError")
+         override fun analyze(imageProxy: ImageProxy) {
+             val mediaImage = imageProxy.image
+             if (mediaImage != null) {
+                 val image =
+                     InputImage.fromMediaImage(mediaImage, imageProxy.imageInfo.rotationDegrees)
+
+                 // Pass image to an ML Kit Vision API
+                 val options = BarcodeScannerOptions.Builder()
+                     .setBarcodeFormats(
+                         Barcode.FORMAT_QR_CODE,
+                         Barcode.FORMAT_AZTEC
+                     )
+                     .build()
+                 val scanner = BarcodeScanning.getClient(options)
+
+                 val result = scanner.process(image)
+                     .addOnSuccessListener { barcodes ->
+                         // Task completed successfully
+                         val rawValue = barcodes[0].rawValue
+                         Toast.makeText(
+                             context,
+                             "Scanning barcode success - Raw -> $rawValue  Barcode -> ${barcodes[0]}",
+                             Toast.LENGTH_LONG
+                         )
+                             .show()
+                     }
+                     .addOnFailureListener {
+                         Toast.makeText(context, "Scanning barcode failed", Toast.LENGTH_LONG)
+                             .show()
+                     }
+             }
+         }
+     }*/
+    //endregion
+
+    companion object {
+        const val TAG = "RouteSelectionScreen"
+        private const val FILENAME_FORMAT = "yyyy-MM-dd-HH-mm-ss-SSS"
+        private const val REQUEST_CODE_PERMISSIONS = 10
+        private val REQUIRED_PERMISSIONS = arrayOf(Manifest.permission.CAMERA)
     }
 }

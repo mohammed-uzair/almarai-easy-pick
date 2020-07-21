@@ -5,9 +5,11 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.almarai.data.easy_pick_models.Result
-import com.almarai.data.easy_pick_models.Route
-import com.almarai.data.easy_pick_models.RouteStatus
+import com.almarai.data.easy_pick_models.route.Route
+import com.almarai.data.easy_pick_models.route.RouteServiceStatus
 import com.almarai.data.easy_pick_models.filter.Filters
+import com.almarai.data.easy_pick_models.route.RouteAccessibility
+import com.almarai.data.easy_pick_models.route.RouteStatus
 import com.almarai.data.easy_pick_models.util.ERROR_OCCURRED
 import com.almarai.data.easy_pick_models.util.exhaustive
 import com.almarai.repository.api.RoutesRepository
@@ -16,7 +18,11 @@ import kotlinx.coroutines.launch
 
 class RouteSelectionViewModel(private val repository: RoutesRepository) : ViewModel() {
     private val _routes = MutableLiveData<Result<List<Route>>>()
+    private val _routesStatus = MutableLiveData<Result<List<RouteServiceStatus>>>()
+    private val _routeAccessibility = MutableLiveData<Result<RouteAccessibility>>()
     val routes: LiveData<Result<List<Route>>> = _routes
+    val routesServiceStatus: LiveData<Result<List<RouteServiceStatus>>> = _routesStatus
+    val routeAccessibility: LiveData<Result<RouteAccessibility>> = _routeAccessibility
     internal var filtersModel: Filters? = null
     val totalRoutes: MutableLiveData<Int> = MutableLiveData(0)
     val routesServed: MutableLiveData<Int> = MutableLiveData(0)
@@ -28,9 +34,31 @@ class RouteSelectionViewModel(private val repository: RoutesRepository) : ViewMo
         viewModelScope.launch(Dispatchers.IO) {
             _routes.postValue(Result.Fetching)
             try {
-                _routes.postValue(Result.Success(repository.getAllRoutes(1, "", 0)))
+                _routes.postValue(Result.Success(repository.getAllRoutes()))
             } catch (exception: Exception) {
                 _routes.postValue(Result.Error(exception.message ?: ERROR_OCCURRED))
+            }
+        }
+    }
+
+    fun getAllRouteStatus() {
+        viewModelScope.launch(Dispatchers.IO) {
+            _routesStatus.postValue(Result.Fetching)
+            try {
+                _routesStatus.postValue(Result.Success(repository.getAllRoutesStatus()))
+            } catch (exception: Exception) {
+                _routesStatus.postValue(Result.Error(exception.message ?: ERROR_OCCURRED))
+            }
+        }
+    }
+
+    fun getRouteStatus(routeNumber: Int) {
+        viewModelScope.launch(Dispatchers.IO) {
+            _routeAccessibility.postValue(Result.Fetching)
+            try {
+                _routeAccessibility.postValue(Result.Success(repository.getRouteStatus(routeNumber)))
+            } catch (exception: Exception) {
+                _routeAccessibility.postValue(Result.Error(exception.message ?: ERROR_OCCURRED))
             }
         }
     }
@@ -40,10 +68,10 @@ class RouteSelectionViewModel(private val repository: RoutesRepository) : ViewMo
         var servingRoutes = 0
         var notServedRoutes = 0
         list.forEach {
-            when (it.serviceCurrentStatus) {
-                is RouteStatus.Served -> ++servedRoutes
-                is RouteStatus.Serving -> ++servingRoutes
-                is RouteStatus.NotServed -> ++notServedRoutes
+            when (it.serviceStatus) {
+                RouteStatus.Served -> ++servedRoutes
+                RouteStatus.Serving -> ++servingRoutes
+                RouteStatus.NotServed -> ++notServedRoutes
             }.exhaustive
         }
 
@@ -61,11 +89,15 @@ class RouteSelectionViewModel(private val repository: RoutesRepository) : ViewMo
             for ((index, element) in routes.withIndex()) {
                 if (element.number == details.first) {
                     position = index
-                    element.serviceCurrentStatus = details.second
+                    element.serviceStatus = details.second
                     break
                 }
             }
         }
         return position
+    }
+
+    fun serveRoute(routeNumber:Int){
+
     }
 }

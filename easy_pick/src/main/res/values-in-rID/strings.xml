@@ -49,8 +49,8 @@
     <string name="user_greeting">Halo,</string>
     <string name="general">Umum</string>
     <string name="loading">Harap tunggu, memuat …</string>
-    <string name="no_data_available">Data kosong, tidak ada data</string>
-    <string name="no_data_found">Kesalahan, tidak ada yang tersedia</string>
+    <string name="empty_data">Data kosong, tidak ada data</string>
+    <string name="error">Kesalahan, tidak ada yang tersedia</string>
     <string name="no_filter">Tidak ada filter</string>
     <string name="sort_in">Sortir di dalam</string>
     <string name="ascending">Progresif</string>

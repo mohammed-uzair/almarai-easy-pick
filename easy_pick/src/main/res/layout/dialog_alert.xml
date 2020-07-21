@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.almarai.easypick.utils.alert_dialog.AlertDialogViewModel" />
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="?colorBackgroundScreenHeader"
+        android:orientation="vertical">
+
+        <View
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginBottom="@dimen/_5sdp"
+            android:background="@drawable/card1"
+            app:layout_constraintBottom_toTopOf="@+id/dialog_alert_description"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/dialog_alert_title"
+            style="@style/AlmTextSingleLineBoldDialog"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_10sdp"
+            android:layout_marginTop="@dimen/_15sdp"
+            android:layout_marginEnd="@dimen/_5sdp"
+            android:gravity="center"
+            android:text="@{viewModel.alertTitleText}"
+            android:textSize="16sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="Double Chocolate Milk Shake 250ml" />
+
+        <TextView
+            android:id="@+id/dialog_alert_description"
+            style="@style/AlmTextSingleLineBoldDialog"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_10sdp"
+            android:layout_marginTop="@dimen/_15sdp"
+            android:layout_marginEnd="@dimen/_5sdp"
+            android:gravity="start"
+            android:maxLines="5"
+            android:text="@{viewModel.alertMessageText}"
+            android:textColor="?colorText"
+            android:textSize="16sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/dialog_alert_title"
+            tools:text="Double Chocolate Milk Shake 250ml Double Chocolate Milk Shake 250ml Double Chocolate Milk Shake 250ml..." />
+
+        <Button
+            android:id="@+id/dialog_alert_positive_button"
+            alertButtonVisibility="@{viewModel.alertPositiveButtonText}"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_15sdp"
+            android:layout_marginEnd="@dimen/_15sdp"
+            android:layout_marginBottom="@dimen/_8sdp"
+            android:onClick="@{() -> viewModel.positiveButtonClicked()}"
+            android:text="@{viewModel.alertPositiveButtonText}"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/dialog_alert_description"
+            tools:text="@string/alert_button_ok" />
+
+        <Button
+            android:id="@+id/dialog_alert_negative_button"
+            style="@style/Widget.MaterialComponents.Button.TextButton"
+            alertButtonVisibility="@{viewModel.alertNegativeButtonText}"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/_15sdp"
+            android:onClick="@{() -> viewModel.negativeButtonClicked()}"
+            android:text="@{viewModel.alertNegativeButtonText}"
+            app:layout_constraintBaseline_toBaselineOf="@+id/dialog_alert_positive_button"
+            app:layout_constraintEnd_toStartOf="@+id/dialog_alert_positive_button"
+            tools:text="@string/alert_button_cancel" />
+
+        <Button
+            android:id="@+id/dialog_alert_neutral_button"
+            style="@style/Widget.MaterialComponents.Button.TextButton"
+            alertButtonVisibility="@{viewModel.alertNeutralButtonText}"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/_15sdp"
+            android:onClick="@{() -> viewModel.neutralButtonClicked()}"
+            android:text="@{viewModel.alertNeutralButtonText}"
+            app:layout_constraintBaseline_toBaselineOf="@+id/dialog_alert_negative_button"
+            app:layout_constraintEnd_toStartOf="@+id/dialog_alert_negative_button"
+            tools:text="@string/alert_button_cancel" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>

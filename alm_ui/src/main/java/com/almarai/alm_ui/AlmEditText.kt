@@ -3,7 +3,6 @@ package com.almarai.alm_ui
 import android.annotation.SuppressLint
 import android.content.Context
 import android.os.Build
-import android.os.LocaleList
 import android.text.InputFilter
 import android.text.InputFilter.LengthFilter
 import android.text.InputType
@@ -13,6 +12,7 @@ import android.view.View
 import android.view.View.OnFocusChangeListener
 import android.widget.EditText
 import com.almarai.alm_ui.Constants.CHANGED_BY_PROG
+import com.almarai.alm_ui.Utils.APP_LOCALE
 import java.util.*
 
 
@@ -125,17 +125,9 @@ class AlmEditText : EditText {
 
     private fun getDigitsKeyListener(): DigitsKeyListener {
         return if (Build.VERSION.SDK_INT > Build.VERSION_CODES.O) {
-            DigitsKeyListener.getInstance(getCurrentLocale(), true, true)
+            DigitsKeyListener.getInstance(APP_LOCALE, true, true)
         } else {
             DigitsKeyListener.getInstance(true, true)
-        }
-    }
-
-    private fun getCurrentLocale(): Locale {
-        return if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-            LocaleList.getDefault()[0]
-        } else {
-            Locale.getDefault()
         }
     }
 

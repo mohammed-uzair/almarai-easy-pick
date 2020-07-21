@@ -1,11 +1,10 @@
 package com.almarai.easypick.screens
 
-import android.app.Activity
 import android.os.Bundle
 import android.text.InputType
 import android.view.*
 import android.view.animation.AnimationUtils
-import android.view.inputmethod.InputMethodManager
+import android.widget.Toast
 import androidx.appcompat.widget.SearchView
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
@@ -15,18 +14,15 @@ import androidx.navigation.NavController
 import androidx.navigation.Navigation
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.almarai.data.easy_pick_models.Product
 import com.almarai.data.easy_pick_models.Result
-import com.almarai.data.easy_pick_models.RouteStatus
 import com.almarai.data.easy_pick_models.filter.Filters
+import com.almarai.data.easy_pick_models.product.Product
+import com.almarai.data.easy_pick_models.route.RouteStatus
 import com.almarai.data.easy_pick_models.util.exhaustive
 import com.almarai.easypick.R
 import com.almarai.easypick.adapters.item.ProductsAdapter
 import com.almarai.easypick.databinding.ScreenProductBinding
 import com.almarai.easypick.extensions.*
-import com.almarai.easypick.extensions.hideViewStateAlert
-import com.almarai.easypick.extensions.setSearchView
-import com.almarai.easypick.extensions.showViewStateAlert
 import com.almarai.easypick.utils.BundleKeys
 import com.almarai.easypick.utils.FilterFunnel
 import com.almarai.easypick.utils.FilterScreenSource
@@ -42,7 +38,6 @@ class ProductListScreen(val adapter: ProductsAdapter) : Fragment(), SearchView.O
     private val args: ProductListScreenArgs by navArgs()
     private lateinit var screenProductBinding: ScreenProductBinding
     private lateinit var products: List<Product>
-    private var searchView: SearchView? = null
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -86,18 +81,15 @@ class ProductListScreen(val adapter: ProductsAdapter) : Fragment(), SearchView.O
         adapter.products = listOf()
         adapter.setProductScreenViewModel(productListViewModel)
 
-        productListViewModel.products.observe(viewLifecycleOwner, Observer {
-            it?.let { result ->
-                when (result) {
-                    is Result.Fetching -> showViewStateAlert(Alert.Loading)
-                    is Result.Success -> showDataUi(result.data)
-                    is Result.Error -> showViewStateAlert(Alert.Error)
-                }.exhaustive
-            }
-        })
+        productListViewModel.getAllProducts(args.SelectedRouteNumber)
+        observeProducts()
 
         setRecyclerView()
 
+        handleFilterScreenResult()
+    }
+
+    private fun handleFilterScreenResult() {
         val savedStateHandle = navController.currentBackStackEntry?.savedStateHandle
 
         savedStateHandle?.getLiveData<Filters>(BundleKeys.FILTER_MODEL)?.observe(
@@ -118,6 +110,24 @@ class ProductListScreen(val adapter: ProductsAdapter) : Fragment(), SearchView.O
                     productListViewModel.isFiltered.value = products.size != adapter.products.size
                 }
             })
+    }
+
+    private fun observeProducts() {
+        productListViewModel.products.observe(viewLifecycleOwner, Observer {
+            it?.let { result ->
+                when (result) {
+                    is Result.Fetching -> showViewStateAlert(
+                        Alert.Loading,
+                        R.string.fetching_products
+                    )
+                    is Result.Success -> showDataUi(result.data)
+                    is Result.Error -> {
+                        showViewStateAlert(Alert.Error)
+                        Toast.makeText(requireContext(), result.exceptionMessage, Toast.LENGTH_LONG).show()
+                    }
+                }.exhaustive
+            }
+        })
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
@@ -141,30 +151,44 @@ class ProductListScreen(val adapter: ProductsAdapter) : Fragment(), SearchView.O
             R.id.menu_product_action_save -> {
                 val saveStateHandle = navController.previousBackStackEntry?.savedStateHandle
 
+                //Save the data in the data source
+                productListViewModel.updateRouteData(args.SelectedRouteNumber, products)
+
                 //Set the result
                 saveStateHandle?.set(
                     BundleKeys.ROUTE_PROCESSED,
                     Pair(args.SelectedRouteNumber, RouteStatus.Served)
                 )
 
-                navController.popBackStack()
-            }
-            R.id.menu_product_action_search -> {
-                viewLifecycleOwner.lifecycleScope.launch {
-                    delay(100)
-
-                   hideKeyboard()
-                }
+                observeRouteUpdated()
             }
         }
 
         return super.onOptionsItemSelected(item)
     }
 
+    private fun observeRouteUpdated() {
+        productListViewModel.routeDataUpdated.observe(viewLifecycleOwner, Observer {
+            it?.let { result ->
+                when (result) {
+                    is Result.Fetching -> {
+                    }
+                    is Result.Success -> {
+                        //Go back
+                        goBack()
+                    }
+                    is Result.Error -> {
+                    }
+//                    showAlertDialog(R.string.error, R.string.alert_default_message)
+                }.exhaustive
+            }
+        })
+    }
+
     private fun showDataUi(list: List<Product>) {
         //If the received data is empty
         if (list.isEmpty()) {
-            showViewStateAlert(Alert.NoDataAvailable)
+            showViewStateAlert(Alert.NoDataAvailable, R.string.no_data_available_products)
             return
         }
 
@@ -176,6 +200,8 @@ class ProductListScreen(val adapter: ProductsAdapter) : Fragment(), SearchView.O
         adapter.notifyDataSetChanged()
 
         productListViewModel.setRouteServiceDetails(list)
+
+        setListFocus()
     }
 
     private fun animateUI() {
@@ -229,4 +255,8 @@ class ProductListScreen(val adapter: ProductsAdapter) : Fragment(), SearchView.O
         FilterFunnel(adapter, Filters()).searchProducts(newText, products)
         return false
     }
+
+    private fun setListFocus() =
+        screenProductBinding.recyclerView.layoutMainRecyclerview
+            .showFocus(lifecycleScope = viewLifecycleOwner.lifecycleScope)
 }

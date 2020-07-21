@@ -4,21 +4,21 @@ import android.content.res.ColorStateList
 import android.widget.ImageView
 import androidx.core.content.ContextCompat
 import androidx.databinding.BindingAdapter
-import com.almarai.data.easy_pick_models.ProductStatus
-import com.almarai.data.easy_pick_models.RouteStatus
+import com.almarai.data.easy_pick_models.route.RouteStatus
+import com.almarai.data.easy_pick_models.product.ProductStatus
 import com.almarai.easypick.R
 import com.almarai.easypick.extensions.exhaustive
 
 @BindingAdapter("routeStatus")
 fun ImageView.bindRouteStatus(status: RouteStatus) {
     imageTintList = when (status) {
-        is RouteStatus.NotServed -> ColorStateList.valueOf(
+        RouteStatus.NotServed -> ColorStateList.valueOf(
             ContextCompat.getColor(context, R.color.green)
         )
-        is RouteStatus.Serving -> ColorStateList.valueOf(
+        RouteStatus.Serving -> ColorStateList.valueOf(
             ContextCompat.getColor(context, R.color.blue)
         )
-        is RouteStatus.Served -> ColorStateList.valueOf(
+        RouteStatus.Served -> ColorStateList.valueOf(
             ContextCompat.getColor(context, R.color.red)
         )
     }.exhaustive

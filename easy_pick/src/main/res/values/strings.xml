@@ -18,19 +18,8 @@
     <!--region Menu Titles-->
     <string name="menu_title_search">Search</string>
     <string name="menu_title_filter">Filter</string>
+    <string name="menu_title_barcode">Barcode</string>
     <string name="menu_title_save">Save</string>
-    <!--endregion-->
-
-    <!--region User Alert Messages-->
-    <!--endregion-->
-
-    <!--region Success Messages-->
-    <!--endregion-->
-
-    <!--region Failure Messages-->
-    <string name="network_not_available">Network not available.</string>
-    <string name="data_not_available">Data not available.</string>
-    <string name="system_date_not_in_range">System date is not within range.</string>
     <!--endregion-->
 
     <!--region List Header Titles-->
@@ -52,6 +41,7 @@
     <!--endregion-->
 
     <!--region Common-->
+    <string name="empty"> </string>
     <string name="crates">Crate(s)</string>
     <string name="pieces">Piece(s)</string>
     <!--endregion-->
@@ -102,19 +92,19 @@
 
     <!--region Alerts-->
     <string name="loading">Please wait, loading…</string>
-    <string name="no_data_available">Empty data, no data available</string>
-    <string name="no_data_found">Error, nothing found</string>
+    <string name="empty_data">Empty data</string>
+    <string name="error">Nothing found</string>
     <!--endregion-->
 
     <!--region Fetching-->
     <string name="fetching_routes">Fetching all routes, please wait…</string>
-    <string name="fetching_items">Fetching all items, please wait…</string>
+    <string name="fetching_products">Fetching all items, please wait…</string>
     <string name="fetching_statistics">Fetching statistics data, please wait…</string>
     <!--endregion-->
 
     <!--region No Data Available-->
     <string name="no_data_available_routes">We couldn\'t find any routes on this depot, please try again after some time, also please check the depot code or the server IP.</string>
-    <string name="no_data_available_items">We couldn\'t find any items on this route, please try again after some time, or check for other routes.</string>
+    <string name="no_data_available_products">We couldn\'t find any products on this route, please try again after some time, or check for other routes.</string>
     <string name="no_data_available_statistics">No statistics data available for the selected range, please select a range within the deployment of this app as the least start date and today\'s date, also please check for the device date if its synced.</string>
     <!--endregion-->
 
@@ -163,4 +153,37 @@
     <string name="hint_search_route">Search Route</string>
     <!--endregion-->
 
+    <!--region Alerts/Error messages-->
+    <string name="alert_default_title">Alert</string>
+    <string name="alert_title_fetching">Fetching data</string>
+    <string name="alert_default_message">Could not find anything</string>
+    <string name="alert_button_yes">Yes</string>
+    <string name="alert_button_no">NO</string>
+    <string name="alert_button_ok">OK</string>
+    <string name="alert_button_cancel">Cancel</string>
+    <string name="alert_button_done">Done</string>
+    <string name="alert_button_discard">Discard</string>
+    <string name="alert_button_update">Update</string>
+    <string name="alert_button_not_now">Not Now</string>
+    <string name="alert_button_later">Later</string>
+    <string name="alert_button_continue">Continue</string>
+    <string name="alert_button_proceed">Proceed</string>
+    <string name="alert_network_not_available">Network not available.</string>
+    <string name="alert_data_not_available">Data not available.</string>
+    <string name="alert_system_date_not_in_range">System date is not within range.</string>
+    <string name="alert_title_route_served">Route Served</string>
+    <string name="alert_title_route_serving">Route Serving</string>
+    <string name="alert_title_serve_route">Serve Route</string>
+    <string name="alert_title_discard_route">Discard Route</string>
+    <string name="alert_title_password">Enter Password</string>
+    <string name="alert_message_route_served">This route has already been served, please select a different route</string>
+    <string name="alert_message_route_serving">This route is getting served, please select a different route</string>
+    <string name="alert_message_route_serve">Are you sure you want to serve this route ?</string>
+    <string name="alert_message_route_discard">Are you sure you want to discard this route, all changes will be lost ?</string>
+    <string name="alert_message_route_save">Are you sure you want to save this route ?</string>
+    <string name="alert_message_route_not_found">Route number not found</string>
+    <string name="alert_message_password">Enter password to exit the app</string>
+    <string name="alert_message_incorrect_password">Incorrect password</string>
+    <string name="alert_message_route_serviced_sucessfully">Route has been serviced</string>
+    <!--endregion-->
 </resources>
