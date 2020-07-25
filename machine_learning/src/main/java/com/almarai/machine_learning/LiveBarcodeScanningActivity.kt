@@ -16,7 +16,6 @@
 
 package com.almarai.machine_learning
 
-import android.animation.AnimatorInflater
 import android.animation.AnimatorSet
 import android.app.Activity
 import android.content.Intent
@@ -36,7 +35,6 @@ import com.almarai.machine_learning.camera.CameraSourcePreview
 import com.almarai.machine_learning.camera.GraphicOverlay
 import com.almarai.machine_learning.camera.WorkflowModel
 import com.almarai.machine_learning.camera.WorkflowModel.WorkflowState
-import com.almarai.machine_learning.settings.SettingsActivity
 import com.google.android.material.chip.Chip
 import com.google.common.base.Objects
 import com.google.mlkit.md.R
@@ -67,10 +65,10 @@ class LiveBarcodeScanningActivity : AppCompatActivity(), OnClickListener {
         }
 
         promptChip = findViewById(R.id.bottom_prompt_chip)
-        promptChipAnimator =
-            (AnimatorInflater.loadAnimator(this, R.animator.bottom_prompt_chip_enter) as AnimatorSet).apply {
-                setTarget(promptChip)
-            }
+//        promptChipAnimator =
+//            (AnimatorInflater.loadAnimator(this, R.animator.bottom_prompt_chip_enter) as AnimatorSet).apply {
+//                setTarget(promptChip)
+//            }
 
         findViewById<View>(R.id.close_button).setOnClickListener(this)
         flashButton = findViewById<View>(R.id.flash_button).apply {
@@ -123,10 +121,6 @@ class LiveBarcodeScanningActivity : AppCompatActivity(), OnClickListener {
                         cameraSource!!.updateFlashMode(Camera.Parameters.FLASH_MODE_TORCH)
                     }
                 }
-            }
-            R.id.settings_button -> {
-                settingsButton?.isEnabled = false
-                startActivity(Intent(this, SettingsActivity::class.java))
             }
         }
     }
@@ -193,7 +187,8 @@ class LiveBarcodeScanningActivity : AppCompatActivity(), OnClickListener {
                 else -> promptChip?.visibility = View.GONE
             }
 
-            val shouldPlayPromptChipEnteringAnimation = wasPromptChipGone && promptChip?.visibility == View.VISIBLE
+            val shouldPlayPromptChipEnteringAnimation =
+                wasPromptChipGone && promptChip?.visibility == View.VISIBLE
             promptChipAnimator?.let {
                 if (shouldPlayPromptChipEnteringAnimation && !it.isRunning) it.start()
             }
