@@ -20,10 +20,10 @@ import android.content.Context
 import android.graphics.RectF
 import android.preference.PreferenceManager
 import androidx.annotation.StringRes
-import com.google.android.gms.common.images.Size
-import com.google.mlkit.md.R
 import com.almarai.machine_learning.camera.CameraSizePair
 import com.almarai.machine_learning.camera.GraphicOverlay
+import com.google.android.gms.common.images.Size
+import com.google.mlkit.md.R
 import com.google.mlkit.vision.barcode.Barcode
 
 /** Utility class to retrieve shared preferences.  */
@@ -47,7 +47,11 @@ object PreferenceUtils {
 
     fun getConfirmationTimeMs(context: Context): Int = when {
         isMultipleObjectsMode(context) -> 300
-        isAutoSearchEnabled(context) -> getIntPref(context, R.string.pref_key_confirmation_time_in_auto_search, 1500)
+        isAutoSearchEnabled(context) -> getIntPref(
+            context,
+            R.string.pref_key_confirmation_time_in_auto_search,
+            1500
+        )
         else -> getIntPref(context, R.string.pref_key_confirmation_time_in_manual_search, 500)
     }
 
@@ -56,29 +60,47 @@ object PreferenceUtils {
         barcode: Barcode
     ): Float {
         val context = overlay.context
-        return if (getBooleanPref(context, R.string.pref_key_enable_barcode_size_check, false)) {
-            val reticleBoxWidth = getBarcodeReticleBox(overlay).width()
+        val reticleBoxWidth = getBarcodeReticleBox(overlay).width()
             val barcodeWidth = overlay.translateX(barcode.boundingBox?.width()?.toFloat() ?: 0f)
-            val requiredWidth = reticleBoxWidth * getIntPref(context, R.string.pref_key_minimum_barcode_width, 50) / 100
-            (barcodeWidth / requiredWidth).coerceAtMost(1f)
-        } else {
-            1f
-        }
+//            val requiredWidth = reticleBoxWidth * getIntPref(
+//                context,
+//                R.string.pref_key_minimum_barcode_width,
+//                50
+//            ) / 100
+            val requiredWidth = reticleBoxWidth * 50 / 100
+            return (barcodeWidth / requiredWidth).coerceAtMost(1f)
+
+//        return if (getBooleanPref(context, R.string.pref_key_enable_barcode_size_check, false)) {
+//            val reticleBoxWidth = getBarcodeReticleBox(overlay).width()
+//            val barcodeWidth = overlay.translateX(barcode.boundingBox?.width()?.toFloat() ?: 0f)
+////            val requiredWidth = reticleBoxWidth * getIntPref(
+////                context,
+////                R.string.pref_key_minimum_barcode_width,
+////                50
+////            ) / 100
+//            val requiredWidth = reticleBoxWidth * 50 / 100
+//            (barcodeWidth / requiredWidth).coerceAtMost(1f)
+//        } else {
+//            1f
+//        }
     }
 
     fun getBarcodeReticleBox(overlay: GraphicOverlay): RectF {
         val context = overlay.context
         val overlayWidth = overlay.width.toFloat()
         val overlayHeight = overlay.height.toFloat()
-        val boxWidth = overlayWidth * getIntPref(context, R.string.pref_key_barcode_reticle_width, 80) / 100
-        val boxHeight = overlayHeight * getIntPref(context, R.string.pref_key_barcode_reticle_height, 35) / 100
+//        val boxWidth = overlayWidth * getIntPref(context, R.string.pref_key_barcode_reticle_width, 80) / 100
+        val boxWidth = overlayWidth * 80 / 100
+        val boxHeight = overlayHeight * 45 / 100
+//        val boxHeight = overlayHeight * getIntPref(context, R.string.pref_key_barcode_reticle_height, 35) / 100
         val cx = overlayWidth / 2
         val cy = overlayHeight / 2
         return RectF(cx - boxWidth / 2, cy - boxHeight / 2, cx + boxWidth / 2, cy + boxHeight / 2)
     }
 
-    fun shouldDelayLoadingBarcodeResult(context: Context): Boolean =
-        getBooleanPref(context, R.string.pref_key_delay_loading_barcode_result, true)
+//    fun shouldDelayLoadingBarcodeResult(context: Context): Boolean =
+//        getBooleanPref(context, R.string.pref_key_delay_loading_barcode_result, true)
+    fun shouldDelayLoadingBarcodeResult(context: Context): Boolean = false
 
     private fun getIntPref(context: Context, @StringRes prefKeyId: Int, defaultValue: Int): Int {
         val sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context)
@@ -100,6 +122,11 @@ object PreferenceUtils {
         }
     }
 
-    private fun getBooleanPref(context: Context, @StringRes prefKeyId: Int, defaultValue: Boolean): Boolean =
-        PreferenceManager.getDefaultSharedPreferences(context).getBoolean(context.getString(prefKeyId), defaultValue)
+    private fun getBooleanPref(
+        context: Context,
+        @StringRes prefKeyId: Int,
+        defaultValue: Boolean
+    ): Boolean =
+        PreferenceManager.getDefaultSharedPreferences(context)
+            .getBoolean(context.getString(prefKeyId), defaultValue)
 }

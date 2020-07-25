@@ -11,6 +11,7 @@ import android.util.AttributeSet
 import android.view.View
 import android.view.View.OnFocusChangeListener
 import android.widget.EditText
+import androidx.appcompat.widget.AppCompatEditText
 import com.almarai.alm_ui.Constants.CHANGED_BY_PROG
 import com.almarai.alm_ui.Utils.APP_LOCALE
 import java.util.*
@@ -20,7 +21,7 @@ import java.util.*
  * This class is the common class for edit text with no keyboard
  */
 @SuppressLint("AppCompatCustomView")
-class AlmEditText : EditText {
+open class AlmEditText : AppCompatEditText {
     //Global Variables
     private var type = 0
 

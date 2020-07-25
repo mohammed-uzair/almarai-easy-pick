@@ -17,7 +17,7 @@ import com.almarai.easypick.R
 import com.almarai.easypick.databinding.ItemRouteBinding
 import com.almarai.easypick.screens.RouteSelectionScreen
 import com.almarai.easypick.screens.RouteSelectionScreenDirections
-import com.almarai.easypick.utils.alert_dialog.OnPositiveButtonClick
+import com.almarai.easypick.utils.alert_dialog.OnPositiveButtonClickListener
 import com.almarai.easypick.utils.alert_dialog.hideAlertDialog
 import com.almarai.easypick.utils.alert_dialog.showAlertDialog
 import com.almarai.easypick.view_models.RouteSelectionViewModel
@@ -107,7 +107,7 @@ class RoutesAdapter : RecyclerView.Adapter<RoutesAdapter.ViewHolder>() {
                 R.string.alert_message_route_serve,
                 R.string.alert_button_yes,
                 R.string.alert_button_no,
-                positiveButtonListener = object : OnPositiveButtonClick {
+                positiveButtonClickListener = object : OnPositiveButtonClickListener {
                     override fun onClick() {
                         //Check if this routes can be serviced
                         val routeNumber = routeBinding.route?.number
@@ -133,7 +133,7 @@ class RoutesAdapter : RecyclerView.Adapter<RoutesAdapter.ViewHolder>() {
                             //Show loading progress
                         }
                         is Result.Success -> {
-                            if(result.data.isAccessible) {
+                            if (result.data.isAccessible) {
                                 val action = RouteSelectionScreenDirections
                                     .actionRouteSelectionScreenToProductListScreen(
                                         routeBinding.itemRouteNumberText.text.toString()
@@ -141,7 +141,7 @@ class RoutesAdapter : RecyclerView.Adapter<RoutesAdapter.ViewHolder>() {
                                     )
                                 routeBinding.root.findNavController()
                                     .navigate(action)
-                            }else{
+                            } else {
                                 //Alert the user
                                 fragment.showAlertDialog(
                                     R.string.error,

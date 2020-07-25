@@ -203,8 +203,8 @@ dependencies {
     implementation "com.google.android.material:material:$material_version"
 
     // Leak Canary
-    def leak_canary_version = "2.0-alpha-3"
-    debugImplementation "com.squareup.leakcanary:leakcanary-android:$leak_canary_version"
+//    def leak_canary_version = "2.0-alpha-3"
+//    debugImplementation "com.squareup.leakcanary:leakcanary-android:$leak_canary_version"
 
     // Recyclerview
     def recyclerview_version = '1.2.0-alpha04'
@@ -217,4 +217,7 @@ dependencies {
     implementation 'com.google.mlkit:barcode-scanning:16.0.1'
 
     api 'com.google.guava:guava:29.0-jre'
+
+    //Round view
+    implementation 'de.hdodenhof:circleimageview:3.1.0'
 }

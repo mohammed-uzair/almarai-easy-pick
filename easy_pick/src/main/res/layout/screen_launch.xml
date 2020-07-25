@@ -41,7 +41,8 @@
             android:textSize="50sp"
             android:textStyle="bold"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="EASY PICK" />
 
         <TextView
             android:id="@+id/screen_launch_app_description_text"
@@ -89,7 +90,6 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="@dimen/_40sdp"
-            android:text="124786"
             android:textColor="@color/colorEmployeeId"
             android:textSize="20sp"
             android:textStyle="bold"

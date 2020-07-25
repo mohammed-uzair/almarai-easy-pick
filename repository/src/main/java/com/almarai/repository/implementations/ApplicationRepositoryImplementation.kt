@@ -2,20 +2,24 @@ package com.almarai.repository.implementations
 
 import com.almarai.business.Utils.AppDateTimeFormat
 import com.almarai.business.Utils.DateUtil.convertDateToMilliseconds
+import com.almarai.data.easy_pick_models.AppUpdate
 import com.almarai.data.easy_pick_models.DataConfiguration
 import com.almarai.data.easy_pick_models.NetworkConfiguration
 import com.almarai.data.easy_pick_models.User
-import com.almarai.easypick.data_source.shared_preference.SharedPreferencesKeys.Companion.DATA_CONFIGURATION_STATUS
-import com.almarai.easypick.data_source.shared_preference.SharedPreferencesKeys.Companion.DEPOT_CODE
-import com.almarai.easypick.data_source.shared_preference.SharedPreferencesKeys.Companion.NETWORK_CONFIGURATION_SERVER_IP
-import com.almarai.easypick.data_source.shared_preference.SharedPreferencesKeys.Companion.NETWORK_CONFIGURATION_SERVER_PORT
-import com.almarai.easypick.data_source.shared_preference.SharedPreferencesKeys.Companion.NETWORK_CONFIGURATION_STATUS
-import com.almarai.easypick.data_source.shared_preference.SharedPreferencesKeys.Companion.ROUTE_PREFERENCE
-import com.almarai.easypick.data_source.shared_preference.SharedPreferencesKeys.Companion.SALES_DATE
-import com.almarai.easypick.data_source.shared_preference.SharedPreferencesKeys.Companion.USER_LOGGED_IN_STATUS
-import com.almarai.easypick.data_source.shared_preference.SharedPreferencesKeys.Companion.USER_LOGGED_USER_ID
-import com.almarai.easypick.data_source.shared_preference.SharedPreferencesKeys.Companion.USER_LOGGED_USER_NAME
-import com.almarai.easypick.data_source.shared_preference.interfaces.SharedPreferenceDataSource
+import com.almarai.easypick.data_source.local_data_source.SharedPreferencesKeys.Companion.APP_UPDATE
+import com.almarai.easypick.data_source.local_data_source.SharedPreferencesKeys.Companion.APP_UPDATE_DENY_COUNTER
+import com.almarai.easypick.data_source.local_data_source.SharedPreferencesKeys.Companion.APP_UPDATE_ELAPSED_TIMER
+import com.almarai.easypick.data_source.local_data_source.SharedPreferencesKeys.Companion.DATA_CONFIGURATION_STATUS
+import com.almarai.easypick.data_source.local_data_source.SharedPreferencesKeys.Companion.DEPOT_CODE
+import com.almarai.easypick.data_source.local_data_source.SharedPreferencesKeys.Companion.NETWORK_CONFIGURATION_SERVER_IP
+import com.almarai.easypick.data_source.local_data_source.SharedPreferencesKeys.Companion.NETWORK_CONFIGURATION_SERVER_PORT
+import com.almarai.easypick.data_source.local_data_source.SharedPreferencesKeys.Companion.NETWORK_CONFIGURATION_STATUS
+import com.almarai.easypick.data_source.local_data_source.SharedPreferencesKeys.Companion.ROUTE_PREFERENCE
+import com.almarai.easypick.data_source.local_data_source.SharedPreferencesKeys.Companion.SALES_DATE
+import com.almarai.easypick.data_source.local_data_source.SharedPreferencesKeys.Companion.USER_LOGGED_IN_STATUS
+import com.almarai.easypick.data_source.local_data_source.SharedPreferencesKeys.Companion.USER_LOGGED_USER_ID
+import com.almarai.easypick.data_source.local_data_source.SharedPreferencesKeys.Companion.USER_LOGGED_USER_NAME
+import com.almarai.easypick.data_source.local_data_source.interfaces.SharedPreferenceDataSource
 import com.almarai.repository.api.ApplicationRepository
 import com.almarai.repository.utils.AppDataConfiguration
 
@@ -113,4 +117,34 @@ class ApplicationRepositoryImplementation(private val sharedPreferenceDataSource
         else
             AppDataConfiguration.Home
     }
+
+    override fun setAppUpdate(appUpdate: AppUpdate?) =
+        sharedPreferenceDataSource.setSharedPreferenceJson(
+            APP_UPDATE, appUpdate
+        )
+
+    override fun getAppUpdate() =
+        (sharedPreferenceDataSource.getSharedPreferenceJsonObject(
+            APP_UPDATE,
+            AppUpdate::class.java
+        )) as AppUpdate?
+
+    override fun getAppUpdateDenyCounter() =
+        sharedPreferenceDataSource.getSharedPreferenceInt(APP_UPDATE_DENY_COUNTER)
+
+    override fun increaseAppUpdateDenyCounter(): Int {
+        val result = sharedPreferenceDataSource.getSharedPreferenceInt(APP_UPDATE_DENY_COUNTER) + 1
+        sharedPreferenceDataSource.setSharedPreference(APP_UPDATE_DENY_COUNTER, result)
+
+        return result
+    }
+
+    override fun getAppUpdateElapsedTimer() =
+        sharedPreferenceDataSource.getSharedPreferenceLong(APP_UPDATE_ELAPSED_TIMER)
+
+    override fun setAppUpdateElapsedTimer(updatedTimer: Long) =
+        sharedPreferenceDataSource.setSharedPreference(APP_UPDATE_ELAPSED_TIMER, updatedTimer)
+
+    override fun reSetAppUpdateDenyCounter() =
+        sharedPreferenceDataSource.setSharedPreference(APP_UPDATE_DENY_COUNTER, 0)
 }

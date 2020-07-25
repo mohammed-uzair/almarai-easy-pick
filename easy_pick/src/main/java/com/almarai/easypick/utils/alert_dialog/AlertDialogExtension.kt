@@ -1,154 +1,158 @@
 package com.almarai.easypick.utils.alert_dialog
 
-import android.app.Activity
 import androidx.annotation.StringRes
+import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
-import androidx.fragment.app.FragmentTransaction
 import com.almarai.easypick.R
 
-sealed class ButtonFocus {
-    object Positive : ButtonFocus()
-    object Negative : ButtonFocus()
-    object Neutral : ButtonFocus()
-}
+internal fun AppCompatActivity.showAlertDialog(
+    @StringRes alertTitle: Int = R.string.alert_default_title,
+    alertMessage: String,
+    @StringRes buttonPositiveText: Int = R.string.alert_button_ok,
+    @StringRes buttonNegativeText: Int = R.string.empty,
+    @StringRes buttonNeutralText: Int = R.string.empty,
+    positiveButtonClickListener: OnPositiveButtonClickListener? = null,
+    negativeButtonClickListener: OnNegativeButtonClickListener? = null,
+    neutralButtonClickListener: OnNeutralButtonClickListener? = null
+) =
+    showAlert(
+        alertTitle,
+        alertMessage,
+        buttonPositiveText,
+        buttonNegativeText,
+        buttonNeutralText,
+        positiveButtonClickListener,
+        negativeButtonClickListener,
+        neutralButtonClickListener,
+        this
+    )
 
-sealed class ButtonEmphasis {
-    object High : ButtonEmphasis()
-    object Medium : ButtonEmphasis()
-    object Low : ButtonEmphasis()
-}
+internal fun AppCompatActivity.showAlertDialog(
+    @StringRes alertTitle: Int = R.string.alert_default_title,
+    alertMessage: Int,
+    @StringRes buttonPositiveText: Int = R.string.alert_button_ok,
+    @StringRes buttonNegativeText: Int = R.string.empty,
+    @StringRes buttonNeutralText: Int = R.string.empty,
+    positiveButtonClickListener: OnPositiveButtonClickListener? = null,
+    negativeButtonClickListener: OnNegativeButtonClickListener? = null,
+    neutralButtonClickListener: OnNeutralButtonClickListener? = null
+) =
+    showAlert(
+        alertTitle,
+        getString(alertMessage),
+        buttonPositiveText,
+        buttonNegativeText,
+        buttonNeutralText,
+        positiveButtonClickListener,
+        negativeButtonClickListener,
+        neutralButtonClickListener,
+        this
+    )
 
-@FunctionalInterface
-interface OnPositiveButtonClick {
-    fun onClick()
-}
+internal fun AppCompatActivity.hideAlertDialog() = hideAlertDialog(supportFragmentManager)
 
-interface OnNegativeButtonClick {
-    fun onClick()
-}
-
-interface OnNeutralButtonClick {
-    fun onClick()
-}
+internal fun Fragment.showAlertDialog(
+    @StringRes alertTitle: Int = R.string.alert_default_title,
+    alertMessage: String = getString(R.string.alert_default_message),
+    @StringRes buttonPositiveText: Int = R.string.alert_button_ok,
+    @StringRes buttonNegativeText: Int = R.string.empty,
+    @StringRes buttonNeutralText: Int = R.string.empty,
+    positiveButtonClickListener: OnPositiveButtonClickListener? = null,
+    negativeButtonClickListener: OnNegativeButtonClickListener? = null,
+    neutralButtonClickListener: OnNeutralButtonClickListener? = null
+) =
+    showAlert(
+        alertTitle,
+        alertMessage,
+        buttonPositiveText,
+        buttonNegativeText,
+        buttonNeutralText,
+        positiveButtonClickListener,
+        negativeButtonClickListener,
+        neutralButtonClickListener,
+        requireActivity() as AppCompatActivity
+    )
 
 internal fun Fragment.showAlertDialog(
     @StringRes alertTitle: Int = R.string.alert_default_title,
     @StringRes alertMessage: Int = R.string.alert_default_message,
     @StringRes buttonPositiveText: Int = R.string.alert_button_ok,
-    @StringRes buttonNegativeText: Int = -1,
-    @StringRes buttonNeutralText: Int = -1,
-    positiveButtonListener: OnPositiveButtonClick? = null,
-    negativeButtonListener: OnNegativeButtonClick? = null,
-    neutralButtonListener: OnNeutralButtonClick? = null
-) {
-    val alertDialog = AlertDialog()
-    alertDialog.setBundleDate(
+    @StringRes buttonNegativeText: Int = R.string.empty,
+    @StringRes buttonNeutralText: Int = R.string.empty,
+    positiveButtonClickListener: OnPositiveButtonClickListener? = null,
+    negativeButtonClickListener: OnNegativeButtonClickListener? = null,
+    neutralButtonClickListener: OnNeutralButtonClickListener? = null
+) =
+    showAlert(
         alertTitle,
-        alertMessage,
+        getString(alertMessage),
         buttonPositiveText,
         buttonNegativeText,
-        buttonNeutralText
+        buttonNeutralText,
+        positiveButtonClickListener,
+        negativeButtonClickListener,
+        neutralButtonClickListener,
+        requireActivity() as AppCompatActivity
     )
 
-    val fragmentManager = requireActivity().supportFragmentManager
+internal fun Fragment.hideAlertDialog() = hideAlertDialog(requireActivity().supportFragmentManager)
+
+interface OnPositiveButtonClickListener {
+    fun onClick()
+}
+
+interface OnNegativeButtonClickListener {
+    fun onClick()
+}
+
+interface OnNeutralButtonClickListener {
+    fun onClick()
+}
+
+private fun showAlert(
+    @StringRes alertTitle: Int = R.string.alert_default_message,
+    alertMessage: String = "",
+    @StringRes buttonPositiveText: Int,
+    @StringRes buttonNegativeText: Int,
+    @StringRes buttonNeutralText: Int,
+    positiveButtonClickListener: OnPositiveButtonClickListener? = null,
+    negativeButtonClickListener: OnNegativeButtonClickListener? = null,
+    neutralButtonClickListener: OnNeutralButtonClickListener? = null,
+    activity: AppCompatActivity
+): AppAlertDialog {
+    val alertDialog = AppAlertDialog().apply {
+        setBundle(
+            activity.getString(alertTitle),
+            alertMessage,
+            activity.getString(buttonPositiveText),
+            activity.getString(buttonNegativeText),
+            activity.getString(buttonNeutralText)
+        )
+
+        this.positiveButtonClickListener = positiveButtonClickListener
+        this.negativeButtonClickListener = negativeButtonClickListener
+        this.neutralButtonClickListener = neutralButtonClickListener
+    }
+
+    val fragmentManager = activity.supportFragmentManager
     val fragmentTransaction = fragmentManager.beginTransaction()
 
-    hideAlertDialog(fragmentManager, fragmentTransaction)
+    hideAlertDialog(fragmentManager)
 
     //Show the dialog
-    fragmentTransaction.addToBackStack(AlertDialog.TAG)
-    alertDialog.show(fragmentManager, AlertDialog.TAG)
+    fragmentTransaction.addToBackStack(AppAlertDialog.TAG)
 
-    alertDialog.setPositiveButtonListener(positiveButtonListener)
-    alertDialog.setNegativeButtonListener(negativeButtonListener)
-    alertDialog.setNeutralButtonListener(neutralButtonListener)
+    alertDialog.show(fragmentManager, AppAlertDialog.TAG)
+    return alertDialog
 }
 
-private fun hideAlertDialog(
-    fragmentManager: FragmentManager,
-    fragmentTransaction: FragmentTransaction
-) {
+private fun hideAlertDialog(fragmentManager: FragmentManager) {
     //Remove previous dialog
-    val previousDialog = fragmentManager.findFragmentByTag(AlertDialog.TAG)
+    val previousDialog = fragmentManager.findFragmentByTag(AppAlertDialog.TAG)
     if (previousDialog != null) {
+        val fragmentTransaction = fragmentManager.beginTransaction()
         fragmentTransaction.remove(previousDialog)
-        (previousDialog as AlertDialog).dismiss()
+        (previousDialog as AppAlertDialog).dismiss()
     }
 }
-
-
-/*
-private fun Activity.showAlertDialog(
-    @StringRes alertTitle: Int = R.string.alert,
-    @StringRes alertMessage: Int = R.string.alert,
-    @StringRes buttonPositiveText: Int = R.string.alert_button_ok,
-    @StringRes buttonNegativeText: Int = -1,
-    @StringRes buttonNeutralText: Int = -1,
-    positiveButton: OnPositiveButtonClick?,
-    negativeButton: OnNegativeButtonClick?,
-    neutralButton: OnNeutralButtonClick?
-) {
-    val alertDialog = AlertDialog()
-
-
-}
-*/
-
-
-//
-//internal fun Dialog.showAlert(
-//    @StringRes alertTitle: Int = R.string.alert,
-//    @StringRes alertMessage: Int = R.string.alert,
-//    @StringRes buttonPositiveText: Int = R.string.alert_button_ok,
-//    @StringRes buttonNegativeText: Int = -1,
-//    @StringRes buttonNeutralText: Int = -1,
-//    positiveButtonListener: OnAlertPositiveButtonClickListener?,
-//    negativeButtonListener: OnAlertNegativeButtonClickListener?,
-//    neutralButtonListener: OnAlertNeutralButtonClickListener?
-//) = showAlertDialog(
-//    alertTitle,
-//    alertMessage,
-//    buttonPositiveText,
-//    buttonNegativeText,
-//    buttonNeutralText,
-//    positiveButtonListener,
-//    negativeButtonListener,
-//    neutralButtonListener
-//)
-//
-//internal fun Activity.showAlert(
-//    @StringRes alertTitle: Int = R.string.alert,
-//    @StringRes alertMessage: Int = R.string.alert,
-//    @StringRes buttonPositiveText: Int = R.string.alert_button_ok,
-//    @StringRes buttonNegativeText: Int = -1,
-//    @StringRes buttonNeutralText: Int = -1,
-//    positiveButtonListener: OnAlertPositiveButtonClickListener?,
-//    negativeButtonListener: OnAlertNegativeButtonClickListener?,
-//    neutralButtonListener: OnAlertNeutralButtonClickListener?
-//) = showAlertDialog(
-//    alertTitle,
-//    alertMessage,
-//    buttonPositiveText,
-//    buttonNegativeText,
-//    buttonNeutralText,
-//    positiveButtonListener,
-//    negativeButtonListener,
-//    neutralButtonListener
-//)
-
-internal fun Fragment.hideAlertDialog(){
-    val fragmentManager = requireActivity().supportFragmentManager
-    val fragmentTransaction = fragmentManager.beginTransaction()
-
-    hideAlertDialog(fragmentManager, fragmentTransaction)
-}
-
-
-
-
-
-
-
-
-

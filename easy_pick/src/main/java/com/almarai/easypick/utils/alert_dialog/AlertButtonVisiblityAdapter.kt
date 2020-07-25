@@ -6,5 +6,5 @@ import androidx.databinding.BindingAdapter
 
 @BindingAdapter("alertButtonVisibility")
 fun Button.bindVisibility(buttonText: String) {
-    visibility = if (buttonText.length > 1) View.VISIBLE else View.GONE
+    visibility = if (buttonText.isNotEmpty()) View.VISIBLE else View.GONE
 }

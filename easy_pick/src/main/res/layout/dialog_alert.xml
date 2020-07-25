@@ -7,63 +7,97 @@
 
         <variable
             name="viewModel"
-            type="com.almarai.easypick.utils.alert_dialog.AlertDialogViewModel" />
+            type="com.almarai.easypick.utils.alert_dialog.AppAlertDialogViewModel" />
 
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="?colorBackgroundScreenHeader"
-        android:orientation="vertical">
+        android:background="@drawable/dialog"
+        app:layout_constraintTop_toTopOf="parent">
 
-        <View
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/dialog_alert_guideline"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.5" />
+
+        <ImageView
+            android:id="@+id/dialog_alert_header_image"
             android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:layout_marginBottom="@dimen/_5sdp"
-            android:background="@drawable/card1"
-            app:layout_constraintBottom_toTopOf="@+id/dialog_alert_description"
+            android:layout_height="@dimen/_12sdp"
+            android:adjustViewBounds="true"
+            android:contentDescription="@string/image_description_theme_background"
+            android:scaleType="fitXY"
+            android:src="@drawable/sample"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="@+id/dialog_alert_animation" />
+
+        <ImageView
+            android:id="@+id/dialog_alert_header_image1"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:adjustViewBounds="true"
+            android:contentDescription="@string/image_description_theme_background"
+            android:scaleType="fitXY"
+            android:src="@drawable/ic_other_screens_background"
+            app:layout_constraintBottom_toTopOf="@+id/dialog_alert_guideline"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/dialog_alert_header_image" />
+
+        <com.airbnb.lottie.LottieAnimationView
+            android:id="@+id/dialog_alert_animation"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:padding="@dimen/_12sdp"
+            android:scaleType="fitCenter"
+            app:layout_constraintBottom_toTopOf="@+id/dialog_alert_guideline"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:lottie_autoPlay="true"
+            app:lottie_loop="true"
+            app:lottie_rawRes="@raw/anim_update"
+            tools:src="@drawable/ic_settings" />
 
         <TextView
             android:id="@+id/dialog_alert_title"
             style="@style/AlmTextSingleLineBoldDialog"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/_10sdp"
-            android:layout_marginTop="@dimen/_15sdp"
-            android:layout_marginEnd="@dimen/_5sdp"
+            android:layout_marginStart="@dimen/_12sdp"
+            android:layout_marginTop="@dimen/_5sdp"
+            android:layout_marginEnd="@dimen/_12sdp"
             android:gravity="center"
             android:text="@{viewModel.alertTitleText}"
-            android:textSize="16sp"
+            android:textSize="20sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:text="Double Chocolate Milk Shake 250ml" />
+            app:layout_constraintTop_toBottomOf="@id/dialog_alert_guideline"
+            tools:text="Update available" />
 
         <TextView
             android:id="@+id/dialog_alert_description"
             style="@style/AlmTextSingleLineBoldDialog"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/_10sdp"
-            android:layout_marginTop="@dimen/_15sdp"
-            android:layout_marginEnd="@dimen/_5sdp"
-            android:gravity="start"
+            android:layout_marginTop="@dimen/_12sdp"
+            android:ellipsize="end"
             android:maxLines="5"
             android:text="@{viewModel.alertMessageText}"
-            android:textColor="?colorText"
-            android:textSize="16sp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/dialog_alert_title"
-            tools:text="Double Chocolate Milk Shake 250ml Double Chocolate Milk Shake 250ml Double Chocolate Milk Shake 250ml..." />
+            android:textSize="14sp"
+            android:textStyle="normal"
+            app:layout_constraintEnd_toEndOf="@+id/dialog_alert_title"
+            app:layout_constraintStart_toStartOf="@+id/dialog_alert_title"
+            app:layout_constraintTop_toBottomOf="@+id/dialog_alert_title"
+            tools:text="@string/alert_message_update_available" />
 
         <Button
             android:id="@+id/dialog_alert_positive_button"
-            alertButtonVisibility="@{viewModel.alertPositiveButtonText}"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/_15sdp"
@@ -87,7 +121,7 @@
             android:text="@{viewModel.alertNegativeButtonText}"
             app:layout_constraintBaseline_toBaselineOf="@+id/dialog_alert_positive_button"
             app:layout_constraintEnd_toStartOf="@+id/dialog_alert_positive_button"
-            tools:text="@string/alert_button_cancel" />
+            tools:text="@string/alert_button_later" />
 
         <Button
             android:id="@+id/dialog_alert_neutral_button"

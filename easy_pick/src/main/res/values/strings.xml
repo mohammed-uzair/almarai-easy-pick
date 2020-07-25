@@ -67,6 +67,8 @@
     <string name="general">General</string>
     <string name="app_theme" translatable="false">App Theme</string>
     <string name="app_language" translatable="false">App Language</string>
+    <string name="app_update" translatable="false">App Update</string>
+    <string name="app_update_summary" translatable="false">Check for new app updates</string>
 
     <string name="base_app_theme" translatable="false">base</string>
     <string name="light_app_theme" translatable="false">light</string>
@@ -175,8 +177,11 @@
     <string name="alert_title_route_serving">Route Serving</string>
     <string name="alert_title_serve_route">Serve Route</string>
     <string name="alert_title_discard_route">Discard Route</string>
+    <string name="alert_title_update_available">Update Available</string>
     <string name="alert_title_password">Enter Password</string>
     <string name="alert_message_route_served">This route has already been served, please select a different route</string>
+    <string name="alert_message_update_available">A new update for the app is available, please update your app\nUpdate Details\n</string>
+    <string name="alert_message_force_update">This is a mandatory update, please update the app\nUpdate Details\n</string>
     <string name="alert_message_route_serving">This route is getting served, please select a different route</string>
     <string name="alert_message_route_serve">Are you sure you want to serve this route ?</string>
     <string name="alert_message_route_discard">Are you sure you want to discard this route, all changes will be lost ?</string>

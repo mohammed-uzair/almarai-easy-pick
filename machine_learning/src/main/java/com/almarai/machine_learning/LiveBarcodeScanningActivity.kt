@@ -18,6 +18,7 @@ package com.almarai.machine_learning
 
 import android.animation.AnimatorInflater
 import android.animation.AnimatorSet
+import android.app.Activity
 import android.content.Intent
 import android.hardware.Camera
 import android.os.Bundle
@@ -27,24 +28,24 @@ import android.view.View.OnClickListener
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
-import com.google.android.material.chip.Chip
-import com.google.common.base.Objects
-import com.almarai.machine_learning.camera.GraphicOverlay
-import com.almarai.machine_learning.camera.WorkflowModel
-import com.almarai.machine_learning.camera.WorkflowModel.WorkflowState
 import com.almarai.machine_learning.barcodedetection.BarcodeField
 import com.almarai.machine_learning.barcodedetection.BarcodeProcessor
 import com.almarai.machine_learning.barcodedetection.BarcodeResultFragment
 import com.almarai.machine_learning.camera.CameraSource
 import com.almarai.machine_learning.camera.CameraSourcePreview
+import com.almarai.machine_learning.camera.GraphicOverlay
+import com.almarai.machine_learning.camera.WorkflowModel
+import com.almarai.machine_learning.camera.WorkflowModel.WorkflowState
 import com.almarai.machine_learning.settings.SettingsActivity
+import com.google.android.material.chip.Chip
+import com.google.common.base.Objects
 import com.google.mlkit.md.R
 import java.io.IOException
-import java.util.ArrayList
+import java.util.*
+
 
 /** Demonstrates the barcode scanning workflow using camera preview.  */
 class LiveBarcodeScanningActivity : AppCompatActivity(), OnClickListener {
-
     private var cameraSource: CameraSource? = null
     private var preview: CameraSourcePreview? = null
     private var graphicOverlay: GraphicOverlay? = null
@@ -202,12 +203,19 @@ class LiveBarcodeScanningActivity : AppCompatActivity(), OnClickListener {
             if (barcode != null) {
                 val barcodeFieldList = ArrayList<BarcodeField>()
                 barcodeFieldList.add(BarcodeField("Raw Value", barcode.rawValue ?: ""))
-                BarcodeResultFragment.show(supportFragmentManager, barcodeFieldList)
+
+                val returnIntent = Intent()
+                returnIntent.putExtra(EXTRA_SCANNED_BARCODE, barcode.rawValue)
+                setResult(Activity.RESULT_OK, returnIntent)
+                finish()
+//                BarcodeResultFragment.show(supportFragmentManager, barcodeFieldList)
             }
         })
     }
 
     companion object {
         private const val TAG = "LiveBarcodeActivity"
+        const val BARCODE_SCANNER_ACTIVITY_RESULT = 10010
+        const val EXTRA_SCANNED_BARCODE = "BarcodeResult"
     }
 }

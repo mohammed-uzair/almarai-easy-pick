@@ -8,7 +8,9 @@ import com.almarai.easypick.di.ViewModelsModule
 import com.almarai.easypick.extensions.IS_HARDWARE_KEYBOARD_AVAILABLE
 import com.almarai.easypick.extensions.isHardwareKeyboardAvailable
 import com.almarai.easypick.lifecycle_handlers.ActivityLifecycleHandler
+import com.almarai.repository.di.DataSourceModule
 import com.almarai.repository.di.RepositoryModule
+import org.koin.android.ext.android.inject
 import org.koin.android.ext.koin.androidContext
 import org.koin.android.ext.koin.androidLogger
 import org.koin.androidx.fragment.koin.fragmentFactory
@@ -23,11 +25,13 @@ class AndroidApplication : Application() {
             androidContext(this@AndroidApplication)
             fragmentFactory()
             // declare modules
-            modules(AppModule, FragmentModule, ViewModelsModule, RepositoryModule)
+            modules(AppModule, FragmentModule, ViewModelsModule, RepositoryModule, DataSourceModule)
         }
 
+        val activityLifecycleHandler: ActivityLifecycleHandler by inject()
+
         // Register the activity lifecycle callback listener object
-        registerActivityLifecycleCallbacks(ActivityLifecycleHandler())
+        registerActivityLifecycleCallbacks(activityLifecycleHandler)
     }
 
     override fun onConfigurationChanged(newConfig: Configuration) {

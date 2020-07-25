@@ -1,29 +1,44 @@
 package com.almarai.easypick.data_source.web
 
 import android.os.Build
+import android.util.Log
+import com.almarai.data.easy_pick_models.AppUpdate
 import com.almarai.easypick.data_source.BuildConfig
-import com.almarai.easypick.data_source.shared_preference.SharedPreferencesKeys
-import com.almarai.easypick.data_source.shared_preference.interfaces.SharedPreferenceDataSource
+import com.almarai.easypick.data_source.local_data_source.SharedPreferencesKeys
+import com.almarai.easypick.data_source.local_data_source.interfaces.LocalAppUpdateDataSource
+import com.almarai.easypick.data_source.local_data_source.interfaces.SharedPreferenceDataSource
+import com.almarai.easypick.data_source.web.api.AppUpdateApi
 import com.almarai.easypick.data_source.web.api.ProductsApi
 import com.almarai.easypick.data_source.web.api.RoutesApi
 import com.almarai.easypick.data_source.web.api.StatisticsApi
+import com.google.gson.Gson
+import com.google.gson.JsonSyntaxException
 import okhttp3.OkHttpClient
 import okhttp3.Request
+import okhttp3.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import java.text.DateFormat
 import java.text.ParseException
 import java.text.SimpleDateFormat
 import java.util.*
-import java.util.concurrent.TimeUnit
 
 
 const val DEFAULT_URL = "http://192.168.1.237:8080/"
 
-class WebService(private val sharedPreferenceDataSource: SharedPreferenceDataSource) {
+class WebService(
+    private val sharedPreferenceDataSource: SharedPreferenceDataSource,
+    private val gson: Gson,
+    private val appUpdateDataSource: LocalAppUpdateDataSource
+) {
+    companion object {
+        const val TAG = "WebService"
+    }
+
     val routesApi: RoutesApi = getRetrofit().create(RoutesApi::class.java)
     val productsApi: ProductsApi = getRetrofit().create(ProductsApi::class.java)
     val statisticsApi: StatisticsApi = getRetrofit().create(StatisticsApi::class.java)
+    val appUpdateApi: AppUpdateApi = getRetrofit().create(AppUpdateApi::class.java)
 
     private fun getRetrofit() = buildRetrofit()
 
@@ -78,7 +93,21 @@ class WebService(private val sharedPreferenceDataSource: SharedPreferenceDataSou
                         ?: "NA"
                 )
                 .build()
-            chain.proceed(request)
+            val response: Response = chain.proceed(request)
+            val appUpdates: String = response.header("app-update") ?: ""
+
+            var appUpdate: AppUpdate? = null
+            if (appUpdates.isNotEmpty()) {
+                //Convert the app update from Json
+                try {
+                    appUpdate = gson.fromJson(appUpdates, AppUpdate::class.java)
+                } catch (exception: JsonSyntaxException) {
+                    Log.e(TAG, "Error on parsing app update", exception)
+                }
+            }
+            appUpdateDataSource.setAppUpdates(appUpdate)
+
+            response
         }
 
         val client: OkHttpClient = builder.build()
@@ -105,6 +134,11 @@ class WebService(private val sharedPreferenceDataSource: SharedPreferenceDataSou
     }
 
     private fun getDeviceSerialNumber(): String {
+        //More promissing one, try using below
+//        Settings.Secure.getString(context.getContentResolver(),
+//            Settings.Secure.ANDROID_ID)
+
+
         var deviceId = ""
         try {
             deviceId = Build::class.java.getField("SERIAL")[null] as String

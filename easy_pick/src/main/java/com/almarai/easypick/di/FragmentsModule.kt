@@ -16,4 +16,5 @@ val FragmentModule = module {
     fragment { ProductListScreen(productsAdapter) }
     fragment { FilterScreen() }
     fragment { ProductDetailsDialog(productsAdapter) }
+    fragment { SettingsScreen(get()) }
 }

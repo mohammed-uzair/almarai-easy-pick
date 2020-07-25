@@ -18,6 +18,11 @@
             app:title="@string/app_language"
             app:useSimpleSummaryProvider="true" />
 
+        <Preference
+            app:key="@string/app_update"
+            app:summary="@string/app_update_summary"
+            app:title="@string/app_update" />
+
     </PreferenceCategory>
 
 </PreferenceScreen>

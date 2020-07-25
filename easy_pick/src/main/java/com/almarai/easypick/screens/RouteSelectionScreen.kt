@@ -1,13 +1,13 @@
 package com.almarai.easypick.screens
 
-import android.Manifest
 import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
-import android.text.InputType
+import android.speech.RecognizerIntent
+import android.text.Editable
+import android.text.TextWatcher
 import android.view.*
 import android.view.animation.AnimationUtils
-import android.view.inputmethod.InputMethodManager
 import androidx.appcompat.widget.SearchView
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
@@ -26,6 +26,8 @@ import com.almarai.data.easy_pick_models.route.RouteStatus
 import com.almarai.data.easy_pick_models.util.exhaustive
 import com.almarai.easypick.R
 import com.almarai.easypick.adapters.route.RoutesAdapter
+import com.almarai.easypick.common.custom_views.search_view.OnBarcodeScanClickListener
+import com.almarai.easypick.common.custom_views.search_view.OnSpeechToTextClickListener
 import com.almarai.easypick.databinding.ScreenRouteSelectionBinding
 import com.almarai.easypick.extensions.*
 import com.almarai.easypick.utils.BundleKeys
@@ -33,10 +35,12 @@ import com.almarai.easypick.utils.FilterFunnel
 import com.almarai.easypick.utils.FilterScreenSource
 import com.almarai.easypick.view_models.RouteSelectionViewModel
 import com.almarai.machine_learning.LiveBarcodeScanningActivity
+import com.almarai.machine_learning.LiveBarcodeScanningActivity.Companion.BARCODE_SCANNER_ACTIVITY_RESULT
+import com.almarai.machine_learning.LiveBarcodeScanningActivity.Companion.EXTRA_SCANNED_BARCODE
+import kotlinx.android.synthetic.main.view_search.view.*
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.viewModel
-import java.util.concurrent.ExecutorService
 
 class RouteSelectionScreen : Fragment(), SearchView.OnQueryTextListener {
     private val routesViewModel: RouteSelectionViewModel by viewModel()
@@ -45,16 +49,8 @@ class RouteSelectionScreen : Fragment(), SearchView.OnQueryTextListener {
     private lateinit var screenRouteSelectionBinding: ScreenRouteSelectionBinding
     private lateinit var routes: List<Route>
 
-
-//    private var preview: Preview? = null
-//
-//    //    private var imageCapture: ImageCapture? = null
-////    private var imageAnalyzer: ImageAnalysis? = null
-//    private var camera: Camera? = null
-
-    //    private lateinit var outputDirectory: File
-    private lateinit var cameraExecutor: ExecutorService
-
+    //    private lateinit var mSearchView:SearchView
+    private lateinit var mSearchView: com.almarai.easypick.common.custom_views.search_view.SearchView
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -85,11 +81,48 @@ class RouteSelectionScreen : Fragment(), SearchView.OnQueryTextListener {
         init()
     }
 
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if (requestCode == BARCODE_SCANNER_ACTIVITY_RESULT) {
+            handleBarcodeScannedResult(resultCode, data)
+        } else if (requestCode == TEXT_TO_SPEECH_ACTIVITY_RESULT) {
+            handleSpeechToTextResult(resultCode, data)
+        }
+    }
+
+    private fun handleSpeechToTextResult(resultCode: Int, data: Intent?) {
+        if (resultCode == Activity.RESULT_OK) {
+            val result = data?.getStringArrayListExtra(RecognizerIntent.EXTRA_RESULTS)?.get(0) ?: ""
+
+            if (result.isNotEmpty()) {
+                //Set the speech text in the search view
+                mSearchView.setText(result.trim())
+            }
+        }
+        if (resultCode == Activity.RESULT_CANCELED) {
+            //Write your code if there's no result, or user speech could't work
+        }
+    }
+
+    private fun handleBarcodeScannedResult(resultCode: Int, data: Intent?) {
+        if (resultCode == Activity.RESULT_OK) {
+            val result = data?.getStringExtra(EXTRA_SCANNED_BARCODE) ?: ""
+
+            //Set the scanned barcode in the search view
+            mSearchView.setText(result)
+        }
+        if (resultCode == Activity.RESULT_CANCELED) {
+            //Write your code if there's no result, or user didn't scanned any barcode
+        }
+    }
+
     private fun init() {
         //Set screen title
         activity?.title = getString(R.string.title_route_selection)
 
         setHasOptionsMenu(true)
+
+        setHasSearchView(true)
 
         animateUI()
 
@@ -182,10 +215,51 @@ class RouteSelectionScreen : Fragment(), SearchView.OnQueryTextListener {
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         inflater.inflate(R.menu.menu_routes_screen, menu)
-        (menu.findItem(R.id.menu_route_action_search).actionView as SearchView).setSearchView(
-            this,
-            R.string.hint_search_route, InputType.TYPE_CLASS_TEXT
-        )
+        mSearchView =
+            (menu.findItem(R.id.menu_route_action_search).actionView as com.almarai.easypick.common.custom_views.search_view.SearchView)
+        addBarcodeScanListenerToSearchView()
+        addSpeechToTextListenerToSearchView()
+        addTextChangeListenerToSearchView()
+    }
+
+    private fun addSpeechToTextListenerToSearchView() {
+        mSearchView.onSpeechToTextClickListener = object : OnSpeechToTextClickListener {
+            override fun onClick() {
+                val speechIntent = Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH).apply {
+                    putExtra(
+                        RecognizerIntent.EXTRA_LANGUAGE_MODEL,
+                        RecognizerIntent.LANGUAGE_MODEL_FREE_FORM
+                    )
+                }
+
+                startActivityForResult(speechIntent, TEXT_TO_SPEECH_ACTIVITY_RESULT)
+            }
+        }
+    }
+
+    private fun addBarcodeScanListenerToSearchView() {
+        mSearchView.onBarcodeScanClickListener = object : OnBarcodeScanClickListener {
+            override fun onClick() {
+                val intent = Intent(
+                    this@RouteSelectionScreen.requireContext(),
+                    LiveBarcodeScanningActivity::class.java
+                )
+                startActivityForResult(intent, BARCODE_SCANNER_ACTIVITY_RESULT)
+            }
+        }
+    }
+
+    private fun addTextChangeListenerToSearchView() {
+        mSearchView.search_input_text.addTextChangedListener(object : TextWatcher {
+            override fun afterTextChanged(s: Editable?) {
+                //Filter the list
+                FilterFunnel(adapter, Filters()).searchRoutes(s.toString().trim(), routes)
+            }
+
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
+
+        })
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
@@ -199,17 +273,12 @@ class RouteSelectionScreen : Fragment(), SearchView.OnQueryTextListener {
                 navController.navigate(action)
             }
             R.id.menu_route_action_search -> {
-                viewLifecycleOwner.lifecycleScope.launch {
-                    delay(100)
+                mSearchView.openSearch()
+//                com.almarai.easypick.common.custom_views.search_view.SearchView(requireContext())
 
-                    //Close the keyboard on load
-                    val imm: InputMethodManager =
-                        requireContext().getSystemService(Activity.INPUT_METHOD_SERVICE) as InputMethodManager
-                    imm.hideSoftInputFromWindow(item.actionView.windowToken, 0)
-                }
-            }
-            R.id.menu_route_action_barcode_search -> {
-                startActivity(Intent(activity, LiveBarcodeScanningActivity::class.java))
+//                val searchView = item.actionView as com.almarai.easypick.common.custom_views.search_view.SearchView
+////                com.almarai.easypick.common.custom_views.search_view.SearchView(requireContext(), null)
+////                SearchView(requireContext())
             }
         }
 
@@ -220,7 +289,12 @@ class RouteSelectionScreen : Fragment(), SearchView.OnQueryTextListener {
         if (list.isNotEmpty()) {
             //Update all routes status
             list.forEach { route ->
-                routes.first { it.number == route.number }.serviceStatus = route.status
+                try {
+                    val result = routes.first { it.number == route.number }
+                    result.serviceStatus = route.status
+                } catch (e: Exception) {
+                    val e = "exception"
+                }
             }
 
             //Notify the adapter
@@ -288,82 +362,8 @@ class RouteSelectionScreen : Fragment(), SearchView.OnQueryTextListener {
         screenRouteSelectionBinding.recyclerView.layoutMainRecyclerview
             .showFocus(lifecycleScope = viewLifecycleOwner.lifecycleScope)
 
-    /* //region CameraX
-     private fun startCamera() {
-         val cameraProviderFuture =
-             androidx.camera.lifecycle.ProcessCameraProvider.getInstance(requireContext())
-
-         cameraProviderFuture.addListener(Runnable {
-             // Used to bind the lifecycle of cameras to the lifecycle owner
-             val cameraProvider: androidx.camera.lifecycle.ProcessCameraProvider =
-                 cameraProviderFuture.get()
-
-             // Preview
-             preview = Preview.Builder()
-                 .build()
-
-             // Select back camera
-             val cameraSelector =
-                 CameraSelector.Builder().requireLensFacing(CameraSelector.LENS_FACING_BACK)
-                     .build()
-
-             try {
-                 // Unbind use cases before rebinding
-                 cameraProvider.unbindAll()
-
-                 // Bind use cases to camera
-                 camera = cameraProvider.bindToLifecycle(
-                     this, cameraSelector, preview
-                 )
-                 preview?.setSurfaceProvider(screenRouteSelectionBinding.viewFinder.createSurfaceProvider())
-             } catch (exc: Exception) {
-                 Log.e(TAG, "Use case binding failed", exc)
-             }
-
-         }, ContextCompat.getMainExecutor(requireContext()))
-     }
-
-     private class YourImageAnalyzer(private val context: Context) : ImageAnalysis.Analyzer {
-         @SuppressLint("UnsafeExperimentalUsageError")
-         override fun analyze(imageProxy: ImageProxy) {
-             val mediaImage = imageProxy.image
-             if (mediaImage != null) {
-                 val image =
-                     InputImage.fromMediaImage(mediaImage, imageProxy.imageInfo.rotationDegrees)
-
-                 // Pass image to an ML Kit Vision API
-                 val options = BarcodeScannerOptions.Builder()
-                     .setBarcodeFormats(
-                         Barcode.FORMAT_QR_CODE,
-                         Barcode.FORMAT_AZTEC
-                     )
-                     .build()
-                 val scanner = BarcodeScanning.getClient(options)
-
-                 val result = scanner.process(image)
-                     .addOnSuccessListener { barcodes ->
-                         // Task completed successfully
-                         val rawValue = barcodes[0].rawValue
-                         Toast.makeText(
-                             context,
-                             "Scanning barcode success - Raw -> $rawValue  Barcode -> ${barcodes[0]}",
-                             Toast.LENGTH_LONG
-                         )
-                             .show()
-                     }
-                     .addOnFailureListener {
-                         Toast.makeText(context, "Scanning barcode failed", Toast.LENGTH_LONG)
-                             .show()
-                     }
-             }
-         }
-     }*/
-    //endregion
-
     companion object {
         const val TAG = "RouteSelectionScreen"
-        private const val FILENAME_FORMAT = "yyyy-MM-dd-HH-mm-ss-SSS"
-        private const val REQUEST_CODE_PERMISSIONS = 10
-        private val REQUIRED_PERMISSIONS = arrayOf(Manifest.permission.CAMERA)
+        private const val TEXT_TO_SPEECH_ACTIVITY_RESULT = 10020
     }
 }

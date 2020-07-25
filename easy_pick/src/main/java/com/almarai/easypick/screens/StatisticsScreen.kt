@@ -16,8 +16,8 @@ import androidx.navigation.Navigation
 import com.almarai.business.Utils.Util.STATISTICS_CONSTRAINT_BEGINNING_DATE
 import com.almarai.business.Utils.Util.STATISTICS_CONSTRAINT_INITIAL_DAYS_PERIOD
 import com.almarai.data.easy_pick_models.Result
-import com.almarai.data.easy_pick_models.Statistics
-import com.almarai.data.easy_pick_models.StatisticsData
+import com.almarai.data.easy_pick_models.statistics.Statistics
+import com.almarai.data.easy_pick_models.statistics.StatisticsData
 import com.almarai.data.easy_pick_models.util.exhaustive
 import com.almarai.easypick.R
 import com.almarai.easypick.databinding.ScreenStatisticsBinding

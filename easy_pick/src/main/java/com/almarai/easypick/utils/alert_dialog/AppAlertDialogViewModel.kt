@@ -3,14 +3,14 @@ package com.almarai.easypick.utils.alert_dialog
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 
-class AlertDialogViewModel : ViewModel() {
+class AppAlertDialogViewModel : ViewModel() {
     companion object {
         const val TAG = "AlertDialogViewModel"
     }
 
-    var positiveButtonClick: OnPositiveButtonClick? = null
-    var negativeButtonClick: OnNegativeButtonClick? = null
-    var neutralButtonClick: OnNeutralButtonClick? = null
+    var positiveButtonClickListener: OnPositiveButtonClickListener? = null
+    var negativeButtonClickListener: OnNegativeButtonClickListener? = null
+    var neutralButtonClickListener: OnNeutralButtonClickListener? = null
 
     val alertTitleText: MutableLiveData<String> = MutableLiveData("")
     val alertMessageText: MutableLiveData<String> = MutableLiveData("")
@@ -18,7 +18,7 @@ class AlertDialogViewModel : ViewModel() {
     val alertNegativeButtonText: MutableLiveData<String> = MutableLiveData("")
     val alertNeutralButtonText: MutableLiveData<String> = MutableLiveData("")
 
-    fun positiveButtonClicked() = positiveButtonClick?.onClick()
-    fun negativeButtonClicked() = negativeButtonClick?.onClick()
-    fun neutralButtonClicked() = neutralButtonClick?.onClick()
+    fun positiveButtonClicked() = positiveButtonClickListener?.onClick()
+    fun negativeButtonClicked() = negativeButtonClickListener?.onClick()
+    fun neutralButtonClicked() = neutralButtonClickListener?.onClick()
 }

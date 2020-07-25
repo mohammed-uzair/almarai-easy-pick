@@ -162,6 +162,13 @@
         <item name="android:windowAnimationStyle">@style/DialogAnimation</item>
     </style>
 
+    <style name="AlertDialogStyle" parent="@android:style/Theme.Dialog">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_margin">@dimen/_5sdp</item>
+        <item name="android:windowAnimationStyle">@style/DialogAnimation</item>
+    </style>
+
     <!--region Dialog Styles-->
     <style name="DialogAnimation" parent="@android:style/Animation.Activity">
         <item name="android:windowEnterAnimation">@anim/product_details_enter</item>

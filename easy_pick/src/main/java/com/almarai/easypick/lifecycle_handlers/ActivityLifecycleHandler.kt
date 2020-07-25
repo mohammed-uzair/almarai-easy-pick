@@ -7,10 +7,12 @@ import android.content.res.Configuration
 import android.os.Build
 import android.os.Bundle
 import android.util.Log
+import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.FragmentActivity
 import androidx.preference.PreferenceManager
 import com.almarai.business.Utils.DateUtil
 import com.almarai.easypick.R
+import com.almarai.easypick.common.AppUpdateFlow
 import com.almarai.easypick.extensions.IS_HARDWARE_KEYBOARD_AVAILABLE
 import com.almarai.easypick.extensions.exhaustive
 import com.almarai.easypick.extensions.isHardwareKeyboardAvailable
@@ -20,7 +22,10 @@ import com.google.firebase.analytics.FirebaseAnalytics
 import org.koin.androidx.fragment.android.setupKoinFragmentFactory
 import java.util.*
 
-class ActivityLifecycleHandler :
+
+class ActivityLifecycleHandler(
+    private val appUpdateFlow: AppUpdateFlow
+) :
     Application.ActivityLifecycleCallbacks {
     private lateinit var mFirebaseAnalytics: FirebaseAnalytics
 
@@ -39,6 +44,8 @@ class ActivityLifecycleHandler :
         val bundle = Bundle()
         bundle.putString("screen_name", "Main Activity")
         mFirebaseAnalytics.logEvent("screen_opened", bundle)
+
+        appUpdateFlow.initiate(activity as AppCompatActivity)
     }
 
     override fun onActivityStarted(activity: Activity) {

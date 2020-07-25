@@ -83,7 +83,7 @@
     <color name="darkColorSubTitle">#FAFAFA</color>
 
     <color name="darkColorText">#3C4053</color>
-    <color name="darkColorTextDialog">#FAFAFA</color>
+    <color name="darkColorTextDialog">#3C4053</color>
     <color name="darkColorButton">#59AB61</color>
 
     <color name="darkColorHomeMenuIcons">#59AB61</color>
