@@ -603,8 +603,6 @@ m
 =machine_learning/src/main/res/layout/barcode_bottom_sheet.xml,3/5/35a3ffc50b7219d9b906a6a28b8e366713b2cfc8
 f
 6machine_learning/src/main/res/layout/barcode_field.xml,2/c/2ceb4058e210b31cf110d4581afea58fe74ca8ad
-o
-?machine_learning/src/main/res/layout/camera_preview_overlay.xml,3/9/39a731d3ee1eba71019fd5528c7587b566f3f965
 l
 <machine_learning/src/main/res/layout/detection_mode_item.xml,c/f/cf751617a23a42b4b97a35e9ecb26534de2cd396
 c
@@ -617,14 +615,6 @@ n
 >machine_learning/src/main/res/layout/products_preview_card.xml,0/c/0cac12aa659d4f1ad280c81af299b400443404a8
 w
 Gmachine_learning/src/main/res/layout/top_action_bar_in_static_image.xml,d/a/da25c947aa133a82453880f6bef43609baf32a60
-_
-/machine_learning/src/main/res/values/colors.xml,0/f/0fad7c36358832c09cdca1dd617c8edfcbb54234
-_
-/machine_learning/src/main/res/values/dimens.xml,d/4/d4c4ad451e89fda5c7ac02ecf707faa93bb28de6
-_
-/machine_learning/src/main/res/values/styles.xml,2/7/276e93ff05e6c13bcda9765225407216baea2ea5
-c
-3machine_learning/src/main/res/values-v21/styles.xml,c/9/c945b01ccd82c0828a4439f2e48470d4b184e0e0
 ]
 -machine_learning/src/main/AndroidManifest.xml,1/3/13e8b5267a7c097e3c15131ed96a9513256d0a25
 R
@@ -653,8 +643,6 @@ bmachine_learning/src/main/java/com/almarai/machine_learning/barcodedetection/Ba
 Smachine_learning/src/main/java/com/almarai/machine_learning/camera/WorkflowModel.kt,9/3/9394c41e1ae6d3813ac85c3a15d396806fa01866
 „
 Tmachine_learning/src/main/java/com/almarai/machine_learning/camera/GraphicOverlay.kt,1/c/1c7c124cf0f8e8ce076abb67a97b86a4bcf789f9
-`
-0machine_learning/src/main/res/values/strings.xml,8/0/80d0b2ebbb2009226af9035ac0803843cc0da3bc
 ‡
 Wmachine_learning/src/main/java/com/almarai/machine_learning/settings/PreferenceUtils.kt,e/9/e9a9ef81ab7c6dcee0e318b2a5745619361df796
 •

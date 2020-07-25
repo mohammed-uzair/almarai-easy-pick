@@ -97,26 +97,6 @@
     <!--endregion-->
 
     <!--region Grid Style-->
-    <style name="AlmGridItemsTextView" parent="android:Widget.Material.TextView">
-        <item name="android:textColor">?attr/colorText</item>
-        <item name="android:width">0dp</item>
-        <item name="android:maxLines">1</item>
-        <item name="android:textStyle">bold</item>
-        <item name="android:paddingStart">@dimen/_4sdp</item>
-        <item name="android:paddingEnd">@dimen/_2sdp</item>
-        <item name="android:paddingTop">@dimen/_5sdp</item>
-        <item name="android:paddingBottom">@dimen/_5sdp</item>
-        <item name="android:ellipsize">end</item>
-        <item name="android:gravity">start</item>
-        <item name="android:textSize">15sp</item>
-        <item name="android:background">@drawable/border</item>
-    </style>
-
-    <style name="AlmGridTitleTextView" parent="AlmGridItemsTextView">
-        <item name="android:textColor">?colorListHeaderTitle</item>
-        <item name="android:gravity">center</item>
-        <item name="android:background">?colorListHeaderBackground</item>
-    </style>
 
     <style name="AlmTextSingleLine" parent="android:Widget.Material.TextView">
         <item name="android:layout_width">wrap_content</item>
@@ -140,12 +120,6 @@
     <!--endregion-->
 
     <!--region Alert Dialog Style-->
-    <style name="ThemeOverlay.App.MaterialAlertDialog" parent="ThemeOverlay.MaterialComponents.MaterialAlertDialog">
-        <item name="colorPrimary">?colorPrimary</item>
-        <item name="colorSecondary">?colorPrimaryDark</item>
-        <item name="colorSurface">?colorBackgroundScreenHeader</item>
-        <item name="colorOnSurface">@android:color/transparent</item>
-    </style>
 
     <style name="PreferenceThemeNight" parent="@style/Theme.AppCompat.Light.DarkActionBar">
         <item name="android:background">?colorBackgroundScreenHeader</item>
@@ -157,17 +131,6 @@
         <item name="colorPrimary">?colorDatePicker</item>
     </style>
     <!--endregion-->
-
-    <style name="DialogStyle" parent="@android:style/Theme.Panel">
-        <item name="android:windowAnimationStyle">@style/DialogAnimation</item>
-    </style>
-
-    <style name="AlertDialogStyle" parent="@android:style/Theme.Dialog">
-        <item name="android:layout_width">match_parent</item>
-        <item name="android:layout_height">wrap_content</item>
-        <item name="android:layout_margin">@dimen/_5sdp</item>
-        <item name="android:windowAnimationStyle">@style/DialogAnimation</item>
-    </style>
 
     <!--region Dialog Styles-->
     <style name="DialogAnimation" parent="@android:style/Animation.Activity">

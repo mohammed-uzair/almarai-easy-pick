@@ -1,32 +1,16 @@
-/*
- * Copyright 2020 Google LLC
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *     https://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- */
-
 package com.almarai.machine_learning.barcodedetection
 
 import android.animation.ValueAnimator
 import android.util.Log
 import androidx.annotation.MainThread
-import com.google.android.gms.tasks.Task
 import com.almarai.machine_learning.InputInfo
 import com.almarai.machine_learning.camera.CameraReticleAnimator
+import com.almarai.machine_learning.camera.FrameProcessorBase
 import com.almarai.machine_learning.camera.GraphicOverlay
 import com.almarai.machine_learning.camera.WorkflowModel
 import com.almarai.machine_learning.camera.WorkflowModel.WorkflowState
-import com.almarai.machine_learning.camera.FrameProcessorBase
 import com.almarai.machine_learning.settings.PreferenceUtils
+import com.google.android.gms.tasks.Task
 import com.google.mlkit.vision.barcode.Barcode
 import com.google.mlkit.vision.barcode.BarcodeScanning
 import com.google.mlkit.vision.common.InputImage
@@ -68,7 +52,10 @@ class BarcodeProcessor(graphicOverlay: GraphicOverlay, private val workflowModel
             workflowModel.setWorkflowState(WorkflowState.DETECTING)
         } else {
             cameraReticleAnimator.cancel()
-            val sizeProgress = PreferenceUtils.getProgressToMeetBarcodeSizeRequirement(graphicOverlay, barcodeInCenter)
+            val sizeProgress = PreferenceUtils.getProgressToMeetBarcodeSizeRequirement(
+                graphicOverlay,
+                barcodeInCenter
+            )
             if (sizeProgress < 1) {
                 // Barcode in the camera view is too small, so prompt user to move camera closer.
                 graphicOverlay.add(BarcodeConfirmingGraphic(graphicOverlay, barcodeInCenter))
@@ -89,7 +76,10 @@ class BarcodeProcessor(graphicOverlay: GraphicOverlay, private val workflowModel
         graphicOverlay.invalidate()
     }
 
-    private fun createLoadingAnimator(graphicOverlay: GraphicOverlay, barcode: Barcode): ValueAnimator {
+    private fun createLoadingAnimator(
+        graphicOverlay: GraphicOverlay,
+        barcode: Barcode
+    ): ValueAnimator {
         val endProgress = 1.1f
         return ValueAnimator.ofFloat(0f, endProgress).apply {
             duration = 2000

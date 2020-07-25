@@ -35,39 +35,10 @@
     <!--endregion-->
 
     <!--region Light Theme Colors-->
-    <color name="lightColorAccent">#59AB61</color>
-    <color name="lightColorStatusBar">#59AB61</color>
-    <color name="lightColorToolbar">#F2F2F2</color>
-    <color name="lightColorNavigationBar">#F2F2F2</color>
 
-    <color name="lightColorToolbarTitle">#59AB61</color>
-    <color name="lightColorToolbarSubTitle">#59AB61</color>
-    <color name="lightColorToolbarIcons">#59AB61</color>
-
-    <color name="lightColorBackgroundScreenHeader">#F2F2F2</color>
-    <color name="lightColorBackgroundScreenBody">#FAFAFA</color>
-
-    <color name="lightColorTitle">#59AB61</color>
-    <color name="lightColorSubTitle">#808183</color>
-
-    <color name="lightColorText">#3C4053</color>
-    <color name="lightColorTextDialog">#3C4053</color>
-    <color name="lightColorButton">#59AB61</color>
-
-    <color name="lightColorHomeMenuIcons">#59AB61</color>
-    <color name="lightColorHomeMenuDivider">#59AB61</color>
-
-    <color name="lightColorListBackground">#E4E4E4</color>
-    <color name="lightColorListHeaderBackground">#E4E4E4</color>
-    <color name="lightColorListHeaderTitle">#3C4053</color>
-    <color name="lightColorListItemBackground">#F2F2F2</color>
-    <color name="lightColorListItemDivider">#59AB61</color>
-
-    <color name="lightColorFilterScreenDivider">#59AB61</color>
     <!--endregion-->
 
     <!--region Dark Theme Colors-->
-    <color name="darkColorAccent">#59AB61</color>
     <color name="darkColorStatusBar">#3C4053</color>
     <color name="darkColorToolbar">#3C4053</color>
     <color name="darkColorNavigationBar">#3C4053</color>
@@ -84,7 +55,6 @@
 
     <color name="darkColorText">#3C4053</color>
     <color name="darkColorTextDialog">#3C4053</color>
-    <color name="darkColorButton">#59AB61</color>
 
     <color name="darkColorHomeMenuIcons">#59AB61</color>
     <color name="darkColorHomeMenuDivider">#59AB61</color>
@@ -95,12 +65,10 @@
     <color name="darkColorListItemBackground">#F2F2F2</color>
     <color name="darkColorListItemDivider">#59AB61</color>
 
-    <color name="darkColorFilterScreenDivider">#59AB61</color>
     <color name="darkColorDatePicker">#3C4053</color>
     <!--endregion-->
 
     <!--region Night Theme Colors-->
-    <color name="nightColorAccent">#59AB61</color>
     <color name="nightColorStatusBar">#202020</color>
     <color name="nightColorToolbar">#202020</color>
     <color name="nightColorNavigationBar">#202020</color>
@@ -117,7 +85,6 @@
 
     <color name="nightColorText">#E1E1E1</color>
     <color name="nightColorTextDialog">#E1E1E1</color>
-    <color name="nightColorButton">#59AB61</color>
 
     <color name="nightColorHomeMenuIcons">#E2E2E2</color>
     <color name="nightColorHomeMenuDivider">#E1E1E1</color>
@@ -128,7 +95,6 @@
     <color name="nightColorListItemBackground">#131313</color>
     <color name="nightColorListItemDivider">#000000</color>
 
-    <color name="nightColorFilterScreenDivider">#59AB61</color>
     <color name="nightColorDatePicker">#202020</color>
     <!--endregion-->
     <!--endregion-->
