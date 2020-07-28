@@ -1,6 +1,8 @@
-apply plugin: 'com.android.library'
-apply plugin: 'kotlin-android'
-apply plugin: 'kotlin-android-extensions'
+plugins {
+    id("com.android.library")
+    kotlin("android")
+    kotlin("android.extensions")
+}
 
 //Locate your keystore file path
 def keystorePropertiesFile = rootProject.file("keystore.properties")
@@ -13,14 +15,14 @@ keystoreProperties.load(new FileInputStream(keystorePropertiesFile))
 
 android {
 //    resourcePrefix 'alm_logging_'
-    compileSdkVersion 29
-    buildToolsVersion "29.0.3"
+    compileSdkVersion = 29
+    buildToolsVersion = "29.0.3"
 
     defaultConfig {
-        minSdkVersion 23
-        targetSdkVersion 29
-        versionCode 1
-        versionName "1.0"
+        minSdkVersion = 23
+        targetSdkVersion = 29
+        versionCode = 1
+        versionName = "1.0"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles 'consumer-rules.pro'

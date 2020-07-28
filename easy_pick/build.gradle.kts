@@ -1,10 +1,12 @@
-apply plugin: 'com.android.application'
-apply plugin: 'kotlin-android'
-apply plugin: 'kotlin-android-extensions'
-apply plugin: 'kotlin-kapt'
-apply plugin: 'com.google.gms.google-services'
-apply plugin: 'com.google.firebase.crashlytics'
-apply plugin: "androidx.navigation.safeargs.kotlin"
+plugins {
+    id("com.android.application")
+    kotlin("android")
+    kotlin("android.extensions")
+    kotlin("kapt")
+    id("com.google.gms.google-services")
+    id("com.google.firebase.crashlytics")
+    id("androidx.navigation.safeargs.kotlin")
+}
 
 //Locate your keystore file path
 def keystorePropertiesFile = rootProject.file("keystore.properties")

@@ -1,7 +1,8 @@
-apply plugin: 'com.android.library'
-apply plugin: 'kotlin-android'
-apply plugin: 'kotlin-android-extensions'
-apply plugin: 'kotlin-kapt'
+plugins {
+    id("com.android.library")
+    kotlin("android")
+    kotlin("android.extensions")
+}
 
 //Locate your keystore file path
 def keystorePropertiesFile = rootProject.file("keystore.properties")
@@ -34,7 +35,7 @@ android {
             storePassword keystoreProperties['RELEASE_STORE_PASSWORD']
         }
 
-        debug{}
+        debug {}
     }
 
     /*Specify the build types here as release and debug*/
@@ -79,33 +80,38 @@ android {
             jvmTarget = "1.8"
         }
     }
+
+    aaptOptions {
+        noCompress "tflite"
+    }
+
+    sourceSets.main {
+        assets.srcDirs = ['assets']
+    }
+}
+
+androidExtensions {
+    experimental = true
 }
 
 dependencies {
-    implementation fileTree(dir: 'libs', include: ['*.jar'])
-    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
-    implementation "org.jetbrains.kotlin:kotlin-reflect:$kotlin_version"
-    implementation 'androidx.appcompat:appcompat:1.1.0'
-    implementation 'androidx.core:core-ktx:1.3.0'
-    testImplementation 'junit:junit:4.13'
-    androidTestImplementation 'androidx.test.ext:junit:1.1.1'
-    androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
-    implementation project(path: ':data')
+    implementation 'com.android.volley:volley:1.1.1'
+    implementation 'com.google.android.material:material:1.3.0-alpha01'
+    implementation "android.arch.lifecycle:extensions:1.1.1"
+    implementation "androidx.annotation:annotation:1.1.0"
+    implementation "androidx.core:core-ktx:1.3.0"
+    implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:2.2.0"
+    implementation 'androidx.preference:preference:1.1.1'
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:1.3.72"
 
-    // -- Retrofit2
-    def retrofit2_version = '2.9.0'
-    implementation "com.squareup.retrofit2:retrofit:$retrofit2_version"
-    implementation "com.squareup.retrofit2:converter-gson:$retrofit2_version"
+    // Barcode model
+    implementation 'com.google.mlkit:barcode-scanning:16.0.1'
 
-    def coroutines_version = "1.3.4"
-    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutines_version"
+    // Object feature and model
+    implementation 'com.google.mlkit:object-detection:16.1.0'
 
-    implementation 'com.google.firebase:firebase-firestore:21.5.0'
-    implementation 'com.google.firebase:firebase-firestore-ktx:21.5.0'
+    // Custom model
+    implementation 'com.google.mlkit:object-detection-custom:16.1.0'
 
-    implementation 'com.squareup.retrofit2:converter-jackson:2.9.0'
-
-    def koin_version = '2.1.5'
-    // Koin AndroidX Scope features
-    implementation "org.koin:koin-androidx-scope:$koin_version"
+    api 'com.google.guava:guava:29.0-jre'
 }

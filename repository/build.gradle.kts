@@ -1,6 +1,8 @@
-apply plugin: 'com.android.library'
-apply plugin: 'kotlin-android'
-apply plugin: 'kotlin-android-extensions'
+plugins {
+    id("com.android.library")
+    kotlin("android")
+    kotlin("android.extensions")
+}
 
 //Locate your keystore file path
 def keystorePropertiesFile = rootProject.file("keystore.properties")
@@ -12,7 +14,6 @@ def keystoreProperties = new Properties()
 keystoreProperties.load(new FileInputStream(keystorePropertiesFile))
 
 android {
-//    resourcePrefix 'alm_ui_'
     compileSdkVersion 29
     buildToolsVersion "29.0.3"
 
@@ -82,14 +83,25 @@ android {
 }
 
 dependencies {
-    /*SDP Library - Use to auto adjust the views for all screen sizes*, only in portrait mode
-     url {@link "https://github.com/intuit/sdp"}*/
-    implementation "com.intuit.sdp:sdp-android:1.0.6"
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
     implementation 'androidx.appcompat:appcompat:1.1.0'
     implementation 'androidx.core:core-ktx:1.3.0'
+    implementation project(path: ':business')
     testImplementation 'junit:junit:4.13'
     androidTestImplementation 'androidx.test.ext:junit:1.1.1'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
+    implementation 'androidx.paging:paging-runtime-ktx:2.1.2'
+    implementation project(path: ':data')
+    implementation project(path: ':data_source')
+
+    // -- Coroutines
+    def coroutines_version = "1.3.4"
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutines_version"
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:$coroutines_version"
+
+    // latest stable
+    def koin_version = '2.1.5'
+    // Koin AndroidX Scope features
+    implementation "org.koin:koin-androidx-scope:$koin_version"
 }

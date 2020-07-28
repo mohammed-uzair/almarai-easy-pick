@@ -1,6 +1,9 @@
-apply plugin: 'com.android.library'
-apply plugin: 'kotlin-android'
-apply plugin: 'kotlin-android-extensions'
+plugins {
+    id("com.android.library")
+    kotlin("android")
+    kotlin("android.extensions")
+    kotlin("kapt")
+}
 
 //Locate your keystore file path
 def keystorePropertiesFile = rootProject.file("keystore.properties")
@@ -89,6 +92,22 @@ dependencies {
     testImplementation 'junit:junit:4.13'
     androidTestImplementation 'androidx.test.ext:junit:1.1.1'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
+    implementation project(path: ':data')
+
+    // -- Retrofit2
+    def retrofit2_version = '2.9.0'
+    implementation "com.squareup.retrofit2:retrofit:$retrofit2_version"
+    implementation "com.squareup.retrofit2:converter-gson:$retrofit2_version"
+
+    def coroutines_version = "1.3.4"
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutines_version"
+
+    implementation 'com.google.firebase:firebase-firestore:21.5.0'
+    implementation 'com.google.firebase:firebase-firestore-ktx:21.5.0'
+
     implementation 'com.squareup.retrofit2:converter-jackson:2.9.0'
-    implementation "org.jetbrains.kotlin:kotlin-reflect:1.3.72"
+
+    def koin_version = '2.1.5'
+    // Koin AndroidX Scope features
+    implementation "org.koin:koin-androidx-scope:$koin_version"
 }
