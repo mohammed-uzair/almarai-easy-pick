@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <data>
 
@@ -10,7 +11,7 @@
 
     </data>
 
-    <androidx.constraintlayout.widget.ConstraintLayout xmlns:tools="http://schemas.android.com/tools"
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/network_config_screen_root"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -40,14 +41,15 @@
             android:id="@+id/screen_home_animation"
             android:layout_width="0dp"
             android:layout_height="0dp"
-            android:src="@drawable/ic_temp_home_background"
             app:layout_constraintBottom_toTopOf="@id/screen_home_guideline_for_background_theme"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
+            android:scaleType="centerCrop"
             app:layout_constraintTop_toTopOf="parent"
             app:lottie_autoPlay="true"
             app:lottie_loop="true"
-            tools:src="@drawable/ic_temp_home_background" />
+            app:lottie_rawRes="@raw/anim_home_screen"
+            tools:src="@drawable/ic_not_found" />
 
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/screen_home_guideline_for_center_menu_contents"
@@ -147,7 +149,7 @@
         <Button
             android:id="@+id/home_screen_settings_button"
             style="@style/HomeButtonStyle"
-            android:drawableTop="@drawable/ic_settings"
+            android:drawableTop="@drawable/ic_settings_alert"
             android:text="@string/title_settings"
             app:layout_constraintBottom_toBottomOf="@id/home_screen_data_configuration_button"
             app:layout_constraintEnd_toEndOf="@+id/home_screen_network_configuration_button"

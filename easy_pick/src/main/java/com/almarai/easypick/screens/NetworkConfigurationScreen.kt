@@ -66,8 +66,8 @@ class NetworkConfigurationScreen : Fragment() {
     }
 
     private fun animateUI() {
-        val bottomToTop = AnimationUtils.loadAnimation(activity, R.anim.bottom_to_top)
-        val topToBottom = AnimationUtils.loadAnimation(activity, R.anim.top_to_bottom)
+        val bottomToTop = AnimationUtils.loadAnimation(activity, R.anim.anim_bottom_to_top)
+        val topToBottom = AnimationUtils.loadAnimation(activity, R.anim.anim_top_to_bottom)
 
         screenNetworkConfigurationBinding.screenNetworkConfigBackgroundImage.startAnimation(
             topToBottom

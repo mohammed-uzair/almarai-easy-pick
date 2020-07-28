@@ -1,5 +1,6 @@
 package com.almarai.easypick.utils.alert_dialog
 
+import androidx.annotation.RawRes
 import androidx.annotation.StringRes
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
@@ -12,6 +13,7 @@ internal fun AppCompatActivity.showAlertDialog(
     @StringRes buttonPositiveText: Int = R.string.alert_button_ok,
     @StringRes buttonNegativeText: Int = R.string.empty,
     @StringRes buttonNeutralText: Int = R.string.empty,
+    @RawRes animationResourceId: Int = R.raw.anim_tick_panda,
     positiveButtonClickListener: OnPositiveButtonClickListener? = null,
     negativeButtonClickListener: OnNegativeButtonClickListener? = null,
     neutralButtonClickListener: OnNeutralButtonClickListener? = null
@@ -22,6 +24,7 @@ internal fun AppCompatActivity.showAlertDialog(
         buttonPositiveText,
         buttonNegativeText,
         buttonNeutralText,
+        animationResourceId,
         positiveButtonClickListener,
         negativeButtonClickListener,
         neutralButtonClickListener,
@@ -34,6 +37,7 @@ internal fun AppCompatActivity.showAlertDialog(
     @StringRes buttonPositiveText: Int = R.string.alert_button_ok,
     @StringRes buttonNegativeText: Int = R.string.empty,
     @StringRes buttonNeutralText: Int = R.string.empty,
+    @RawRes animationResourceId: Int = R.raw.anim_tick_panda,
     positiveButtonClickListener: OnPositiveButtonClickListener? = null,
     negativeButtonClickListener: OnNegativeButtonClickListener? = null,
     neutralButtonClickListener: OnNeutralButtonClickListener? = null
@@ -44,6 +48,7 @@ internal fun AppCompatActivity.showAlertDialog(
         buttonPositiveText,
         buttonNegativeText,
         buttonNeutralText,
+        animationResourceId,
         positiveButtonClickListener,
         negativeButtonClickListener,
         neutralButtonClickListener,
@@ -58,6 +63,7 @@ internal fun Fragment.showAlertDialog(
     @StringRes buttonPositiveText: Int = R.string.alert_button_ok,
     @StringRes buttonNegativeText: Int = R.string.empty,
     @StringRes buttonNeutralText: Int = R.string.empty,
+    @RawRes animationResourceId: Int = R.raw.anim_tick_panda,
     positiveButtonClickListener: OnPositiveButtonClickListener? = null,
     negativeButtonClickListener: OnNegativeButtonClickListener? = null,
     neutralButtonClickListener: OnNeutralButtonClickListener? = null
@@ -68,6 +74,7 @@ internal fun Fragment.showAlertDialog(
         buttonPositiveText,
         buttonNegativeText,
         buttonNeutralText,
+        animationResourceId,
         positiveButtonClickListener,
         negativeButtonClickListener,
         neutralButtonClickListener,
@@ -80,6 +87,7 @@ internal fun Fragment.showAlertDialog(
     @StringRes buttonPositiveText: Int = R.string.alert_button_ok,
     @StringRes buttonNegativeText: Int = R.string.empty,
     @StringRes buttonNeutralText: Int = R.string.empty,
+    @RawRes animationResourceId: Int = R.raw.anim_tick_panda,
     positiveButtonClickListener: OnPositiveButtonClickListener? = null,
     negativeButtonClickListener: OnNegativeButtonClickListener? = null,
     neutralButtonClickListener: OnNeutralButtonClickListener? = null
@@ -90,6 +98,7 @@ internal fun Fragment.showAlertDialog(
         buttonPositiveText,
         buttonNegativeText,
         buttonNeutralText,
+        animationResourceId,
         positiveButtonClickListener,
         negativeButtonClickListener,
         neutralButtonClickListener,
@@ -116,6 +125,7 @@ private fun showAlert(
     @StringRes buttonPositiveText: Int,
     @StringRes buttonNegativeText: Int,
     @StringRes buttonNeutralText: Int,
+    @RawRes animationResourceId: Int = R.raw.anim_tick_panda,
     positiveButtonClickListener: OnPositiveButtonClickListener? = null,
     negativeButtonClickListener: OnNegativeButtonClickListener? = null,
     neutralButtonClickListener: OnNeutralButtonClickListener? = null,
@@ -127,7 +137,8 @@ private fun showAlert(
             alertMessage,
             activity.getString(buttonPositiveText),
             activity.getString(buttonNegativeText),
-            activity.getString(buttonNeutralText)
+            activity.getString(buttonNeutralText),
+            animationResourceId
         )
 
         this.positiveButtonClickListener = positiveButtonClickListener

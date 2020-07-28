@@ -4,7 +4,6 @@ import android.os.Bundle
 import android.text.InputType
 import android.view.*
 import android.view.animation.AnimationUtils
-import android.widget.Toast
 import androidx.appcompat.widget.SearchView
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
@@ -26,14 +25,19 @@ import com.almarai.easypick.extensions.*
 import com.almarai.easypick.utils.BundleKeys
 import com.almarai.easypick.utils.FilterFunnel
 import com.almarai.easypick.utils.FilterScreenSource
+import com.almarai.easypick.utils.alert_dialog.showAlertDialog
+import com.almarai.easypick.utils.progress.hideProgress
+import com.almarai.easypick.utils.progress.showProgress
 import com.almarai.easypick.view_models.ProductListViewModel
 import com.google.android.material.transition.MaterialContainerTransform
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
+@Suppress("IMPLICIT_CAST_TO_ANY")
 class ProductListScreen(val adapter: ProductsAdapter) : Fragment(), SearchView.OnQueryTextListener {
     private val productListViewModel: ProductListViewModel by viewModel()
+    private var saveButton: MenuItem? = null
     private lateinit var navController: NavController
     private val args: ProductListScreenArgs by navArgs()
     private lateinit var screenProductBinding: ScreenProductBinding
@@ -87,6 +91,13 @@ class ProductListScreen(val adapter: ProductsAdapter) : Fragment(), SearchView.O
         setRecyclerView()
 
         handleFilterScreenResult()
+        saveRouteProcessedResult(false)
+
+        //A work around hack for the bug in the progress bar, that shows sometimes, do not comment this without doing monkey testing
+        lifecycleScope.launch {
+            delay(200)
+            hideProgress()
+        }
     }
 
     private fun handleFilterScreenResult() {
@@ -122,8 +133,7 @@ class ProductListScreen(val adapter: ProductsAdapter) : Fragment(), SearchView.O
                     )
                     is Result.Success -> showDataUi(result.data)
                     is Result.Error -> {
-                        showViewStateAlert(Alert.Error)
-                        Toast.makeText(requireContext(), result.exceptionMessage, Toast.LENGTH_LONG).show()
+                        showViewStateAlert(Alert.Error, result.exceptionMessage)
                     }
                 }.exhaustive
             }
@@ -132,10 +142,17 @@ class ProductListScreen(val adapter: ProductsAdapter) : Fragment(), SearchView.O
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         inflater.inflate(R.menu.menu_product_screen, menu)
+
+        saveButton = menu.getItem(2)
+
         (menu.findItem(R.id.menu_product_action_search).actionView as SearchView).setSearchView(
             this,
             R.string.hint_search_product, InputType.TYPE_CLASS_TEXT
         )
+    }
+
+    private fun disableSaveButton(toggle: Boolean) {
+        saveButton?.isVisible = !toggle
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
@@ -149,16 +166,11 @@ class ProductListScreen(val adapter: ProductsAdapter) : Fragment(), SearchView.O
                 navController.navigate(action)
             }
             R.id.menu_product_action_save -> {
-                val saveStateHandle = navController.previousBackStackEntry?.savedStateHandle
+                disableSaveButton(true)
+
 
                 //Save the data in the data source
                 productListViewModel.updateRouteData(args.SelectedRouteNumber, products)
-
-                //Set the result
-                saveStateHandle?.set(
-                    BundleKeys.ROUTE_PROCESSED,
-                    Pair(args.SelectedRouteNumber, RouteStatus.Served)
-                )
 
                 observeRouteUpdated()
             }
@@ -167,19 +179,44 @@ class ProductListScreen(val adapter: ProductsAdapter) : Fragment(), SearchView.O
         return super.onOptionsItemSelected(item)
     }
 
+    private fun saveRouteProcessedResult(isProcessed: Boolean) {
+        val saveStateHandle = navController.previousBackStackEntry?.savedStateHandle
+
+        //Set the result
+        val result = if (isProcessed) {
+            Pair(args.SelectedRouteNumber, RouteStatus.Served)
+        } else Pair(-1, RouteStatus.NotServed)
+
+        saveStateHandle?.set(BundleKeys.ROUTE_PROCESSED, result)
+    }
+
     private fun observeRouteUpdated() {
         productListViewModel.routeDataUpdated.observe(viewLifecycleOwner, Observer {
             it?.let { result ->
                 when (result) {
                     is Result.Fetching -> {
+                        showProgress(R.string.progress_saving_route_details)
                     }
                     is Result.Success -> {
+                        hideProgress()
+
+                        saveRouteProcessedResult(true)
+
                         //Go back
                         goBack()
                     }
                     is Result.Error -> {
+                        hideProgress()
+
+                        disableSaveButton(false)
+
+                        //Update the user
+                        showAlertDialog(
+                            R.string.error,
+                            result.exceptionMessage,
+                            animationResourceId = R.raw.anim_error
+                        )
                     }
-//                    showAlertDialog(R.string.error, R.string.alert_default_message)
                 }.exhaustive
             }
         })
@@ -205,8 +242,8 @@ class ProductListScreen(val adapter: ProductsAdapter) : Fragment(), SearchView.O
     }
 
     private fun animateUI() {
-        val bottomToTop = AnimationUtils.loadAnimation(activity, R.anim.bottom_to_top)
-        val topToBottom = AnimationUtils.loadAnimation(activity, R.anim.top_to_bottom)
+        val bottomToTop = AnimationUtils.loadAnimation(activity, R.anim.anim_bottom_to_top)
+        val topToBottom = AnimationUtils.loadAnimation(activity, R.anim.anim_top_to_bottom)
 
         screenProductBinding.screenProductBackgroundImage.startAnimation(topToBottom)
 

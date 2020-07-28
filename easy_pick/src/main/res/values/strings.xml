@@ -33,7 +33,7 @@
     <!--endregion-->
 
     <!--region Common-->
-    <string name="empty"> </string>
+    <string name="empty" translatable="false"> </string>
     <!--endregion-->
 
     <!--region Buttons-->
@@ -45,6 +45,7 @@
     <!--region Images Descriptions-->
     <string name="image_description_theme_background">Theme Background</string>
     <string name="image_description_status_route">Route Status</string>
+    <string name="image_description_on_boarding">On Boarding Illustration</string>
     <!--endregion-->
 
     <!--region Setting Screen Titles-->
@@ -77,14 +78,22 @@
     <!--endregion-->
 
     <!--region Alerts-->
-    <string name="loading">Please wait, loading…</string>
+    <string name="loading">Please wait…</string>
+    <string name="loading_title">Please wait</string>
+    <string name="progress_saving_route_details">Please wait, saving route details…</string>
+    <string name="progress_fetching_route_status">Please wait, fetching this route\'s updated status…</string>
     <string name="empty_data">Empty data</string>
-    <string name="error">Nothing found</string>
+    <string name="error">Error</string>
+    <string name="server_error">Server Error</string>
+    <string name="error_could_not_load_navigaton">Could not get the navigation controller, please check me I am sick.</string>
+    <string name="nothing_found">Nothing found</string>
+    <string name="alert_title_route_not_accessible">Route not accessible</string>
+    <string name="alert_message_route_not_accessible">Only the owner who started this route can reopen this route. Please select a different route</string>
     <!--endregion-->
 
     <!--region Fetching-->
     <string name="fetching_routes">Fetching all routes, please wait…</string>
-    <string name="fetching_products">Fetching all items, please wait…</string>
+    <string name="fetching_products">Fetching all products</string>
     <!--endregion-->
 
     <!--region No Data Available-->
@@ -94,6 +103,7 @@
     <!--endregion-->
 
     <!--region Other labels-->
+    <string name="default_number">0</string>
     <string name="server_ip">Server IP</string>
     <string name="made_with">Made with</string>
     <string name="love" translatable="false">  ❤️</string>
@@ -140,6 +150,8 @@
     <string name="alert_button_yes">Yes</string>
     <string name="alert_button_no">NO</string>
     <string name="alert_button_ok">OK</string>
+    <string name="alert_button_next">Next</string>
+    <string name="alert_button_done">Done</string>
     <string name="alert_button_cancel">Cancel</string>
     <string name="alert_button_update">Update</string>
     <string name="alert_button_later">Later</string>
@@ -147,8 +159,23 @@
     <string name="alert_title_serve_route">Serve Route</string>
     <string name="alert_title_update_available">Update Available</string>
     <string name="alert_message_route_served">This route has already been served, please select a different route</string>
+    <string name="alert_message_route_served_updated">Hurray, you have done an excellent job. The route has been served successfully.</string>
     <string name="alert_message_update_available">A new update for the app is available, please update your app\nUpdate Details\n</string>
     <string name="alert_message_force_update">This is a mandatory update, please update the app\nUpdate Details\n</string>
     <string name="alert_message_route_serve">Are you sure you want to serve this route ?</string>
+    <!--endregion-->
+
+    <!--region OnBoarding-->
+    <string name="on_boarding_title_custom_filter">Custom Filters</string>
+    <string name="on_boarding_title_barcode_scanning">Barcode Scanning</string>
+    <string name="on_boarding_title_statistics">Statistics</string>
+    <string name="on_boarding_title_save_papers">Green Earth</string>
+    <string name="on_boarding_title_voice_search">Voice Search</string>
+
+    <string name="on_boarding_message_custom_filter">Search exactly what you need with custom filters in no time</string>
+    <string name="on_boarding_message_barcode_scanning">Baked in barcode scanner to scan any products right away</string>
+    <string name="on_boarding_message_statistics">See the statistics of papers saved along the way</string>
+    <string name="on_boarding_message_save_papers">Make our planet green again, by saving tons of physical papers</string>
+    <string name="on_boarding_message_voice_search">Search with voice support</string>
     <!--endregion-->
 </resources>

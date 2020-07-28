@@ -13,6 +13,8 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
+import com.almarai.business.Utils.AppDateTimeFormat
+import com.almarai.business.Utils.DateUtil
 import com.almarai.business.Utils.Util.STATISTICS_CONSTRAINT_BEGINNING_DATE
 import com.almarai.business.Utils.Util.STATISTICS_CONSTRAINT_INITIAL_DAYS_PERIOD
 import com.almarai.data.easy_pick_models.Result
@@ -24,8 +26,6 @@ import com.almarai.easypick.databinding.ScreenStatisticsBinding
 import com.almarai.easypick.extensions.Alert
 import com.almarai.easypick.extensions.hideViewStateAlert
 import com.almarai.easypick.extensions.showViewStateAlert
-import com.almarai.business.Utils.AppDateTimeFormat
-import com.almarai.business.Utils.DateUtil
 import com.almarai.easypick.view_models.StatisticsViewModel
 import com.github.mikephil.charting.components.AxisBase
 import com.github.mikephil.charting.components.XAxis
@@ -86,7 +86,7 @@ class StatisticsScreen : Fragment() {
                 when (result) {
                     is Result.Fetching -> showViewStateAlert(Alert.Loading)
                     is Result.Success -> showDataUi(result.data)
-                    is Result.Error -> showViewStateAlert(Alert.Error)
+                    is Result.Error -> showViewStateAlert(Alert.Error, result.exceptionMessage)
                 }.exhaustive
             }
         })
@@ -137,7 +137,7 @@ class StatisticsScreen : Fragment() {
         screenStatisticsBinding.screenStatisticsChart.startAnimation(
             AnimationUtils.loadAnimation(
                 activity,
-                R.anim.card_bottom_up
+                R.anim.anim_card_bottom_to_top
             )
         )
     }
@@ -150,7 +150,7 @@ class StatisticsScreen : Fragment() {
         screenStatisticsBinding.screenStatisticsChart.startAnimation(
             AnimationUtils.loadAnimation(
                 activity,
-                R.anim.card_up_bottom
+                R.anim.anim_card_top_to_bottom
             )
         )
 
@@ -271,7 +271,7 @@ class StatisticsScreen : Fragment() {
     }
 
     private fun animateUI() {
-        val topToBottom = AnimationUtils.loadAnimation(activity, R.anim.top_to_bottom)
+        val topToBottom = AnimationUtils.loadAnimation(activity, R.anim.anim_top_to_bottom)
 
         screenStatisticsBinding.screenStatisticsBackgroundImage.startAnimation(topToBottom)
         screenStatisticsBinding.screenStatisticsPhysicalPagesSavedText.startAnimation(topToBottom)

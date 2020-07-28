@@ -61,7 +61,7 @@
             app:layout_constraintTop_toTopOf="parent"
             app:lottie_autoPlay="true"
             app:lottie_loop="true"
-            app:lottie_rawRes="@raw/anim_update"
+            app:lottie_rawRes="@raw/anim_update_available"
             tools:src="@drawable/ic_settings" />
 
         <TextView

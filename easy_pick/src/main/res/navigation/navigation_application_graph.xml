@@ -183,6 +183,13 @@
             app:exitAnim="@anim/anim_screen_slide_out_left"
             app:popEnterAnim="@anim/anim_screen_slide_in_left"
             app:popExitAnim="@anim/anim_screen_slide_out_right" />
+        <action
+            android:id="@+id/action_launchScreen_to_onBoardingScreen"
+            app:destination="@id/onBoardingScreen"
+            app:enterAnim="@anim/anim_screen_slide_in_right"
+            app:exitAnim="@anim/anim_screen_slide_out_left"
+            app:popEnterAnim="@anim/anim_screen_slide_in_left"
+            app:popExitAnim="@anim/anim_screen_slide_out_right" />
     </fragment>
     <fragment
         android:id="@+id/filterScreen"
@@ -211,10 +218,15 @@
         android:id="@+id/productDetailsDialog"
         android:name="com.almarai.easypick.screens.ProductDetailsDialog"
         android:label="ProductDetailsDialog"
-        tools:layout="@layout/dialog_product_detail" >
+        tools:layout="@layout/dialog_product_detail">
         <argument
             android:name="SelectedProductPosition"
-            app:argType="integer"
-            android:defaultValue="0" />
+            android:defaultValue="0"
+            app:argType="integer" />
     </dialog>
+    <fragment
+        android:id="@+id/onBoardingScreen"
+        android:name="com.almarai.easypick.screens.OnBoardingScreen"
+        android:label="OnBoardingScreen"
+        tools:layout="@layout/item_on_boarding"></fragment>
 </navigation>

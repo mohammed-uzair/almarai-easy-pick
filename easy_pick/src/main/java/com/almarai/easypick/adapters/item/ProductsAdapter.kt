@@ -3,8 +3,8 @@ package com.almarai.easypick.adapters.item
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.view.animation.Animation
 import android.view.animation.AnimationUtils
+import androidx.core.view.isVisible
 import androidx.databinding.DataBindingUtil
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
@@ -37,46 +37,24 @@ class ProductsAdapter : RecyclerView.Adapter<ProductsAdapter.ViewHolder>() {
             productBinding.product = product
             productBinding.position = position
 
-//            //Set the animation
-//            animate(productBinding)
+            //Set the animation
+            animate(productBinding)
 
-            // bind focus listener
+            // Bind focus listener
             productBinding.root.onFocusChangeListener =
                 View.OnFocusChangeListener { v, hasFocus ->
                     if (hasFocus) {
-                        val anim = AnimationUtils.loadAnimation(v.context, R.anim.item_focused)
-                        anim.setAnimationListener(object : Animation.AnimationListener {
-                            override fun onAnimationRepeat(animation: Animation?) {
-                                //Intentionally kept empty
-                            }
+                        if (!productBinding.itemProductSelector.isVisible) {
+                            productBinding.itemProductSelector.visibility = View.VISIBLE
 
-                            override fun onAnimationEnd(animation: Animation?) {
-                                //Intentionally kept empty
-                            }
-
-                            override fun onAnimationStart(animation: Animation?) {
-                                productBinding.itemProductSelector.visibility = View.VISIBLE
-                            }
-                        })
-
-                        productBinding.itemProductSelector.startAnimation(anim)
+                            val anim = AnimationUtils.loadAnimation(v.context, R.anim.anim_item_focused)
+                            productBinding.itemProductSelector.startAnimation(anim)
+                        }
                     } else {
-                        val anim = AnimationUtils.loadAnimation(v.context, R.anim.item_defocused)
-                        anim.setAnimationListener(object : Animation.AnimationListener {
-                            override fun onAnimationRepeat(animation: Animation?) {
-                                //Intentionally kept empty
-                            }
-
-                            override fun onAnimationEnd(animation: Animation?) {
-                                productBinding.itemProductSelector.visibility = View.GONE
-                            }
-
-                            override fun onAnimationStart(animation: Animation?) {
-                                //Intentionally kept empty
-                            }
-                        })
-
+                        val anim = AnimationUtils.loadAnimation(v.context, R.anim.anim_item_defocused)
                         productBinding.itemProductSelector.startAnimation(anim)
+
+                        productBinding.itemProductSelector.visibility = View.INVISIBLE
                     }
                 }
         }
@@ -109,12 +87,12 @@ class ProductsAdapter : RecyclerView.Adapter<ProductsAdapter.ViewHolder>() {
         productBinding.itemProductStatusImage.animation =
             AnimationUtils.loadAnimation(
                 productBinding.itemProductStatusImage.context,
-                R.anim.list_status
+                R.anim.anim_item_status
             )
         productBinding.itemProductDetailRoot.animation =
             AnimationUtils.loadAnimation(
                 productBinding.itemProductDetailRoot.context,
-                R.anim.list_loading
+                R.anim.anim_item
             )
     }
 

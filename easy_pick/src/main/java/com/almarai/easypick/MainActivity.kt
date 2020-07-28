@@ -1,28 +1,22 @@
 package com.almarai.easypick
 
 import android.content.Context
-import android.content.SharedPreferences
-import android.content.res.Configuration
-import android.os.Build
 import android.os.Bundle
 import android.view.MenuItem
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
-import androidx.preference.PreferenceManager
-import com.almarai.business.Utils.DateUtil
 import com.almarai.easypick.databinding.FragmentContainerBinding
-import com.almarai.easypick.extensions.*
+import com.almarai.easypick.extensions.OnBackPressListener
+import com.almarai.easypick.extensions.hideViewStateAlert
 import com.almarai.easypick.lifecycle_handlers.ActivityLifecycleHandler
-import com.almarai.easypick.utils.*
-import com.google.firebase.analytics.FirebaseAnalytics
-import org.koin.androidx.fragment.android.setupKoinFragmentFactory
+import com.almarai.easypick.utils.progress.AppProgressDialog
 import org.koin.core.KoinComponent
-import java.util.*
+import org.koin.core.inject
 
 class MainActivity : AppCompatActivity(), KoinComponent {
+    val progressDialog: AppProgressDialog by inject()
     lateinit var screenMainBinding: FragmentContainerBinding
-
     internal var backPressListener: OnBackPressListener? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -38,9 +32,8 @@ class MainActivity : AppCompatActivity(), KoinComponent {
     }
 
     override fun onBackPressed() {
-        hideViewStateAlert()
-
         backPressListener?.onBackPressed() ?: super.onBackPressed()
+        hideViewStateAlert()
     }
 
     override fun attachBaseContext(newContext: Context) {

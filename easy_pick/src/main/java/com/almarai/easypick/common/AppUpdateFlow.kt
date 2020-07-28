@@ -166,6 +166,7 @@ class AppUpdateFlow(
             R.string.alert_title_update_available,
             updateMessage,
             R.string.alert_button_update,
+            animationResourceId = R.raw.anim_update_available,
             positiveButtonClickListener = object : OnPositiveButtonClickListener {
                 override fun onClick() {
                     Log.i(TAG, "Positive button clicked")

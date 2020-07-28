@@ -2,7 +2,6 @@ package com.almarai.easypick.utils.alert_dialog
 
 import android.app.AlertDialog
 import android.app.Dialog
-import android.graphics.BitmapFactory
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
@@ -10,8 +9,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.Window
-import androidx.core.graphics.drawable.RoundedBitmapDrawable
-import androidx.core.graphics.drawable.RoundedBitmapDrawableFactory
+import androidx.annotation.RawRes
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.DialogFragment
 import com.almarai.easypick.R
@@ -28,6 +26,7 @@ class AppAlertDialog : DialogFragment() {
         const val BundleButtonPositiveText = "BundleButtonPositiveText"
         const val BundleButtonNegativeText = "BundleButtonNegativeText"
         const val BundleButtonNeutralText = "BundleButtonNeutralText"
+        const val BundleAnimationResourceId = "BundleAnimationResourceId"
     }
 
     private val viewModel: AppAlertDialogViewModel by viewModel()
@@ -45,7 +44,8 @@ class AppAlertDialog : DialogFragment() {
         alertMessage: String,
         positiveButtonText: String,
         negativeButtonText: String,
-        neutralButtonText: String
+        neutralButtonText: String,
+        @RawRes animationResourceId: Int
     ) {
         val bundle = Bundle()
         bundle.run {
@@ -54,6 +54,7 @@ class AppAlertDialog : DialogFragment() {
             putString(BundleButtonPositiveText, positiveButtonText)
             putString(BundleButtonNegativeText, negativeButtonText)
             putString(BundleButtonNeutralText, neutralButtonText)
+            putInt(BundleAnimationResourceId, animationResourceId)
         }
 
         this.arguments = bundle
@@ -69,8 +70,15 @@ class AppAlertDialog : DialogFragment() {
                     ?: getString(R.string.alert_default_message)
                 alertPositiveButtonText.value = bundle.getString(BundleButtonPositiveText)
                     ?: getString(R.string.alert_button_ok)
-                alertNegativeButtonText.value = bundle.getString(BundleButtonNegativeText) ?: ""
+                buttonNegativeText =
+                    if (buttonNegativeText.isEmpty()) (bundle.getString(BundleButtonNegativeText)
+                        ?: "") else buttonNegativeText
                 alertNeutralButtonText.value = bundle.getString(BundleButtonNeutralText) ?: ""
+                alertDialogBinding.dialogAlertAnimation.setAnimation(
+                    bundle.getInt(
+                        BundleAnimationResourceId
+                    )
+                )
             }
         }
     }
@@ -107,13 +115,13 @@ class AppAlertDialog : DialogFragment() {
                 or View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY)
 
         dialog?.window?.apply {
+            //Do not allow the dialog to dismiss if clicked outside of its frame
+            isCancelable = false
+
             requestFeature(Window.FEATURE_NO_TITLE)
 
             //Avoid default color, use our custom color what we define
             setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
-
-            //Do not allow the dialog to dismiss if clicked outside of its frame
-            isCancelable = false
         }
 
         processBundle()
@@ -124,35 +132,38 @@ class AppAlertDialog : DialogFragment() {
 
     private fun setButtonListeners() {
         viewModel.apply {
-            if (this@AppAlertDialog.positiveButtonClickListener != null) {
-                positiveButtonClickListener = this@AppAlertDialog.positiveButtonClickListener
-            } else {
-                object : OnPositiveButtonClickListener {
-                    override fun onClick() {
-                        dismiss()
+            positiveButtonClickListener =
+                if (this@AppAlertDialog.positiveButtonClickListener != null) {
+                    this@AppAlertDialog.positiveButtonClickListener
+                } else {
+                    object : OnPositiveButtonClickListener {
+                        override fun onClick() {
+                            dismiss()
+                        }
                     }
                 }
-            }
 
-            if (this@AppAlertDialog.negativeButtonClickListener != null) {
-                negativeButtonClickListener = this@AppAlertDialog.negativeButtonClickListener
-            } else {
-                object : OnNegativeButtonClickListener {
-                    override fun onClick() {
-                        dismiss()
+            negativeButtonClickListener =
+                if (this@AppAlertDialog.negativeButtonClickListener != null) {
+                    this@AppAlertDialog.negativeButtonClickListener
+                } else {
+                    object : OnNegativeButtonClickListener {
+                        override fun onClick() {
+                            dismiss()
+                        }
                     }
                 }
-            }
 
-            if (this@AppAlertDialog.neutralButtonClickListener != null) {
-                neutralButtonClickListener = this@AppAlertDialog.neutralButtonClickListener
-            } else {
-                object : OnNeutralButtonClickListener {
-                    override fun onClick() {
-                        dismiss()
+            neutralButtonClickListener =
+                if (this@AppAlertDialog.neutralButtonClickListener != null) {
+                    this@AppAlertDialog.neutralButtonClickListener
+                } else {
+                    object : OnNeutralButtonClickListener {
+                        override fun onClick() {
+                            dismiss()
+                        }
                     }
                 }
-            }
 
             alertNegativeButtonText.value = buttonNegativeText
         }

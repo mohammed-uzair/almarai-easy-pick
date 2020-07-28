@@ -7,14 +7,15 @@ import org.koin.dsl.module
 
 val FragmentModule = module {
     val productsAdapter = ProductsAdapter()
-    fragment { LaunchScreen() }
+    fragment { LaunchScreen(get()) }
     fragment { NetworkConfigurationScreen() }
     fragment { DataConfigurationScreen() }
     fragment { LoginScreen() }
-    fragment { HomeScreen() }
+    fragment { HomeScreen(get()) }
     fragment { RouteSelectionScreen() }
     fragment { ProductListScreen(productsAdapter) }
     fragment { FilterScreen() }
     fragment { ProductDetailsDialog(productsAdapter) }
     fragment { SettingsScreen(get()) }
+    fragment { OnBoardingScreen(get()) }
 }

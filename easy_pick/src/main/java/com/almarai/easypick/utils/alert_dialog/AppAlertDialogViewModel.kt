@@ -20,5 +20,13 @@ class AppAlertDialogViewModel : ViewModel() {
 
     fun positiveButtonClicked() = positiveButtonClickListener?.onClick()
     fun negativeButtonClicked() = negativeButtonClickListener?.onClick()
+//    {
+//        val a = object : OnNegativeButtonClickListener {
+//            override fun onClick() {
+//                negativeButtonClickListener?.onClick()
+//            }
+//        }
+//    }
+
     fun neutralButtonClicked() = neutralButtonClickListener?.onClick()
 }

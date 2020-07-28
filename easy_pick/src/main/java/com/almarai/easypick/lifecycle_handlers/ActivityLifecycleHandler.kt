@@ -4,13 +4,13 @@ import android.app.Activity
 import android.app.Application
 import android.content.Context
 import android.content.res.Configuration
+import android.media.AudioManager
 import android.os.Build
 import android.os.Bundle
 import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.FragmentActivity
 import androidx.preference.PreferenceManager
-import com.almarai.business.Utils.DateUtil
 import com.almarai.easypick.R
 import com.almarai.easypick.common.AppUpdateFlow
 import com.almarai.easypick.extensions.IS_HARDWARE_KEYBOARD_AVAILABLE
@@ -50,6 +50,8 @@ class ActivityLifecycleHandler(
 
     override fun onActivityStarted(activity: Activity) {
         Log.d(TAG, "onActivityStarted at ${activity.localClassName}")
+
+        AlertTones.audioManager = activity.getSystemService(Context.AUDIO_SERVICE) as AudioManager
     }
 
     override fun onActivityResumed(activity: Activity) {
@@ -191,7 +193,6 @@ class ActivityLifecycleHandler(
             val config = Configuration()
 
             config.setLocale(locale)
-            DateUtil.APP_LOCALE = locale
             Utils.APP_LOCALE = locale
 
             //Workaround for platform bug on SDK <26(O - Oreo)

@@ -28,4 +28,7 @@ interface ApplicationRepository {
     fun getAppUpdateDenyCounter(): Int
     fun getAppUpdateElapsedTimer(): Long
     fun increaseAppUpdateDenyCounter(): Int
+
+    fun isOnBoardingCompleted():Boolean
+    fun setOnBoardingCompleted()
 }

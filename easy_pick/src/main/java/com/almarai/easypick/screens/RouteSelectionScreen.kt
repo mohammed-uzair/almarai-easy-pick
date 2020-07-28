@@ -30,9 +30,11 @@ import com.almarai.easypick.common.custom_views.search_view.OnBarcodeScanClickLi
 import com.almarai.easypick.common.custom_views.search_view.OnSpeechToTextClickListener
 import com.almarai.easypick.databinding.ScreenRouteSelectionBinding
 import com.almarai.easypick.extensions.*
+import com.almarai.easypick.utils.AlertTones
 import com.almarai.easypick.utils.BundleKeys
 import com.almarai.easypick.utils.FilterFunnel
 import com.almarai.easypick.utils.FilterScreenSource
+import com.almarai.easypick.utils.alert_dialog.showAlertDialog
 import com.almarai.easypick.view_models.RouteSelectionViewModel
 import com.almarai.machine_learning.LiveBarcodeScanningActivity
 import com.almarai.machine_learning.LiveBarcodeScanningActivity.Companion.BARCODE_SCANNER_ACTIVITY_RESULT
@@ -157,9 +159,20 @@ class RouteSelectionScreen : Fragment(), SearchView.OnQueryTextListener {
         savedStateHandle?.getLiveData<Pair<Int, RouteStatus>>(BundleKeys.ROUTE_PROCESSED)?.observe(
             viewLifecycleOwner,
             Observer { result ->
-                val position = routesViewModel.updateRouteProcessed(result)
+                if (result.first != -1) {
+                    val position = routesViewModel.updateRouteProcessed(result)
 
-                if (position != RecyclerView.NO_POSITION) adapter.notifyItemChanged(position)
+                    if (position != RecyclerView.NO_POSITION) adapter.notifyItemChanged(position)
+
+                    AlertTones.playTone(true)
+
+                    //Update the user
+                    showAlertDialog(
+                        R.string.alert_title_route_served,
+                        R.string.alert_message_route_served_updated,
+                        animationResourceId = R.raw.anim_tick
+                    )
+                }
             })
     }
 
@@ -193,7 +206,7 @@ class RouteSelectionScreen : Fragment(), SearchView.OnQueryTextListener {
                         R.string.fetching_routes
                     )
                     is Result.Success -> showDataUi(result.data)
-                    is Result.Error -> showViewStateAlert(Alert.Error)
+                    is Result.Error -> showViewStateAlert(Alert.Error, result.exceptionMessage)
                 }.exhaustive
             }
         })
@@ -324,8 +337,8 @@ class RouteSelectionScreen : Fragment(), SearchView.OnQueryTextListener {
     }
 
     private fun animateUI() {
-        val bottomToTop = AnimationUtils.loadAnimation(activity, R.anim.bottom_to_top)
-        val topToBottom = AnimationUtils.loadAnimation(activity, R.anim.top_to_bottom)
+        val bottomToTop = AnimationUtils.loadAnimation(activity, R.anim.anim_bottom_to_top)
+        val topToBottom = AnimationUtils.loadAnimation(activity, R.anim.anim_top_to_bottom)
 
         screenRouteSelectionBinding.screenRouteSelectionBackgroundImage.startAnimation(topToBottom)
 

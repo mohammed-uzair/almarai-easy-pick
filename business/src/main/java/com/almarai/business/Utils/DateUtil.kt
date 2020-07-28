@@ -8,8 +8,6 @@ import java.util.concurrent.TimeUnit
 import kotlin.math.abs
 
 object DateUtil {
-    var APP_LOCALE: Locale = Locale.US
-
     /**
      * Function to get current date in default format (MM/dd/yy HH:mm:ss)
      *
@@ -55,19 +53,19 @@ object DateUtil {
      *
      * @return Formatted date string
      */
-    fun getCurrentDateInMillis() = Calendar.getInstance(APP_LOCALE).timeInMillis
+    fun getCurrentDateInMillis() = Calendar.getInstance(Locale.ENGLISH).timeInMillis
 
     fun getDate(millis: Long?, @AppDateTimeFormat format: String): String {
         val dateFormat: DateFormat =
-            SimpleDateFormat(format, APP_LOCALE)
-        val calendar = Calendar.getInstance(APP_LOCALE)
+            SimpleDateFormat(format, Locale.ENGLISH)
+        val calendar = Calendar.getInstance(Locale.ENGLISH)
         calendar.timeInMillis = millis ?: 0
 
         return dateFormat.format(calendar.time)
     }
 
     fun getDate(date: String, @AppDateTimeFormat format: String): Long {
-        val sdf = SimpleDateFormat(format, APP_LOCALE)
+        val sdf = SimpleDateFormat(format, Locale.ENGLISH)
         val result = sdf.parse(date)
 
         return result.time
@@ -89,9 +87,9 @@ object DateUtil {
         var date: Date? = null
         var formattedDate = ""
         try {
-            date = SimpleDateFormat(fromFormat, APP_LOCALE).parse(strDate)
+            date = SimpleDateFormat(fromFormat, Locale.ENGLISH).parse(strDate)
             val simpleDateFormat =
-                SimpleDateFormat(toFormat, APP_LOCALE)
+                SimpleDateFormat(toFormat, Locale.ENGLISH)
             formattedDate = simpleDateFormat.format(date)
         } catch (e: ParseException) {
             e.printStackTrace()
@@ -125,7 +123,7 @@ object DateUtil {
         //Set the end date
         val endSalesDate = Calendar.getInstance()
         val simpleDateFormat =
-            SimpleDateFormat(AppDateTimeFormat.formatDDMMYYYY, APP_LOCALE)
+            SimpleDateFormat(AppDateTimeFormat.formatDDMMYYYY, Locale.ENGLISH)
         return try {
             startSalesDate.time = simpleDateFormat.parse(salesDate)
             startSalesDate.add(Calendar.DATE, -differenceInDays)
@@ -146,7 +144,7 @@ object DateUtil {
     ): Long {
         val simpleDateFormat = SimpleDateFormat(
             AppDateTimeFormat.formatDDMMYYYYHHMMSS,
-            APP_LOCALE
+            Locale.ENGLISH
         )
         val difference: Long
         return try {
@@ -179,7 +177,7 @@ object DateUtil {
     }
 
     private fun getVarianceDate(daysFromToday: Int): Long {
-        val calender = Calendar.getInstance(APP_LOCALE)
+        val calender = Calendar.getInstance(Locale.ENGLISH)
         calender.add(Calendar.DATE, daysFromToday)
 
         return calender.timeInMillis

@@ -8,5 +8,6 @@ annotation class BundleKeys {
     companion object {
         const val ROUTE_PROCESSED = "ROUTE_PROCESSED"
         const val FILTER_MODEL = "FILTER_MODEL"
+        const val IS_ON_BOARDING_COMPLETED = "IS_ON_BOARDING_COMPLETED"
     }
 }

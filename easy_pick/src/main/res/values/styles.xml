@@ -13,7 +13,7 @@
 
     <!--region Edit Text Style-->
     <style name="EditTextLayoutStyle" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox">
-        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:layout_gravity">center_vertical</item>
         <item name="android:layout_marginTop">@dimen/_8sdp</item>
@@ -36,7 +36,7 @@
 
     <!--region Dropdown Style-->
     <style name="DropdownLayoutStyle" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu">
-        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:layout_gravity">center_vertical</item>
         <item name="android:layout_marginTop">@dimen/_8sdp</item>
@@ -134,8 +134,8 @@
 
     <!--region Dialog Styles-->
     <style name="DialogAnimation" parent="@android:style/Animation.Activity">
-        <item name="android:windowEnterAnimation">@anim/product_details_enter</item>
-        <item name="android:windowExitAnimation">@anim/product_details_exit</item>
+        <item name="android:windowEnterAnimation">@anim/anim_product_details_enter</item>
+        <item name="android:windowExitAnimation">@anim/anim_product_details_exit</item>
     </style>
     <!--endregion-->
 </resources>

@@ -133,19 +133,11 @@ class ProductDetailsDialog(private val productsAdapter: ProductsAdapter) : Dialo
                 KeyEvent.KEYCODE_ENTER -> {
                     return when (v.id) {
                         R.id.dialog_product_detail_crates_edit_text -> {
-                            if (dialogProductDetailsBinding.dialogProductDetailCratesEditText.text.toString()
-                                    .isEmpty()
-                            ) {
-                                dialogProductDetailsBinding.dialogProductDetailCratesEditText.setText(
-                                    "0"
-                                )
-                            }
-                            v.focusSearch(View.FOCUS_RIGHT).requestFocus()
+                            onCratesEnterPressed(v)
                             true
                         }
                         R.id.dialog_product_detail_pieces_edit_text -> {
                             updateProduct()
-
                             false
                         }
                         else -> false
@@ -153,15 +145,11 @@ class ProductDetailsDialog(private val productsAdapter: ProductsAdapter) : Dialo
                 }
 
                 KeyEvent.KEYCODE_DPAD_UP -> {
-                    --indexPos
-                    showItemInList(indexPos - 1)
-                    setProductValues()
+                    onKeyboardUpArrowPressed()
                     true
                 }
                 KeyEvent.KEYCODE_DPAD_DOWN -> {
-                    showItemInList(indexPos)
-                    indexPos++
-                    setProductValues()
+                    onKeyBoardDownArrowPressed()
                     true
                 }
                 else -> false
@@ -169,13 +157,32 @@ class ProductDetailsDialog(private val productsAdapter: ProductsAdapter) : Dialo
         } else false
     }
 
+    private fun onKeyBoardDownArrowPressed() {
+        showItemInList(indexPos)
+        indexPos++
+        setProductValues()
+    }
+
+    private fun onKeyboardUpArrowPressed() {
+        --indexPos
+        showItemInList(indexPos - 1)
+        setProductValues()
+    }
+
+    private fun onCratesEnterPressed(v: View) {
+        if (dialogProductDetailsBinding.dialogProductDetailCratesEditText.text.toString()
+                .isEmpty()
+        ) {
+            dialogProductDetailsBinding.dialogProductDetailCratesEditText.setText(R.string.default_number)
+        }
+        v.focusSearch(View.FOCUS_RIGHT).requestFocus()
+    }
+
     private fun updateProduct() {
         if (dialogProductDetailsBinding.dialogProductDetailPiecesEditText.text.toString()
                 .isEmpty()
         ) {
-            dialogProductDetailsBinding.dialogProductDetailPiecesEditText.setText(
-                "0"
-            )
+            dialogProductDetailsBinding.dialogProductDetailPiecesEditText.setText(R.string.default_number)
         }
         updateProductPickedStatus()
 
@@ -195,7 +202,7 @@ class ProductDetailsDialog(private val productsAdapter: ProductsAdapter) : Dialo
         )
 
         if (product.productStatus == ProductStatus.NotPicked) {
-            //Update the items picked count
+            //Update the items picked count in the products main list screen
             val itemsPicked: Int = productsAdapter.productViewModel.itemsPicked.value ?: 0
             productsAdapter.productViewModel.itemsPicked.value = itemsPicked + 1
         }

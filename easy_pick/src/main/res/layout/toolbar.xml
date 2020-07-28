@@ -5,13 +5,6 @@
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar"
         style="@style/ToolBarStyle"
-        app:titleTextColor="?colorToolbarTitle">
-
-<!--        <com.almarai.easypick.common.custom_views.search_view.SearchView-->
-<!--            android:id="@+id/main_search_view"-->
-<!--            android:layout_width="match_parent"-->
-<!--            android:layout_height="wrap_content" />-->
-
-    </androidx.appcompat.widget.Toolbar>
+        app:titleTextColor="?colorToolbarTitle" />
 
 </layout>

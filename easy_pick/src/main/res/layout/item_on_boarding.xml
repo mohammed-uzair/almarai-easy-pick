@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <import type="android.view.View" />
+
+        <variable
+            name="onBoarding"
+            type="com.almarai.easypick.utils.on_boarding.OnBoarding" />
+
+        <variable
+            name="onBoardingCompletedListener"
+            type="com.almarai.easypick.utils.on_boarding.OnBoardingCompletedListener" />
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/on_boarding_root"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:clipToPadding="false"
+        android:padding="@dimen/_15sdp">
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/on_boarding_guideline1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.15" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/on_boarding_guideline2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.5" />
+
+        <ImageView
+            android:id="@+id/on_boarding_illustration"
+            onBoardingIllustration="@{onBoarding.illustrationResourceId}"
+            onBoardingIllustrationVisibility="@{onBoarding.illustrationResourceId}"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:contentDescription="@string/image_description_on_boarding"
+            android:gravity="top"
+            app:layout_constraintBottom_toTopOf="@+id/on_boarding_guideline2"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/on_boarding_guideline1"
+            tools:src="@drawable/ic_on_boarding_filter" />
+
+        <com.airbnb.lottie.LottieAnimationView
+            android:id="@+id/on_boarding_animation"
+            onBoardingAnimation="@{onBoarding.animationResourceId}"
+            onBoardingAnimationVisibility="@{onBoarding.animationResourceId}"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:contentDescription="@string/image_description_on_boarding"
+            android:gravity="top"
+            app:layout_constraintBottom_toTopOf="@+id/on_boarding_guideline2"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/on_boarding_guideline1"
+            app:lottie_autoPlay="true"
+            app:lottie_loop="true"
+            app:lottie_rawRes="@raw/anim_launch"
+            tools:src="@drawable/ic_on_boarding_filter" />
+
+        <TextView
+            android:id="@+id/on_boarding_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_12sdp"
+            android:gravity="start"
+            android:text="@{onBoarding.title}"
+            android:textColor="@color/green"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/on_boarding_guideline2"
+            tools:text="Custom Filters" />
+
+        <TextView
+            android:id="@+id/on_boarding_message"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_12sdp"
+            android:gravity="center"
+            android:maxLines="10"
+            android:text="@{onBoarding.description}"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/on_boarding_title"
+            tools:text="Filter the data according to your custom needs, to find just exactly what you looking for" />
+
+        <Button
+            android:id="@+id/on_boarding_done_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_55sdp"
+            android:onClick="@{() -> onBoardingCompletedListener.onOnBoardingCompleted()}"
+            android:text="@string/alert_button_done"
+            android:visibility="@{onBoarding.isLastScreen ? View.VISIBLE : View.GONE}"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/on_boarding_message" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>

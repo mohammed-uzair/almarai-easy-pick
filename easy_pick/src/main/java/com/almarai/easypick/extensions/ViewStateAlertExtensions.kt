@@ -1,11 +1,14 @@
 package com.almarai.easypick.extensions
 
 import android.view.View
+import androidx.annotation.RawRes
 import androidx.annotation.StringRes
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import com.almarai.easypick.MainActivity
 import com.almarai.easypick.R
+import com.almarai.easypick.databinding.ScreenViewStateAlertBinding
+import com.almarai.easypick.utils.AlertTones.playTone
 
 sealed class Alert {
     object Loading : Alert()
@@ -13,7 +16,17 @@ sealed class Alert {
     object NoDataAvailable : Alert()
 }
 
-internal fun Fragment.showViewStateAlert(alertType: Alert, @StringRes message: Int = -1) {
+internal fun Fragment.showViewStateAlert(
+    alertType: Alert,
+    @StringRes message: Int = R.string.empty
+) {
+    (requireActivity() as MainActivity).showViewStateAlert(alertType, message)
+}
+
+internal fun Fragment.showViewStateAlert(
+    alertType: Alert,
+    message: String
+) {
     (requireActivity() as MainActivity).showViewStateAlert(alertType, message)
 }
 
@@ -21,80 +34,123 @@ internal fun Fragment.hideViewStateAlert() {
     (requireActivity() as MainActivity).hideViewStateAlert()
 }
 
-internal fun AppCompatActivity.showViewStateAlert(alertType: Alert, @StringRes message: Int = -1) {
+internal fun AppCompatActivity.showViewStateAlert(
+    alertType: Alert,
+    @StringRes message: Int = R.string.empty
+) {
+    showUserViewStateAlert(getString(message), alertType)
+}
+
+internal fun AppCompatActivity.showViewStateAlert(
+    alertType: Alert,
+    message: String
+) {
+    showUserViewStateAlert(message, alertType)
+}
+
+private fun AppCompatActivity.showUserViewStateAlert(
+    message: String,
+    alertType: Alert
+) {
     val mainActivity = this as MainActivity
 
-    //Hide the root fragment view
+    //Hide toolbar
+    supportActionBar?.hide()
+
+    //Hide fragment container
     mainActivity.screenMainBinding.fragmentContainerHostFragment.visibility = View.GONE
 
-    //Show the alert view as visible
+    //Show ViewStateAlert screen
     mainActivity.screenMainBinding.fragmentContainerAlert.mainAlertDialogRoot.visibility =
         View.VISIBLE
-
-    //Set the animation to the required one
-    var text = if (message == -1) "" else getString(message)
 
     val binding = mainActivity.screenMainBinding.fragmentContainerAlert
     when (alertType) {
         is Alert.Loading -> {
-            if (text.isEmpty()) {
-                text = getString(R.string.loading)
-            }
-
-            //Set the animation
-            binding.alertAnimation.setAnimation(R.raw.anim_loading)
-            binding.alertAnimation.post { binding.alertAnimation.playAnimation() }
+            val text = getTextMessage(message, R.string.loading)
 
             //Set the message
-            binding.alertTextDetails.text = text.trim()
+            setMessageAndTitle(binding, R.string.loading_title, text)
+
+            //Set the animation
+            setAnimation(binding, R.raw.anim_loading)
+
+            //Set button visibility
+            setButtonVisibility(binding, View.GONE)
         }
         is Alert.Error -> {
-            if (text.isEmpty()) {
-                text = getString(R.string.error)
-            }
+            playTone(false)
 
-            //Set the animation
-            binding.alertAnimation.setAnimation(R.raw.anim_error)
-            binding.alertAnimation.post { binding.alertAnimation.playAnimation() }
+            val text = getTextMessage(message, R.string.error)
 
             //Set the message
-            binding.alertTextDetails.text = text.trim()
+            setMessageAndTitle(binding, R.string.error, text)
+
+            //Set the animation
+            setAnimation(binding, R.raw.anim_error)
+
+            //Set button visibility
+            setButtonVisibility(binding, View.VISIBLE)
         }
         is Alert.NoDataAvailable -> {
-            if (text.isEmpty()) {
-                text = getString(R.string.empty_data)
-            }
+            playTone(false)
 
-            //Set the animation
-            binding.alertAnimation.setAnimation(R.raw.anim_no_data_available)
-            binding.alertAnimation.post { binding.alertAnimation.playAnimation() }
+            val text = getTextMessage(message, R.string.empty_data)
 
             //Set the message
-            binding.alertTextDetails.text = text.trim()
+            setMessageAndTitle(binding, R.string.error, text)
+
+            //Set the animation
+            setAnimation(binding, R.raw.anim_no_data_available)
+
+            //Set button visibility
+            setButtonVisibility(binding, View.VISIBLE)
         }
     }.exhaustive
 
-    supportActionBar?.hide()
     binding.alertButton.setOnClickListener {
         onBackPressed()
-        supportActionBar?.show()
     }
 }
 
 internal fun AppCompatActivity.hideViewStateAlert() {
-    supportActionBar?.show()
-
     val mainActivity = this as MainActivity
-    val binding = mainActivity.screenMainBinding.fragmentContainerAlert
+    val binding = mainActivity.screenMainBinding
 
-    //Hide the view state alert
-    if (mainActivity.screenMainBinding.fragmentContainerAlert.mainAlertDialogRoot.visibility == View.VISIBLE)
-        mainActivity.screenMainBinding.fragmentContainerAlert.mainAlertDialogRoot.visibility =
+    //Hide ViewStateAlert
+    if (binding.fragmentContainerAlert.mainAlertDialogRoot.visibility == View.VISIBLE)
+        binding.fragmentContainerAlert.mainAlertDialogRoot.visibility =
             View.GONE
 
-    //Show the root fragment container
-    if (mainActivity.screenMainBinding.fragmentContainerHostFragment.visibility == View.GONE ||
-        mainActivity.screenMainBinding.fragmentContainerHostFragment.visibility == View.INVISIBLE
+    //Show fragment container
+    if (binding.fragmentContainerHostFragment.visibility == View.GONE ||
+        binding.fragmentContainerHostFragment.visibility == View.INVISIBLE
     )
-        mainActivity.screenMainBinding.fragmentContainerHostFragment.visibility = View.VISIBLE
+        binding.fragmentContainerHostFragment.visibility = View.VISIBLE
+
+    //Show toolbar
+    supportActionBar?.show()
+}
+
+private fun setButtonVisibility(binding: ScreenViewStateAlertBinding, visibility: Int) {
+    binding.alertButton.visibility = visibility
+}
+
+private fun MainActivity.getTextMessage(text: String, @StringRes defaultMessage: Int) =
+    if (text.isEmpty()) {
+        getString(defaultMessage)
+    } else text
+
+private fun MainActivity.setMessageAndTitle(
+    binding: ScreenViewStateAlertBinding,
+    @StringRes title: Int,
+    text: String
+) {
+    binding.alertTextDetails.text = text.trim()
+    binding.alertTextTitle.text = getString(title)
+}
+
+private fun setAnimation(binding: ScreenViewStateAlertBinding, @RawRes animation: Int) {
+    binding.alertAnimation.setAnimation(animation)
+    binding.alertAnimation.post { binding.alertAnimation.playAnimation() }
 }

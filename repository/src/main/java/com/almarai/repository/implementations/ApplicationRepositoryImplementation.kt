@@ -11,6 +11,7 @@ import com.almarai.easypick.data_source.local_data_source.SharedPreferencesKeys.
 import com.almarai.easypick.data_source.local_data_source.SharedPreferencesKeys.Companion.APP_UPDATE_ELAPSED_TIMER
 import com.almarai.easypick.data_source.local_data_source.SharedPreferencesKeys.Companion.DATA_CONFIGURATION_STATUS
 import com.almarai.easypick.data_source.local_data_source.SharedPreferencesKeys.Companion.DEPOT_CODE
+import com.almarai.easypick.data_source.local_data_source.SharedPreferencesKeys.Companion.IS_ON_BOARDING_COMPLETED
 import com.almarai.easypick.data_source.local_data_source.SharedPreferencesKeys.Companion.NETWORK_CONFIGURATION_SERVER_IP
 import com.almarai.easypick.data_source.local_data_source.SharedPreferencesKeys.Companion.NETWORK_CONFIGURATION_SERVER_PORT
 import com.almarai.easypick.data_source.local_data_source.SharedPreferencesKeys.Companion.NETWORK_CONFIGURATION_STATUS
@@ -138,6 +139,13 @@ class ApplicationRepositoryImplementation(private val sharedPreferenceDataSource
 
         return result
     }
+
+    override fun setOnBoardingCompleted() = sharedPreferenceDataSource.setSharedPreference(
+        IS_ON_BOARDING_COMPLETED, true
+    )
+
+    override fun isOnBoardingCompleted() =
+        sharedPreferenceDataSource.getSharedPreferenceBoolean(IS_ON_BOARDING_COMPLETED)
 
     override fun getAppUpdateElapsedTimer() =
         sharedPreferenceDataSource.getSharedPreferenceLong(APP_UPDATE_ELAPSED_TIMER)

@@ -9,12 +9,15 @@ import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
+import com.almarai.easypick.BuildConfig
 import com.almarai.easypick.R
 import com.almarai.easypick.databinding.ScreenHomeBinding
 import com.almarai.easypick.view_models.HomeViewModel
+import com.almarai.repository.api.ApplicationRepository
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
-class HomeScreen : Fragment(), View.OnClickListener {
+class HomeScreen(private val applicationRepository: ApplicationRepository) : Fragment(),
+    View.OnClickListener {
     private val viewModel: HomeViewModel by viewModel()
     private lateinit var navController: NavController
     private lateinit var screenHomeBinding: ScreenHomeBinding
@@ -53,6 +56,23 @@ class HomeScreen : Fragment(), View.OnClickListener {
         screenHomeBinding.homeScreenSettingsButton.setOnClickListener(this)
         screenHomeBinding.homeScreenStatisticsButton.setOnClickListener(this)
         screenHomeBinding.homeScreenExitAppButton.setOnClickListener(this)
+
+        val appUpdate = applicationRepository.getAppUpdate()
+        if (appUpdate != null && appUpdate.appVersionNumber > BuildConfig.VERSION_CODE) {
+            screenHomeBinding.homeScreenSettingsButton.setCompoundDrawablesWithIntrinsicBounds(
+                0,
+                R.drawable.ic_settings_alert,
+                0,
+                0
+            )
+        } else {
+            screenHomeBinding.homeScreenSettingsButton.setCompoundDrawablesWithIntrinsicBounds(
+                0,
+                R.drawable.ic_settings,
+                0,
+                0
+            )
+        }
     }
 
     override fun onClick(v: View?) {
@@ -67,9 +87,9 @@ class HomeScreen : Fragment(), View.OnClickListener {
     }
 
     private fun animateUI() {
-        val topToBottom = AnimationUtils.loadAnimation(activity, R.anim.top_to_bottom)
-        val rightToLeft = AnimationUtils.loadAnimation(activity, R.anim.right_to_left)
-        val leftToRight = AnimationUtils.loadAnimation(activity, R.anim.left_to_right)
+        val topToBottom = AnimationUtils.loadAnimation(activity, R.anim.anim_top_to_bottom)
+        val rightToLeft = AnimationUtils.loadAnimation(activity, R.anim.anim_right_to_left)
+        val leftToRight = AnimationUtils.loadAnimation(activity, R.anim.anim_left_to_right)
 
         screenHomeBinding.screenHomeBackgroundImage.startAnimation(topToBottom)
         screenHomeBinding.screenHomeAnimation.startAnimation(topToBottom)
