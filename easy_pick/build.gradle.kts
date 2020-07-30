@@ -135,11 +135,44 @@ dependencies {
 }*/
 
 android {
+    val appName = "Easy Pick"
+
+    defaultConfig {
+        //Creates a placeholder property for common application name and intent to use in the manifest.
+//        manifestPlaceholders = [appName: appName]
+
+        //Add a new build config field for common application name into the BuildConfig class.
+        buildConfigField("String", "APP_NAME", "\"${appName}\"")
+    }
+
+    buildFeatures{
+        dataBinding = true
+    }
+
     buildTypes {
         getByName("debug") {
             isTestCoverageEnabled = true
         }
     }
+
+    compileOptions {
+        sourceCompatibility = JavaVersion.VERSION_1_8
+        targetCompatibility = JavaVersion.VERSION_1_8
+    }
+
+//    tasks.withType(org.jetbrains.kotlin.gradle.tasks.KotlinCompile).all {
+//        kotlinOptions {
+//            jvmTarget = "1.8"
+//        }
+//    }
+
+//    aaptOptions {
+//        noCompress= kotlin.collections.mutableListOf("tflite")
+//    }
+//
+//    configurations {
+//        all*.exclude group: 'com.google.guava', module: 'listenablefuture'
+//    }
 }
 
 dependencies {
@@ -149,7 +182,7 @@ dependencies {
     implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk7:1.3.72")
     implementation("androidx.appcompat:appcompat:1.1.0")
     implementation("com.airbnb.android:lottie:3.4.1")
-    implementation("androidx.core:core-ktx:1.3.0")
+    implementation("androidx.core:core-ktx:1.3.1")
     //Pagination
     implementation("androidx.paging:paging-runtime-ktx:2.1.2")
     implementation("androidx.constraintlayout:constraintlayout:2.0.0-beta8")
@@ -184,16 +217,16 @@ dependencies {
 
     // -- Lifecycle Components (ViewModel, LiveData and ReactiveStreams)
     val lifecycle_version = "2.3.0-alpha05"
-    implementation("androidx.lifecycle:lifecycle-runtime:2.3.0-alpha05")
-    kapt("androidx.lifecycle:lifecycle-compiler:2.3.0-alpha05")
+    implementation("androidx.lifecycle:lifecycle-runtime:2.3.0-alpha06")
+    kapt("androidx.lifecycle:lifecycle-compiler:2.3.0-alpha06")
 
     // -- Coroutines
 //    def coroutines_version = "1.3.4"
-    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.3.4")
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.3.7")
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.3.4")
 
     // LiveData Coroutines
-    implementation("androidx.lifecycle:lifecycle-livedata-ktx:2.3.0-alpha05")
+    implementation("androidx.lifecycle:lifecycle-livedata-ktx:2.3.0-alpha06")
 
     // Recommended: Add the Firebase SDK for Google Analytics.
     implementation("com.google.firebase:firebase-analytics-ktx:17.4.4")
@@ -208,7 +241,7 @@ dependencies {
     implementation("androidx.navigation:navigation-runtime:2.3.0")
 
 //    def material_version = '1.3.0-alpha01'
-    implementation("com.google.android.material:material:1.3.0-alpha01")
+    implementation("com.google.android.material:material:1.3.0-alpha02")
 
     // Leak Canary
 //    def leak_canary_version = "2.0-alpha-3"
@@ -216,7 +249,7 @@ dependencies {
 
     // Recyclerview
 //    def recyclerview_version = '1.2.0-alpha04'
-    implementation("androidx.recyclerview:recyclerview:1.2.0-alpha04")
+    implementation("androidx.recyclerview:recyclerview:1.2.0-alpha05")
 
     //Chart
     implementation("com.github.PhilJay:MPAndroidChart:v3.1.0")

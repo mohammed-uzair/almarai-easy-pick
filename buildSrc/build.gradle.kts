@@ -22,7 +22,7 @@ dependencies {
     compileOnly(gradleApi())
 
     implementation("com.android.tools.build:gradle:4.0.1")
-    implementation(kotlin("gradle-plugin", "1.3.50"))
+    implementation(kotlin("gradle-plugin", "1.3.72"))
     implementation(kotlin("android-extensions"))
 
 //    implementation("org.jacoco:org.jacoco.core:0.8.4")

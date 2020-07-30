@@ -70,12 +70,12 @@ class MyModulePlugin : Plugin<Project> {
 
         // Adds required dependencies for all modules.
         project.dependencies {
-            add("implementation", "org.jetbrains.kotlin:kotlin-stdlib-jdk7:1.3.50")
-            add("implementation", "androidx.core:core-ktx:1.0.2")
+            add("implementation", "org.jetbrains.kotlin:kotlin-stdlib-jdk7:1.3.72")
+            add("implementation", "androidx.core:core-ktx:1.3.1")
 
-            add("testImplementation", "junit:junit:4.12")
-            add("androidTestImplementation", "androidx.test.ext:junit:1.1.1")
-            add("androidTestImplementation", "androidx.test.espresso:espresso-core:3.2.0")
+//            add("testImplementation", "junit:junit:4.12")
+//            add("androidTestImplementation", "androidx.test.ext:junit:1.1.1")
+//            add("androidTestImplementation", "androidx.test.espresso:espresso-core:3.2.0")
         }
 
         // Read MyModuleExtension values in afterEvaluate block.
@@ -89,12 +89,12 @@ class MyModulePlugin : Plugin<Project> {
                         when (this) {
                             is LibraryPlugin -> {
                                 project.extensions.getByType(LibraryExtension::class.java).run {
-                                    configureJacoco(project, libraryVariants, jacocoOptions)
+//                                    configureJacoco(project, libraryVariants, jacocoOptions)
                                 }
                             }
                             is AppPlugin -> {
                                 project.extensions.getByType(AppExtension::class.java).run {
-                                    configureJacoco(project, applicationVariants, jacocoOptions)
+//                                    configureJacoco(project, applicationVariants, jacocoOptions)
                                 }
                             }
                         }
