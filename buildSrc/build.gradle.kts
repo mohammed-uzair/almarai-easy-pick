@@ -7,7 +7,7 @@ gradlePlugin {
     plugins {
         register("my-plugin") {
             id = "my-plugin"
-            implementationClass = "com.almarai.gradle.plugins.MyModulePlugin"
+            implementationClass = "com.almarai.gradle.MyModulePlugin"
         }
     }
 }
@@ -24,6 +24,5 @@ dependencies {
     implementation("com.android.tools.build:gradle:4.0.1")
     implementation(kotlin("gradle-plugin", "1.3.72"))
     implementation(kotlin("android-extensions"))
-
-//    implementation("org.jacoco:org.jacoco.core:0.8.4")
+    implementation(kotlin("stdlib-jdk8"))
 }

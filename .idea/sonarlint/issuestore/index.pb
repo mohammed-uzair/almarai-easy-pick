@@ -519,17 +519,25 @@ L
 easy_pick/proguard-rules.pro,7/b/7b3eba1a2982e4ec63f22adc743a4e89f7cbb11a
 M
 repository/proguard-rules.pro,1/8/181b246a4802f1b09e908e44c9b89971abb8abd3
-f
-6buildSrc/src/main/kotlin/com/almarai/gradle/Project.kt,9/c/9c3609432701dc71881c99124a182b206fc407f0
-x
-HbuildSrc/src/main/kotlin/com/almarai/gradle/plugins/MyModuleExtension.kt,5/f/5f14bbc72345fd693afb826d3bdc2ea2af2e18df
 I
 buildSrc/build.gradle.kts,d/9/d90b697280fada81e52ec92d24725920f1cb087b
-u
-EbuildSrc/src/main/kotlin/com/almarai/gradle/plugins/MyModulePlugin.kt,e/3/e3fc546cf7df46cf788a8c27de21b32d21f565df
 ¹
 ˆdata_source/src/main/java/com/almarai/easypick/data_source/local_data_source/implementations/SharedPreferenceDataSourceImplementation.kt,2/a/2a51163c00adfe99f6232d23080b6ca5b8afe2c9
 C
 settings.gradle.kts,7/4/749edfcc96398253e5b3416184e95c46621da850
 @
 build.gradle.kts,d/b/dbcff70658daf80b53ce624f6adcaa529df5ed8d
+}
+MbuildSrc/src/main/kotlin/com/almarai/gradle/dependencies/BuildDependencies.kt,0/d/0de06d8522e190283d75113daf0fc9a762a30ec4
+l
+<buildSrc/src/main/kotlin/com/almarai/gradle/util/DateUtil.kt,2/e/2e1514ca7f3144496c9b09c46d0865993e7b3573
+|
+LbuildSrc/src/main/kotlin/com/almarai/gradle/dependencies/TestDependencies.kt,3/e/3e496815e5e5a2424934e3613cb554766952f971
+m
+=buildSrc/src/main/kotlin/com/almarai/gradle/MyModulePlugin.kt,a/1/a1d62f7b9ae250fb2b33c2f9f58817dadcb91ed0
+i
+9buildSrc/src/main/kotlin/com/almarai/gradle/BuildTypes.kt,5/6/569bf1f5f5469e624248eb8a5fd6b32fa1622add
+
+ObuildSrc/src/main/kotlin/com/almarai/gradle/dependencies/ProjectDependencies.kt,a/3/a323dcf726a7bc9b685cb37c4b4dc7c0cbdecaed
+x
+HbuildSrc/src/main/kotlin/com/almarai/gradle/dependencies/Dependencies.kt,e/c/ec46da9ff8d112490ca4b5516ce596008fdbe30c
