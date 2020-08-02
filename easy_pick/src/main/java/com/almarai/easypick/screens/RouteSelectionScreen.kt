@@ -51,7 +51,6 @@ class RouteSelectionScreen : Fragment(), SearchView.OnQueryTextListener {
     private lateinit var screenRouteSelectionBinding: ScreenRouteSelectionBinding
     private lateinit var routes: List<Route>
 
-    //    private lateinit var mSearchView:SearchView
     private lateinit var mSearchView: com.almarai.easypick.common.custom_views.search_view.SearchView
 
     override fun onCreateView(
@@ -101,9 +100,6 @@ class RouteSelectionScreen : Fragment(), SearchView.OnQueryTextListener {
                 mSearchView.setText(result.trim())
             }
         }
-        if (resultCode == Activity.RESULT_CANCELED) {
-            //Write your code if there's no result, or user speech could't work
-        }
     }
 
     private fun handleBarcodeScannedResult(resultCode: Int, data: Intent?) {
@@ -112,9 +108,6 @@ class RouteSelectionScreen : Fragment(), SearchView.OnQueryTextListener {
 
             //Set the scanned barcode in the search view
             mSearchView.setText(result)
-        }
-        if (resultCode == Activity.RESULT_CANCELED) {
-            //Write your code if there's no result, or user didn't scanned any barcode
         }
     }
 

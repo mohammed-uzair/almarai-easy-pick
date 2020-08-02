@@ -93,7 +93,8 @@ class DataConfigurationScreen : Fragment() {
     }
 
     private fun setUIData() {
-        val items = resources.getStringArray(R.array.route_product_type_preferences)
+//        val items = resources.getStringArray(R.array.route_product_type_preferences)
+        val items = listOf<String>()
         val adapter = ArrayAdapter(requireContext(), android.R.layout.simple_list_item_1, items)
         screenDataConfigurationBinding.screenDataConfigRoutePreferenceSpinner.setAdapter(adapter)
         screenDataConfigurationBinding.screenDataConfigRoutePreferenceSpinner.threshold
