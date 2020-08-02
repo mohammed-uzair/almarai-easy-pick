@@ -12,6 +12,7 @@
             <option value="$PROJECT_DIR$" />
             <option value="$PROJECT_DIR$/alm_logging" />
             <option value="$PROJECT_DIR$/alm_ui" />
+            <option value="$PROJECT_DIR$/buildSrc" />
             <option value="$PROJECT_DIR$/business" />
             <option value="$PROJECT_DIR$/data" />
             <option value="$PROJECT_DIR$/data_source" />

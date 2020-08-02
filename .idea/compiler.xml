@@ -11,6 +11,7 @@
       <module name="Easy_Pick.data_source" target="1.8" />
       <module name="Easy_Pick.easy_pick" target="1.8" />
       <module name="Easy_Pick.repository" target="1.8" />
+      <module name="EasyPick-business" target="1.7" />
     </bytecodeTargetLevel>
   </component>
 </project>

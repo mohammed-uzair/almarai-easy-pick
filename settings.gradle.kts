@@ -1,0 +1,10 @@
+include(
+    ":machine_learning",
+    ":easy_pick",
+    ":business",
+    ":alm_ui",
+    ":data",
+    ":repository",
+    ":alm_logging",
+    ":data_source"
+)

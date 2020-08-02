@@ -14,12 +14,11 @@
     <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission android:name="android.permission.WAKE_LOCK" />
 
-    <!--Todo - Remove the network security configs-->
     <application
         android:name="com.almarai.AndroidApplication"
         android:configChanges="keyboard|keyboardHidden"
         android:icon="@mipmap/ic_launcher"
-        android:label="${appName}"
+        android:label="Easy Pick"
         android:networkSecurityConfig="@xml/network_security_config"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
@@ -27,7 +26,15 @@
         <activity
             android:name=".MainActivity"
             android:configChanges="uiMode"
-            android:label="${appName}"
+
+
+
+        android:label="Easy Pick"
+
+
+
+
+
             android:launchMode="singleInstance"
             android:screenOrientation="portrait">
             <intent-filter>
