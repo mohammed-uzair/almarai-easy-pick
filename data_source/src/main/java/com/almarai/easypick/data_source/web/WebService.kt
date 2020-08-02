@@ -73,6 +73,12 @@ class WebService(
                 salesDate = result.toString()
             }
 
+            val depotCode =
+                sharedPreferenceDataSource.getSharedPreferenceString(SharedPreferencesKeys.DEPOT_CODE)
+                    ?: "0"
+            val routePreference =
+                sharedPreferenceDataSource.getSharedPreferenceString(SharedPreferencesKeys.ROUTE_PREFERENCE)
+                    ?: "NA"
             val request: Request = chain.request().newBuilder()
                 .addHeader("app-version", BuildConfig.VERSION_NAME)
                 .addHeader("app-build-type", BuildConfig.BUILD_TYPE)
@@ -81,18 +87,11 @@ class WebService(
                 .addHeader("device-name", Build.MODEL)
                 .addHeader("device-manufacturer", Build.MANUFACTURER)
                 .addHeader("device-serial-number", getDeviceSerialNumber())
-                .addHeader(
-                    "depotCode",
-                    sharedPreferenceDataSource.getSharedPreferenceString(SharedPreferencesKeys.DEPOT_CODE)
-                        ?: "0"
-                )
-                .addHeader("salesDate", salesDate)
-                .addHeader(
-                    "routePreference",
-                    sharedPreferenceDataSource.getSharedPreferenceString(SharedPreferencesKeys.ROUTE_PREFERENCE)
-                        ?: "NA"
-                )
+                .addHeader("depot-code", depotCode)
+                .addHeader("sales-date", salesDate)
+                .addHeader("route-preference", routePreference)
                 .build()
+
             val response: Response = chain.proceed(request)
             val appUpdates: String = response.header("app-update") ?: ""
 

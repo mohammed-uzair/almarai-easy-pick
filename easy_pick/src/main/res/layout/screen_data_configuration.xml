@@ -133,6 +133,7 @@
                         android:layout_height="wrap_content"
                         android:imeOptions="actionDone"
                         android:inputType="none"
+                        android:text="@={viewModel.routeGroup}"
                         android:labelFor="@id/screen_data_config_route_preference_spinner_layout"
                         android:textColor="?colorText"
                         tools:ignore="LabelFor" />

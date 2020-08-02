@@ -22,16 +22,14 @@ class DataConfigurationViewModel(private val applicationRepository: ApplicationR
     val depotCode: MutableLiveData<String> = MutableLiveData("0")
     val routeGroup: MutableLiveData<String> = MutableLiveData()
 
-    init {
+    fun fetchData() {
         viewModelScope.launch(Dispatchers.IO) {
             try {
                 val dataConfiguration = applicationRepository.getDataConfiguration()
 
                 salesDate.postValue(
-                    if (dataConfiguration.salesDate != null && dataConfiguration.salesDate!!.isNotEmpty()) dataConfiguration.salesDate else salesDateToday
+                    if (dataConfiguration.salesDate != null && dataConfiguration.salesDate!!.length > 6) dataConfiguration.salesDate else salesDateToday
                 )
-
-                salesDate.postValue(dataConfiguration.salesDate)
                 depotCode.postValue(dataConfiguration.depotCode)
                 routeGroup.postValue(dataConfiguration.routeGroup)
             } catch (exception: Exception) {

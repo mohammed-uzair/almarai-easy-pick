@@ -89,33 +89,37 @@ class DataConfigurationScreen : Fragment() {
         }
 
         setUIData()
+        viewModel.fetchData()
     }
 
     private fun setUIData() {
         val items = resources.getStringArray(R.array.route_product_type_preferences)
         val adapter = ArrayAdapter(requireContext(), android.R.layout.simple_list_item_1, items)
         screenDataConfigurationBinding.screenDataConfigRoutePreferenceSpinner.setAdapter(adapter)
+        screenDataConfigurationBinding.screenDataConfigRoutePreferenceSpinner.threshold
 
 //        screenDataConfigurationBinding.screenDataConfigRoutePreferenceSpinner.setOnItemClickListener { _, _, position, _ ->
 //            viewModel.routeGroup.value =
 //                screenDataConfigurationBinding.screenDataConfigRoutePreferenceSpinner.text.toString()
 //        }
 
-        viewModel.routeGroup.observe(viewLifecycleOwner, androidx.lifecycle.Observer {
-            val routeProductTypePreferences =
-                resources.getStringArray(R.array.route_product_type_preferences)
-            var selectedPreferenceId = 0
-            for ((index, value) in routeProductTypePreferences.withIndex()) {
-                if (value == viewModel.routeGroup.value) {
-                    selectedPreferenceId = index
-                    break
-                }
-            }
-
-            screenDataConfigurationBinding.screenDataConfigRoutePreferenceSpinner.setSelection(
-                selectedPreferenceId
-            )
-        })
+//        viewModel.routeGroup.observe(viewLifecycleOwner, androidx.lifecycle.Observer {
+//            val routeProductTypePreferences =
+//                resources.getStringArray(R.array.route_product_type_preferences)
+//            var selectedPreferenceId = 0
+//            for ((index, value) in routeProductTypePreferences.withIndex()) {
+//                if (value == viewModel.routeGroup.value) {
+//                    selectedPreferenceId = index
+//                    break
+//                }
+//            }
+//
+//            screenDataConfigurationBinding.screenDataConfigRoutePreferenceSpinner.setText(viewModel.routeGroup.value)
+//
+////            screenDataConfigurationBinding.screenDataConfigRoutePreferenceSpinner.setSelection(
+////                selectedPreferenceId
+//////            )
+//        })
     }
 
     private fun animateUI() {
