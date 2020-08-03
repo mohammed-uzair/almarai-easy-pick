@@ -9,13 +9,16 @@ import androidx.databinding.DataBindingUtil
 import com.almarai.easypick.databinding.FragmentContainerBinding
 import com.almarai.easypick.extensions.OnBackPressListener
 import com.almarai.easypick.extensions.hideViewStateAlert
-import com.almarai.easypick.lifecycle_handlers.ActivityLifecycleHandler
+import com.almarai.easypick.utils.LanguageSetup
 import com.almarai.easypick.utils.progress.AppProgressDialog
-import org.koin.core.KoinComponent
-import org.koin.core.inject
+import dagger.hilt.android.AndroidEntryPoint
+import javax.inject.Inject
 
-class MainActivity : AppCompatActivity(), KoinComponent {
-    val progressDialog: AppProgressDialog by inject()
+@AndroidEntryPoint
+class MainActivity : AppCompatActivity() {
+    @Inject
+    lateinit var progressDialog: AppProgressDialog
+
     lateinit var screenMainBinding: FragmentContainerBinding
     internal var backPressListener: OnBackPressListener? = null
 
@@ -38,7 +41,7 @@ class MainActivity : AppCompatActivity(), KoinComponent {
 
     override fun attachBaseContext(newContext: Context) {
         //Delegate to super to apply
-        super.attachBaseContext(ActivityLifecycleHandler.setAppLanguage(newContext))
+        super.attachBaseContext(LanguageSetup.setAppLanguage(newContext))
     }
 
     override fun onWindowFocusChanged(hasFocus: Boolean) {

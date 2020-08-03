@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="CompilerConfiguration">
-    <bytecodeTargetLevel>
+    <bytecodeTargetLevel target="1.8">
       <module name="business" target="1.7" />
       <module name="Easy Pick-business" target="1.7" />
       <module name="Easy_Pick.alm_logging" target="1.8" />
@@ -12,15 +12,6 @@
       <module name="Easy_Pick.easy_pick" target="1.8" />
       <module name="Easy_Pick.repository" target="1.8" />
       <module name="EasyPick-business" target="1.7" />
-      <module name="EasyPick.alm_logging" target="1.8" />
-      <module name="EasyPick.alm_ui" target="1.8" />
-      <module name="EasyPick.buildSrc" target="1.8" />
-      <module name="EasyPick.business" target="1.8" />
-      <module name="EasyPick.data" target="1.8" />
-      <module name="EasyPick.data_source" target="1.8" />
-      <module name="EasyPick.easy_pick" target="1.8" />
-      <module name="EasyPick.machine_learning" target="1.8" />
-      <module name="EasyPick.repository" target="1.8" />
     </bytecodeTargetLevel>
   </component>
 </project>

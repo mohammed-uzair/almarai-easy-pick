@@ -8,11 +8,14 @@ import com.almarai.easypick.data_source.local_data_source.interfaces.LocalAppUpd
 import com.almarai.easypick.data_source.local_data_source.interfaces.SharedPreferenceDataSource
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.receiveAsFlow
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-class LocalAppUpdateDataSourceImplementation(
+class LocalAppUpdateDataSourceImplementation
+@Inject constructor(
     private val sharedPreferenceDataSource: SharedPreferenceDataSource
 ) : LocalAppUpdateDataSource {
     companion object {
@@ -20,7 +23,9 @@ class LocalAppUpdateDataSourceImplementation(
         private val APP_UPDATE: Channel<AppUpdate> = Channel()
     }
 
+    @ExperimentalCoroutinesApi
     override suspend fun getAppUpdates() = APP_UPDATE.receiveAsFlow()
+
     override fun setAppUpdates(appUpdate: AppUpdate?) = checkIfAppUpdateAvailable(appUpdate)
 
     private fun checkIfAppUpdateAvailable(appUpdate: AppUpdate?) {
@@ -28,10 +33,10 @@ class LocalAppUpdateDataSourceImplementation(
             Log.d(TAG, "App update available : $appUpdate")
 
             //Save to prefs
-            sharedPreferenceDataSource.setSharedPreferenceJson(
-                SharedPreferencesKeys.APP_UPDATE,
-                appUpdate
-            )
+//            sharedPreferenceDataSource.setSharedPreferenceJson(
+//                SharedPreferencesKeys.APP_UPDATE,
+//                appUpdate
+//            )
 
             Log.d(TAG, "New App update is Saved to shared preferences")
 

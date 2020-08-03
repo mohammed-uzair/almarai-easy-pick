@@ -1,6 +1,7 @@
 package com.almarai.easypick.view_models
 
 import android.util.Log
+import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -9,7 +10,7 @@ import com.almarai.repository.api.ApplicationRepository
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
-class NetworkConfigurationViewModel(private val applicationRepository: ApplicationRepository) :
+class NetworkConfigurationViewModel @ViewModelInject constructor(private val applicationRepository: ApplicationRepository) :
     ViewModel() {
     companion object {
         const val TAG = "NetworkConfigViewModel"

@@ -1,11 +1,12 @@
 package com.almarai.easypick.utils.alert_dialog
 
+import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 
-class AppAlertDialogViewModel : ViewModel() {
+class AppAlertDialogViewModel @ViewModelInject constructor() : ViewModel() {
     companion object {
-        const val TAG = "AlertDialogViewModel"
+        const val TAG = "AppAlertDialogViewModel"
     }
 
     var positiveButtonClickListener: OnPositiveButtonClickListener? = null
@@ -20,13 +21,6 @@ class AppAlertDialogViewModel : ViewModel() {
 
     fun positiveButtonClicked() = positiveButtonClickListener?.onClick()
     fun negativeButtonClicked() = negativeButtonClickListener?.onClick()
-//    {
-//        val a = object : OnNegativeButtonClickListener {
-//            override fun onClick() {
-//                negativeButtonClickListener?.onClick()
-//            }
-//        }
-//    }
 
     fun neutralButtonClicked() = neutralButtonClickListener?.onClick()
 }

@@ -14,11 +14,11 @@ import com.almarai.easypick.R
 import com.almarai.easypick.databinding.ScreenHomeBinding
 import com.almarai.easypick.view_models.HomeViewModel
 import com.almarai.repository.api.ApplicationRepository
-import org.koin.androidx.viewmodel.ext.android.viewModel
+import androidx.fragment.app.viewModels
 
 class HomeScreen(private val applicationRepository: ApplicationRepository) : Fragment(),
     View.OnClickListener {
-    private val viewModel: HomeViewModel by viewModel()
+    private val viewModel: HomeViewModel by viewModels()
     private lateinit var navController: NavController
     private lateinit var screenHomeBinding: ScreenHomeBinding
 

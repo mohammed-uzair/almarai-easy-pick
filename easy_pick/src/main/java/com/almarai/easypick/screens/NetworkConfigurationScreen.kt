@@ -7,16 +7,16 @@ import android.view.ViewGroup
 import android.view.animation.AnimationUtils
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
 import com.almarai.easypick.R
 import com.almarai.easypick.databinding.ScreenNetworkConfigurationBinding
 import com.almarai.easypick.view_models.NetworkConfigurationViewModel
 import com.almarai.repository.utils.AppDataConfiguration
-import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class NetworkConfigurationScreen : Fragment() {
-    private val viewModel: NetworkConfigurationViewModel by viewModel()
+    private val viewModel: NetworkConfigurationViewModel by viewModels()
     private lateinit var navController: NavController
     private lateinit var screenNetworkConfigurationBinding: ScreenNetworkConfigurationBinding
 

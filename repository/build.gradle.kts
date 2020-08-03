@@ -5,6 +5,9 @@ plugins {
     id("my-plugin")
     kotlin("android")
     kotlin("android.extensions")
+    kotlin("kapt")
+
+    id("dagger.hilt.android.plugin")
 }
 
 dependencies {
@@ -18,5 +21,8 @@ dependencies {
 
     implementation(Dependencies_Coroutines_Core)
     implementation(Dependencies_Coroutines_Android)
-    implementation(Dependencies_Koin_Scope)
+//    implementation(Dependencies_Koin_Scope)
+
+    implementation(Dependencies_Hilt)
+    kapt(Dependencies_Hilt_Annotation_Processor)
 }

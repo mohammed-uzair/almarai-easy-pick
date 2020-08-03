@@ -9,8 +9,10 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers.IO
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-class AppUpdateRepositoryImplementation(
+class AppUpdateRepositoryImplementation
+@Inject constructor(
     private val localAppUpdateDataSource: LocalAppUpdateDataSource,
     private val webAppUpdateDataSource: WebAppUpdateDataSource
 ) :

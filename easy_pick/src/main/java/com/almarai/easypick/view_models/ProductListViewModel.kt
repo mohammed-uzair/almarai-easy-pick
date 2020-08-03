@@ -1,5 +1,6 @@
 package com.almarai.easypick.view_models
 
+import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -14,7 +15,7 @@ import com.almarai.repository.api.ProductsRepository
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
-class ProductListViewModel(private val repository: ProductsRepository) : ViewModel() {
+class ProductListViewModel @ViewModelInject constructor(private val repository: ProductsRepository) : ViewModel() {
     private val _products = MutableLiveData<Result<List<Product>>>()
     private val _routeDataUpdated = MutableLiveData<Result<RouteStatus>>()
     internal val products: LiveData<Result<List<Product>>> = _products

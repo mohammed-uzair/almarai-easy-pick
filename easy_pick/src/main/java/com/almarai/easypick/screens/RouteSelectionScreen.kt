@@ -42,10 +42,10 @@ import com.almarai.machine_learning.LiveBarcodeScanningActivity.Companion.EXTRA_
 import kotlinx.android.synthetic.main.view_search.view.*
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
-import org.koin.androidx.viewmodel.ext.android.viewModel
+import androidx.fragment.app.viewModels
 
 class RouteSelectionScreen : Fragment(), SearchView.OnQueryTextListener {
-    private val routesViewModel: RouteSelectionViewModel by viewModel()
+    private val routesViewModel: RouteSelectionViewModel by viewModels()
     private lateinit var navController: NavController
     private val adapter by lazy { RoutesAdapter() }
     private lateinit var screenRouteSelectionBinding: ScreenRouteSelectionBinding

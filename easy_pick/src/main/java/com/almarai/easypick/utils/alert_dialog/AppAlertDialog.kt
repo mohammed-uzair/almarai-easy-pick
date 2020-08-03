@@ -14,7 +14,7 @@ import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.DialogFragment
 import com.almarai.easypick.R
 import com.almarai.easypick.databinding.DialogAlertBinding
-import org.koin.androidx.viewmodel.ext.android.viewModel
+import androidx.fragment.app.viewModels
 
 class AppAlertDialog : DialogFragment() {
     companion object {
@@ -29,7 +29,7 @@ class AppAlertDialog : DialogFragment() {
         const val BundleAnimationResourceId = "BundleAnimationResourceId"
     }
 
-    private val viewModel: AppAlertDialogViewModel by viewModel()
+    private val viewModel: AppAlertDialogViewModel by viewModels()
     private lateinit var alertDialogBinding: DialogAlertBinding
 
     //Buttons listeners

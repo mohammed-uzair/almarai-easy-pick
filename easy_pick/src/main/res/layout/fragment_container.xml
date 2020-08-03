@@ -31,7 +31,7 @@
 
         <androidx.fragment.app.FragmentContainerView
             android:id="@+id/fragment_container_host_fragment"
-            android:name="androidx.navigation.fragment.NavHostFragment"
+            android:name="com.almarai.easypick.di.AppNavHostFragment"
             android:layout_width="0dp"
             android:layout_height="0dp"
             app:defaultNavHost="true"
