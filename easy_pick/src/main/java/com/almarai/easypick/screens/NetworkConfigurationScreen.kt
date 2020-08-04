@@ -14,7 +14,9 @@ import com.almarai.easypick.R
 import com.almarai.easypick.databinding.ScreenNetworkConfigurationBinding
 import com.almarai.easypick.view_models.NetworkConfigurationViewModel
 import com.almarai.repository.utils.AppDataConfiguration
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class NetworkConfigurationScreen : Fragment() {
     private val viewModel: NetworkConfigurationViewModel by viewModels()
     private lateinit var navController: NavController

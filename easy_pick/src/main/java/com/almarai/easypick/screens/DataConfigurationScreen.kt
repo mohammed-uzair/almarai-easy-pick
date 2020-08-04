@@ -20,8 +20,10 @@ import com.almarai.business.Utils.DateUtil
 import com.almarai.easypick.view_models.DataConfigurationViewModel
 import com.almarai.repository.utils.AppDataConfiguration
 import androidx.fragment.app.viewModels
+import dagger.hilt.android.AndroidEntryPoint
 import java.util.*
 
+@AndroidEntryPoint
 class DataConfigurationScreen : Fragment() {
     private val viewModel: DataConfigurationViewModel by viewModels()
     private lateinit var navController: NavController

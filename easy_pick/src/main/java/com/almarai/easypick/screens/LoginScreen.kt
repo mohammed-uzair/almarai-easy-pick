@@ -13,7 +13,9 @@ import com.almarai.easypick.R
 import com.almarai.easypick.databinding.ScreenLoginBinding
 import com.almarai.easypick.view_models.LoginViewModel
 import androidx.fragment.app.viewModels
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class LoginScreen : Fragment() {
     private val viewModel: LoginViewModel by viewModels()
     private lateinit var navController: NavController

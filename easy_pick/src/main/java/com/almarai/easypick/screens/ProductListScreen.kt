@@ -33,8 +33,10 @@ import com.google.android.material.transition.MaterialContainerTransform
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import androidx.fragment.app.viewModels
+import dagger.hilt.android.AndroidEntryPoint
 
 @Suppress("IMPLICIT_CAST_TO_ANY")
+@AndroidEntryPoint
 class ProductListScreen(val adapter: ProductsAdapter) : Fragment(), SearchView.OnQueryTextListener {
     private val productListViewModel: ProductListViewModel by viewModels()
     private var saveButton: MenuItem? = null

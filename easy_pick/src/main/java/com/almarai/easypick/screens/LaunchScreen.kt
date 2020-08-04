@@ -19,7 +19,9 @@ import com.almarai.easypick.utils.BundleKeys
 import com.almarai.easypick.view_models.LaunchViewModel
 import com.almarai.repository.api.ApplicationRepository
 import com.almarai.repository.utils.AppDataConfiguration
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class LaunchScreen(private val applicationRepository: ApplicationRepository) : Fragment() {
     private val viewModel: LaunchViewModel by viewModels()
     private lateinit var navController: NavController

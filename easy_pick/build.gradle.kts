@@ -45,9 +45,9 @@ dependencies {
 //    implementation(Dependencies_Koin_ViewModel)
 //    implementation(Dependencies_Koin_Fragment)
 
+    implementation(project(mapOf("path" to ":data_source")))
     implementation(Dependencies_Hilt)
     implementation(Dependencies_Hilt_Android_ViewModel)
-    implementation(project(mapOf("path" to ":data_source")))
     kapt(Dependencies_Hilt_Annotation_Processor)
     kapt(Dependencies_Hilt_Android_Annotation_Processor)
 

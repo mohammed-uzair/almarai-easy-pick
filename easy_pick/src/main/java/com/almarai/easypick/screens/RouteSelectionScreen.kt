@@ -43,7 +43,9 @@ import kotlinx.android.synthetic.main.view_search.view.*
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import androidx.fragment.app.viewModels
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class RouteSelectionScreen : Fragment(), SearchView.OnQueryTextListener {
     private val routesViewModel: RouteSelectionViewModel by viewModels()
     private lateinit var navController: NavController

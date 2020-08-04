@@ -3,11 +3,13 @@ package com.almarai.easypick.di
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentFactory
 import com.almarai.easypick.adapters.item.ProductsAdapter
+import com.almarai.easypick.common.AppUpdateFlow
 import com.almarai.easypick.screens.*
 import com.almarai.repository.api.ApplicationRepository
 import javax.inject.Inject
 
 class AppFragmentFactory @Inject constructor(
+    private val appUpdateFlow: AppUpdateFlow,
     private val applicationRepository: ApplicationRepository,
 
     //All screens adapters
@@ -26,6 +28,7 @@ class AppFragmentFactory @Inject constructor(
             RouteSelectionScreen::class.java.name -> RouteSelectionScreen()
             ProductListScreen::class.java.name -> ProductListScreen(productsAdapter)
             FilterScreen::class.java.name -> FilterScreen()
+            SettingsScreen::class.java.name -> SettingsScreen(appUpdateFlow)
 
             else -> super.instantiate(classLoader, className)
         }

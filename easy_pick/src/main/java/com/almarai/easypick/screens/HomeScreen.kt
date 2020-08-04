@@ -15,7 +15,9 @@ import com.almarai.easypick.databinding.ScreenHomeBinding
 import com.almarai.easypick.view_models.HomeViewModel
 import com.almarai.repository.api.ApplicationRepository
 import androidx.fragment.app.viewModels
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class HomeScreen(private val applicationRepository: ApplicationRepository) : Fragment(),
     View.OnClickListener {
     private val viewModel: HomeViewModel by viewModels()

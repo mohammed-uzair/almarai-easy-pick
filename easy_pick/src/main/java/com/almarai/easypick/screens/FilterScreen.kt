@@ -25,7 +25,9 @@ import com.almarai.easypick.view_models.FilterViewModel
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import androidx.fragment.app.viewModels
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class FilterScreen : Fragment() {
     private val viewModel: FilterViewModel by viewModels()
     private val args: FilterScreenArgs by navArgs()
