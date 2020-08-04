@@ -9,9 +9,10 @@ import com.google.firebase.FirebaseOptions
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.ktx.initialize
+import javax.inject.Inject
 
 
-class FirebaseRoutesDataSourceImplementation(val context: Context) : FirebaseRoutesDataSource {
+class FirebaseRoutesDataSourceImplementation @Inject constructor(private val context: Context) : FirebaseRoutesDataSource {
     companion object{
         const val TAG = "FirebaseRouteDSImpl"
     }

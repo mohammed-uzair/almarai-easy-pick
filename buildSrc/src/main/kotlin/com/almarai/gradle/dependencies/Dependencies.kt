@@ -1,7 +1,7 @@
 package com.almarai.gradle.dependencies
 
 //region
-private const val Dependencies_Version_Kotlin = "1.3.72"
+const val Dependencies_Version_Kotlin = "1.3.72"
 
 const val Dependencies_Kotlin =
     "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$Dependencies_Version_Kotlin"
@@ -68,18 +68,28 @@ private const val Dependencies_Version_Sdp = "1.0.6"
 const val Dependencies_Sdp = "com.intuit.sdp:sdp-android:$Dependencies_Version_Sdp"
 
 //Retrofit
-const val Dependencies_Version_Retrofit = "2.9.0"
+private const val Dependencies_Version_Retrofit = "2.9.0"
+
 const val Dependencies_Retrofit = "com.squareup.retrofit2:retrofit:$Dependencies_Version_Retrofit"
 const val Dependencies_Retrofit_Gson_Converter =
     "com.squareup.retrofit2:converter-gson:$Dependencies_Version_Retrofit"
 
 
 //DI - Koin
-const val Dependencies_Version_Koin = "2.1.5"
+private const val Dependencies_Version_Koin = "2.1.5"
 const val Dependencies_Koin_Scope = "org.koin:koin-androidx-scope:$Dependencies_Version_Koin"
 const val Dependencies_Koin_Fragment = "org.koin:koin-androidx-fragment:$Dependencies_Version_Koin"
 const val Dependencies_Koin_ViewModel =
     "org.koin:koin-androidx-viewmodel:$Dependencies_Version_Koin"
+
+//DI - Hilt
+private const val Dependencies_Version_Hilt = "2.28-alpha"
+
+const val Dependencies_Hilt = "com.google.dagger:hilt-android:$Dependencies_Version_Hilt"
+const val Dependencies_Hilt_Annotation_Processor =
+    "com.google.dagger:hilt-android-compiler:$Dependencies_Version_Hilt"
+const val Dependencies_Hilt_Android_ViewModel = "androidx.hilt:hilt-lifecycle-viewmodel:1.0.0-alpha01"
+const val Dependencies_Hilt_Android_Annotation_Processor = "androidx.hilt:hilt-compiler:1.0.0-alpha01"
 
 //Room
 
@@ -113,7 +123,6 @@ const val Dependencies_Mp_Chart = "com.github.PhilJay:MPAndroidChart:$Dependenci
 //Network Communication - Volley
 private const val Dependencies_Version_Volley = "1.1.1"
 const val Dependencies_Volley = "com.android.volley:volley:$Dependencies_Version_Volley"
-
 
 //Barcode
 private const val Dependencies_Version_Ml_Kit = "16.1.0"

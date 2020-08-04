@@ -22,11 +22,13 @@ import java.text.DateFormat
 import java.text.ParseException
 import java.text.SimpleDateFormat
 import java.util.*
-
+import javax.inject.Inject
+import javax.inject.Singleton
 
 const val DEFAULT_URL = "http://192.168.1.237:8080/"
 
-class WebService(
+@Singleton
+class WebService @Inject constructor(
     private val sharedPreferenceDataSource: SharedPreferenceDataSource,
     private val gson: Gson,
     private val appUpdateDataSource: LocalAppUpdateDataSource

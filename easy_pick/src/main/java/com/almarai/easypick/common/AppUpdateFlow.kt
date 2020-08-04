@@ -22,9 +22,12 @@ import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import java.io.File
 import java.util.*
+import javax.inject.Inject
+import javax.inject.Singleton
 import kotlin.concurrent.schedule
 
-class AppUpdateFlow(
+@Singleton
+class AppUpdateFlow @Inject constructor(
     private val applicationRepository: ApplicationRepository,
     private val appUpdateRepository: AppUpdateRepository
 ) {

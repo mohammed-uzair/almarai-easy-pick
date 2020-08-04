@@ -11,7 +11,6 @@ import androidx.preference.PreferenceFragmentCompat
 import com.almarai.easypick.R
 import com.almarai.easypick.common.AppUpdateFlow
 
-
 class SettingsScreen(private val appUpdateFlow: AppUpdateFlow) : PreferenceFragmentCompat(),
     Preference.OnPreferenceChangeListener {
     private lateinit var navController: NavController

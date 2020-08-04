@@ -9,6 +9,8 @@ plugins {
     id("com.google.gms.google-services")
     id("com.google.firebase.crashlytics")
     id("androidx.navigation.safeargs.kotlin")
+
+    id("dagger.hilt.android.plugin")
 }
 
 android {
@@ -39,9 +41,16 @@ dependencies {
     implementation(Dependencies_Navigation_Fragment_Kotlin_Extensions)
     implementation(Dependencies_Navigation)
 
-    implementation(Dependencies_Koin_Scope)
-    implementation(Dependencies_Koin_ViewModel)
-    implementation(Dependencies_Koin_Fragment)
+//    implementation(Dependencies_Koin_Scope)
+//    implementation(Dependencies_Koin_ViewModel)
+//    implementation(Dependencies_Koin_Fragment)
+
+    implementation(project(mapOf("path" to ":data_source")))
+    implementation(Dependencies_Hilt)
+    implementation(Dependencies_Hilt_Android_ViewModel)
+    kapt(Dependencies_Hilt_Annotation_Processor)
+    kapt(Dependencies_Hilt_Android_Annotation_Processor)
+
     implementation(Dependencies_Retrofit)
     implementation(Dependencies_Retrofit_Gson_Converter)
     implementation(Dependencies_Lifecycle_Runtime)

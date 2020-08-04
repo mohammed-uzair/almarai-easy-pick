@@ -24,10 +24,12 @@ import com.almarai.easypick.utils.setTitle
 import com.almarai.easypick.view_models.FilterViewModel
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
-import org.koin.androidx.viewmodel.ext.android.viewModel
+import androidx.fragment.app.viewModels
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class FilterScreen : Fragment() {
-    private val viewModel: FilterViewModel by viewModel()
+    private val viewModel: FilterViewModel by viewModels()
     private val args: FilterScreenArgs by navArgs()
     private lateinit var navController: NavController
     private lateinit var screenFilterBinding: ScreenFilterBinding

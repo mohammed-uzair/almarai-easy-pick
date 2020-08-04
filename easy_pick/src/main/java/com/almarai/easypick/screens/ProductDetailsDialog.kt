@@ -26,7 +26,6 @@ import com.almarai.easypick.utils.AlertTones.playTone
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
-
 class ProductDetailsDialog(private val productsAdapter: ProductsAdapter) : DialogFragment(),
     View.OnKeyListener, TextView.OnEditorActionListener {
     private var indexPos = 0

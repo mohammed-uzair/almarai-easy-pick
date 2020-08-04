@@ -23,8 +23,10 @@ import com.almarai.easypick.data_source.local_data_source.SharedPreferencesKeys.
 import com.almarai.easypick.data_source.local_data_source.interfaces.SharedPreferenceDataSource
 import com.almarai.repository.api.ApplicationRepository
 import com.almarai.repository.utils.AppDataConfiguration
+import javax.inject.Inject
 
-class ApplicationRepositoryImplementation(private val sharedPreferenceDataSource: SharedPreferenceDataSource) :
+class ApplicationRepositoryImplementation
+@Inject constructor(private val sharedPreferenceDataSource: SharedPreferenceDataSource) :
     ApplicationRepository {
     override fun setNetworkConfiguration(networkConfiguration: NetworkConfiguration) {
         sharedPreferenceDataSource.setSharedPreference(

@@ -5,10 +5,11 @@ import com.almarai.data.easy_pick_models.route.RouteStatus
 import com.almarai.easypick.data_source.firebase.interfaces.FirebaseRoutesDataSource
 import com.almarai.easypick.data_source.web.interfaces.WebRoutesDataSource
 import com.almarai.repository.api.RoutesRepository
+import javax.inject.Inject
 
-class RoutesRepositoryImplementation(
-    private val webRoutesDataSource: WebRoutesDataSource,
-    private val firebaseRoutesDataSource: FirebaseRoutesDataSource
+class RoutesRepositoryImplementation @Inject constructor(
+    private val webRoutesDataSource: WebRoutesDataSource
+//    private val firebaseRoutesDataSource: FirebaseRoutesDataSource
 ) : RoutesRepository {
     override suspend fun getAllRoutes() = webRoutesDataSource.getAllRoutes()
 

@@ -4,8 +4,9 @@ import com.almarai.data.easy_pick_models.route.RouteServiceStatus
 import com.almarai.data.easy_pick_models.route.RouteStatus
 import com.almarai.easypick.data_source.web.WebService
 import com.almarai.easypick.data_source.web.interfaces.WebRoutesDataSource
+import javax.inject.Inject
 
-class WebRoutesDataSourceImplementation(private val webService: WebService) :
+class WebRoutesDataSourceImplementation @Inject constructor(private val webService: WebService) :
     WebRoutesDataSource {
     override suspend fun getAllRoutes() = webService.routesApi.getAllRoutes()
     override suspend fun getAllRoutesStatus() =

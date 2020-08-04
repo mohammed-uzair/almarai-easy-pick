@@ -1,5 +1,6 @@
 package com.almarai.easypick.view_models
 
+import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -16,7 +17,7 @@ import com.almarai.repository.api.RoutesRepository
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
-class RouteSelectionViewModel(private val repository: RoutesRepository) : ViewModel() {
+class RouteSelectionViewModel @ViewModelInject constructor(private val repository: RoutesRepository) : ViewModel() {
     private val _routes = MutableLiveData<Result<List<Route>>>()
     private val _routesStatus = MutableLiveData<Result<List<RouteServiceStatus>>>()
     private val _routeAccessibility = MutableLiveData<Result<RouteAccessibility>>()

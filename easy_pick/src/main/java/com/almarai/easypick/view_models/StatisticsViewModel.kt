@@ -1,5 +1,6 @@
 package com.almarai.easypick.view_models
 
+import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -11,7 +12,7 @@ import com.almarai.repository.api.StatisticsRepository
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
-class StatisticsViewModel(private val repository: StatisticsRepository) : ViewModel() {
+class StatisticsViewModel @ViewModelInject constructor(private val repository: StatisticsRepository) : ViewModel() {
     private val _statistics = MutableLiveData<Result<Statistics>>()
     val statistics: LiveData<Result<Statistics>> = _statistics
     val physicalPagesSaved: MutableLiveData<String> = MutableLiveData()

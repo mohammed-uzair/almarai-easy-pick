@@ -19,11 +19,13 @@ import com.almarai.easypick.utils.AppTheme
 import com.almarai.business.Utils.DateUtil
 import com.almarai.easypick.view_models.DataConfigurationViewModel
 import com.almarai.repository.utils.AppDataConfiguration
-import org.koin.androidx.viewmodel.ext.android.viewModel
+import androidx.fragment.app.viewModels
+import dagger.hilt.android.AndroidEntryPoint
 import java.util.*
 
+@AndroidEntryPoint
 class DataConfigurationScreen : Fragment() {
-    private val viewModel: DataConfigurationViewModel by viewModel()
+    private val viewModel: DataConfigurationViewModel by viewModels()
     private lateinit var navController: NavController
     private var salesDate = DateUtil.getCurrentDate(AppDateTimeFormat.formatDDMMYYYY)
     private lateinit var screenDataConfigurationBinding: ScreenDataConfigurationBinding

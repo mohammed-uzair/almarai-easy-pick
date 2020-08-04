@@ -12,10 +12,12 @@ import androidx.navigation.Navigation
 import com.almarai.easypick.R
 import com.almarai.easypick.databinding.ScreenLoginBinding
 import com.almarai.easypick.view_models.LoginViewModel
-import org.koin.androidx.viewmodel.ext.android.viewModel
+import androidx.fragment.app.viewModels
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class LoginScreen : Fragment() {
-    private val viewModel: LoginViewModel by viewModel()
+    private val viewModel: LoginViewModel by viewModels()
     private lateinit var navController: NavController
     private lateinit var screenLoginBinding: ScreenLoginBinding
 

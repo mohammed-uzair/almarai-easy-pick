@@ -7,12 +7,13 @@ import com.almarai.easypick.data_source.local_data_source.interfaces.SharedPrefe
 import com.google.gson.Gson
 import com.google.gson.JsonSyntaxException
 import java.lang.reflect.Type
+import javax.inject.Inject
 
-class SharedPreferenceDataSourceImplementation(
+class SharedPreferenceDataSourceImplementation
+@Inject constructor(
     private val context: Context,
     private val gson: Gson
-) :
-    SharedPreferenceDataSource {
+) : SharedPreferenceDataSource {
     /**
      * Function to save [int] value to preference
      *

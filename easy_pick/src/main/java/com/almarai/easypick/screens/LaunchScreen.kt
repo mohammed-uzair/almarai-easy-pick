@@ -8,6 +8,7 @@ import android.view.animation.AnimationUtils
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
@@ -18,10 +19,11 @@ import com.almarai.easypick.utils.BundleKeys
 import com.almarai.easypick.view_models.LaunchViewModel
 import com.almarai.repository.api.ApplicationRepository
 import com.almarai.repository.utils.AppDataConfiguration
-import org.koin.androidx.viewmodel.ext.android.viewModel
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class LaunchScreen(private val applicationRepository: ApplicationRepository) : Fragment() {
-    private val viewModel: LaunchViewModel by viewModel()
+    private val viewModel: LaunchViewModel by viewModels()
     private lateinit var navController: NavController
     private lateinit var screenLaunchBinding: ScreenLaunchBinding
 

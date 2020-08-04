@@ -35,13 +35,15 @@ import com.github.mikephil.charting.data.LineDataSet
 import com.github.mikephil.charting.formatter.ValueFormatter
 import com.github.mikephil.charting.interfaces.datasets.ILineDataSet
 import com.google.android.material.datepicker.*
-import org.koin.androidx.viewmodel.ext.android.viewModel
+import androidx.fragment.app.viewModels
+import dagger.hilt.android.AndroidEntryPoint
 import java.text.NumberFormat
 import java.util.*
 import kotlin.collections.ArrayList
 
+@AndroidEntryPoint
 class StatisticsScreen : Fragment() {
-    private val viewModel: StatisticsViewModel by viewModel()
+    private val viewModel: StatisticsViewModel by viewModels()
     private lateinit var navController: NavController
     private lateinit var screenStatisticsBinding: ScreenStatisticsBinding
 

@@ -2,13 +2,17 @@ package com.almarai.easypick.utils.progress
 
 import android.app.Activity
 import android.app.ProgressDialog
+import javax.inject.Inject
+import javax.inject.Singleton
 
 
 /**
  * Created by Mohammed Uzair on 1/16/2018.
  * This class is used to show the progress dialogue
  */
-class AppProgressDialog {
+
+@Singleton
+class AppProgressDialog @Inject constructor() {
     //region Variables
     private var mProgressDialog: ProgressDialog? = null
     private val isProgressShown = false
