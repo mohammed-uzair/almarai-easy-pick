@@ -1,22 +1,22 @@
 // Top-level build file where you can add configuration options common to all sub-projects/modules.
 
 buildscript {
-    val kotlin_version = "1.3.72"
+    val kotlin_version = "1.4.10"
     repositories {
         google()
         jcenter()
     }
 
     dependencies {
-        classpath("com.android.tools.build:gradle:4.0.1")
+        classpath("com.android.tools.build:gradle:4.1.0")
         classpath("org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version")
-        classpath("com.google.gms:google-services:4.3.3")
+        classpath("com.google.gms:google-services:4.3.4")
 
         //Hilt
         classpath("com.google.dagger:hilt-android-gradle-plugin:2.28-alpha")
 
         // Add the Crashlytics Gradle plugin.
-        classpath("com.google.firebase:firebase-crashlytics-gradle:2.2.0")
+        classpath("com.google.firebase:firebase-crashlytics-gradle:2.3.0")
 
         val nav_version = "2.3.0-rc01"
         classpath("androidx.navigation:navigation-safe-args-gradle-plugin:$nav_version")

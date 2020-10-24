@@ -1,10 +1,10 @@
 import com.almarai.gradle.dependencies.*
 
+val kotlin_version: String by extra
+
 plugins {
     id("com.android.library")
     id("my-plugin")
-    kotlin("android")
-    kotlin("android.extensions")
     kotlin("kapt")
 
     id("dagger.hilt.android.plugin")
@@ -12,6 +12,7 @@ plugins {
 
 dependencies {
     implementation(project(Dependencies_Project_Data))
+    implementation(project(Dependencies_Project_Business))
 
     implementation(Dependencies_Kotlin_Reflect)
 
@@ -24,10 +25,12 @@ dependencies {
     implementation(Dependencies_Retrofit_Gson_Converter)
 
     implementation(Dependencies_Firestore)
+    implementation(Dependencies_Firebase_Storage)
     implementation(Dependencies_Firestore_Kotlin_Extensions)
-
-//    implementation(Dependencies_Koin_Scope)
 
     implementation(Dependencies_Hilt)
     kapt(Dependencies_Hilt_Annotation_Processor)
+}
+repositories {
+    mavenCentral()
 }

@@ -98,9 +98,12 @@ const val Dependencies_Hilt_Android_Annotation_Processor = "androidx.hilt:hilt-c
 private const val Dependencies_Version_Firestore = "21.5.0"
 private const val Dependencies_Version_Firebase = "17.4.4"
 private const val Dependencies_Version_Firebase_Crashlytics = "17.1.1"
+private const val Dependencies_Version_Firebase_Storage = "19.1.1"
 
 const val Dependencies_Firestore =
     "com.google.firebase:firebase-firestore:$Dependencies_Version_Firestore"
+const val Dependencies_Firebase_Storage =
+    "com.google.firebase:firebase-storage-ktx:$Dependencies_Version_Firebase_Storage"
 const val Dependencies_Firestore_Kotlin_Extensions =
     "com.google.firebase:firebase-firestore-ktx:$Dependencies_Version_Firestore"
 

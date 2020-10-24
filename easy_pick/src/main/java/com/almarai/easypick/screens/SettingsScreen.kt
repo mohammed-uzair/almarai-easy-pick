@@ -4,7 +4,6 @@ import android.os.Bundle
 import android.view.View
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
-import androidx.preference.EditTextPreference
 import androidx.preference.ListPreference
 import androidx.preference.Preference
 import androidx.preference.PreferenceFragmentCompat
@@ -34,11 +33,17 @@ class SettingsScreen(private val appUpdateFlow: AppUpdateFlow) : PreferenceFragm
         val appTheme = findPreference(getString(R.string.app_theme)) as ListPreference?
         val appLanguage = findPreference(getString(R.string.app_language)) as ListPreference?
         val appUpdate = findPreference(getString(R.string.app_update)) as Preference?
+        val appNewTicketGeneration =
+            findPreference(getString(R.string.app_ticket_generation)) as Preference?
 
         appTheme?.onPreferenceChangeListener = this
         appLanguage?.onPreferenceChangeListener = this
         appUpdate?.onPreferenceClickListener = Preference.OnPreferenceClickListener {
             appUpdateFlow.checkManualAppUpdate()
+            true
+        }
+        appNewTicketGeneration?.onPreferenceClickListener = Preference.OnPreferenceClickListener {
+            navController.navigate(R.id.action_settingsScreen_to_ticketScreen)
             true
         }
     }

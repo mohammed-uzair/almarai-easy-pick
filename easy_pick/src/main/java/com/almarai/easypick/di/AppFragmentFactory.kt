@@ -29,6 +29,7 @@ class AppFragmentFactory @Inject constructor(
             ProductListScreen::class.java.name -> ProductListScreen(productsAdapter)
             FilterScreen::class.java.name -> FilterScreen()
             SettingsScreen::class.java.name -> SettingsScreen(appUpdateFlow)
+            TicketScreen::class.java.name -> TicketScreen()
 
             else -> super.instantiate(classLoader, className)
         }

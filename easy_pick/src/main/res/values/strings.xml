@@ -13,6 +13,7 @@
     <string name="title_item_list">Items</string>
     <string name="title_filter_routes">Routes Filter</string>
     <string name="title_filter_products">Products Filter</string>
+    <string name="title_ticket_generation">File Ticket</string>
     <!--endregion-->
 
     <!--region Menu Titles-->
@@ -39,6 +40,8 @@
     <!--region Buttons-->
     <string name="button_launch">Launch</string>
     <string name="button_save">Save</string>
+    <string name="button_send">Send</string>
+    <string name="ticket_button_proof">Attach Proof</string>
     <string name="button_login">Login</string>
     <!--endregion-->
 
@@ -50,10 +53,12 @@
 
     <!--region Setting Screen Titles-->
     <string name="general">General</string>
-    <string name="app_theme" translatable="false">App Theme</string>
-    <string name="app_language" translatable="false">App Language</string>
-    <string name="app_update" translatable="false">App Update</string>
-    <string name="app_update_summary" translatable="false">Check for new app updates</string>
+    <string name="app_theme">App Theme</string>
+    <string name="app_language">App Language</string>
+    <string name="app_update">App Update</string>
+    <string name="app_update_summary">Check for new app updates</string>
+    <string name="app_ticket_generation">Generate Ticket</string>
+    <string name="app_ticket_generation_summary">File a new ticket for bug, crash, feedback or enhancement</string>
 
     <string name="base_app_theme" translatable="false">base</string>
     <string name="light_app_theme" translatable="false">light</string>
@@ -80,6 +85,7 @@
     <!--region Alerts-->
     <string name="loading">Please wait…</string>
     <string name="loading_title">Please wait</string>
+    <string name="loading_upload_files">Uploading files and generating a ticket number, please wait…</string>
     <string name="progress_saving_route_details">Please wait, saving route details…</string>
     <string name="progress_fetching_route_status">Please wait, fetching this route\'s updated status…</string>
     <string name="empty_data">Empty data</string>
@@ -103,6 +109,7 @@
     <!--endregion-->
 
     <!--region Other labels-->
+    <string name="ticket_detail">Elaborated feedback</string>
     <string name="default_number">0</string>
     <string name="server_ip">Server IP</string>
     <string name="made_with">Made with</string>
@@ -112,6 +119,12 @@
     <string name="server_port">Server Port</string>
     <string name="sales_date">Sales Date</string>
     <string name="date_range">Date Range</string>
+    <string name="ticket_bug">Bug</string>
+    <string name="ticket_enhancement">Feature</string>
+    <string name="ticket_feedback">Feedback</string>
+    <string name="ticket_description">Describe your thought</string>
+    <string name="ticket_crash">Crash</string>
+    <string name="ticket_ui_fix">UI Fix</string>
     <string name="dept_code">Depot Code</string>
     <string name="route_group">Route Group</string>
     <string name="sales_days_variance">+- 2 Days</string>
@@ -145,8 +158,15 @@
     <!--endregion-->
 
     <!--region Alerts/Error messages-->
+    <string name="alert_upload_ticket_title">Ticket Created</string>
+    <string name="alert_upload_ticket_message">Your request has been taken, with ticket number\n</string>
+
+    <string name="alert_ticket_upload_failed_title">Ticket Not Created</string>
+        <string name="alert_ticket_upload_failed_ticket_message">Some error occurred, your ticket could not be filed</string>
+
     <string name="alert_default_title">Alert</string>
     <string name="alert_default_message">Could not find anything</string>
+    <string name="alert_selected_data_null_message">Clip data is null</string>
     <string name="alert_button_yes">Yes</string>
     <string name="alert_button_no">NO</string>
     <string name="alert_button_ok">OK</string>

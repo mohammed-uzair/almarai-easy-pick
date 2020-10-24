@@ -1,5 +1,7 @@
 package com.almarai.easypick.di.hilt
 
+import com.almarai.easypick.data_source.firebase.implementation.FirebaseFileUploadDataSourceImplementation
+import com.almarai.easypick.data_source.firebase.interfaces.FirebaseFileUploadDataSource
 import com.almarai.easypick.data_source.local_data_source.implementations.LocalAppUpdateDataSourceImplementation
 import com.almarai.easypick.data_source.local_data_source.implementations.SharedPreferenceDataSourceImplementation
 import com.almarai.easypick.data_source.local_data_source.interfaces.LocalAppUpdateDataSource
@@ -37,4 +39,7 @@ abstract class DataSourceModule {
 
     @Binds
     abstract fun provideWebStatisticsDataSource(webStatisticsDataSourceImplementation: WebStatisticsDataSourceImplementation): WebStatisticsDataSource
+
+    @Binds
+    abstract fun provideFirebaseFileUploadDataSource(fileUploadDataSourceImplementation: FirebaseFileUploadDataSourceImplementation): FirebaseFileUploadDataSource
 }

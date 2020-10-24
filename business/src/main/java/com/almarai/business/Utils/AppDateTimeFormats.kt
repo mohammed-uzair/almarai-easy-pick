@@ -3,6 +3,7 @@ package com.almarai.business.Utils
 @kotlin.annotation.Retention(AnnotationRetention.SOURCE)
 annotation class AppDateTimeFormat {
     companion object {
+        const val formatDDMMMYYYYHHMMSS = "ddMMyyyyHHmmss" //02102020101512
         const val formatDDMMMYYYY = "dd-MMM-yyyy" //02-Feb-2018
         const val formatDDMMYYYY = "dd/MM/yyyy" //02-08-2017
         const val formatDDMMYY = "dd/MM/yy" //02/02/2018

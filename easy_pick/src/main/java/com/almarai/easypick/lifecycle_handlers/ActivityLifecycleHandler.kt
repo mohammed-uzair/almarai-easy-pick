@@ -1,6 +1,5 @@
 package com.almarai.easypick.lifecycle_handlers
 
-//import org.koin.androidx.fragment.android.setupKoinFragmentFactory
 import android.app.Activity
 import android.app.Application
 import android.content.Context
@@ -22,8 +21,6 @@ class ActivityLifecycleHandler @Inject constructor(private val appUpdateFlow: Ap
 
     override fun onActivityCreated(activity: Activity, p1: Bundle?) {
         Log.d(TAG, "onActivityCreated at ${activity.localClassName}")
-
-//        (activity as FragmentActivity).setupKoinFragmentFactory()
 
         ThemeSetup.setAppTheme(activity)
 

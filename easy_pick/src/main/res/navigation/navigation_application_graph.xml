@@ -213,7 +213,15 @@
     <fragment
         android:id="@+id/settingsScreen"
         android:name="com.almarai.easypick.screens.SettingsScreen"
-        android:label="SettingsScreen" />
+        android:label="SettingsScreen">
+        <action
+            android:id="@+id/action_settingsScreen_to_ticketScreen"
+            app:destination="@id/ticketScreen"
+            app:enterAnim="@anim/anim_screen_slide_in_right"
+            app:exitAnim="@anim/anim_screen_slide_out_left"
+            app:popEnterAnim="@anim/anim_screen_slide_in_left"
+            app:popExitAnim="@anim/anim_screen_slide_out_right" />
+    </fragment>
     <dialog
         android:id="@+id/productDetailsDialog"
         android:name="com.almarai.easypick.screens.ProductDetailsDialog"
@@ -228,5 +236,10 @@
         android:id="@+id/onBoardingScreen"
         android:name="com.almarai.easypick.screens.OnBoardingScreen"
         android:label="OnBoardingScreen"
-        tools:layout="@layout/item_on_boarding"></fragment>
+        tools:layout="@layout/item_on_boarding" />
+    <fragment
+        android:id="@+id/ticketScreen"
+        android:name="com.almarai.easypick.screens.TicketScreen"
+        android:label="TicketScreen"
+        tools:layout="@layout/screen_self_ticket_generator" />
 </navigation>

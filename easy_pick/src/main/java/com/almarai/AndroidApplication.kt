@@ -26,14 +26,6 @@ class AndroidApplication : Application() {
 
     override fun onCreate() {
         super.onCreate()
-//        startKoin {
-//            androidLogger()
-//            // declare used Android context
-//            androidContext(this@AndroidApplication)
-//            fragmentFactory()
-//            // declare modules
-//            modules(AppModule, FragmentModule, ViewModelsModule, RepositoryModule, DataSourceModule)
-//        }
 
         // Register the activity lifecycle callback listener object
         registerActivityLifecycleCallbacks(ActivityLifecycleHandler(appUpdateFlow))

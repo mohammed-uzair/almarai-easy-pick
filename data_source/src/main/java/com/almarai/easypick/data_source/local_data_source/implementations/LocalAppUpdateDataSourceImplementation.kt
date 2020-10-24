@@ -1,5 +1,6 @@
 package com.almarai.easypick.data_source.local_data_source.implementations
 
+import android.os.Build
 import android.util.Log
 import com.almarai.data.easy_pick_models.AppUpdate
 import com.almarai.easypick.data_source.BuildConfig
@@ -29,7 +30,7 @@ class LocalAppUpdateDataSourceImplementation
     override fun setAppUpdates(appUpdate: AppUpdate?) = checkIfAppUpdateAvailable(appUpdate)
 
     private fun checkIfAppUpdateAvailable(appUpdate: AppUpdate?) {
-        if (appUpdate != null && appUpdate.appVersionNumber > BuildConfig.VERSION_CODE) {
+        if (appUpdate != null && appUpdate.appVersionNumber > 1) {
             Log.d(TAG, "App update available : $appUpdate")
 
             //Save to prefs

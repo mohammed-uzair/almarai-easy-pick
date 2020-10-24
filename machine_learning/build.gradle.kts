@@ -1,10 +1,10 @@
 import com.almarai.gradle.dependencies.*
 
+val kotlin_version: String by extra
+
 plugins {
     id("com.android.library")
     id("my-plugin")
-    kotlin("android")
-    kotlin("android.extensions")
 }
 
 dependencies {
@@ -26,4 +26,7 @@ dependencies {
     implementation(Dependencies_Ml_Kit_Detection_Custom)
 
     api(Dependencies_Guava)
+}
+repositories {
+    mavenCentral()
 }

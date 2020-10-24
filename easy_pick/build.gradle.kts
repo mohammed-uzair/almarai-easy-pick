@@ -1,10 +1,10 @@
 import com.almarai.gradle.dependencies.*
 
+val kotlin_version: String by extra
+
 plugins {
     id("com.android.application")
     id("my-plugin")
-    kotlin("android")
-    kotlin("android.extensions")
     kotlin("kapt")
     id("com.google.gms.google-services")
     id("com.google.firebase.crashlytics")
@@ -26,6 +26,7 @@ dependencies {
     implementation(project(Dependencies_Project_Alm_Ui))
     implementation(project(Dependencies_Project_Business))
     implementation(project(Dependencies_Project_Data))
+    implementation(project(Dependencies_Project_Data_Source))
 
     implementation(Dependencies_Sdp)
     implementation(Dependencies_Android_AppCompat)
@@ -39,13 +40,7 @@ dependencies {
     implementation(Dependencies_Android_Preference)
     implementation(Dependencies_Firebase_Core)
     implementation(Dependencies_Navigation_Fragment_Kotlin_Extensions)
-    implementation(Dependencies_Navigation)
 
-//    implementation(Dependencies_Koin_Scope)
-//    implementation(Dependencies_Koin_ViewModel)
-//    implementation(Dependencies_Koin_Fragment)
-
-    implementation(project(mapOf("path" to ":data_source")))
     implementation(Dependencies_Hilt)
     implementation(Dependencies_Hilt_Android_ViewModel)
     kapt(Dependencies_Hilt_Annotation_Processor)
@@ -68,4 +63,7 @@ dependencies {
     implementation(Dependencies_Mp_Chart)
 
     //implementation(Dependencies_Leak_Canary)
+}
+repositories {
+    mavenCentral()
 }

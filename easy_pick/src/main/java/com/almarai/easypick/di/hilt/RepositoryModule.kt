@@ -6,7 +6,6 @@ import dagger.Binds
 import dagger.Module
 import dagger.hilt.InstallIn
 import dagger.hilt.android.components.ApplicationComponent
-import javax.inject.Singleton
 
 @InstallIn(ApplicationComponent::class)
 @Module
@@ -29,4 +28,7 @@ abstract class RepositoryModule {
 
     @Binds
     abstract fun provideStatisticsRepository(statisticsRepositoryImplementation: StatisticsRepositoryImplementation): StatisticsRepository
+
+    @Binds
+    abstract fun provideFileUploadRepository(fileUploadRepositoryImplementation: FileUploadRepositoryImplementation): FileUploadRepository
 }

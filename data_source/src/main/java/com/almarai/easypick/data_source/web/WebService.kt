@@ -25,7 +25,7 @@ import java.util.*
 import javax.inject.Inject
 import javax.inject.Singleton
 
-const val DEFAULT_URL = "http://192.168.1.237:8080/"
+const val DEFAULT_URL = "http://192.168.0.196:8080/"
 
 @Singleton
 class WebService @Inject constructor(
@@ -82,7 +82,7 @@ class WebService @Inject constructor(
                 sharedPreferenceDataSource.getSharedPreferenceString(SharedPreferencesKeys.ROUTE_PREFERENCE)
                     ?: "NA"
             val request: Request = chain.request().newBuilder()
-                .addHeader("app-version", BuildConfig.VERSION_NAME)
+                .addHeader("app-version", "1")
                 .addHeader("app-build-type", BuildConfig.BUILD_TYPE)
                 .addHeader("device-os-version", Build.VERSION.RELEASE)
                 .addHeader("device-sdk-version", Build.VERSION.SDK_INT.toString())

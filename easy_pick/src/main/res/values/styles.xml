@@ -23,12 +23,12 @@
         <item name="android:selectAllOnFocus">true</item>
         <item name="android:textColor">?attr/colorText</item>
         <item name="android:textColorHint">?attr/colorText</item>
-        <item name="boxCornerRadiusBottomEnd">@dimen/_8sdp</item>
         <item name="suffixTextColor">?colorAccent</item>
         <item name="startIconTint">?colorAccent</item>
-        <item name="boxCornerRadiusBottomStart">0dp</item>
-        <item name="boxCornerRadiusTopEnd">0dp</item>
         <item name="boxCornerRadiusTopStart">@dimen/_8sdp</item>
+        <item name="boxCornerRadiusTopEnd">@dimen/_8sdp</item>
+        <item name="boxCornerRadiusBottomStart">@dimen/_8sdp</item>
+        <item name="boxCornerRadiusBottomEnd">@dimen/_8sdp</item>
         <item name="boxStrokeColor">@color/text_input_box_stroke</item>
         <item name="hintTextColor">?colorAccent</item>
     </style>
@@ -123,6 +123,7 @@
 
     <style name="PreferenceThemeNight" parent="@style/Theme.AppCompat.Light.DarkActionBar">
         <item name="android:background">?colorBackgroundScreenHeader</item>
+        <item name="android:title">?colorBackgroundScreenHeader</item>
     </style>
     <!--endregion-->
 
