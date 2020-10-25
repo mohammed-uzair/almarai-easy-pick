@@ -288,7 +288,7 @@ class ProductListScreen(val adapter: ProductsAdapter) : Fragment(), SearchView.O
 
     override fun onQueryTextChange(newText: String): Boolean {
         //Hide the keyboard
-        hideKeyboard()
+        //hideKeyboard()
 
         //Filter the list
         FilterFunnel(adapter, Filters()).searchProducts(newText, products)

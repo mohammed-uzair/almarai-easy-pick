@@ -107,6 +107,7 @@ class MyModulePlugin : Plugin<Project> {
 
                     //Add a new build config field for common application name into the BuildConfig class.
                     buildConfigField("String", "APP_NAME", "\"$APP_NAME\"")
+                    buildConfigField("int", "VERSION_CODE", "$APP_VERSION_CODE")
 
                     testInstrumentationRunner = Test_InstrumentationRunner
                 }

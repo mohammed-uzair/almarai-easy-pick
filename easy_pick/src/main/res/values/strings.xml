@@ -166,7 +166,7 @@
 
     <string name="alert_default_title">Alert</string>
     <string name="alert_default_message">Could not find anything</string>
-    <string name="alert_selected_data_null_message">Clip data is null</string>
+    <string name="alert_selected_data_null_message">No file is selected</string>
     <string name="alert_button_yes">Yes</string>
     <string name="alert_button_no">NO</string>
     <string name="alert_button_ok">OK</string>
@@ -183,6 +183,8 @@
     <string name="alert_message_update_available">A new update for the app is available, please update your app\nUpdate Details\n</string>
     <string name="alert_message_force_update">This is a mandatory update, please update the app\nUpdate Details\n</string>
     <string name="alert_message_route_serve">Are you sure you want to serve this route ?</string>
+    <string name="alert_message_maximum_file_count_reached">You have selected %d files, which is more than the maximum number of files allowed, which is %d, remaining files will be omitted</string>
+    <string name="alert_message_maximum_file_count">You can select a maximum of %d files</string>
     <!--endregion-->
 
     <!--region OnBoarding-->

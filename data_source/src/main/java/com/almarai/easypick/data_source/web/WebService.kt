@@ -2,8 +2,8 @@ package com.almarai.easypick.data_source.web
 
 import android.os.Build
 import android.util.Log
+import com.almarai.data.BuildConfig
 import com.almarai.data.easy_pick_models.AppUpdate
-import com.almarai.easypick.data_source.BuildConfig
 import com.almarai.easypick.data_source.local_data_source.SharedPreferencesKeys
 import com.almarai.easypick.data_source.local_data_source.interfaces.LocalAppUpdateDataSource
 import com.almarai.easypick.data_source.local_data_source.interfaces.SharedPreferenceDataSource
@@ -82,7 +82,7 @@ class WebService @Inject constructor(
                 sharedPreferenceDataSource.getSharedPreferenceString(SharedPreferencesKeys.ROUTE_PREFERENCE)
                     ?: "NA"
             val request: Request = chain.request().newBuilder()
-                .addHeader("app-version", "1")
+                .addHeader("app-version", BuildConfig.VERSION_CODE.toString())
                 .addHeader("app-build-type", BuildConfig.BUILD_TYPE)
                 .addHeader("device-os-version", Build.VERSION.RELEASE)
                 .addHeader("device-sdk-version", Build.VERSION.SDK_INT.toString())

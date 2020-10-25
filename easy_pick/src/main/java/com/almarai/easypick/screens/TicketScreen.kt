@@ -4,9 +4,11 @@ import android.app.Activity.RESULT_OK
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
+import android.provider.OpenableColumns
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
@@ -14,6 +16,11 @@ import androidx.lifecycle.Observer
 import com.almarai.data.easy_pick_models.Result
 import com.almarai.easypick.R
 import com.almarai.easypick.databinding.ScreenSelfTicketGeneratorBinding
+import com.almarai.easypick.extensions.goBack
+import com.almarai.easypick.utils.APP_LOCALE
+import com.almarai.easypick.utils.SUPPORTED_TICKET_MIME_TYPES
+import com.almarai.easypick.utils.alert_dialog.OnPositiveButtonClickListener
+import com.almarai.easypick.utils.alert_dialog.hideAlertDialog
 import com.almarai.easypick.utils.alert_dialog.showAlertDialog
 import com.almarai.easypick.utils.progress.hideProgress
 import com.almarai.easypick.utils.progress.showProgress
@@ -25,6 +32,7 @@ const val FILES_INTENT_RESULT_CODE = 1901
 
 @AndroidEntryPoint
 class TicketScreen : Fragment() {
+    private val MAX_TICKET_PROOF_FILES_COUNT = 6
     private val viewModel: TicketViewModel by viewModels()
     private lateinit var screenBinding: ScreenSelfTicketGeneratorBinding
     private lateinit var files: List<Uri>
@@ -60,8 +68,17 @@ class TicketScreen : Fragment() {
         setTitle(R.string.title_ticket_generation)
 
         screenBinding.screenTicketAttachProofButton.setOnClickListener {
+            //Show an alert to the user, of the maximum files count that can be selected.
+            val message = String.format(
+                APP_LOCALE,
+                getString(R.string.alert_message_maximum_file_count),
+                MAX_TICKET_PROOF_FILES_COUNT
+            )
+            Toast.makeText(context, message, Toast.LENGTH_LONG).show()
+
             val intent = Intent(Intent.ACTION_GET_CONTENT).apply {
-                type = "image/*"
+                type = "*/*"
+                putExtra(Intent.EXTRA_MIME_TYPES, SUPPORTED_TICKET_MIME_TYPES)
                 putExtra(Intent.EXTRA_ALLOW_MULTIPLE, true)
             }
 
@@ -86,7 +103,16 @@ class TicketScreen : Fragment() {
 
                     showAlertDialog(
                         R.string.alert_upload_ticket_title,
-                        getString(R.string.alert_upload_ticket_message) + it.data
+                        getString(R.string.alert_upload_ticket_message) + it.data,
+                        positiveButtonClickListener = object : OnPositiveButtonClickListener {
+                            override fun onClick() {
+                                //Hide the dialog
+                                hideAlertDialog()
+
+                                //Leave the ticket screen
+                                goBack()
+                            }
+                        }
                     )
                 }
                 is Result.Error -> {
@@ -112,7 +138,20 @@ class TicketScreen : Fragment() {
             } else {
                 val count = data.clipData?.itemCount ?: 0
 
-                for (i in 0 until count) {
+                if (count > MAX_TICKET_PROOF_FILES_COUNT) {
+                    //Alert the user
+                    val message = String.format(
+                        APP_LOCALE,
+                        getString(R.string.alert_message_maximum_file_count_reached),
+                        count,
+                        MAX_TICKET_PROOF_FILES_COUNT
+                    )
+                    showAlertDialog(R.string.alert_default_title, message, R.string.alert_button_ok)
+                }
+
+                val maxCount =
+                    if (MAX_TICKET_PROOF_FILES_COUNT > count) count else MAX_TICKET_PROOF_FILES_COUNT
+                for (i in 0 until maxCount) {
                     val path = data.clipData?.getItemAt(i)?.uri
 
                     if (path != null)
@@ -120,9 +159,26 @@ class TicketScreen : Fragment() {
                 }
             }
 
+            //Show the selected files in the proofs view
+            updateProofsView(_files)
+
             files = _files
         } else if (data?.clipData == null) {
             showAlertDialog(alertMessage = R.string.alert_selected_data_null_message)
         }
+    }
+
+    private fun updateProofsView(files: MutableList<Uri>) {
+        val filesBuffer = StringBuffer()
+        for ((index, file) in files.withIndex()) {
+            val cursor = activity?.contentResolver?.query(file, null, null, null, null)
+            if (cursor != null && cursor.moveToFirst()) {
+                val fileName = cursor.getString(cursor.getColumnIndex(OpenableColumns.DISPLAY_NAME))
+                filesBuffer.append("${index + 1}. $fileName.\n")
+                cursor.close()
+            }
+        }
+
+        screenBinding.screenTicketProofsView.text = filesBuffer
     }
 }

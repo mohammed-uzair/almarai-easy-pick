@@ -23,11 +23,13 @@ import com.almarai.easypick.extensions.hideKeyboard
 import com.almarai.easypick.extensions.positionDialogAtBottom
 import com.almarai.easypick.extensions.showFocus
 import com.almarai.easypick.utils.AlertTones.playTone
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
+@AndroidEntryPoint
 class ProductDetailsDialog(private val productsAdapter: ProductsAdapter) : DialogFragment(),
-    View.OnKeyListener, TextView.OnEditorActionListener {
+    View.OnKeyListener{
     private var indexPos = 0
     private val args: ProductDetailsDialogArgs by navArgs()
     private lateinit var products: List<Product>
@@ -39,7 +41,7 @@ class ProductDetailsDialog(private val productsAdapter: ProductsAdapter) : Dialo
         savedInstanceState: Bundle?
     ): View? {
         dialogProductDetailsBinding =
-            DataBindingUtil.inflate(inflater, R.layout.dialog_product_detail, container, false)
+                DataBindingUtil.inflate(inflater, R.layout.dialog_product_detail, container, false)
         dialogProductDetailsBinding.apply {
             lifecycleOwner = this@ProductDetailsDialog
             dialogProductDetailsBinding.product =
@@ -96,7 +98,6 @@ class ProductDetailsDialog(private val productsAdapter: ProductsAdapter) : Dialo
         //Set the key listener
         dialogProductDetailsBinding.dialogProductDetailCratesEditText.setOnKeyListener(this@ProductDetailsDialog)
         dialogProductDetailsBinding.dialogProductDetailPiecesEditText.setOnKeyListener(this@ProductDetailsDialog)
-        dialogProductDetailsBinding.dialogProductDetailPiecesEditText.setOnEditorActionListener(this@ProductDetailsDialog)
     }
 
     private fun setProductValues() {
@@ -126,13 +127,13 @@ class ProductDetailsDialog(private val productsAdapter: ProductsAdapter) : Dialo
         }
     }
 
-    override fun onKey(v: View, keyCode: Int, event: KeyEvent): Boolean {
-        return if (event.action == KeyEvent.ACTION_DOWN) {
+    override fun onKey(view: View, keyCode: Int, event: KeyEvent): Boolean {
+        return if (event.action == KeyEvent.ACTION_UP) {
             when (event.keyCode) {
                 KeyEvent.KEYCODE_ENTER -> {
-                    return when (v.id) {
+                    return when (view.id) {
                         R.id.dialog_product_detail_crates_edit_text -> {
-                            onCratesEnterPressed(v)
+                            focusOnPieces(view)
                             true
                         }
                         R.id.dialog_product_detail_pieces_edit_text -> {
@@ -144,13 +145,15 @@ class ProductDetailsDialog(private val productsAdapter: ProductsAdapter) : Dialo
                 }
 
                 KeyEvent.KEYCODE_DPAD_UP -> {
-                    onKeyboardUpArrowPressed()
+                    onKeyBoardUpArrowPressed()
                     true
                 }
+
                 KeyEvent.KEYCODE_DPAD_DOWN -> {
                     onKeyBoardDownArrowPressed()
                     true
                 }
+
                 else -> false
             }
         } else false
@@ -162,13 +165,13 @@ class ProductDetailsDialog(private val productsAdapter: ProductsAdapter) : Dialo
         setProductValues()
     }
 
-    private fun onKeyboardUpArrowPressed() {
+    private fun onKeyBoardUpArrowPressed() {
         --indexPos
         showItemInList(indexPos - 1)
         setProductValues()
     }
 
-    private fun onCratesEnterPressed(v: View) {
+    private fun focusOnPieces(v: View) {
         if (dialogProductDetailsBinding.dialogProductDetailCratesEditText.text.toString()
                 .isEmpty()
         ) {
@@ -238,13 +241,5 @@ class ProductDetailsDialog(private val productsAdapter: ProductsAdapter) : Dialo
                 ?: 195//Custom aprox item card height
 
         return recyclerViewHeight - (dialogHeight + itemHeight + 20)//~extra 20 pixels for adding all the views margin spaces
-    }
-
-    override fun onEditorAction(v: TextView?, actionId: Int, event: KeyEvent?): Boolean {
-        if (actionId == EditorInfo.IME_ACTION_DONE) {
-            updateProduct()
-        }
-
-        return false
     }
 }

@@ -27,6 +27,7 @@ class AppFragmentFactory @Inject constructor(
             HomeScreen::class.java.name -> HomeScreen(applicationRepository)
             RouteSelectionScreen::class.java.name -> RouteSelectionScreen()
             ProductListScreen::class.java.name -> ProductListScreen(productsAdapter)
+            ProductDetailsDialog::class.java.name -> ProductDetailsDialog(productsAdapter)
             FilterScreen::class.java.name -> FilterScreen()
             SettingsScreen::class.java.name -> SettingsScreen(appUpdateFlow)
             TicketScreen::class.java.name -> TicketScreen()

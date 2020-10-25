@@ -87,6 +87,11 @@ class AppAlertDialog : DialogFragment() {
         alertDialogBinding =
             DataBindingUtil.inflate(layoutInflater, R.layout.dialog_alert, null, false)
 
+        alertDialogBinding.apply {
+            lifecycleOwner = this@AppAlertDialog
+            viewModel = this@AppAlertDialog.viewModel
+        }
+
         val builder = AlertDialog.Builder(activity).apply {
             setView(alertDialogBinding.root)
         }
@@ -99,11 +104,6 @@ class AppAlertDialog : DialogFragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        alertDialogBinding.apply {
-            lifecycleOwner = this@AppAlertDialog
-            viewModel = this@AppAlertDialog.viewModel
-        }
-
         return alertDialogBinding.root
     }
 
@@ -167,10 +167,6 @@ class AppAlertDialog : DialogFragment() {
 
             alertNegativeButtonText.value = buttonNegativeText
         }
-    }
-
-    override fun dismiss() {
-        super.dismiss()
     }
 
     override fun onActivityCreated(arg0: Bundle?) {

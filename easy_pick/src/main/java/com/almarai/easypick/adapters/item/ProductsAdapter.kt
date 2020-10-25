@@ -15,7 +15,6 @@ import com.almarai.easypick.screens.ProductListScreenDirections
 import com.almarai.easypick.view_models.ProductListViewModel
 import javax.inject.Inject
 
-
 class ProductsAdapter @Inject constructor() : RecyclerView.Adapter<ProductsAdapter.ViewHolder>() {
     lateinit var products: List<Product>
     lateinit var recyclerView: RecyclerView
