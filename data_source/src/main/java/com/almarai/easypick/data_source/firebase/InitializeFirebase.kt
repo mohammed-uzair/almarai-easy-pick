@@ -1,4 +1,4 @@
-package com.almarai.easypick.data_source.firebase.implementation
+package com.almarai.easypick.data_source.firebase
 
 import android.content.Context
 import com.google.firebase.FirebaseOptions

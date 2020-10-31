@@ -27,6 +27,7 @@ import com.almarai.easypick.utils.progress.hideProgress
 import com.almarai.easypick.utils.progress.showProgress
 import com.almarai.easypick.view_models.RouteSelectionViewModel
 
+private var selectedItemPosition = 0
 
 class RoutesAdapter : RecyclerView.Adapter<RoutesAdapter.ViewHolder>() {
     companion object {
@@ -42,6 +43,7 @@ class RoutesAdapter : RecyclerView.Adapter<RoutesAdapter.ViewHolder>() {
         fragment: RouteSelectionScreen,
         viewModel: RouteSelectionViewModel
     ) {
+        selectedItemPosition = 0
         this.routes = routes
         this.fragment = fragment
         this.viewModel = viewModel
@@ -51,6 +53,9 @@ class RoutesAdapter : RecyclerView.Adapter<RoutesAdapter.ViewHolder>() {
         RecyclerView.ViewHolder(routeBinding.root) {
         init {
             routeBinding.root.setOnClickListener {
+                selectedItemPosition = routes.indexOfFirst {
+                    it.number == routeBinding.itemRouteNumberText.text.toString().toInt()
+                }
                 checkValidRoute(routeBinding)
             }
         }
@@ -71,21 +76,34 @@ class RoutesAdapter : RecyclerView.Adapter<RoutesAdapter.ViewHolder>() {
                 )
 
             // Bind focus listener
-            routeBinding.root.onFocusChangeListener =
-                View.OnFocusChangeListener { v, hasFocus ->
-                    if (hasFocus) {
-                        routeBinding.itemRouteSelector.visibility = View.VISIBLE
+            if(route?.number == selectedItemPosition){
+                routeBinding.itemRouteSelector.visibility = View.VISIBLE
 
-                        val anim = AnimationUtils.loadAnimation(v.context, R.anim.anim_item_focused)
-                        routeBinding.itemRouteSelector.startAnimation(anim)
-                    } else {
-                        val anim =
-                            AnimationUtils.loadAnimation(v.context, R.anim.anim_item_defocused)
-                        routeBinding.itemRouteSelector.startAnimation(anim)
+                val anim = AnimationUtils.loadAnimation(routeBinding.root.context, R.anim.anim_item_focused)
+                routeBinding.itemRouteSelector.startAnimation(anim)
+            }else{
+                val anim =
+                    AnimationUtils.loadAnimation(routeBinding.root.context, R.anim.anim_item_defocused)
+                routeBinding.itemRouteSelector.startAnimation(anim)
 
-                        routeBinding.itemRouteSelector.visibility = View.GONE
-                    }
-                }
+                routeBinding.itemRouteSelector.visibility = View.GONE
+            }
+
+//            routeBinding.root.onFocusChangeListener =
+//                View.OnFocusChangeListener { v, hasFocus ->
+//                    if (hasFocus) {
+//                        routeBinding.itemRouteSelector.visibility = View.VISIBLE
+//
+//                        val anim = AnimationUtils.loadAnimation(v.context, R.anim.anim_item_focused)
+//                        routeBinding.itemRouteSelector.startAnimation(anim)
+//                    } else {
+//                        val anim =
+//                            AnimationUtils.loadAnimation(v.context, R.anim.anim_item_defocused)
+//                        routeBinding.itemRouteSelector.startAnimation(anim)
+//
+//                        routeBinding.itemRouteSelector.visibility = View.GONE
+//                    }
+//                }
         }
     }
 

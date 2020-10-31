@@ -58,7 +58,12 @@
     <string name="app_update">App Update</string>
     <string name="app_update_summary">Check for new app updates</string>
     <string name="app_ticket_generation">Generate Ticket</string>
+    <string name="app_database">Data Source</string>
     <string name="app_ticket_generation_summary">File a new ticket for bug, crash, feedback or enhancement</string>
+    <string name="app_database_summary">Select from which DB the app should communicate with</string>
+
+    <string name="app_data_source_almarai" translatable="false">Almarai</string>
+    <string name="app_data_source_cloud" translatable="false">Cloud</string>
 
     <string name="base_app_theme" translatable="false">base</string>
     <string name="light_app_theme" translatable="false">light</string>

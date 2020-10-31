@@ -1,7 +1,9 @@
-package com.almarai.easypick.data_source.local_data_source.interfaces
+package com.almarai.easypick.data_source.interfaces
 
 import java.lang.reflect.Type
+import javax.inject.Singleton
 
+@Singleton
 interface SharedPreferenceDataSource {
     /**
      * Function to save [Int] value to preference

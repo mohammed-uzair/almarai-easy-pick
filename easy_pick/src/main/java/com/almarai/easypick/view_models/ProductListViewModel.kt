@@ -13,9 +13,11 @@ import com.almarai.data.easy_pick_models.route.RouteStatus
 import com.almarai.data.easy_pick_models.util.ERROR_OCCURRED
 import com.almarai.repository.api.ProductsRepository
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 
-class ProductListViewModel @ViewModelInject constructor(private val repository: ProductsRepository) : ViewModel() {
+class ProductListViewModel @ViewModelInject constructor(private val repository: ProductsRepository) :
+    ViewModel() {
     private val _products = MutableLiveData<Result<List<Product>>>()
     private val _routeDataUpdated = MutableLiveData<Result<RouteStatus>>()
     internal val products: LiveData<Result<List<Product>>> = _products
@@ -29,7 +31,10 @@ class ProductListViewModel @ViewModelInject constructor(private val repository: 
         viewModelScope.launch(Dispatchers.IO) {
             _products.postValue(Result.Fetching)
             try {
-                _products.postValue(Result.Success(repository.getAllProducts(routeNumber)))
+                val data = repository.getAllProducts(routeNumber)
+                data.collect {
+                    _products.postValue(Result.Success(it))
+                }
             } catch (exception: Exception) {
                 _products.postValue(Result.Error(exception.message ?: ERROR_OCCURRED))
             }

@@ -6,7 +6,7 @@ import android.view.MenuItem
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
-import com.almarai.easypick.data_source.firebase.implementation.InitializeFirebase.configureFirebase
+import com.almarai.easypick.data_source.firebase.InitializeFirebase.configureFirebase
 import com.almarai.easypick.databinding.FragmentContainerBinding
 import com.almarai.easypick.extensions.OnBackPressListener
 import com.almarai.easypick.extensions.hideViewStateAlert

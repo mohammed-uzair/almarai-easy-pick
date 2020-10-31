@@ -8,7 +8,9 @@ import retrofit2.http.Body
 import retrofit2.http.GET
 import retrofit2.http.POST
 import retrofit2.http.Query
+import javax.inject.Singleton
 
+@Singleton
 interface RoutesApi {
     @GET("routes")
     suspend fun getAllRoutes(): List<Route>

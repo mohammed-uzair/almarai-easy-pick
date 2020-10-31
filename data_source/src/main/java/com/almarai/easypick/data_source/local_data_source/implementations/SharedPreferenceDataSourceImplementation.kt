@@ -2,13 +2,17 @@ package com.almarai.easypick.data_source.local_data_source.implementations
 
 import android.content.Context
 import android.content.SharedPreferences
+import android.os.Build
 import android.util.Log
-import com.almarai.easypick.data_source.local_data_source.interfaces.SharedPreferenceDataSource
+import com.almarai.easypick.data_source.BuildConfig
+import com.almarai.easypick.data_source.interfaces.SharedPreferenceDataSource
 import com.google.gson.Gson
 import com.google.gson.JsonSyntaxException
 import java.lang.reflect.Type
 import javax.inject.Inject
+import javax.inject.Singleton
 
+@Singleton
 class SharedPreferenceDataSourceImplementation
 @Inject constructor(
     private val context: Context,
@@ -114,6 +118,6 @@ class SharedPreferenceDataSourceImplementation
         const val ALM_PREFERENCE_MODE: Int = Context.MODE_PRIVATE
 
         /*App preference file name*/
-        const val ALM_PREF_KEY: String = "App_Preferences"
+        const val ALM_PREF_KEY: String = "com.almarai.easypick_preferences"
     }
 }

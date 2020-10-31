@@ -18,7 +18,6 @@ const val Dependencies_Plugin_My_Custom = "my-plugin"
 const val Dependencies_Plugin_Android_Extensions = "android-extensions"
 const val Dependencies_Plugin_Jdk_Library = "stdlib-jdk8"
 
-
 //Android
 const val Dependencies_Android_Kotlin_Extensions = "androidx.core:core-ktx:1.3.1"
 const val Dependencies_Android_AppCompat = "androidx.appcompat:appcompat:1.1.0"
@@ -54,9 +53,8 @@ const val Dependencies_Navigation_Runtime =
 const val Dependencies_Navigation_Fragment_Kotlin_Extensions =
     "androidx.navigation:navigation-fragment-ktx:$Dependencies_Version_Navigation"
 
-
 //Coroutines
-private const val Dependencies_Version_Coroutines = "1.3.4"
+private const val Dependencies_Version_Coroutines = "1.4.0"
 const val Dependencies_Coroutines_Core =
     "org.jetbrains.kotlinx:kotlinx-coroutines-core:$Dependencies_Version_Coroutines"
 const val Dependencies_Coroutines_Android =
@@ -73,14 +71,6 @@ private const val Dependencies_Version_Retrofit = "2.9.0"
 const val Dependencies_Retrofit = "com.squareup.retrofit2:retrofit:$Dependencies_Version_Retrofit"
 const val Dependencies_Retrofit_Gson_Converter =
     "com.squareup.retrofit2:converter-gson:$Dependencies_Version_Retrofit"
-
-
-//DI - Koin
-private const val Dependencies_Version_Koin = "2.1.5"
-const val Dependencies_Koin_Scope = "org.koin:koin-androidx-scope:$Dependencies_Version_Koin"
-const val Dependencies_Koin_Fragment = "org.koin:koin-androidx-fragment:$Dependencies_Version_Koin"
-const val Dependencies_Koin_ViewModel =
-    "org.koin:koin-androidx-viewmodel:$Dependencies_Version_Koin"
 
 //DI - Hilt
 private const val Dependencies_Version_Hilt = "2.28-alpha"

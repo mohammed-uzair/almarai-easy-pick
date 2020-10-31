@@ -1,12 +1,11 @@
 package com.almarai.easypick.data_source.web
 
-import android.os.Build
 import android.util.Log
-import com.almarai.data.BuildConfig
 import com.almarai.data.easy_pick_models.AppUpdate
+import com.almarai.easypick.data_source.interfaces.AppUpdateDataSource
 import com.almarai.easypick.data_source.local_data_source.SharedPreferencesKeys
-import com.almarai.easypick.data_source.local_data_source.interfaces.LocalAppUpdateDataSource
-import com.almarai.easypick.data_source.local_data_source.interfaces.SharedPreferenceDataSource
+import com.almarai.easypick.data_source.interfaces.SharedPreferenceDataSource
+import com.almarai.easypick.data_source.request.RequestHeaders
 import com.almarai.easypick.data_source.web.api.AppUpdateApi
 import com.almarai.easypick.data_source.web.api.ProductsApi
 import com.almarai.easypick.data_source.web.api.RoutesApi
@@ -18,10 +17,6 @@ import okhttp3.Request
 import okhttp3.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
-import java.text.DateFormat
-import java.text.ParseException
-import java.text.SimpleDateFormat
-import java.util.*
 import javax.inject.Inject
 import javax.inject.Singleton
 
@@ -31,7 +26,7 @@ const val DEFAULT_URL = "http://192.168.0.196:8080/"
 class WebService @Inject constructor(
     private val sharedPreferenceDataSource: SharedPreferenceDataSource,
     private val gson: Gson,
-    private val appUpdateDataSource: LocalAppUpdateDataSource
+    private val appUpdateDataSource: AppUpdateDataSource
 ) {
     companion object {
         const val TAG = "WebService"
@@ -52,46 +47,19 @@ class WebService @Inject constructor(
         }
 
         builder.addInterceptor { chain ->
-            var salesDate =
-                sharedPreferenceDataSource.getSharedPreferenceString(SharedPreferencesKeys.SALES_DATE)
-            if (salesDate == null || salesDate.length < 13) {
-                val dateFormat: DateFormat = SimpleDateFormat(
-                    "dd/MM/yy",
-                    Locale.ENGLISH
-                )
-                val calendar = Calendar.getInstance(Locale.ENGLISH)
-                val curdate = dateFormat.format(calendar.time)
+            val requestHeader = RequestHeaders(sharedPreferenceDataSource).getRequestHeader()
 
-
-                var result = 1L
-                val format = SimpleDateFormat("dd/MM/yy")
-                try {
-                    val d = format.parse(curdate)
-                    result = d.time
-                } catch (e: ParseException) {
-                    e.printStackTrace()
-                }
-
-                salesDate = result.toString()
-            }
-
-            val depotCode =
-                sharedPreferenceDataSource.getSharedPreferenceString(SharedPreferencesKeys.DEPOT_CODE)
-                    ?: "0"
-            val routePreference =
-                sharedPreferenceDataSource.getSharedPreferenceString(SharedPreferencesKeys.ROUTE_PREFERENCE)
-                    ?: "NA"
             val request: Request = chain.request().newBuilder()
-                .addHeader("app-version", BuildConfig.VERSION_CODE.toString())
-                .addHeader("app-build-type", BuildConfig.BUILD_TYPE)
-                .addHeader("device-os-version", Build.VERSION.RELEASE)
-                .addHeader("device-sdk-version", Build.VERSION.SDK_INT.toString())
-                .addHeader("device-name", Build.MODEL)
-                .addHeader("device-manufacturer", Build.MANUFACTURER)
-                .addHeader("device-serial-number", getDeviceSerialNumber())
-                .addHeader("depot-code", depotCode)
-                .addHeader("sales-date", salesDate)
-                .addHeader("route-preference", routePreference)
+                .addHeader("app-version", requestHeader.appVersion)
+                .addHeader("app-build-type", requestHeader.appBuildType)
+                .addHeader("device-os-version", requestHeader.deviceOsVersion)
+                .addHeader("device-sdk-version", requestHeader.deviceSdkVersion)
+                .addHeader("device-name", requestHeader.deviceName)
+                .addHeader("device-manufacturer", requestHeader.deviceManufacturer)
+                .addHeader("device-serial-number", requestHeader.deviceSerialNumber)
+                .addHeader("depot-code", requestHeader.depotCode)
+                .addHeader("sales-date", requestHeader.salesDate)
+                .addHeader("route-preference", requestHeader.routePreference)
                 .build()
 
             val response: Response = chain.proceed(request)
@@ -132,22 +100,5 @@ class WebService @Inject constructor(
         }
 
         return url
-    }
-
-    private fun getDeviceSerialNumber(): String {
-        //More promissing one, try using below
-//        Settings.Secure.getString(context.getContentResolver(),
-//            Settings.Secure.ANDROID_ID)
-
-
-        var deviceId = ""
-        try {
-            deviceId = Build::class.java.getField("SERIAL")[null] as String
-        } catch (e: IllegalAccessException) {
-            e.printStackTrace()
-        } catch (e: NoSuchFieldException) {
-            e.printStackTrace()
-        }
-        return deviceId
     }
 }

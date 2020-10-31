@@ -6,9 +6,9 @@ import kotlinx.android.parcel.Parcelize
 
 @Parcelize
 data class Route(
-    val number: Int,
-    val description: String,
-    val descriptionArabic: String,
+    val number: Int = 0,
+    val description: String = "NA",
+    val descriptionArabic: String = "NA",
     val group: List<GroupType> = listOf(),
-    var serviceStatus: RouteStatus
+    var serviceStatus: RouteStatus = RouteStatus.NotServed
 ) : Parcelable

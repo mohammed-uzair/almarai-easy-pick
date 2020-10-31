@@ -6,18 +6,21 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.almarai.data.easy_pick_models.Result
-import com.almarai.data.easy_pick_models.route.Route
-import com.almarai.data.easy_pick_models.route.RouteServiceStatus
 import com.almarai.data.easy_pick_models.filter.Filters
+import com.almarai.data.easy_pick_models.route.Route
 import com.almarai.data.easy_pick_models.route.RouteAccessibility
+import com.almarai.data.easy_pick_models.route.RouteServiceStatus
 import com.almarai.data.easy_pick_models.route.RouteStatus
 import com.almarai.data.easy_pick_models.util.ERROR_OCCURRED
 import com.almarai.data.easy_pick_models.util.exhaustive
 import com.almarai.repository.api.RoutesRepository
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.InternalCoroutinesApi
+import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 
-class RouteSelectionViewModel @ViewModelInject constructor(private val repository: RoutesRepository) : ViewModel() {
+class RouteSelectionViewModel @ViewModelInject constructor(private val repository: RoutesRepository) :
+    ViewModel() {
     private val _routes = MutableLiveData<Result<List<Route>>>()
     private val _routesStatus = MutableLiveData<Result<List<RouteServiceStatus>>>()
     private val _routeAccessibility = MutableLiveData<Result<RouteAccessibility>>()
@@ -35,7 +38,10 @@ class RouteSelectionViewModel @ViewModelInject constructor(private val repositor
         viewModelScope.launch(Dispatchers.IO) {
             _routes.postValue(Result.Fetching)
             try {
-                _routes.postValue(Result.Success(repository.getAllRoutes()))
+                val data = repository.getAllRoutes()
+                data.collect {
+                    _routes.postValue(Result.Success(it))
+                }
             } catch (exception: Exception) {
                 _routes.postValue(Result.Error(exception.message ?: ERROR_OCCURRED))
             }
@@ -98,7 +104,7 @@ class RouteSelectionViewModel @ViewModelInject constructor(private val repositor
         return position
     }
 
-    fun serveRoute(routeNumber:Int){
+    fun serveRoute(routeNumber: Int) {
 
     }
 }

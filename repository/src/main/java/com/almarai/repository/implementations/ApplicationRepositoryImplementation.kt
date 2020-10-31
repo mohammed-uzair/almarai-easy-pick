@@ -20,7 +20,7 @@ import com.almarai.easypick.data_source.local_data_source.SharedPreferencesKeys.
 import com.almarai.easypick.data_source.local_data_source.SharedPreferencesKeys.Companion.USER_LOGGED_IN_STATUS
 import com.almarai.easypick.data_source.local_data_source.SharedPreferencesKeys.Companion.USER_LOGGED_USER_ID
 import com.almarai.easypick.data_source.local_data_source.SharedPreferencesKeys.Companion.USER_LOGGED_USER_NAME
-import com.almarai.easypick.data_source.local_data_source.interfaces.SharedPreferenceDataSource
+import com.almarai.easypick.data_source.interfaces.SharedPreferenceDataSource
 import com.almarai.repository.api.ApplicationRepository
 import com.almarai.repository.utils.AppDataConfiguration
 import javax.inject.Inject

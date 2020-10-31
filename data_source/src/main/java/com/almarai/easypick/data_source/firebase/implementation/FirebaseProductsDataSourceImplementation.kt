@@ -2,11 +2,10 @@ package com.almarai.easypick.data_source.firebase.implementation
 
 import android.content.Context
 import android.util.Log
+import com.almarai.data.easy_pick_models.product.Product
 import com.almarai.data.easy_pick_models.route.Route
-import com.almarai.data.easy_pick_models.route.RouteAccessibility
-import com.almarai.data.easy_pick_models.route.RouteServiceStatus
 import com.almarai.data.easy_pick_models.route.RouteStatus
-import com.almarai.easypick.data_source.interfaces.RouteDataSource
+import com.almarai.easypick.data_source.interfaces.ProductsDataSource
 import com.almarai.easypick.data_source.interfaces.SharedPreferenceDataSource
 import com.almarai.easypick.data_source.request.RequestHeaders
 import com.google.firebase.firestore.FirebaseFirestore
@@ -17,61 +16,53 @@ import javax.inject.Inject
 import javax.inject.Singleton
 
 @Singleton
-class FirebaseRoutesDataSourceImplementation @Inject constructor(
+class FirebaseProductsDataSourceImplementation @Inject constructor(
     private val context: Context,
     private val gson: Gson,
     private val sharedPreferenceDataSource: SharedPreferenceDataSource
 ) :
-    RouteDataSource {
+    ProductsDataSource {
     companion object {
         const val TAG = "FirebaseRouteDSImpl"
     }
 
-    override suspend fun getAllRoutes(): StateFlow<List<Route>> {
-        val flow: MutableStateFlow<List<Route>> = MutableStateFlow(listOf())
+    override suspend fun getAllProducts(routeNumber: Int): StateFlow<List<Product>> {
+        val flow: MutableStateFlow<List<Product>> = MutableStateFlow(listOf())
 
         val requestHeader = RequestHeaders(sharedPreferenceDataSource).getRequestHeader()
 
         val db = FirebaseFirestore.getInstance()
 
-        val path = "Depots/${requestHeader.depotCode}/Routes"
+        val path = "Depots/${requestHeader.depotCode}/Routes/$routeNumber/Products"
         val docRef = db.collection(path)
 
         docRef.addSnapshotListener { snapshot, exception ->
             if (exception != null) {
-                Log.e(TAG, "Routes fetching from firebase error", exception)
+                Log.e(FirebaseRoutesDataSourceImplementation.TAG, "Products fetching from firebase error", exception)
                 return@addSnapshotListener
             }
 
             if (snapshot != null && snapshot.documents.isNotEmpty()) {
-                val routes = ArrayList<Route>()
+                val products = ArrayList<Product>()
                 for (result in snapshot.documents) {
-                    Log.d(TAG, "${result.id} => ${result.data}")
+                    Log.d(FirebaseRoutesDataSourceImplementation.TAG, "${result.id} => ${result.data}")
 
                     val dataInJson = gson.toJson(result.data).toString()
-                    val dataFormatted = gson.fromJson(dataInJson, Route::class.java)
+                    val dataFormatted = gson.fromJson(dataInJson, Product::class.java)
 
-                    routes.add(dataFormatted)
+                    products.add(dataFormatted)
                 }
 
-                flow.value = routes
+                flow.value = products
             } else {
-                Log.d(TAG, "Current data: null")
+                Log.d(FirebaseRoutesDataSourceImplementation.TAG, "Current data: null")
             }
         }
 
         return flow
     }
 
-    override suspend fun getAllRoutesStatus(): List<RouteServiceStatus> {
-        return listOf()
-    }
-
-    override suspend fun getRouteStatus(routeNumber: Int): RouteAccessibility {
-        return RouteAccessibility(routeNumber, RouteStatus.NotServed, true)
-    }
-
-    override suspend fun updateRouteStatus(routeNumber: Int, status: RouteStatus) {
-
+    override suspend fun updateRouteData(routeNumber: Int, products: List<Product>): RouteStatus {
+        TODO("Not yet implemented")
     }
 }

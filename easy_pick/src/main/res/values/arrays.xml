@@ -57,4 +57,9 @@
         <item>Non IPNC</item>
     </string-array>
     <!--endregion-->
+
+    <string-array name="app_db_connection_values">
+        <item>Almarai</item>
+        <item>Cloud</item>
+    </string-array>
 </resources>

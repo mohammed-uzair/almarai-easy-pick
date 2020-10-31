@@ -1,45 +1,112 @@
 package com.almarai.easypick.di.hilt
 
-import com.almarai.easypick.data_source.firebase.implementation.FirebaseFileUploadDataSourceImplementation
-import com.almarai.easypick.data_source.firebase.interfaces.FirebaseFileUploadDataSource
-import com.almarai.easypick.data_source.local_data_source.implementations.LocalAppUpdateDataSourceImplementation
+import android.content.Context
+import com.almarai.easypick.data_source.AppDataSourceType
+import com.almarai.easypick.data_source.AppDataSourceTypes
+import com.almarai.easypick.data_source.firebase.implementation.FirebaseProductsDataSourceImplementation
+import com.almarai.easypick.data_source.firebase.implementation.FirebaseRoutesDataSourceImplementation
+import com.almarai.easypick.data_source.firebase.implementation.FirebaseTicketDataSourceImplementation
+import com.almarai.easypick.data_source.interfaces.*
+import com.almarai.easypick.data_source.local_data_source.implementations.AppUpdateDataSourceImplementation
 import com.almarai.easypick.data_source.local_data_source.implementations.SharedPreferenceDataSourceImplementation
-import com.almarai.easypick.data_source.local_data_source.interfaces.LocalAppUpdateDataSource
-import com.almarai.easypick.data_source.local_data_source.interfaces.SharedPreferenceDataSource
+import com.almarai.easypick.data_source.web.WebService
 import com.almarai.easypick.data_source.web.implementation.WebAppUpdateDataSourceImplementation
 import com.almarai.easypick.data_source.web.implementation.WebProductsDataSourceImplementation
 import com.almarai.easypick.data_source.web.implementation.WebRoutesDataSourceImplementation
 import com.almarai.easypick.data_source.web.implementation.WebStatisticsDataSourceImplementation
-import com.almarai.easypick.data_source.web.interfaces.WebAppUpdateDataSource
-import com.almarai.easypick.data_source.web.interfaces.WebProductsDataSource
-import com.almarai.easypick.data_source.web.interfaces.WebRoutesDataSource
-import com.almarai.easypick.data_source.web.interfaces.WebStatisticsDataSource
-import dagger.Binds
+import com.google.gson.Gson
 import dagger.Module
+import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.android.components.ApplicationComponent
+import javax.inject.Singleton
 
-@InstallIn(ApplicationComponent::class)
 @Module
-abstract class DataSourceModule {
-    @Binds
-    abstract fun provideSharedPreferences(sharedPreferenceDataSourceImplementation: SharedPreferenceDataSourceImplementation): SharedPreferenceDataSource
+@InstallIn(ApplicationComponent::class)
+class DataSourceModule {
+    @Provides
+    @Singleton
+    fun provideSharedPreferences(context: Context, gson: Gson): SharedPreferenceDataSource {
+        return SharedPreferenceDataSourceImplementation(context, gson)
+    }
 
-    @Binds
-    abstract fun provideLocalAppUpdateDataSource(localAppUpdateDataSourceImplementation: LocalAppUpdateDataSourceImplementation): LocalAppUpdateDataSource
+    @Provides
+    @Singleton
+    fun provideAppUpdateDataSource(
+        appDataSourceType: AppDataSourceType,
+        sharedPreferenceDataSource: SharedPreferenceDataSource
+    ): AppUpdateDataSource {
+        return when (appDataSourceType.getAppUpdateType()) {
+            AppDataSourceTypes.Almarai -> AppUpdateDataSourceImplementation(
+                sharedPreferenceDataSource
+            )
+            else -> WebAppUpdateDataSourceImplementation()
+        }
+    }
 
-    @Binds
-    abstract fun provideWebAppUpdateDataSource(webAppUpdateDataSourceImplementation: WebAppUpdateDataSourceImplementation): WebAppUpdateDataSource
+    @Provides
+    fun provideRoutesDataSource(
+        context: Context,
+        webservice: WebService,
+        appDataSourceType: AppDataSourceType,
+        gson: Gson,
+        sharedPreferenceDataSource: SharedPreferenceDataSource
+    ): RouteDataSource {
+        return when (appDataSourceType.getAppUpdateType()) {
+            AppDataSourceTypes.Almarai -> WebRoutesDataSourceImplementation(webservice)
+            else -> FirebaseRoutesDataSourceImplementation(
+                context,
+                gson,
+                sharedPreferenceDataSource
+            )
+        }
+    }
 
-    @Binds
-    abstract fun provideWebRoutesDataSource(webRoutesDataSourceImplementation: WebRoutesDataSourceImplementation): WebRoutesDataSource
+    @Provides
+    @Singleton
+    fun provideProductsDataSource(
+        context: Context,
+        webservice: WebService,
+        appDataSourceType: AppDataSourceType,
+        gson: Gson,
+        sharedPreferenceDataSource: SharedPreferenceDataSource
+    ): ProductsDataSource {
+        return when (appDataSourceType.getAppUpdateType()) {
+            AppDataSourceTypes.Almarai -> WebProductsDataSourceImplementation(webservice)
+            else -> FirebaseProductsDataSourceImplementation(
+                context,
+                gson,
+                sharedPreferenceDataSource
+            )
+        }
+    }
 
-    @Binds
-    abstract fun provideWebProductsDataSource(webProductsDataSourceImplementation: WebProductsDataSourceImplementation): WebProductsDataSource
+    @Provides
+    fun provideStatisticsDataSource(
+        context: Context,
+        webservice: WebService,
+        appDataSourceType: AppDataSourceType,
+        sharedPreferenceDataSource: SharedPreferenceDataSource
+    ): StatisticsDataSource {
+//        return when (appDataSourceType.getAppUpdateType()) {
+//            AppDataSourceType.Almarai ->
+        return WebStatisticsDataSourceImplementation(webservice)
+//            else -> FirebaseStatisticsDataSourceImplementation(context, sharedPreferenceDataSource)
+//        }
+    }
 
-    @Binds
-    abstract fun provideWebStatisticsDataSource(webStatisticsDataSourceImplementation: WebStatisticsDataSourceImplementation): WebStatisticsDataSource
-
-    @Binds
-    abstract fun provideFirebaseFileUploadDataSource(fileUploadDataSourceImplementation: FirebaseFileUploadDataSourceImplementation): FirebaseFileUploadDataSource
+    @Provides
+    @Singleton
+    fun provideTicketDataSource(
+        context: Context,
+        webservice: WebService,
+        appDataSourceType: AppDataSourceType,
+        sharedPreferenceDataSource: SharedPreferenceDataSource
+    ): TicketDataSource {
+//        return when (appDataSourceType.getAppUpdateType()) {
+//            AppDataSourceType.Almarai -> WebFileUploadDataSourceImplementation()
+//            else ->
+        return FirebaseTicketDataSourceImplementation()
+//        }
+    }
 }

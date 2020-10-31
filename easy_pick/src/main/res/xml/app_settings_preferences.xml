@@ -35,6 +35,16 @@
             app:summary="@string/app_ticket_generation_summary"
             app:title="@string/app_ticket_generation" />
 
+        <ListPreference
+            app:defaultValue="Almarai"
+            app:entries="@array/app_db_connection_values"
+            app:entryValues="@array/app_db_connection_values"
+            app:icon="@drawable/ic_db"
+            app:summary="@string/app_database_summary"
+            app:key="@string/app_database"
+            app:title="@string/app_database"
+            app:useSimpleSummaryProvider="true" />
+
     </PreferenceCategory>
 
 </PreferenceScreen>

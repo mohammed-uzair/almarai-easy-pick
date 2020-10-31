@@ -17,9 +17,8 @@ import javax.inject.Inject
 import javax.inject.Singleton
 
 @Singleton
-class FirebaseRoutesDataSourceImplementation @Inject constructor(
+class FirebaseAppUpdateDataSourceImplementation @Inject constructor(
     private val context: Context,
-    private val gson: Gson,
     private val sharedPreferenceDataSource: SharedPreferenceDataSource
 ) :
     RouteDataSource {
@@ -37,28 +36,28 @@ class FirebaseRoutesDataSourceImplementation @Inject constructor(
         val path = "Depots/${requestHeader.depotCode}/Routes"
         val docRef = db.collection(path)
 
-        docRef.addSnapshotListener { snapshot, exception ->
-            if (exception != null) {
-                Log.e(TAG, "Routes fetching from firebase error", exception)
-                return@addSnapshotListener
-            }
+        docRef.get()
+            .addOnSuccessListener { documents ->
+                if (documents != null && !documents.isEmpty) {
+                    val routes = ArrayList<Route>()
+                    for (result in documents) {
+                        Log.d(TAG, "${result.id} => ${result.data}")
 
-            if (snapshot != null && snapshot.documents.isNotEmpty()) {
-                val routes = ArrayList<Route>()
-                for (result in snapshot.documents) {
-                    Log.d(TAG, "${result.id} => ${result.data}")
+                        val gson = Gson()
+                        val dataInJson = gson.toJson(result.data).toString()
+                        val dataFormatted = gson.fromJson(dataInJson, Route::class.java)
 
-                    val dataInJson = gson.toJson(result.data).toString()
-                    val dataFormatted = gson.fromJson(dataInJson, Route::class.java)
+                        routes.add(dataFormatted)
+                    }
 
-                    routes.add(dataFormatted)
+                    flow.value = routes
+                } else {
+                    Log.d(TAG, "No such document")
                 }
-
-                flow.value = routes
-            } else {
-                Log.d(TAG, "Current data: null")
             }
-        }
+            .addOnFailureListener { exception ->
+                Log.d(TAG, "get failed with ", exception)
+            }
 
         return flow
     }

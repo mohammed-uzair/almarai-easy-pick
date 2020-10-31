@@ -35,6 +35,8 @@ class SettingsScreen(private val appUpdateFlow: AppUpdateFlow) : PreferenceFragm
         val appUpdate = findPreference(getString(R.string.app_update)) as Preference?
         val appNewTicketGeneration =
             findPreference(getString(R.string.app_ticket_generation)) as Preference?
+        val appDbConnection =
+            findPreference(getString(R.string.app_database)) as Preference?
 
         appTheme?.onPreferenceChangeListener = this
         appLanguage?.onPreferenceChangeListener = this
@@ -46,6 +48,7 @@ class SettingsScreen(private val appUpdateFlow: AppUpdateFlow) : PreferenceFragm
             navController.navigate(R.id.action_settingsScreen_to_ticketScreen)
             true
         }
+        appDbConnection?.onPreferenceChangeListener = this
     }
 
     override fun onPreferenceChange(preference: Preference?, newValue: Any?): Boolean {

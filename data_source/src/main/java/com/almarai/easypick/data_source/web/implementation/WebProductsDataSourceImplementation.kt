@@ -2,15 +2,27 @@ package com.almarai.easypick.data_source.web.implementation
 
 import com.almarai.data.easy_pick_models.product.Product
 import com.almarai.data.easy_pick_models.product.Products
+import com.almarai.easypick.data_source.interfaces.ProductsDataSource
 import com.almarai.easypick.data_source.web.WebService
-import com.almarai.easypick.data_source.web.interfaces.WebProductsDataSource
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
 import javax.inject.Inject
+import javax.inject.Singleton
 
+@Singleton
 class WebProductsDataSourceImplementation @Inject constructor(private val webService: WebService) :
-    WebProductsDataSource {
-    override suspend fun getAllProducts(routeNumber: Int) =
-        webService.productsApi.getAllProducts(routeNumber)
+    ProductsDataSource {
+    override suspend fun getAllProducts(routeNumber: Int): StateFlow<List<Product>> {
+        val flow: MutableStateFlow<List<Product>> = MutableStateFlow(listOf())
 
-        override suspend fun updateRouteData(routeNumber: Int, products: List<Product>) =
+        val products = webService.productsApi.getAllProducts(routeNumber)
+        if (products.isNotEmpty()) {
+            flow.value = products
+        }
+
+        return flow
+    }
+
+    override suspend fun updateRouteData(routeNumber: Int, products: List<Product>) =
         webService.productsApi.updateRouteData(routeNumber, Products(products))
 }

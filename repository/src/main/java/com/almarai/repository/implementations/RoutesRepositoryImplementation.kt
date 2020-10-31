@@ -1,24 +1,22 @@
 package com.almarai.repository.implementations
 
-import com.almarai.data.easy_pick_models.route.RouteServiceStatus
 import com.almarai.data.easy_pick_models.route.RouteStatus
-import com.almarai.easypick.data_source.firebase.interfaces.FirebaseRoutesDataSource
-import com.almarai.easypick.data_source.web.interfaces.WebRoutesDataSource
+import com.almarai.easypick.data_source.interfaces.RouteDataSource
 import com.almarai.repository.api.RoutesRepository
 import javax.inject.Inject
 
 class RoutesRepositoryImplementation @Inject constructor(
-    private val webRoutesDataSource: WebRoutesDataSource
-//    private val firebaseRoutesDataSource: FirebaseRoutesDataSource
+    private val routesDataSource: RouteDataSource
 ) : RoutesRepository {
-    override suspend fun getAllRoutes() = webRoutesDataSource.getAllRoutes()
+    override suspend fun getAllRoutes() =
+        routesDataSource.getAllRoutes()
 
     override suspend fun getAllRoutesStatus() =
-        webRoutesDataSource.getAllRoutesStatus()
+        routesDataSource.getAllRoutesStatus()
 
     override suspend fun getRouteStatus(routeNumber: Int) =
-        webRoutesDataSource.getRouteStatus(routeNumber)
+        routesDataSource.getRouteStatus(routeNumber)
 
     override suspend fun updateRouteStatus(routeNumber: Int, status: RouteStatus) =
-        webRoutesDataSource.updateRouteStatus(routeNumber, status)
+        routesDataSource.updateRouteStatus(routeNumber, status)
 }
