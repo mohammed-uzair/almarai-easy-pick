@@ -1,12 +1,12 @@
 package com.almarai.easypick.lifecycle_handlers
 
 import android.app.Activity
+import androidx.appcompat.app.AppCompatActivity
 import android.app.Application
 import android.content.Context
 import android.media.AudioManager
 import android.os.Bundle
 import android.util.Log
-import androidx.appcompat.app.AppCompatActivity
 import com.almarai.easypick.common.AppUpdateFlow
 import com.almarai.easypick.extensions.IS_HARDWARE_KEYBOARD_AVAILABLE
 import com.almarai.easypick.extensions.isHardwareKeyboardAvailable

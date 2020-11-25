@@ -3,6 +3,7 @@ package com.almarai.easypick.data_source.firebase.implementation
 import android.net.Uri
 import android.util.Log
 import com.almarai.easypick.data_source.interfaces.TicketDataSource
+import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.ktx.storage
 import javax.inject.Inject
@@ -16,17 +17,19 @@ class FirebaseTicketDataSourceImplementation @Inject constructor() :
         const val TAG = "FireFileUploadDSImpl"
     }
 
-    override suspend fun uploadFiles(files: List<Uri>, ticketNumber: String): String {
+    override suspend fun uploadFiles(type: String, feedback: String, files: List<Uri>, ticketNumber: String): String {
         files.forEach { it ->
             val firebaseStorageRoot =
                 Firebase.storage.reference.child(
-                    "${ticketNumber}/${ticketNumber}_${
+                    "Tickets/${ticketNumber}/${ticketNumber}_${
                         Random.nextInt(
                             1000,
                             9999
                         )
                     }"
                 )
+
+            //addTicketDetailsToDataSource(type, feedback, ticketNumber, )
 
             firebaseStorageRoot.putFile(it)
                 .addOnSuccessListener {
@@ -38,5 +41,23 @@ class FirebaseTicketDataSourceImplementation @Inject constructor() :
         }
 
         return ticketNumber
+    }
+
+    private fun addTicketDetailsToDataSource(
+        ticketType: String,
+        feedback: String,
+        ticketNumber: String,
+        proofsPath: String
+    ) {
+        val db = FirebaseFirestore.getInstance()
+
+        val ticket = hashMapOf(
+            "ProofsPath" to proofsPath,
+            "TicketDescription" to "",
+            "TicketType" to ticketType
+        )
+
+        db.collection("Tickets").document(ticketNumber)
+            .set(ticket)
     }
 }

@@ -65,4 +65,8 @@ class FirebaseProductsDataSourceImplementation @Inject constructor(
     override suspend fun updateRouteData(routeNumber: Int, products: List<Product>): RouteStatus {
         TODO("Not yet implemented")
     }
+
+    override suspend fun discardAllChanges(routeNumber: Int) {
+        TODO("Not yet implemented")
+    }
 }

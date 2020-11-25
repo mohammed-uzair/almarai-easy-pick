@@ -34,6 +34,8 @@ dependencies {
     implementation(Dependencies_Android_Kotlin_Extensions)
     implementation(Dependencies_Android_Paging)
     implementation(Dependencies_Android_Constraint_Layout)
+//    implementation(Dependencies_Android_Activity)
+//    implementation(Dependencies_Android_Fragment)
     implementation(Dependencies_Android_Legacy_support)
     implementation(Dependencies_Lifecycle_Extensions)
     implementation(Dependencies_Lifecycle_ViewModel)
@@ -61,6 +63,8 @@ dependencies {
     implementation(Dependencies_Android_Material)
     implementation(Dependencies_Android_Recycler_View)
     implementation(Dependencies_Mp_Chart)
+
+    implementation(Dependencies_Ml_Kit_On_Device_Text_Translation)
 
     //implementation(Dependencies_Leak_Canary)
 }

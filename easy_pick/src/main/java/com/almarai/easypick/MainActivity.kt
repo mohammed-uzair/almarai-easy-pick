@@ -33,7 +33,6 @@ class MainActivity : AppCompatActivity() {
 
         setSupportActionBar(screenMainBinding.fragmentContainerToolbar.toolbar)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
-
         configureFirebase(this)
     }
 

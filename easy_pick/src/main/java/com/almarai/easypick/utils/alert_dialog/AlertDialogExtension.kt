@@ -160,10 +160,11 @@ private fun showAlert(
 
 private fun hideAlertDialog(fragmentManager: FragmentManager) {
     //Remove previous dialog
-    val previousDialog = fragmentManager.findFragmentByTag(AppAlertDialog.TAG)
-    if (previousDialog != null) {
+    while (fragmentManager.findFragmentByTag(AppAlertDialog.TAG) != null && ((fragmentManager.findFragmentByTag(AppAlertDialog.TAG)) as AppAlertDialog).dialog!!.isShowing) {
+        val previousDialog = fragmentManager.findFragmentByTag(AppAlertDialog.TAG)
+
         val fragmentTransaction = fragmentManager.beginTransaction()
-        fragmentTransaction.remove(previousDialog)
+        fragmentTransaction.remove(previousDialog!!)
         (previousDialog as AppAlertDialog).dismiss()
     }
 }

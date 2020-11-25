@@ -4,22 +4,22 @@ import android.net.Uri
 import com.almarai.business.Utils.AppDateTimeFormat
 import com.almarai.business.Utils.DateUtil
 import com.almarai.easypick.data_source.interfaces.TicketDataSource
-import com.almarai.repository.api.FileUploadRepository
+import com.almarai.repository.api.TicketRepository
 import javax.inject.Inject
 import kotlin.random.Random
 
-class FileUploadRepositoryImplementation @Inject constructor(private val ticketDataSource: TicketDataSource) :
-    FileUploadRepository {
-    override suspend fun uploadFiles(files: List<Uri>): String {
+class TicketRepositoryImplementation @Inject constructor(private val ticketDataSource: TicketDataSource) :
+    TicketRepository {
+    override suspend fun uploadFiles(type: String, feedback: String, files: List<Uri>): String {
         //Upload the files to the respective data source
         val ticketNumber = generateTicketNumber()
 
         //In this case using only firebase storage
-        return uploadFilesUsingFirebaseStorage(files, ticketNumber)
+        return uploadFilesUsingFirebaseStorage(type, feedback, files, ticketNumber)
     }
 
-    private suspend fun uploadFilesUsingFirebaseStorage(files: List<Uri>, ticketNumber:String) =
-        ticketDataSource.uploadFiles(files, ticketNumber)
+    private suspend fun uploadFilesUsingFirebaseStorage(type: String, feedback: String, files: List<Uri>, ticketNumber:String) =
+        ticketDataSource.uploadFiles(type, feedback, files, ticketNumber)
 
     private fun generateTicketNumber(): String {
         val currentDateAndTime = DateUtil.getCurrentDate(AppDateTimeFormat.formatDDMMMYYYYHHMMSS)

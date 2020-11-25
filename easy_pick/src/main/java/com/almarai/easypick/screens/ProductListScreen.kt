@@ -7,6 +7,7 @@ import android.view.animation.AnimationUtils
 import androidx.appcompat.widget.SearchView
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.NavController
@@ -25,15 +26,17 @@ import com.almarai.easypick.extensions.*
 import com.almarai.easypick.utils.BundleKeys
 import com.almarai.easypick.utils.FilterFunnel
 import com.almarai.easypick.utils.FilterScreenSource
+import com.almarai.easypick.utils.alert_dialog.OnNegativeButtonClickListener
+import com.almarai.easypick.utils.alert_dialog.OnPositiveButtonClickListener
+import com.almarai.easypick.utils.alert_dialog.hideAlertDialog
 import com.almarai.easypick.utils.alert_dialog.showAlertDialog
 import com.almarai.easypick.utils.progress.hideProgress
 import com.almarai.easypick.utils.progress.showProgress
 import com.almarai.easypick.view_models.ProductListViewModel
 import com.google.android.material.transition.MaterialContainerTransform
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
-import androidx.fragment.app.viewModels
-import dagger.hilt.android.AndroidEntryPoint
 
 @Suppress("IMPLICIT_CAST_TO_ANY")
 @AndroidEntryPoint
@@ -79,7 +82,7 @@ class ProductListScreen(val adapter: ProductsAdapter) : Fragment(), SearchView.O
 
     private fun init() {
         //Set screen title
-        activity?.title = getString(R.string.title_item_list)
+        activity?.title = "${getString(R.string.title_products_list)} - ${args.SelectedRouteNumber}"
 
         setHasOptionsMenu(true)
 
@@ -100,6 +103,29 @@ class ProductListScreen(val adapter: ProductsAdapter) : Fragment(), SearchView.O
             delay(200)
             hideProgress()
         }
+
+        setOnBackPressListener(object : OnBackPressListener {
+            override fun onBackPressed() {
+                showAlertDialog(
+                    alertMessage = getString(R.string.alert_confirm_exit),
+                    buttonPositiveText = R.string.alert_button_discard,
+                    buttonNegativeText = R.string.alert_button_cancel,
+                    animationResourceId = R.raw.anim_error,
+                    positiveButtonClickListener = object : OnPositiveButtonClickListener {
+                        override fun onClick() {
+                            productListViewModel.discardChanges(args.SelectedRouteNumber)
+                            goBack()
+                            hideAlertDialog()
+                        }
+                    },
+                    negativeButtonClickListener = object : OnNegativeButtonClickListener {
+                        override fun onClick() {
+                            hideAlertDialog()
+                        }
+                    }
+                )
+            }
+        })
     }
 
     private fun handleFilterScreenResult() {

@@ -145,9 +145,6 @@ class StatisticsScreen : Fragment() {
     }
 
     private fun closeChart() {
-//        CoroutineScope(Co).launch {
-//
-//        }
         //Close the chart in animation
         screenStatisticsBinding.screenStatisticsChart.startAnimation(
             AnimationUtils.loadAnimation(

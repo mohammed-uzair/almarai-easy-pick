@@ -10,7 +10,7 @@
     <string name="title_exit">Exit</string>
     <string name="title_login">Login</string>
     <string name="title_home">Home</string>
-    <string name="title_item_list">Items</string>
+    <string name="title_products_list">Products</string>
     <string name="title_filter_routes">Routes Filter</string>
     <string name="title_filter_products">Products Filter</string>
     <string name="title_ticket_generation">File Ticket</string>
@@ -178,6 +178,7 @@
     <string name="alert_button_next">Next</string>
     <string name="alert_button_done">Done</string>
     <string name="alert_button_cancel">Cancel</string>
+    <string name="alert_button_discard">Discard</string>
     <string name="alert_button_update">Update</string>
     <string name="alert_button_later">Later</string>
     <string name="alert_title_route_served">Route Served</string>
@@ -190,6 +191,7 @@
     <string name="alert_message_route_serve">Are you sure you want to serve this route ?</string>
     <string name="alert_message_maximum_file_count_reached">You have selected %d files, which is more than the maximum number of files allowed, which is %d, remaining files will be omitted</string>
     <string name="alert_message_maximum_file_count">You can select a maximum of %d files</string>
+    <string name="alert_confirm_exit">Are you sure you want to exit &amp; discard changes</string>
     <!--endregion-->
 
     <!--region OnBoarding-->

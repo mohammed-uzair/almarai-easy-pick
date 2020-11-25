@@ -12,11 +12,14 @@ import javax.inject.Singleton
 @Singleton
 interface ProductsApi {
     @GET("products")
-    suspend fun getAllProducts(@Query("routeNumber") routeNumber:Int): List<Product>
+    suspend fun getAllProducts(@Query("routeNumber") routeNumber: Int): List<Product>
 
     @POST("updateRouteData")
-        suspend fun updateRouteData(
+    suspend fun updateRouteData(
         @Query("routeNumber") routeNumber: Int,
         @Body products: Products
-    ):RouteStatus
+    ): RouteStatus
+
+    @POST("discardChanges")
+    suspend fun discardAllChanges(@Query("routeNumber") routeNumber: Int): String
 }

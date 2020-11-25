@@ -25,4 +25,8 @@ class WebProductsDataSourceImplementation @Inject constructor(private val webSer
 
     override suspend fun updateRouteData(routeNumber: Int, products: List<Product>) =
         webService.productsApi.updateRouteData(routeNumber, Products(products))
+
+    override suspend fun discardAllChanges(routeNumber: Int) {
+        webService.productsApi.discardAllChanges(routeNumber)
+    }
 }

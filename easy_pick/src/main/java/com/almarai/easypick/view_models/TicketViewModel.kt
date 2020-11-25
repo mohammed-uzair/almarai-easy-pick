@@ -6,27 +6,27 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.almarai.data.easy_pick_models.Result
-import com.almarai.repository.api.FileUploadRepository
+import com.almarai.repository.api.TicketRepository
 import kotlinx.coroutines.launch
 
-class TicketViewModel @ViewModelInject constructor(private val filFileUploadRepository: FileUploadRepository) :
+class TicketViewModel @ViewModelInject constructor(private val ticketRepository: TicketRepository) :
     ViewModel() {
-    private val _uploadResult = MutableLiveData<Result<String>>()
-    val uploadResult = _uploadResult
+    private val _ticketResult = MutableLiveData<Result<String>>()
+    val uploadResult = _ticketResult
 
-    fun uploadFiles(files: List<Uri>) {
+    fun generateTicket(type: String, feedback: String, files: List<Uri>) {
         viewModelScope.launch {
             //Start the upload process
-            _uploadResult.value = Result.Fetching
+            _ticketResult.value = Result.Fetching
 
             try {
                 //Upload the files to data store
-                val ticketNumber = filFileUploadRepository.uploadFiles(files)
+                val ticketNumber = ticketRepository.uploadFiles(type, feedback, files)
 
                 //Post the result to the user
-                _uploadResult.value = Result.Success(ticketNumber)
+                _ticketResult.value = Result.Success(ticketNumber)
             } catch (exception: Exception) {
-                _uploadResult.value = Result.Error()
+                _ticketResult.value = Result.Error()
             }
         }
     }

@@ -7,4 +7,5 @@ import kotlinx.coroutines.flow.StateFlow
 interface ProductsRepository {
     suspend fun getAllProducts(routeNumber: Int): StateFlow<List<Product>>
     suspend fun updateRouteData(routeNumber: Int, products:List<Product>): RouteStatus
+    suspend fun discardAllChanges(routeNumber: Int)
 }

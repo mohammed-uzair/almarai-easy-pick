@@ -30,6 +30,8 @@ import com.almarai.easypick.view_models.RouteSelectionViewModel
 private var selectedItemPosition = 0
 
 class RoutesAdapter : RecyclerView.Adapter<RoutesAdapter.ViewHolder>() {
+    private lateinit var binding: ItemRouteBinding
+
     companion object {
         const val TAG = "RoutesAdapter"
     }
@@ -37,6 +39,7 @@ class RoutesAdapter : RecyclerView.Adapter<RoutesAdapter.ViewHolder>() {
     var routes: List<Route> = listOf()
     lateinit var fragment: RouteSelectionScreen
     lateinit var viewModel: RouteSelectionViewModel
+    var selectedRoute = 0
 
     fun setData(
         routes: List<Route>,
@@ -52,11 +55,14 @@ class RoutesAdapter : RecyclerView.Adapter<RoutesAdapter.ViewHolder>() {
     inner class ViewHolder(private val routeBinding: ItemRouteBinding) :
         RecyclerView.ViewHolder(routeBinding.root) {
         init {
+            binding = routeBinding
+
             routeBinding.root.setOnClickListener {
                 selectedItemPosition = routes.indexOfFirst {
+                    binding = routeBinding
                     it.number == routeBinding.itemRouteNumberText.text.toString().toInt()
                 }
-                checkValidRoute(routeBinding)
+                checkValidRoute()
             }
         }
 
@@ -76,14 +82,20 @@ class RoutesAdapter : RecyclerView.Adapter<RoutesAdapter.ViewHolder>() {
                 )
 
             // Bind focus listener
-            if(route?.number == selectedItemPosition){
+            if (route?.number == selectedItemPosition) {
                 routeBinding.itemRouteSelector.visibility = View.VISIBLE
 
-                val anim = AnimationUtils.loadAnimation(routeBinding.root.context, R.anim.anim_item_focused)
+                val anim = AnimationUtils.loadAnimation(
+                    routeBinding.root.context,
+                    R.anim.anim_item_focused
+                )
                 routeBinding.itemRouteSelector.startAnimation(anim)
-            }else{
+            } else {
                 val anim =
-                    AnimationUtils.loadAnimation(routeBinding.root.context, R.anim.anim_item_defocused)
+                    AnimationUtils.loadAnimation(
+                        routeBinding.root.context,
+                        R.anim.anim_item_defocused
+                    )
                 routeBinding.itemRouteSelector.startAnimation(anim)
 
                 routeBinding.itemRouteSelector.visibility = View.GONE
@@ -120,8 +132,8 @@ class RoutesAdapter : RecyclerView.Adapter<RoutesAdapter.ViewHolder>() {
     override fun onBindViewHolder(holder: ViewHolder, position: Int) =
         holder.bindData(routes[holder.layoutPosition])
 
-    private fun checkValidRoute(routeBinding: ItemRouteBinding) {
-        if (isRouteNotServiced(routeBinding.route?.serviceStatus)) {
+    private fun checkValidRoute() {
+        if (isRouteNotServiced(binding.route?.serviceStatus)) {
             //                val extras = FragmentNavigatorExtras(view to "shared_element_container")
 
             fragment.showAlertDialog(
@@ -131,16 +143,20 @@ class RoutesAdapter : RecyclerView.Adapter<RoutesAdapter.ViewHolder>() {
                 R.string.alert_button_no,
                 positiveButtonClickListener = object : OnPositiveButtonClickListener {
                     override fun onClick() {
-                        //Check if this routes can be serviced
-                        val routeNumber = routeBinding.route?.number
-                        if (routeNumber != null) {
-                            viewModel.getRouteStatus(routeNumber)
-                            observeRouteStatus(routeBinding)
-                        }
+                        selectedRoute = binding.route?.number ?: 0
+
+                        processSelectedRoute(selectedRoute)
                     }
                 }
             )
         }
+    }
+
+    fun processSelectedRoute(routeNumber: Int) {
+        //Check if this routes can be serviced
+        observeRouteStatus(binding)
+        viewModel.getRouteStatus(routeNumber)
+        selectedRoute = routeNumber
     }
 
     /**
@@ -148,6 +164,7 @@ class RoutesAdapter : RecyclerView.Adapter<RoutesAdapter.ViewHolder>() {
      * If the status is green, it will move to the products screen
      */
     private fun observeRouteStatus(routeBinding: ItemRouteBinding) {
+        viewModel.routeAccessibility.removeObservers(fragment.viewLifecycleOwner)
         viewModel.routeAccessibility.observe(
             fragment.viewLifecycleOwner,
             Observer {
@@ -160,9 +177,15 @@ class RoutesAdapter : RecyclerView.Adapter<RoutesAdapter.ViewHolder>() {
                             fragment.showProgress(R.string.progress_fetching_route_status)
                         }
                         is Result.Success -> {
-                            routeStatusReceived(result, routeBinding)
+                            if (result.data.number == selectedRoute) {
+                                viewModel.routeAccessibility.removeObservers(fragment.viewLifecycleOwner)
+                                routeStatusReceived(result, routeBinding)
+                            } else {
+                                //Previous value thrown by live data
+                            }
                         }
                         is Result.Error -> {
+                            viewModel.routeAccessibility.removeObservers(fragment.viewLifecycleOwner)
                             serverError(result)
                         }
                     }.exhaustive
@@ -186,7 +209,7 @@ class RoutesAdapter : RecyclerView.Adapter<RoutesAdapter.ViewHolder>() {
     ): Any {
         fragment.hideProgress()
 
-        //Route IS Accessible
+        //Route is Accessible
         return if (result.data.isAccessible) {
             routeAccessible(routeBinding)
         }
@@ -200,6 +223,8 @@ class RoutesAdapter : RecyclerView.Adapter<RoutesAdapter.ViewHolder>() {
     private fun routeNotAccessible(): AppAlertDialog {
         playTone(false)
 
+        fragment.hideAlertDialog()
+
         //Alert the user
         return fragment.showAlertDialog(
             R.string.alert_title_route_not_accessible,
@@ -210,8 +235,7 @@ class RoutesAdapter : RecyclerView.Adapter<RoutesAdapter.ViewHolder>() {
     private fun routeAccessible(routeBinding: ItemRouteBinding): Any {
         val action = RouteSelectionScreenDirections
             .actionRouteSelectionScreenToProductListScreen(
-                routeBinding.itemRouteNumberText.text.toString()
-                    .toInt()
+                selectedRoute
             )
         return try {
             routeBinding.root.findNavController()
@@ -222,7 +246,7 @@ class RoutesAdapter : RecyclerView.Adapter<RoutesAdapter.ViewHolder>() {
         }
     }
 
-    private fun isRouteNotServiced(routeStatus: RouteStatus?): Boolean {
+    fun isRouteNotServiced(routeStatus: RouteStatus?): Boolean {
         if (routeStatus == null) return false
 
         return when (routeStatus) {

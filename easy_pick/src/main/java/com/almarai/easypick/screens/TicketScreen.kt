@@ -8,6 +8,7 @@ import android.provider.OpenableColumns
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.RadioButton
 import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
@@ -27,6 +28,7 @@ import com.almarai.easypick.utils.progress.showProgress
 import com.almarai.easypick.utils.setTitle
 import com.almarai.easypick.view_models.TicketViewModel
 import dagger.hilt.android.AndroidEntryPoint
+
 
 const val FILES_INTENT_RESULT_CODE = 1901
 
@@ -86,7 +88,12 @@ class TicketScreen : Fragment() {
         }
 
         screenBinding.screenTicketSendButton.setOnClickListener {
-            viewModel.uploadFiles(files)
+            val feedback = screenBinding.screenTicketDetailsEditText.text.toString()
+
+            val selectedId: Int = screenBinding.screenTicketTypeRadioGroup.checkedRadioButtonId
+            val type = (screenBinding.root.findViewById(selectedId) as RadioButton).text.toString()
+
+            viewModel.generateTicket(type, feedback, files)
 
             observeUploadResult()
         }

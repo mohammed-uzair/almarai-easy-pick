@@ -15,8 +15,11 @@ import androidx.fragment.app.DialogFragment
 import com.almarai.easypick.R
 import com.almarai.easypick.databinding.DialogAlertBinding
 import androidx.fragment.app.viewModels
+import javax.inject.Inject
+import javax.inject.Singleton
 
-class AppAlertDialog : DialogFragment() {
+@Singleton
+class AppAlertDialog @Inject constructor(): DialogFragment() {
     companion object {
         const val TAG = "AppAlertDialog"
 

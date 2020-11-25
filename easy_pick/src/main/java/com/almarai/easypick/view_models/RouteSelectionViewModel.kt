@@ -13,9 +13,9 @@ import com.almarai.data.easy_pick_models.route.RouteServiceStatus
 import com.almarai.data.easy_pick_models.route.RouteStatus
 import com.almarai.data.easy_pick_models.util.ERROR_OCCURRED
 import com.almarai.data.easy_pick_models.util.exhaustive
+import com.almarai.easypick.ml.OnDeviceTextTranslation.translateText
 import com.almarai.repository.api.RoutesRepository
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.InternalCoroutinesApi
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 
@@ -40,6 +40,10 @@ class RouteSelectionViewModel @ViewModelInject constructor(private val repositor
             try {
                 val data = repository.getAllRoutes()
                 data.collect {
+                    for(route in it){
+                        route.description = translateText(route.description)
+                    }
+
                     _routes.postValue(Result.Success(it))
                 }
             } catch (exception: Exception) {

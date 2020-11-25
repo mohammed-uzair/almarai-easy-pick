@@ -12,6 +12,7 @@ import com.almarai.data.easy_pick_models.product.ProductStatus
 import com.almarai.data.easy_pick_models.route.RouteStatus
 import com.almarai.data.easy_pick_models.util.ERROR_OCCURRED
 import com.almarai.repository.api.ProductsRepository
+import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
@@ -64,6 +65,12 @@ class ProductListViewModel @ViewModelInject constructor(private val repository: 
             } catch (exception: Exception) {
                 _routeDataUpdated.postValue(Result.Error(exception.message ?: ERROR_OCCURRED))
             }
+        }
+    }
+
+    fun discardChanges(routeNumber: Int) {
+        CoroutineScope(Dispatchers.IO).launch {
+            repository.discardAllChanges(routeNumber)
         }
     }
 }

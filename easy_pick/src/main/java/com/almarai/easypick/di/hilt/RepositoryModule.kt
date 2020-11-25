@@ -30,5 +30,5 @@ abstract class RepositoryModule {
     abstract fun provideStatisticsRepository(statisticsRepositoryImplementation: StatisticsRepositoryImplementation): StatisticsRepository
 
     @Binds
-    abstract fun provideFileUploadRepository(fileUploadRepositoryImplementation: FileUploadRepositoryImplementation): FileUploadRepository
+    abstract fun provideFileUploadRepository(ticketRepositoryImplementation: TicketRepositoryImplementation): TicketRepository
 }

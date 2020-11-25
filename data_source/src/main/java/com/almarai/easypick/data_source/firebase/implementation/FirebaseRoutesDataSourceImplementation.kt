@@ -18,7 +18,6 @@ import javax.inject.Singleton
 
 @Singleton
 class FirebaseRoutesDataSourceImplementation @Inject constructor(
-    private val context: Context,
     private val gson: Gson,
     private val sharedPreferenceDataSource: SharedPreferenceDataSource
 ) :

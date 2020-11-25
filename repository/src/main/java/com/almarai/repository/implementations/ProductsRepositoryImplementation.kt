@@ -12,4 +12,5 @@ class ProductsRepositoryImplementation
         productsDataSource.getAllProducts(routeNumber)
     override suspend fun updateRouteData(routeNumber: Int, products:List<Product>) =
         productsDataSource.updateRouteData(routeNumber, products)
+    override suspend fun discardAllChanges(routeNumber: Int) = productsDataSource.discardAllChanges(routeNumber)
 }

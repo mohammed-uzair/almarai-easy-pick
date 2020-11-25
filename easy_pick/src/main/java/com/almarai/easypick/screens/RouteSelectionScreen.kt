@@ -11,6 +11,7 @@ import android.view.animation.AnimationUtils
 import androidx.appcompat.widget.SearchView
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.lifecycleScope
@@ -39,11 +40,10 @@ import com.almarai.easypick.view_models.RouteSelectionViewModel
 import com.almarai.machine_learning.LiveBarcodeScanningActivity
 import com.almarai.machine_learning.LiveBarcodeScanningActivity.Companion.BARCODE_SCANNER_ACTIVITY_RESULT
 import com.almarai.machine_learning.LiveBarcodeScanningActivity.Companion.EXTRA_SCANNED_BARCODE
-import kotlinx.android.synthetic.main.view_search.view.*
-import kotlinx.coroutines.delay
-import kotlinx.coroutines.launch
-import androidx.fragment.app.viewModels
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.android.synthetic.main.view_search.view.*
+import kotlinx.coroutines.*
+import java.util.*
 
 @AndroidEntryPoint
 class RouteSelectionScreen : Fragment(), SearchView.OnQueryTextListener {
@@ -98,8 +98,23 @@ class RouteSelectionScreen : Fragment(), SearchView.OnQueryTextListener {
             val result = data?.getStringArrayListExtra(RecognizerIntent.EXTRA_RESULTS)?.get(0) ?: ""
 
             if (result.isNotEmpty()) {
-                //Set the speech text in the search view
-                mSearchView.setText(result.trim())
+                if (result.toLowerCase(Locale.ROOT)
+                        .contains(VOICE_START_SERVING_COMMAND.toLowerCase(Locale.ROOT))
+                ) {
+                    val routeNumber = result.filter { it.isDigit() }
+
+                    //If the above is a valid route number, start serving it
+                    try {
+                        val route = routes.first { it.number == routeNumber.toInt() }
+                        if (adapter.isRouteNotServiced(route.serviceStatus)) {
+                            adapter.processSelectedRoute(route.number)
+                        }
+                    } catch (exception: NoSuchElementException) {
+
+                    }
+                } else {
+                    mSearchView.setText(result)
+                }
             }
         }
     }
@@ -131,6 +146,12 @@ class RouteSelectionScreen : Fragment(), SearchView.OnQueryTextListener {
         handleOtherScreenResults()
 
         setRoutesRefreshListener()
+
+        //Get the updated route status
+        CoroutineScope(Dispatchers.IO).launch {
+            delay(300)
+            routesViewModel.getAllRouteStatus()
+        }
     }
 
     private fun setRoutesRefreshListener() {
@@ -373,5 +394,6 @@ class RouteSelectionScreen : Fragment(), SearchView.OnQueryTextListener {
     companion object {
         const val TAG = "RouteSelectionScreen"
         private const val TEXT_TO_SPEECH_ACTIVITY_RESULT = 10020
+        private const val VOICE_START_SERVING_COMMAND = "Start Serving"
     }
 }

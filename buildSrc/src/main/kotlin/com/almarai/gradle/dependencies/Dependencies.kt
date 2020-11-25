@@ -21,6 +21,8 @@ const val Dependencies_Plugin_Jdk_Library = "stdlib-jdk8"
 //Android
 const val Dependencies_Android_Kotlin_Extensions = "androidx.core:core-ktx:1.3.1"
 const val Dependencies_Android_AppCompat = "androidx.appcompat:appcompat:1.1.0"
+const val Dependencies_Android_Activity = "androidx.activity:activity-ktx:1.2.0-beta01"
+const val Dependencies_Android_Fragment = "androidx.fragment:fragment-ktx:1.3.0-alpha02"
 const val Dependencies_Android_Constraint_Layout =
     "androidx.constraintlayout:constraintlayout:2.0.0-beta8"
 const val Dependencies_Android_Legacy_support = "androidx.legacy:legacy-support-v4:1.0.0"
@@ -121,9 +123,14 @@ const val Dependencies_Volley = "com.android.volley:volley:$Dependencies_Version
 private const val Dependencies_Version_Ml_Kit = "16.1.0"
 private const val Dependencies_Version_Ml_Kit_Barcode_Scanning = "16.0.1"
 
+//On Device Text Translation
+private const val Dependencies_Version_Ml_Kit_On_Device_Text_Translation = "16.1.1"
+
 // Barcode model
 const val Dependencies_Ml_Kit_Barcode_Scanning =
     "com.google.mlkit:barcode-scanning:$Dependencies_Version_Ml_Kit_Barcode_Scanning"
+const val Dependencies_Ml_Kit_On_Device_Text_Translation =
+    "com.google.mlkit:translate:$Dependencies_Version_Ml_Kit_On_Device_Text_Translation"
 
 // Object feature and model
 const val Dependencies_Ml_Kit_Object_Detection =

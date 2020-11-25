@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import android.view.animation.AnimationUtils
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
 import com.almarai.easypick.BuildConfig
@@ -14,7 +15,6 @@ import com.almarai.easypick.R
 import com.almarai.easypick.databinding.ScreenHomeBinding
 import com.almarai.easypick.view_models.HomeViewModel
 import com.almarai.repository.api.ApplicationRepository
-import androidx.fragment.app.viewModels
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -85,6 +85,11 @@ class HomeScreen(private val applicationRepository: ApplicationRepository) : Fra
             R.id.home_screen_settings_button -> navController.navigate(R.id.action_homeScreen_to_settingsScreen)
             R.id.home_screen_statistics_button -> navController.navigate(R.id.action_homeScreen_to_statisticsScreen)
 //            R.id.home_screen_exit_app_button -> navController.navigate(R.id.action_homeScreen_to_testScreen)
+            R.id.home_screen_exit_app_button -> {
+                //Deliberately crash the app
+                val a = 0
+                2 / a
+            }
         }
     }
 

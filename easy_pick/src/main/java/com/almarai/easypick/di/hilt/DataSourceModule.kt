@@ -5,6 +5,7 @@ import com.almarai.easypick.data_source.AppDataSourceType
 import com.almarai.easypick.data_source.AppDataSourceTypes
 import com.almarai.easypick.data_source.firebase.implementation.FirebaseProductsDataSourceImplementation
 import com.almarai.easypick.data_source.firebase.implementation.FirebaseRoutesDataSourceImplementation
+import com.almarai.easypick.data_source.firebase.implementation.FirebaseStatisticsDataSourceImplementation
 import com.almarai.easypick.data_source.firebase.implementation.FirebaseTicketDataSourceImplementation
 import com.almarai.easypick.data_source.interfaces.*
 import com.almarai.easypick.data_source.local_data_source.implementations.AppUpdateDataSourceImplementation
@@ -55,9 +56,7 @@ class DataSourceModule {
         return when (appDataSourceType.getAppUpdateType()) {
             AppDataSourceTypes.Almarai -> WebRoutesDataSourceImplementation(webservice)
             else -> FirebaseRoutesDataSourceImplementation(
-                context,
-                gson,
-                sharedPreferenceDataSource
+                gson, sharedPreferenceDataSource
             )
         }
     }
@@ -83,16 +82,16 @@ class DataSourceModule {
 
     @Provides
     fun provideStatisticsDataSource(
-        context: Context,
         webservice: WebService,
         appDataSourceType: AppDataSourceType,
-        sharedPreferenceDataSource: SharedPreferenceDataSource
+        sharedPreferenceDataSource: SharedPreferenceDataSource,
+        gson: Gson
     ): StatisticsDataSource {
-//        return when (appDataSourceType.getAppUpdateType()) {
-//            AppDataSourceType.Almarai ->
-        return WebStatisticsDataSourceImplementation(webservice)
-//            else -> FirebaseStatisticsDataSourceImplementation(context, sharedPreferenceDataSource)
-//        }
+        return when (appDataSourceType.getAppUpdateType()) {
+            AppDataSourceTypes.Almarai ->
+                return WebStatisticsDataSourceImplementation(webservice)
+            else -> FirebaseStatisticsDataSourceImplementation(sharedPreferenceDataSource, gson)
+        }
     }
 
     @Provides
