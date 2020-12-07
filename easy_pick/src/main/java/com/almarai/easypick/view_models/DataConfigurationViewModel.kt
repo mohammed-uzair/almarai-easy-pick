@@ -5,9 +5,9 @@ import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.almarai.data.easy_pick_models.DataConfiguration
 import com.almarai.business.Utils.AppDateTimeFormat
-import com.almarai.business.Utils.DateUtil
+import com.almarai.common.date_time.DateUtil
+import com.almarai.data.easy_pick_models.DataConfiguration
 import com.almarai.repository.api.ApplicationRepository
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -45,13 +45,13 @@ class DataConfigurationViewModel @ViewModelInject constructor(private val applic
 
     fun checkAppDataConfigurations() = applicationRepository.checkAppDataIsConfigured()
 
-    fun saveDataConfiguration(): Boolean {
+    fun saveDataConfiguration(routeGroup: String): Boolean {
         if (validateData()) {
             applicationRepository.setDataConfiguration(
                 DataConfiguration(
                     salesDate.value,
                     depotCode.value,
-                    routeGroup.value
+                    routeGroup
                 )
             )
 

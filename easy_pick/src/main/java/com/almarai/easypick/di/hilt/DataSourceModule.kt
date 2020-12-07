@@ -1,14 +1,11 @@
 package com.almarai.easypick.di.hilt
 
 import android.content.Context
+import com.almarai.common.app_update.AppUpdates
 import com.almarai.easypick.data_source.AppDataSourceType
 import com.almarai.easypick.data_source.AppDataSourceTypes
-import com.almarai.easypick.data_source.firebase.implementation.FirebaseProductsDataSourceImplementation
-import com.almarai.easypick.data_source.firebase.implementation.FirebaseRoutesDataSourceImplementation
-import com.almarai.easypick.data_source.firebase.implementation.FirebaseStatisticsDataSourceImplementation
-import com.almarai.easypick.data_source.firebase.implementation.FirebaseTicketDataSourceImplementation
+import com.almarai.easypick.data_source.firebase.implementation.*
 import com.almarai.easypick.data_source.interfaces.*
-import com.almarai.easypick.data_source.local_data_source.implementations.AppUpdateDataSourceImplementation
 import com.almarai.easypick.data_source.local_data_source.implementations.SharedPreferenceDataSourceImplementation
 import com.almarai.easypick.data_source.web.WebService
 import com.almarai.easypick.data_source.web.implementation.WebAppUpdateDataSourceImplementation
@@ -35,19 +32,17 @@ class DataSourceModule {
     @Singleton
     fun provideAppUpdateDataSource(
         appDataSourceType: AppDataSourceType,
-        sharedPreferenceDataSource: SharedPreferenceDataSource
+        webservice: WebService,
+        appUpdates: AppUpdates
     ): AppUpdateDataSource {
         return when (appDataSourceType.getAppUpdateType()) {
-            AppDataSourceTypes.Almarai -> AppUpdateDataSourceImplementation(
-                sharedPreferenceDataSource
-            )
-            else -> WebAppUpdateDataSourceImplementation()
+            AppDataSourceTypes.Almarai -> WebAppUpdateDataSourceImplementation(webservice, appUpdates)
+            else -> FirebaseAppUpdateDataSourceImplementation()
         }
     }
 
     @Provides
     fun provideRoutesDataSource(
-        context: Context,
         webservice: WebService,
         appDataSourceType: AppDataSourceType,
         gson: Gson,

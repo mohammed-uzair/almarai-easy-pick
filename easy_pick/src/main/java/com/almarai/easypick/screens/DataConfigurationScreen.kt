@@ -9,17 +9,20 @@ import android.view.animation.AnimationUtils
 import android.widget.ArrayAdapter
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
+import androidx.lifecycle.Observer
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
+import com.almarai.business.Utils.AppDateTimeFormat
+import com.almarai.common.date_time.DateUtil
 import com.almarai.easypick.R
 import com.almarai.easypick.databinding.ScreenDataConfigurationBinding
 import com.almarai.easypick.utils.APP_SELECTED_THEME
-import com.almarai.business.Utils.AppDateTimeFormat
 import com.almarai.easypick.utils.AppTheme
-import com.almarai.business.Utils.DateUtil
 import com.almarai.easypick.view_models.DataConfigurationViewModel
+import com.almarai.easypick.voice.use_cases.NavigateScreen.Companion.CURRENT_SCREEN
+import com.almarai.easypick.voice.use_cases.Screen
 import com.almarai.repository.utils.AppDataConfiguration
-import androidx.fragment.app.viewModels
 import dagger.hilt.android.AndroidEntryPoint
 import java.util.*
 
@@ -58,13 +61,17 @@ class DataConfigurationScreen : Fragment() {
 
         animateUI()
 
+        CURRENT_SCREEN = Screen.DataConfigurationScreen
+
         screenDataConfigurationBinding.screenDataConfigSaveButton.setOnClickListener {
-            if (viewModel.saveDataConfiguration()) {
+            if (viewModel.saveDataConfiguration(screenDataConfigurationBinding.screenDataConfigRoutePreferenceSpinner.text.toString())) {
                 when (viewModel.checkAppDataConfigurations()) {
                     AppDataConfiguration.NetworkConfiguration ->
                         navController.navigate(R.id.action_dataConfigurationScreen_to_networkConfigurationScreen)
                     AppDataConfiguration.Home ->
                         navController.navigate(R.id.action_dataConfigurationScreen_to_homeScreen)
+                    else -> {
+                    }
                 }
             }
         }
@@ -95,34 +102,24 @@ class DataConfigurationScreen : Fragment() {
     }
 
     private fun setUIData() {
-//        val items = resources.getStringArray(R.array.route_product_type_preferences)
-        val items = listOf<String>()
+        val items = resources.getStringArray(R.array.route_product_type_preferences)
         val adapter = ArrayAdapter(requireContext(), android.R.layout.simple_list_item_1, items)
         screenDataConfigurationBinding.screenDataConfigRoutePreferenceSpinner.setAdapter(adapter)
-        screenDataConfigurationBinding.screenDataConfigRoutePreferenceSpinner.threshold
 
-//        screenDataConfigurationBinding.screenDataConfigRoutePreferenceSpinner.setOnItemClickListener { _, _, position, _ ->
-//            viewModel.routeGroup.value =
-//                screenDataConfigurationBinding.screenDataConfigRoutePreferenceSpinner.text.toString()
-//        }
-
-//        viewModel.routeGroup.observe(viewLifecycleOwner, androidx.lifecycle.Observer {
-//            val routeProductTypePreferences =
-//                resources.getStringArray(R.array.route_product_type_preferences)
-//            var selectedPreferenceId = 0
-//            for ((index, value) in routeProductTypePreferences.withIndex()) {
-//                if (value == viewModel.routeGroup.value) {
-//                    selectedPreferenceId = index
-//                    break
-//                }
-//            }
-//
-//            screenDataConfigurationBinding.screenDataConfigRoutePreferenceSpinner.setText(viewModel.routeGroup.value)
-//
-////            screenDataConfigurationBinding.screenDataConfigRoutePreferenceSpinner.setSelection(
-////                selectedPreferenceId
-//////            )
-//        })
+        viewModel.routeGroup.observe(viewLifecycleOwner,
+            Observer<String?> { groupName ->
+                if (groupName == null || groupName.isEmpty()) {
+                    screenDataConfigurationBinding.screenDataConfigRoutePreferenceSpinner.setText(
+                        items[0],
+                        false
+                    )
+                } else {
+                    screenDataConfigurationBinding.screenDataConfigRoutePreferenceSpinner.setText(
+                        groupName,
+                        false
+                    )
+                }
+            })
     }
 
     private fun animateUI() {

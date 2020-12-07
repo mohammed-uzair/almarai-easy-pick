@@ -14,11 +14,11 @@ import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
+import com.almarai.common.utils.APP_LOCALE
 import com.almarai.data.easy_pick_models.Result
 import com.almarai.easypick.R
 import com.almarai.easypick.databinding.ScreenSelfTicketGeneratorBinding
 import com.almarai.easypick.extensions.goBack
-import com.almarai.easypick.utils.APP_LOCALE
 import com.almarai.easypick.utils.SUPPORTED_TICKET_MIME_TYPES
 import com.almarai.easypick.utils.alert_dialog.OnPositiveButtonClickListener
 import com.almarai.easypick.utils.alert_dialog.hideAlertDialog

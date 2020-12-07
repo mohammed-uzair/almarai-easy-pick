@@ -2,6 +2,7 @@ package com.almarai.easypick.utils
 
 import android.widget.Filterable
 import androidx.recyclerview.widget.RecyclerView
+import com.almarai.common.utils.APP_LOCALE
 import com.almarai.data.easy_pick_models.GroupType
 import com.almarai.data.easy_pick_models.filter.Filters
 import com.almarai.data.easy_pick_models.product.Product

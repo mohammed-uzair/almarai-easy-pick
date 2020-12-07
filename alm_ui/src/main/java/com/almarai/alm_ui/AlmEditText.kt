@@ -13,7 +13,7 @@ import android.view.View.OnFocusChangeListener
 import android.widget.EditText
 import androidx.appcompat.widget.AppCompatEditText
 import com.almarai.alm_ui.Constants.CHANGED_BY_PROG
-import com.almarai.alm_ui.Utils.APP_LOCALE
+import com.almarai.common.utils.APP_LOCALE
 import java.util.*
 
 

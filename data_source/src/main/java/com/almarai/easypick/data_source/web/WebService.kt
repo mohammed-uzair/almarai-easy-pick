@@ -1,10 +1,10 @@
 package com.almarai.easypick.data_source.web
 
 import android.util.Log
+import com.almarai.common.app_update.AppUpdates
 import com.almarai.data.easy_pick_models.AppUpdate
-import com.almarai.easypick.data_source.interfaces.AppUpdateDataSource
-import com.almarai.easypick.data_source.local_data_source.SharedPreferencesKeys
 import com.almarai.easypick.data_source.interfaces.SharedPreferenceDataSource
+import com.almarai.easypick.data_source.local_data_source.SharedPreferencesKeys
 import com.almarai.easypick.data_source.request.RequestHeaders
 import com.almarai.easypick.data_source.web.api.AppUpdateApi
 import com.almarai.easypick.data_source.web.api.ProductsApi
@@ -26,7 +26,7 @@ const val DEFAULT_URL = "http://192.168.0.196:8080/"
 class WebService @Inject constructor(
     private val sharedPreferenceDataSource: SharedPreferenceDataSource,
     private val gson: Gson,
-    private val appUpdateDataSource: AppUpdateDataSource
+    private val appUpdates: AppUpdates
 ) {
     companion object {
         const val TAG = "WebService"
@@ -63,18 +63,17 @@ class WebService @Inject constructor(
                 .build()
 
             val response: Response = chain.proceed(request)
-            val appUpdates: String = response.header("app-update") ?: ""
+            val newAppUpdates: String = response.header("app-update") ?: ""
 
-            var appUpdate: AppUpdate? = null
-            if (appUpdates.isNotEmpty()) {
+            if (newAppUpdates.isNotEmpty()) {
                 //Convert the app update from Json
                 try {
-                    appUpdate = gson.fromJson(appUpdates, AppUpdate::class.java)
+                    val appUpdate = gson.fromJson(newAppUpdates, AppUpdate::class.java)
+                    appUpdates.setAppUpdate(appUpdate)
                 } catch (exception: JsonSyntaxException) {
                     Log.e(TAG, "Error on parsing app update", exception)
                 }
             }
-            appUpdateDataSource.setAppUpdates(appUpdate)
 
             response
         }

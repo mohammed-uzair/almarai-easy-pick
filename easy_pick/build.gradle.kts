@@ -20,6 +20,7 @@ android {
 }
 
 dependencies {
+    implementation(project(Dependencies_Project_Common))
     implementation(project(Dependencies_Project_Machine_Learning))
     implementation(project(Dependencies_Project_Alm_Logging))
     implementation(project(Dependencies_Project_Repository))

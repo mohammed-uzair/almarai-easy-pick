@@ -53,14 +53,21 @@
 
     <!--region Setting Screen Titles-->
     <string name="general">General</string>
+    <string name="features">Features</string>
+    <string name="application">Application</string>
+    <string name="optimisation">Optimisation</string>
+    <string name="network_and_data">Network &amp; Data</string>
     <string name="app_theme">App Theme</string>
     <string name="app_language">App Language</string>
     <string name="app_update">App Update</string>
+    <string name="app_up_to_date">Your App is up to date</string>
     <string name="app_update_summary">Check for new app updates</string>
     <string name="app_ticket_generation">Generate Ticket</string>
     <string name="app_database">Data Source</string>
     <string name="app_ticket_generation_summary">File a new ticket for bug, crash, feedback or enhancement</string>
     <string name="app_database_summary">Select from which DB the app should communicate with</string>
+    <string name="app_voice_commands">Voice Commands</string>
+    <string name="app_voice_commands_summary">Enable voice commands, reduces battery life</string>
 
     <string name="app_data_source_almarai" translatable="false">Almarai</string>
     <string name="app_data_source_cloud" translatable="false">Cloud</string>
@@ -100,6 +107,7 @@
     <string name="nothing_found">Nothing found</string>
     <string name="alert_title_route_not_accessible">Route not accessible</string>
     <string name="alert_message_route_not_accessible">Only the owner who started this route can reopen this route. Please select a different route</string>
+    <string name="alert_error_fetching_app_update">Could not fetch app update</string>
     <!--endregion-->
 
     <!--region Fetching-->
@@ -167,7 +175,7 @@
     <string name="alert_upload_ticket_message">Your request has been taken, with ticket number\n</string>
 
     <string name="alert_ticket_upload_failed_title">Ticket Not Created</string>
-        <string name="alert_ticket_upload_failed_ticket_message">Some error occurred, your ticket could not be filed</string>
+    <string name="alert_ticket_upload_failed_ticket_message">Some error occurred, your ticket could not be filed</string>
 
     <string name="alert_default_title">Alert</string>
     <string name="alert_default_message">Could not find anything</string>

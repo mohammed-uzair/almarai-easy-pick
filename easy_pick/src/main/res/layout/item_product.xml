@@ -73,7 +73,7 @@
                 android:textStyle="normal"
                 app:layout_constraintBaseline_toBaselineOf="@+id/item_product_number_text"
                 app:layout_constraintStart_toEndOf="@+id/item_product_number_text"
-                app:productDescription="@{product}"
+                app:text="@{product.translatedDescription}"
                 tools:text="Double chocolate milk shake 500ml" />
 
             <TextView

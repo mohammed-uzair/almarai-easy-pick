@@ -14,6 +14,8 @@ import com.almarai.easypick.BuildConfig
 import com.almarai.easypick.R
 import com.almarai.easypick.databinding.ScreenHomeBinding
 import com.almarai.easypick.view_models.HomeViewModel
+import com.almarai.easypick.voice.use_cases.NavigateScreen
+import com.almarai.easypick.voice.use_cases.Screen
 import com.almarai.repository.api.ApplicationRepository
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -49,6 +51,8 @@ class HomeScreen(private val applicationRepository: ApplicationRepository) : Fra
     private fun init() {
         //Set screen title
         activity?.title = getString(R.string.title_home)
+
+        NavigateScreen.CURRENT_SCREEN = Screen.HomeScreen
 
         animateUI()
 

@@ -1,3 +1,4 @@
+include(":common")
 include(":alm_logging:common")
 include(
     ":machine_learning",

@@ -9,11 +9,10 @@ plugins {
 
     id("dagger.hilt.android.plugin")
 }
-apply {
-    plugin("kotlin-android")
-}
 
 dependencies {
+    implementation(project(Dependencies_Project_Common))
+
     implementation(Dependencies_Android_AppCompat)
     implementation(Dependencies_Android_Kotlin_Extensions)
 

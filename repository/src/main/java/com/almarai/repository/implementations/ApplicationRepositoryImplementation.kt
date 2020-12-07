@@ -1,11 +1,12 @@
 package com.almarai.repository.implementations
 
 import com.almarai.business.Utils.AppDateTimeFormat
-import com.almarai.business.Utils.DateUtil.convertDateToMilliseconds
+import com.almarai.common.date_time.DateUtil
 import com.almarai.data.easy_pick_models.AppUpdate
 import com.almarai.data.easy_pick_models.DataConfiguration
 import com.almarai.data.easy_pick_models.NetworkConfiguration
 import com.almarai.data.easy_pick_models.User
+import com.almarai.easypick.data_source.interfaces.SharedPreferenceDataSource
 import com.almarai.easypick.data_source.local_data_source.SharedPreferencesKeys.Companion.APP_UPDATE
 import com.almarai.easypick.data_source.local_data_source.SharedPreferencesKeys.Companion.APP_UPDATE_DENY_COUNTER
 import com.almarai.easypick.data_source.local_data_source.SharedPreferencesKeys.Companion.APP_UPDATE_ELAPSED_TIMER
@@ -20,7 +21,6 @@ import com.almarai.easypick.data_source.local_data_source.SharedPreferencesKeys.
 import com.almarai.easypick.data_source.local_data_source.SharedPreferencesKeys.Companion.USER_LOGGED_IN_STATUS
 import com.almarai.easypick.data_source.local_data_source.SharedPreferencesKeys.Companion.USER_LOGGED_USER_ID
 import com.almarai.easypick.data_source.local_data_source.SharedPreferencesKeys.Companion.USER_LOGGED_USER_NAME
-import com.almarai.easypick.data_source.interfaces.SharedPreferenceDataSource
 import com.almarai.repository.api.ApplicationRepository
 import com.almarai.repository.utils.AppDataConfiguration
 import javax.inject.Inject
@@ -56,7 +56,7 @@ class ApplicationRepositoryImplementation
         )
 
     override fun setDataConfiguration(dataConfiguration: DataConfiguration) {
-        val salesDate = convertDateToMilliseconds(
+        val salesDate = DateUtil.convertDateToMilliseconds(
             dataConfiguration.salesDate,
             AppDateTimeFormat.formatDDMMYYYY
         )

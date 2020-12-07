@@ -22,11 +22,27 @@
             app:title="@string/app_language"
             app:useSimpleSummaryProvider="true" />
 
-        <Preference
-            app:icon="@drawable/ic_system_update"
-            app:key="@string/app_update"
-            app:summary="@string/app_update_summary"
-            app:title="@string/app_update" />
+    </PreferenceCategory>
+
+    <PreferenceCategory
+        app:singleLineTitle="true"
+        app:title="@string/network_and_data">
+
+        <ListPreference
+            app:defaultValue="Almarai"
+            app:entries="@array/app_db_connection_values"
+            app:entryValues="@array/app_db_connection_values"
+            app:icon="@drawable/ic_db"
+            app:key="@string/app_database"
+            app:summary="@string/app_database_summary"
+            app:title="@string/app_database"
+            app:useSimpleSummaryProvider="true" />
+
+    </PreferenceCategory>
+
+    <PreferenceCategory
+        app:singleLineTitle="true"
+        app:title="@string/optimisation">
 
         <Preference
             app:icon="@drawable/ic_bug"
@@ -35,15 +51,30 @@
             app:summary="@string/app_ticket_generation_summary"
             app:title="@string/app_ticket_generation" />
 
-        <ListPreference
-            app:defaultValue="Almarai"
-            app:entries="@array/app_db_connection_values"
-            app:entryValues="@array/app_db_connection_values"
-            app:icon="@drawable/ic_db"
-            app:summary="@string/app_database_summary"
-            app:key="@string/app_database"
-            app:title="@string/app_database"
-            app:useSimpleSummaryProvider="true" />
+    </PreferenceCategory>
+
+    <PreferenceCategory
+        app:singleLineTitle="true"
+        app:title="@string/features">
+
+        <SwitchPreference
+            app:icon="@drawable/ic_mic"
+            app:key="@string/app_voice_commands"
+            app:singleLineTitle="true"
+            app:summary="@string/app_voice_commands_summary"
+            app:title="@string/app_voice_commands" />
+
+    </PreferenceCategory>
+
+    <PreferenceCategory
+        app:singleLineTitle="true"
+        app:title="@string/application">
+
+        <Preference
+            app:icon="@drawable/ic_system_update"
+            app:key="@string/app_update"
+            app:summary="@string/app_update_summary"
+            app:title="@string/app_update" />
 
     </PreferenceCategory>
 

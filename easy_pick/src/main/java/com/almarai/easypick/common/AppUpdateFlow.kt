@@ -6,6 +6,7 @@ import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.FileProvider
 import androidx.lifecycle.lifecycleScope
+import com.almarai.common.app_update.AppUpdates
 import com.almarai.data.easy_pick_models.AppUpdate
 import com.almarai.easypick.BuildConfig
 import com.almarai.easypick.R
@@ -29,7 +30,8 @@ import kotlin.concurrent.schedule
 @Singleton
 class AppUpdateFlow @Inject constructor(
     private val applicationRepository: ApplicationRepository,
-    private val appUpdateRepository: AppUpdateRepository
+    private val appUpdateRepository: AppUpdateRepository,
+    private val appUpdates: AppUpdates
 ) {
     companion object {
         const val TAG = "AppUpdateFlow"
@@ -58,7 +60,7 @@ class AppUpdateFlow @Inject constructor(
         val appUpdateRemainingTimer = applicationRepository.getAppUpdateElapsedTimer()
         val appUpdateDenyCounter = applicationRepository.getAppUpdateDenyCounter()
 
-        if (appUpdate != null) {
+        if (appUpdate != null && isUpdateAvailable(appUpdate)) {
             mAppUpdate = appUpdate
 
             Log.i(TAG, "Got app update from local memory : $mAppUpdate")
@@ -90,13 +92,13 @@ class AppUpdateFlow @Inject constructor(
         Log.i(TAG, "Listening for app updates")
         //Listen for app updates
         activity?.lifecycleScope?.launch {
-            appUpdateRepository.getAppUpdates()?.collect { appUpdate ->
+            appUpdates.getAppUpdates().collect { appUpdate ->
                 Log.d(TAG, "Received an update for the app : $appUpdate")
 
                 mAppUpdate = appUpdate
 
                 //Check if already started the app update flow
-                if (!isAppUpdateFlowStarted) {
+                if (!isAppUpdateFlowStarted && isUpdateAvailable(appUpdate)) {
                     Log.i(TAG, "Updated the 'isAppUpdateFlowStarted' flag to true")
                     isAppUpdateFlowStarted = true
 
@@ -234,12 +236,18 @@ class AppUpdateFlow @Inject constructor(
         applicationRepository.reSetAppUpdateDenyCounter()
     }
 
-    fun checkManualAppUpdate() {
+    suspend fun checkManualAppUpdate(): AppUpdate? {
         if (isAppUpdateFlowStarted) {
             showAppUpdateAlertToUser(isForceUpdate = false, isManualUpdate = true)
         } else {
-            appUpdateRepository.checkAppUpdate()
+            return try {
+                appUpdateRepository.checkAppUpdate()
+            } catch (exception: Exception) {
+                null
+            }
         }
+
+        return null
     }
 
     private fun updateApplication() {
@@ -270,4 +278,7 @@ class AppUpdateFlow @Inject constructor(
             activity!!.startActivity(installAppIntent)
         }
     }
+
+    fun isUpdateAvailable(appUpdate: AppUpdate) =
+        appUpdate.appVersionNumber > BuildConfig.VERSION_CODE
 }

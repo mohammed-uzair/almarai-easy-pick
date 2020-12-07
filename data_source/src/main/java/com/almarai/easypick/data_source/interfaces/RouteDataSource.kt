@@ -10,8 +10,8 @@ import javax.inject.Singleton
 
 @Singleton
 interface RouteDataSource {
-    suspend fun getAllRoutes(): StateFlow<List<Route>>
-    suspend fun getAllRoutesStatus(): List<RouteServiceStatus>
+    suspend fun getAllRoutes(): Flow<List<Route>>
+    suspend fun getAllRoutesStatus(): Flow<List<RouteServiceStatus>>
     suspend fun getRouteStatus(routeNumber: Int): RouteAccessibility
     suspend fun updateRouteStatus(routeNumber: Int, status: RouteStatus)
 }

@@ -13,6 +13,8 @@ import androidx.navigation.Navigation
 import com.almarai.easypick.R
 import com.almarai.easypick.databinding.ScreenNetworkConfigurationBinding
 import com.almarai.easypick.view_models.NetworkConfigurationViewModel
+import com.almarai.easypick.voice.use_cases.NavigateScreen
+import com.almarai.easypick.voice.use_cases.Screen
 import com.almarai.repository.utils.AppDataConfiguration
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -52,6 +54,8 @@ class NetworkConfigurationScreen : Fragment() {
     private fun init() {
         //Set screen title
         activity?.title = getString(R.string.title_network_configuration)
+
+        NavigateScreen.CURRENT_SCREEN = Screen.NetworkConfigurationScreen
 
         animateUI()
 

@@ -1,4 +1,4 @@
-package com.almarai.easypick.utils
+package com.almarai.common.utils
 
 import java.util.*
 

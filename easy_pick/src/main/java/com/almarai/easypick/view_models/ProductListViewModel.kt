@@ -32,8 +32,7 @@ class ProductListViewModel @ViewModelInject constructor(private val repository: 
         viewModelScope.launch(Dispatchers.IO) {
             _products.postValue(Result.Fetching)
             try {
-                val data = repository.getAllProducts(routeNumber)
-                data.collect {
+                repository.getAllProducts(routeNumber).collect {
                     _products.postValue(Result.Success(it))
                 }
             } catch (exception: Exception) {

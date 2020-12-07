@@ -91,12 +91,12 @@
             android:layout_marginStart="@dimen/_10sdp"
             android:layout_marginEnd="@dimen/_5sdp"
             android:gravity="start"
+            android:text="@{product.translatedDescription}"
             android:textColor="?colorText"
             android:textSize="16sp"
             app:layout_constraintBaseline_toBaselineOf="@+id/dialog_product_detail_number"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="@+id/guideline"
-            app:productDescription="@{product}"
             tools:text="Double Chocolate Milk Shake 250ml" />
 
         <com.almarai.alm_ui.AlmEditText

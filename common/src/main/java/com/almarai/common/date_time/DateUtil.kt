@@ -1,4 +1,4 @@
-package com.almarai.business.Utils
+package com.almarai.common.date_time
 
 import java.text.DateFormat
 import java.text.ParseException
@@ -13,13 +13,13 @@ object DateUtil {
      *
      * @return Formatted date string
      */
-    fun getCurrentDate(): String? {
+    fun getCurrentDate(): String {
         val dateFormat: DateFormat = SimpleDateFormat(
             AppDateTimeFormat.formatDDMMYYYYHHMMSS,
             Locale.ENGLISH
         )
         val calendar = Calendar.getInstance(Locale.ENGLISH)
-        return dateFormat.format(calendar.time)
+        return dateFormat.format(calendar.time) ?: ""
     }
 
     /**
@@ -66,9 +66,11 @@ object DateUtil {
 
     fun getDate(date: String, @AppDateTimeFormat format: String): Long {
         val sdf = SimpleDateFormat(format, Locale.ENGLISH)
-        val result = sdf.parse(date)
-
-        return result.time
+        return try {
+            return sdf.parse(date)?.time ?: 0
+        }catch (e: ParseException){
+            0
+        }
     }
 
     /**
@@ -97,7 +99,7 @@ object DateUtil {
         return formattedDate
     }
 
-    public fun convertDateToMilliseconds(
+    fun convertDateToMilliseconds(
         date: String?,
         dateFormat: String?
     ): Long {

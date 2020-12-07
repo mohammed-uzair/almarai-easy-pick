@@ -5,6 +5,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.almarai.common.machine_learning.translation.OnDeviceTextTranslation.translateText
 import com.almarai.data.easy_pick_models.Result
 import com.almarai.data.easy_pick_models.filter.Filters
 import com.almarai.data.easy_pick_models.route.Route
@@ -13,7 +14,6 @@ import com.almarai.data.easy_pick_models.route.RouteServiceStatus
 import com.almarai.data.easy_pick_models.route.RouteStatus
 import com.almarai.data.easy_pick_models.util.ERROR_OCCURRED
 import com.almarai.data.easy_pick_models.util.exhaustive
-import com.almarai.easypick.ml.OnDeviceTextTranslation.translateText
 import com.almarai.repository.api.RoutesRepository
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.collect
@@ -40,10 +40,6 @@ class RouteSelectionViewModel @ViewModelInject constructor(private val repositor
             try {
                 val data = repository.getAllRoutes()
                 data.collect {
-                    for(route in it){
-                        route.description = translateText(route.description)
-                    }
-
                     _routes.postValue(Result.Success(it))
                 }
             } catch (exception: Exception) {
@@ -56,7 +52,11 @@ class RouteSelectionViewModel @ViewModelInject constructor(private val repositor
         viewModelScope.launch(Dispatchers.IO) {
             _routesStatus.postValue(Result.Fetching)
             try {
-                _routesStatus.postValue(Result.Success(repository.getAllRoutesStatus()))
+                repository.getAllRoutesStatus().collect {
+                    if (it.isNotEmpty()) {
+                        _routesStatus.postValue(Result.Success(it))
+                    }
+                }
             } catch (exception: Exception) {
                 _routesStatus.postValue(Result.Error(exception.message ?: ERROR_OCCURRED))
             }

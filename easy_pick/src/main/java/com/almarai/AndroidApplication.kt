@@ -2,21 +2,17 @@ package com.almarai
 
 import android.app.Application
 import android.content.res.Configuration
+import com.almarai.common.date_time.DateUtil
+import com.almarai.common.logging.FIREBASE_ANALYTICS
 import com.almarai.easypick.common.AppUpdateFlow
-//import com.almarai.easypick.di.AppModule
-//import com.almarai.easypick.di.FragmentModule
+import com.almarai.easypick.data_source.interfaces.SharedPreferenceDataSource
 import com.almarai.easypick.extensions.IS_HARDWARE_KEYBOARD_AVAILABLE
 import com.almarai.easypick.extensions.isHardwareKeyboardAvailable
 import com.almarai.easypick.lifecycle_handlers.ActivityLifecycleHandler
-import dagger.hilt.EntryPoint
-import dagger.hilt.InstallIn
+import com.almarai.easypick.voice.VoiceRecognitionServer
+import com.google.firebase.analytics.FirebaseAnalytics
+import com.google.firebase.analytics.ktx.logEvent
 import dagger.hilt.android.HiltAndroidApp
-import dagger.hilt.android.components.ApplicationComponent
-//import org.koin.android.ext.android.inject
-//import org.koin.android.ext.koin.androidContext
-//import org.koin.android.ext.koin.androidLogger
-//import org.koin.androidx.fragment.koin.fragmentFactory
-//import org.koin.core.context.startKoin
 import javax.inject.Inject
 
 @HiltAndroidApp
@@ -24,11 +20,29 @@ class AndroidApplication : Application() {
     @Inject
     lateinit var appUpdateFlow: AppUpdateFlow
 
+    @Inject
+    lateinit var preferenceDataSource: SharedPreferenceDataSource
+
+    @Inject
+    lateinit var voiceRecognitionServer: VoiceRecognitionServer
+
     override fun onCreate() {
         super.onCreate()
 
         // Register the activity lifecycle callback listener object
-        registerActivityLifecycleCallbacks(ActivityLifecycleHandler(appUpdateFlow))
+        registerActivityLifecycleCallbacks(
+            ActivityLifecycleHandler(
+                appUpdateFlow,
+                preferenceDataSource,
+                voiceRecognitionServer
+            )
+        )
+
+        FIREBASE_ANALYTICS = FirebaseAnalytics.getInstance(this)
+
+        FIREBASE_ANALYTICS?.logEvent(FirebaseAnalytics.Event.APP_OPEN) {
+            param(FirebaseAnalytics.Param.START_DATE, DateUtil.getCurrentDate() ?: "")
+        }
     }
 
     override fun onConfigurationChanged(newConfig: Configuration) {

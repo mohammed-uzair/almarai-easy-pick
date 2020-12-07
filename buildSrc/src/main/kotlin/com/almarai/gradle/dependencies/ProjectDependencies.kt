@@ -1,6 +1,7 @@
 package com.almarai.gradle.dependencies
 
 //region Project Dependencies
+const val Dependencies_Project_Common = ":common"
 const val Dependencies_Project_Alm_Logging = ":alm_logging"
 const val Dependencies_Project_Alm_Ui = ":alm_ui"
 const val Dependencies_Project_Business = ":business"

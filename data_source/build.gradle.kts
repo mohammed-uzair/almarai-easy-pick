@@ -1,16 +1,14 @@
 import com.almarai.gradle.dependencies.*
 
-val kotlin_version: String by extra
-
 plugins {
     id("com.android.library")
     id("my-plugin")
     kotlin("kapt")
-
     id("dagger.hilt.android.plugin")
 }
 
 dependencies {
+    implementation(project(Dependencies_Project_Common))
     implementation(project(Dependencies_Project_Data))
     implementation(project(Dependencies_Project_Business))
 

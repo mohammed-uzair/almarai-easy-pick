@@ -8,7 +8,6 @@ import org.gradle.api.JavaVersion
 import org.gradle.api.Plugin
 import org.gradle.api.Project
 import org.gradle.kotlin.dsl.dependencies
-import org.gradle.kotlin.dsl.invoke
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 import java.io.File
 import java.text.DateFormat
@@ -19,11 +18,11 @@ import kotlin.collections.set
 class MyModulePlugin : Plugin<Project> {
     override fun apply(project: Project) {
         // Apply Required Plugins.
-        project.plugins.apply("kotlin-android")
-        project.plugins.apply("kotlin-android-extensions")
+        project.plugins.apply(Dependencies_Plugin_Kotlin_Android)
+        project.plugins.apply(Dependencies_Plugin_Kotlin_Android_Extensions)
 
         // Configure common android build parameters.
-        val androidExtension = project.extensions.getByName("android")
+        val androidExtension = project.extensions.getByName(Dependencies_Plugin_Android)
         if (androidExtension is BaseExtension) {
             androidExtension.apply {
                 when (this) {
@@ -53,16 +52,17 @@ class MyModulePlugin : Plugin<Project> {
                     }
                 }
 
-                /*variantFilter {
+                variantFilter {
                     buildOutputs.all {
                         //Easy Pick_release_2.0.1_20_Dec_2020_08_10_34.apk
-//                            named("${APP_NAME}_${buildType.name}_${defaultConfig.versionName.trim()}_${getCurrentDateTime()}.apk")
+                        val appName =
+                            "${APP_NAME}_${buildType.name}_${defaultConfig.versionName?.trim()}_${getCurrentDateTime()}.apk"
 
                         if (outputFile.name.contains(".apk")) {
-                            outputFile.renameTo(File("${APP_NAME}_${buildType.name}_${defaultConfig.versionName.trim()}_${getCurrentDateTime()}.apk"))
+                            outputFile.renameTo(File(appName))
                         }
                     }
-                }*/
+                }
 
                 //Build types
                 buildTypes {
@@ -135,4 +135,13 @@ class MyModulePlugin : Plugin<Project> {
             add("testImplementation", Test_J_Unit_4)
         }
     }
+}
+
+private fun getCurrentDateTime(): String? {
+    val dateFormat: DateFormat = SimpleDateFormat(
+        "dd_MMM_yyyy_HH_mm_ss",
+        Locale.ENGLISH
+    )
+    val calendar = Calendar.getInstance(Locale.ENGLISH)
+    return dateFormat.format(calendar.time)
 }

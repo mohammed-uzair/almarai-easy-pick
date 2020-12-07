@@ -4,6 +4,10 @@ import android.content.Context
 import android.content.res.Configuration
 import android.os.Build
 import androidx.preference.PreferenceManager
+import com.almarai.common.machine_learning.translation.OnDeviceTextTranslation
+import com.almarai.common.utils.APP_LOCALE
+import com.almarai.common.utils.APP_SELECTED_LANGUAGE
+import com.almarai.common.utils.AppLanguage
 import com.almarai.easypick.R
 import com.almarai.easypick.extensions.exhaustive
 import com.almarai.machine_learning.Utils
@@ -97,12 +101,14 @@ object LanguageSetup {
             }
         }.exhaustive
 
+        OnDeviceTextTranslation.downloadModel(true)
+
         val locale = Locale(languageCode)
         Locale.setDefault(locale)
         val config = Configuration()
 
         config.setLocale(locale)
-        Utils.APP_LOCALE = locale
+        APP_LOCALE = locale
 
         //Workaround for platform bug on SDK <26(O - Oreo)
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {

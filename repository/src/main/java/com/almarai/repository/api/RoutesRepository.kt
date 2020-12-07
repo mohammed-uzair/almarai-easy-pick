@@ -8,7 +8,7 @@ import kotlinx.coroutines.flow.Flow
 
 interface RoutesRepository {
     suspend fun getAllRoutes(): Flow<List<Route>>
-    suspend fun getAllRoutesStatus(): List<RouteServiceStatus>
+    suspend fun getAllRoutesStatus(): Flow<List<RouteServiceStatus>>
     suspend fun getRouteStatus(routeNumber: Int = 0): RouteAccessibility
     suspend fun updateRouteStatus(routeNumber: Int, status: RouteStatus)
 }

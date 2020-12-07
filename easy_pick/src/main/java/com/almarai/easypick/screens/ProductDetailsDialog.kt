@@ -4,8 +4,6 @@ import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.view.*
-import android.view.inputmethod.EditorInfo
-import android.widget.TextView
 import androidx.appcompat.widget.SearchView
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.DialogFragment
@@ -14,6 +12,7 @@ import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.almarai.business.CratesPieces
+import com.almarai.common.logging.FIREBASE_ANALYTICS
 import com.almarai.data.easy_pick_models.product.Product
 import com.almarai.data.easy_pick_models.product.ProductStatus
 import com.almarai.easypick.R
@@ -23,13 +22,15 @@ import com.almarai.easypick.extensions.hideKeyboard
 import com.almarai.easypick.extensions.positionDialogAtBottom
 import com.almarai.easypick.extensions.showFocus
 import com.almarai.easypick.utils.AlertTones.playTone
+import com.google.firebase.analytics.FirebaseAnalytics
+import com.google.firebase.analytics.ktx.logEvent
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
 class ProductDetailsDialog(private val productsAdapter: ProductsAdapter) : DialogFragment(),
-    View.OnKeyListener{
+    View.OnKeyListener {
     private var indexPos = 0
     private val args: ProductDetailsDialogArgs by navArgs()
     private lateinit var products: List<Product>
@@ -39,9 +40,9 @@ class ProductDetailsDialog(private val productsAdapter: ProductsAdapter) : Dialo
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         dialogProductDetailsBinding =
-                DataBindingUtil.inflate(inflater, R.layout.dialog_product_detail, container, false)
+            DataBindingUtil.inflate(inflater, R.layout.dialog_product_detail, container, false)
         dialogProductDetailsBinding.apply {
             lifecycleOwner = this@ProductDetailsDialog
             dialogProductDetailsBinding.product =
@@ -108,6 +109,11 @@ class ProductDetailsDialog(private val productsAdapter: ProductsAdapter) : Dialo
                 // Hack
                 delay(300)
                 dialogProductDetailsBinding.dialogProductDetailPiecesEditText.selectAll()
+            }
+
+            FIREBASE_ANALYTICS?.logEvent("product_detail_dialog") {
+                param(FirebaseAnalytics.Param.ITEM_ID, products[indexPos].number.toString())
+                param(FirebaseAnalytics.Param.ITEM_NAME, products[indexPos].description)
             }
         } else {
             //The user might have reached the end of the list, dismiss the dialog

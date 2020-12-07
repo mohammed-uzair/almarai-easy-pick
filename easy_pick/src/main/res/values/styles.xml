@@ -120,10 +120,8 @@
     <!--endregion-->
 
     <!--region Alert Dialog Style-->
-
-    <style name="PreferenceThemeNight" parent="@style/Theme.AppCompat.Light.DarkActionBar">
+    <style name="PreferenceThemeNight" parent="@style/PreferenceThemeOverlay">
         <item name="android:background">?colorBackgroundScreenHeader</item>
-        <item name="android:title">?colorBackgroundScreenHeader</item>
     </style>
     <!--endregion-->
 

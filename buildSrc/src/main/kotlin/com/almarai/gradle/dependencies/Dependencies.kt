@@ -15,7 +15,8 @@ const val Dependencies_Plugin_Gradle = "com.android.tools.build:gradle:4.0.1"
 public const val Dependencies_Plugin_Library = "com.android.library"
 const val Dependencies_Plugin_Android = "android"
 const val Dependencies_Plugin_My_Custom = "my-plugin"
-const val Dependencies_Plugin_Android_Extensions = "android-extensions"
+const val Dependencies_Plugin_Kotlin_Android = "kotlin-android"
+const val Dependencies_Plugin_Kotlin_Android_Extensions = "kotlin-android-extensions"
 const val Dependencies_Plugin_Jdk_Library = "stdlib-jdk8"
 
 //Android
@@ -80,10 +81,19 @@ private const val Dependencies_Version_Hilt = "2.28-alpha"
 const val Dependencies_Hilt = "com.google.dagger:hilt-android:$Dependencies_Version_Hilt"
 const val Dependencies_Hilt_Annotation_Processor =
     "com.google.dagger:hilt-android-compiler:$Dependencies_Version_Hilt"
-const val Dependencies_Hilt_Android_ViewModel = "androidx.hilt:hilt-lifecycle-viewmodel:1.0.0-alpha01"
-const val Dependencies_Hilt_Android_Annotation_Processor = "androidx.hilt:hilt-compiler:1.0.0-alpha01"
+const val Dependencies_Hilt_Android_ViewModel =
+    "androidx.hilt:hilt-lifecycle-viewmodel:1.0.0-alpha01"
+const val Dependencies_Hilt_Android_Annotation_Processor =
+    "androidx.hilt:hilt-compiler:1.0.0-alpha01"
 
 //Room
+private const val Dependencies_Version_Room = "2.2.5"
+
+const val Dependencies_Room = "androidx.room:room-runtime:$Dependencies_Version_Room"
+const val Dependencies_Room_Compiler = "androidx.room:room-compiler:$Dependencies_Version_Room"
+
+// optional - Kotlin Extensions and Coroutines support for Room
+const val Dependencies_Room_Testing = "androidx.room:room-ktx:$Dependencies_Version_Room"
 
 
 //Firebase

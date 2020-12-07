@@ -9,7 +9,7 @@ import kotlinx.android.parcel.RawValue
 data class Product(
     val number: Int = 0,
     val description: String = "NA",
-    val descriptionArabic: String = "NA",
+    var translatedDescription: String = description,
     val truckStock: String = "NA",
     val freshLoad: String = "NA",
     var totalStock: String = "NA",

@@ -8,7 +8,9 @@ import android.view.animation.AnimationUtils
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import androidx.navigation.findNavController
+import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
+import com.almarai.common.logging.FIREBASE_ANALYTICS
 import com.almarai.data.easy_pick_models.Result
 import com.almarai.data.easy_pick_models.route.Route
 import com.almarai.data.easy_pick_models.route.RouteAccessibility
@@ -26,6 +28,8 @@ import com.almarai.easypick.utils.alert_dialog.showAlertDialog
 import com.almarai.easypick.utils.progress.hideProgress
 import com.almarai.easypick.utils.progress.showProgress
 import com.almarai.easypick.view_models.RouteSelectionViewModel
+import com.google.firebase.analytics.FirebaseAnalytics
+import com.google.firebase.analytics.ktx.logEvent
 
 private var selectedItemPosition = 0
 
@@ -47,9 +51,13 @@ class RoutesAdapter : RecyclerView.Adapter<RoutesAdapter.ViewHolder>() {
         viewModel: RouteSelectionViewModel
     ) {
         selectedItemPosition = 0
-        this.routes = routes
         this.fragment = fragment
         this.viewModel = viewModel
+
+        val diffCallback = ListDifferentiators(this.routes, routes)
+        val diffResult = DiffUtil.calculateDiff(diffCallback)
+        this.routes = routes
+        diffResult.dispatchUpdatesTo(this)
     }
 
     inner class ViewHolder(private val routeBinding: ItemRouteBinding) :
@@ -238,6 +246,10 @@ class RoutesAdapter : RecyclerView.Adapter<RoutesAdapter.ViewHolder>() {
                 selectedRoute
             )
         return try {
+            FIREBASE_ANALYTICS?.logEvent("route_selected") {
+                param("route_number", selectedRoute.toString())
+            }
+
             routeBinding.root.findNavController()
                 .navigate(action)
         } catch (exception: IllegalArgumentException) {
@@ -261,5 +273,22 @@ class RoutesAdapter : RecyclerView.Adapter<RoutesAdapter.ViewHolder>() {
                 false
             }
         }
+    }
+
+    /**
+     * This diff callback informs the Adapter how to compute list differences when new lists arrive.
+     */
+    internal class ListDifferentiators(
+        private val oldList: List<Route>,
+        private val newList: List<Route>
+    ) : DiffUtil.Callback() {
+        override fun getOldListSize() = oldList.size
+        override fun getNewListSize() = newList.size
+
+        override fun areItemsTheSame(oldItemPosition: Int, newItemPosition: Int) =
+            oldList[oldItemPosition].number == newList[newItemPosition].number
+
+        override fun areContentsTheSame(oldItemPosition: Int, newItemPosition: Int) =
+            oldList[oldItemPosition] == newList[newItemPosition]
     }
 }

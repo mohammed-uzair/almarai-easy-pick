@@ -37,6 +37,8 @@ import com.almarai.easypick.utils.FilterFunnel
 import com.almarai.easypick.utils.FilterScreenSource
 import com.almarai.easypick.utils.alert_dialog.showAlertDialog
 import com.almarai.easypick.view_models.RouteSelectionViewModel
+import com.almarai.easypick.voice.use_cases.NavigateScreen
+import com.almarai.easypick.voice.use_cases.Screen
 import com.almarai.machine_learning.LiveBarcodeScanningActivity
 import com.almarai.machine_learning.LiveBarcodeScanningActivity.Companion.BARCODE_SCANNER_ACTIVITY_RESULT
 import com.almarai.machine_learning.LiveBarcodeScanningActivity.Companion.EXTRA_SCANNED_BARCODE
@@ -59,9 +61,7 @@ class RouteSelectionScreen : Fragment(), SearchView.OnQueryTextListener {
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
-        return bindUIScreen(inflater, container)
-    }
+    ): View = bindUIScreen(inflater, container)
 
     private fun bindUIScreen(
         inflater: LayoutInflater,
@@ -132,6 +132,8 @@ class RouteSelectionScreen : Fragment(), SearchView.OnQueryTextListener {
         //Set screen title
         activity?.title = getString(R.string.title_route_selection)
 
+        NavigateScreen.CURRENT_SCREEN = Screen.RouteSelectionScreen
+
         setHasOptionsMenu(true)
 
         setHasSearchView(true)
@@ -144,24 +146,6 @@ class RouteSelectionScreen : Fragment(), SearchView.OnQueryTextListener {
         setRecyclerView()
 
         handleOtherScreenResults()
-
-        setRoutesRefreshListener()
-
-        //Get the updated route status
-        CoroutineScope(Dispatchers.IO).launch {
-            delay(300)
-            routesViewModel.getAllRouteStatus()
-        }
-    }
-
-    private fun setRoutesRefreshListener() {
-        screenRouteSelectionBinding.screenRouteSelectionRefresh.setOnRefreshListener {
-            //Get only the routes status from data source
-            routesViewModel.getAllRouteStatus()
-
-            //Update the adapter for the data change
-            screenRouteSelectionBinding.screenRouteSelectionRefresh.isRefreshing = false
-        }
     }
 
     private fun handleOtherScreenResults() {
@@ -232,11 +216,9 @@ class RouteSelectionScreen : Fragment(), SearchView.OnQueryTextListener {
         routesViewModel.routesServiceStatus.observe(viewLifecycleOwner, Observer {
             it?.let { result ->
                 when (result) {
-                    is Result.Fetching -> screenRouteSelectionBinding.screenRouteSelectionRefresh.isRefreshing =
-                        true
                     is Result.Success -> updateRoutesStatuses(result.data)
-                    is Result.Error -> screenRouteSelectionBinding.screenRouteSelectionRefresh.isRefreshing =
-                        false
+                    else -> {
+                    }
                 }.exhaustive
             }
         })
@@ -317,20 +299,22 @@ class RouteSelectionScreen : Fragment(), SearchView.OnQueryTextListener {
     private fun updateRoutesStatuses(list: List<RouteServiceStatus>) {
         if (list.isNotEmpty()) {
             //Update all routes status
-            list.forEach { route ->
-                try {
-                    val result = routes.first { it.number == route.number }
-                    result.serviceStatus = route.status
-                } catch (e: Exception) {
-                    val e = "exception"
+            list.forEach { updatedRouteStatus ->
+                //val route = routes.first { it.number == updatedRouteStatus.number }
+                for ((index, route) in routes.withIndex()) {
+                    if (route.number == updatedRouteStatus.number
+                        && route.serviceStatus != updatedRouteStatus.status
+                    ) {
+                        route.serviceStatus = updatedRouteStatus.status
+
+                        //Notify the adapter for the route status change
+                        adapter.notifyItemChanged(index)
+
+                        break
+                    }
                 }
             }
-
-            //Notify the adapter
-            adapter.notifyDataSetChanged()
         }
-
-        screenRouteSelectionBinding.screenRouteSelectionRefresh.isRefreshing = false
     }
 
     private fun showDataUi(list: List<Route>) {
@@ -345,11 +329,13 @@ class RouteSelectionScreen : Fragment(), SearchView.OnQueryTextListener {
 
         routes = list
         adapter.setData(list, this, routesViewModel)
-        adapter.notifyDataSetChanged()
+        //adapter.notifyDataSetChanged()
 
         routesViewModel.setRouteServiceDetails(list)
 
         setListFocus()
+
+        routesViewModel.getAllRouteStatus()
     }
 
     private fun animateUI() {

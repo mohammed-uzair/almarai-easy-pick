@@ -14,7 +14,6 @@ import androidx.lifecycle.Observer
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
 import com.almarai.business.Utils.AppDateTimeFormat
-import com.almarai.business.Utils.DateUtil
 import com.almarai.business.Utils.Util.STATISTICS_CONSTRAINT_BEGINNING_DATE
 import com.almarai.business.Utils.Util.STATISTICS_CONSTRAINT_INITIAL_DAYS_PERIOD
 import com.almarai.data.easy_pick_models.Result
@@ -36,6 +35,7 @@ import com.github.mikephil.charting.formatter.ValueFormatter
 import com.github.mikephil.charting.interfaces.datasets.ILineDataSet
 import com.google.android.material.datepicker.*
 import androidx.fragment.app.viewModels
+import com.almarai.common.date_time.DateUtil
 import dagger.hilt.android.AndroidEntryPoint
 import java.text.NumberFormat
 import java.util.*

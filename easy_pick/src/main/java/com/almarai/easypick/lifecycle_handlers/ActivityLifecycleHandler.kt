@@ -1,37 +1,52 @@
 package com.almarai.easypick.lifecycle_handlers
 
 import android.app.Activity
-import androidx.appcompat.app.AppCompatActivity
 import android.app.Application
 import android.content.Context
 import android.media.AudioManager
 import android.os.Bundle
 import android.util.Log
+import androidx.appcompat.app.AppCompatActivity
+import com.almarai.alm_logging.database.params.AuditParams
+import com.almarai.alm_logging.util.AlmLogger
+import com.almarai.common.date_time.DateUtil.getCurrentDate
+import com.almarai.common.logging.FIREBASE_ANALYTICS
+import com.almarai.common.machine_learning.translation.OnDeviceTextTranslation
+import com.almarai.easypick.R
 import com.almarai.easypick.common.AppUpdateFlow
+import com.almarai.easypick.data_source.interfaces.SharedPreferenceDataSource
 import com.almarai.easypick.extensions.IS_HARDWARE_KEYBOARD_AVAILABLE
 import com.almarai.easypick.extensions.isHardwareKeyboardAvailable
 import com.almarai.easypick.utils.AlertTones
+import com.almarai.easypick.utils.LanguageSetup
 import com.almarai.easypick.utils.ThemeSetup
+import com.almarai.easypick.voice.VoiceRecognitionServer
 import com.google.firebase.analytics.FirebaseAnalytics
+import com.google.firebase.analytics.ktx.logEvent
 import javax.inject.Inject
 
-class ActivityLifecycleHandler @Inject constructor(private val appUpdateFlow: AppUpdateFlow) :
+class ActivityLifecycleHandler @Inject constructor(
+    private val appUpdateFlow: AppUpdateFlow,
+    private val preferenceDataSource: SharedPreferenceDataSource,
+    private val voiceRecognitionServer: VoiceRecognitionServer
+) :
     Application.ActivityLifecycleCallbacks {
-    private lateinit var mFirebaseAnalytics: FirebaseAnalytics
-
     override fun onActivityCreated(activity: Activity, p1: Bundle?) {
-        Log.d(TAG, "onActivityCreated at ${activity.localClassName}")
+        AlmLogger.startLogging(activity.applicationContext)
+        AlmLogger.saveLog(
+            AuditParams.LogLevel.Deep,
+            AuditParams.LogType.LOG_INFO,
+            activity.localClassName,
+            "onActivityCreated at ${activity.localClassName}"
+        )
 
         ThemeSetup.setAppTheme(activity)
 
         IS_HARDWARE_KEYBOARD_AVAILABLE = isHardwareKeyboardAvailable(activity)
 
-        // Obtain the FirebaseAnalytics instance.
-        mFirebaseAnalytics = FirebaseAnalytics.getInstance(activity)
-
-        val bundle = Bundle()
-        bundle.putString("screen_name", "Main Activity")
-        mFirebaseAnalytics.logEvent("screen_opened", bundle)
+        FIREBASE_ANALYTICS?.logEvent("activity_started") {
+            param(FirebaseAnalytics.Param.START_DATE, getCurrentDate() ?: "")
+        }
 
         appUpdateFlow.initiate(activity as AppCompatActivity)
     }
@@ -44,14 +59,24 @@ class ActivityLifecycleHandler @Inject constructor(private val appUpdateFlow: Ap
 
     override fun onActivityResumed(activity: Activity) {
         Log.d(TAG, "onActivityResumed at ${activity.localClassName}")
+
+        //Listen for voice commands, if the flag is enabled
+        if (preferenceDataSource.getSharedPreferenceBoolean(activity.getString(R.string.app_voice_commands)))
+            voiceRecognitionServer.startVoiceRecognition(activity)
     }
 
     override fun onActivityPaused(activity: Activity) {
         Log.d(TAG, "onActivityPaused at ${activity.localClassName}")
+
+        //Stop listening voice commands
+        voiceRecognitionServer.stopVoiceRecognition()
     }
 
     override fun onActivityStopped(activity: Activity) {
         Log.d(TAG, "onActivityStopped at ${activity.localClassName}")
+
+        //CLose the ML Translator
+        OnDeviceTextTranslation.closeTranslator()
     }
 
     override fun onActivityDestroyed(activity: Activity) {
