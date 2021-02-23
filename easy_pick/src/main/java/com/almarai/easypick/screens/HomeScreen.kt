@@ -13,6 +13,7 @@ import androidx.navigation.Navigation
 import com.almarai.easypick.BuildConfig
 import com.almarai.easypick.R
 import com.almarai.easypick.databinding.ScreenHomeBinding
+import com.almarai.easypick.utils.Util
 import com.almarai.easypick.view_models.HomeViewModel
 import com.almarai.easypick.voice.use_cases.NavigateScreen
 import com.almarai.easypick.voice.use_cases.Screen
@@ -88,12 +89,7 @@ class HomeScreen(private val applicationRepository: ApplicationRepository) : Fra
             R.id.home_screen_data_configuration_button -> navController.navigate(R.id.action_homeScreen_to_dataConfigurationScreen)
             R.id.home_screen_settings_button -> navController.navigate(R.id.action_homeScreen_to_settingsScreen)
             R.id.home_screen_statistics_button -> navController.navigate(R.id.action_homeScreen_to_statisticsScreen)
-//            R.id.home_screen_exit_app_button -> navController.navigate(R.id.action_homeScreen_to_testScreen)
-            R.id.home_screen_exit_app_button -> {
-                //Deliberately crash the app
-                val a = 0
-                2 / a
-            }
+            R.id.home_screen_exit_app_button -> Util.exitApplication(requireActivity())
         }
     }
 

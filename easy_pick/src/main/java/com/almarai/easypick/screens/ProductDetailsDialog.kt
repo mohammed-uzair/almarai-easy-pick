@@ -209,7 +209,7 @@ class ProductDetailsDialog(private val productsAdapter: ProductsAdapter) : Dialo
             product.upc
         )
 
-        if (product.productStatus == ProductStatus.NotPicked) {
+        if (product.status == ProductStatus.NotPicked) {
             //Update the items picked count in the products main list screen
             val itemsPicked: Int = productsAdapter.productViewModel.itemsPicked.value ?: 0
             productsAdapter.productViewModel.itemsPicked.value = itemsPicked + 1
@@ -220,7 +220,7 @@ class ProductDetailsDialog(private val productsAdapter: ProductsAdapter) : Dialo
             editedCrates = cratesPieces.crates
             editedPieces = cratesPieces.pieces
             totalStock = "${cratesPieces.crates}/${cratesPieces.pieces}"
-            productStatus = ProductStatus.Picked
+            status = ProductStatus.Picked
         }
 
         //Notify the adapter

@@ -21,6 +21,7 @@ dependencies {
 
     implementation(Dependencies_Retrofit)
     implementation(Dependencies_Retrofit_Gson_Converter)
+    implementation(Dependencies_Retrofit_Logging)
 
     implementation(Dependencies_Firestore)
     implementation(Dependencies_Firebase_Storage)

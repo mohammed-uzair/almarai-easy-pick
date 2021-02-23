@@ -39,6 +39,6 @@ class WebRoutesDataSourceImplementation @Inject constructor(private val webServi
     override suspend fun getRouteStatus(routeNumber: Int) =
         webService.routesApi.getRouteStatus(routeNumber)
 
-    override suspend fun updateRouteStatus(routeNumber: Int, status: RouteStatus) =
-        webService.routesApi.updateRouteStatus(routeNumber, status)
+    override suspend fun updateRouteStatus(routeNumber: Int, statusCategory: RouteStatus) =
+        webService.routesApi.updateRouteStatus(routeNumber, statusCategory)
 }

@@ -6,6 +6,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.almarai.data.easy_pick_models.NetworkConfiguration
+import com.almarai.easypick.utils.Util
 import com.almarai.repository.api.ApplicationRepository
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -34,7 +35,7 @@ class NetworkConfigurationViewModel @ViewModelInject constructor(private val app
     fun checkAppDataConfigurations() = applicationRepository.checkAppDataIsConfigured()
 
     fun saveNetworkConfiguration(): Boolean {
-        if (validateData()) {
+        if (Util.isValidIPAddress(serverIp.value ?: "")) {
             applicationRepository.setNetworkConfiguration(
                 NetworkConfiguration(
                     serverIp.value,
@@ -46,14 +47,5 @@ class NetworkConfigurationViewModel @ViewModelInject constructor(private val app
         }
 
         return false
-    }
-
-    private fun validateData(): Boolean {
-        validateIpAddress()
-        return true
-    }
-
-    private fun validateIpAddress() {
-
     }
 }

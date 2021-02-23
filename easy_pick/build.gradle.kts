@@ -48,9 +48,9 @@ dependencies {
     implementation(Dependencies_Hilt_Android_ViewModel)
     kapt(Dependencies_Hilt_Annotation_Processor)
     kapt(Dependencies_Hilt_Android_Annotation_Processor)
-
-    implementation(Dependencies_Retrofit)
+    
     implementation(Dependencies_Retrofit_Gson_Converter)
+
     implementation(Dependencies_Lifecycle_Runtime)
     implementation(Dependencies_Lifecycle_Common)
     implementation(Dependencies_Coroutines_Core)

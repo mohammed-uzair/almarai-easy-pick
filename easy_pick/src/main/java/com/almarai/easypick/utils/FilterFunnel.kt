@@ -109,7 +109,7 @@ class FilterFunnel(
         when {
             filters.sortWithXNumber -> if (filters.sortOrderAscending) filteredRoutes.sortBy { it.number } else filteredRoutes.sortByDescending { it.number }
             filters.sortWithXDescription -> if (filters.sortOrderAscending) filteredRoutes.sortBy { it.description } else filteredRoutes.sortByDescending { it.description }
-            filters.statusServed -> if (filters.sortOrderAscending) filteredRoutes.sortBy { it.serviceStatus == RouteStatus.NotServed } else filteredRoutes.sortBy { it.serviceStatus == RouteStatus.Served }
+            filters.statusServed -> if (filters.sortOrderAscending) filteredRoutes.sortBy { it.status == RouteStatus.NotServed } else filteredRoutes.sortBy { it.status == RouteStatus.Served }
         }
         //endregion
 
@@ -191,7 +191,7 @@ class FilterFunnel(
             when {
                 filters.sortWithXNumber -> if (filters.sortOrderAscending) filteredProducts.sortBy { product.number } else filteredProducts.sortByDescending { product.number }
                 filters.sortWithXDescription -> if (filters.sortOrderAscending) filteredProducts.sortBy { product.description } else filteredProducts.sortByDescending { product.description }
-                filters.statusServed -> if (filters.sortOrderAscending) filteredProducts.sortBy { product.productStatus == ProductStatus.NotPicked } else filteredProducts.sortBy { product.productStatus == ProductStatus.Picked }
+                filters.statusServed -> if (filters.sortOrderAscending) filteredProducts.sortBy { product.status == ProductStatus.NotPicked } else filteredProducts.sortBy { product.status == ProductStatus.Picked }
             }
             //endregion
         }

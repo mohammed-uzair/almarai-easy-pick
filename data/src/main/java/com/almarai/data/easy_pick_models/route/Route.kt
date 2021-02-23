@@ -1,14 +1,22 @@
 package com.almarai.data.easy_pick_models.route
 
-import android.os.Parcelable
 import com.almarai.data.easy_pick_models.GroupType
-import kotlinx.android.parcel.Parcelize
+import com.almarai.data.easy_pick_models.util.exhaustive
 
-@Parcelize
-data class Route(
+class Route(
     var number: Int = 0,
     val description: String = "NA",
     var translatedDescription: String = description,
     val group: List<GroupType> = listOf(),
-    var serviceStatus: RouteStatus = RouteStatus.NotServed
-) : Parcelable
+    private val routeStatus: com.almarai.data.easy_pick_models.web.enum.RouteStatus = com.almarai.data.easy_pick_models.web.enum.RouteStatus.NotServed
+) {
+    var status: RouteStatus = RouteStatus.NotServed
+        get() {
+            return when (routeStatus.name) {
+                com.almarai.data.easy_pick_models.web.enum.RouteStatus.Served.name -> RouteStatus.Served
+                com.almarai.data.easy_pick_models.web.enum.RouteStatus.NotServed.name -> RouteStatus.NotServed
+                com.almarai.data.easy_pick_models.web.enum.RouteStatus.PartiallyServed.name -> RouteStatus.PartialServed
+                else -> RouteStatus.NotServed
+            }.exhaustive
+        }
+}

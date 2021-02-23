@@ -4,8 +4,8 @@ import android.content.res.ColorStateList
 import android.widget.ImageView
 import androidx.core.content.ContextCompat
 import androidx.databinding.BindingAdapter
-import com.almarai.data.easy_pick_models.route.RouteStatus
 import com.almarai.data.easy_pick_models.product.ProductStatus
+import com.almarai.data.easy_pick_models.route.RouteStatus
 import com.almarai.easypick.R
 import com.almarai.easypick.extensions.exhaustive
 
@@ -21,6 +21,9 @@ fun ImageView.bindRouteStatus(status: RouteStatus) {
         RouteStatus.Served -> ColorStateList.valueOf(
             ContextCompat.getColor(context, R.color.red)
         )
+        RouteStatus.PartialServed -> ColorStateList.valueOf(
+            ContextCompat.getColor(context, R.color.baby_pink)
+        )
     }.exhaustive
 }
 
@@ -28,10 +31,13 @@ fun ImageView.bindRouteStatus(status: RouteStatus) {
 fun ImageView.bindProductStatus(status: ProductStatus) {
     imageTintList = when (status) {
         is ProductStatus.Picked -> ColorStateList.valueOf(
-            ContextCompat.getColor(context, R.color.blue)
+            ContextCompat.getColor(context, R.color.red)
         )
         is ProductStatus.NotPicked -> ColorStateList.valueOf(
             ContextCompat.getColor(context, R.color.green)
+        )
+        is ProductStatus.PartiallyPicked -> ColorStateList.valueOf(
+            ContextCompat.getColor(context, R.color.baby_pink)
         )
     }.exhaustive
 }

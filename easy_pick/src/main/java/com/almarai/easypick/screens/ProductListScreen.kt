@@ -196,7 +196,6 @@ class ProductListScreen(val adapter: ProductsAdapter) : Fragment(), SearchView.O
             R.id.menu_product_action_save -> {
                 disableSaveButton(true)
 
-
                 //Save the data in the data source
                 productListViewModel.updateRouteData(args.SelectedRouteNumber, products)
 
@@ -219,7 +218,7 @@ class ProductListScreen(val adapter: ProductsAdapter) : Fragment(), SearchView.O
     }
 
     private fun observeRouteUpdated() {
-        productListViewModel.routeDataUpdated.observe(viewLifecycleOwner, Observer {
+        productListViewModel.routeDataUpdatedCategory.observe(viewLifecycleOwner, Observer {
             it?.let { result ->
                 when (result) {
                     is Result.Fetching -> {

@@ -28,7 +28,6 @@ import com.almarai.easypick.utils.alert_dialog.showAlertDialog
 import com.almarai.easypick.utils.progress.hideProgress
 import com.almarai.easypick.utils.progress.showProgress
 import com.almarai.easypick.view_models.RouteSelectionViewModel
-import com.google.firebase.analytics.FirebaseAnalytics
 import com.google.firebase.analytics.ktx.logEvent
 
 private var selectedItemPosition = 0
@@ -141,7 +140,7 @@ class RoutesAdapter : RecyclerView.Adapter<RoutesAdapter.ViewHolder>() {
         holder.bindData(routes[holder.layoutPosition])
 
     private fun checkValidRoute() {
-        if (isRouteNotServiced(binding.route?.serviceStatus)) {
+        if (isRouteNotServiced(binding.route?.status)) {
             //                val extras = FragmentNavigatorExtras(view to "shared_element_container")
 
             fragment.showAlertDialog(
@@ -250,6 +249,9 @@ class RoutesAdapter : RecyclerView.Adapter<RoutesAdapter.ViewHolder>() {
                 param("route_number", selectedRoute.toString())
             }
 
+            //Update this route status
+            viewModel.updateRouteStatus(selectedRoute)
+
             routeBinding.root.findNavController()
                 .navigate(action)
         } catch (exception: IllegalArgumentException) {
@@ -262,7 +264,7 @@ class RoutesAdapter : RecyclerView.Adapter<RoutesAdapter.ViewHolder>() {
         if (routeStatus == null) return false
 
         return when (routeStatus) {
-            RouteStatus.NotServed, RouteStatus.Serving -> true
+            RouteStatus.NotServed, RouteStatus.Serving, RouteStatus.PartialServed -> true
             RouteStatus.Served -> {
                 fragment.showAlertDialog(
                     R.string.alert_title_route_served,

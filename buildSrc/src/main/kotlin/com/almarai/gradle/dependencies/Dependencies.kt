@@ -74,6 +74,7 @@ private const val Dependencies_Version_Retrofit = "2.9.0"
 const val Dependencies_Retrofit = "com.squareup.retrofit2:retrofit:$Dependencies_Version_Retrofit"
 const val Dependencies_Retrofit_Gson_Converter =
     "com.squareup.retrofit2:converter-gson:$Dependencies_Version_Retrofit"
+const val Dependencies_Retrofit_Logging = "com.squareup.okhttp3:logging-interceptor:4.2.1"
 
 //DI - Hilt
 private const val Dependencies_Version_Hilt = "2.28-alpha"

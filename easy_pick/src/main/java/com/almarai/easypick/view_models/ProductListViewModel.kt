@@ -22,7 +22,7 @@ class ProductListViewModel @ViewModelInject constructor(private val repository: 
     private val _products = MutableLiveData<Result<List<Product>>>()
     private val _routeDataUpdated = MutableLiveData<Result<RouteStatus>>()
     internal val products: LiveData<Result<List<Product>>> = _products
-    internal val routeDataUpdated: LiveData<Result<RouteStatus>> = _routeDataUpdated
+    internal val routeDataUpdatedCategory: LiveData<Result<RouteStatus>> = _routeDataUpdated
     internal var filtersModel: Filters? = null
     val totalItems = MutableLiveData(0)
     val itemsPicked = MutableLiveData(0)
@@ -42,7 +42,7 @@ class ProductListViewModel @ViewModelInject constructor(private val repository: 
     }
 
     fun setRouteServiceDetails(list: List<Product>) {
-        val pickedItems = list.count { it.productStatus == ProductStatus.Picked }
+        val pickedItems = list.count { it.status == ProductStatus.Picked }
         val itemDetails = ItemsDetail(pickedItems, list.size)
 
         totalItems.value = itemDetails.totalItems

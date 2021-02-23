@@ -15,7 +15,6 @@ class SearchView(context: Context, attrs: AttributeSet?) : FrameLayout(context, 
     var onSpeechToTextClickListener: OnSpeechToTextClickListener? = null
 
     constructor(context: Context) : this(context, null)
-    constructor(context: Context, attrs: AttributeSet?, defStyleAttr: Int?) : this(context, attrs)
 
     init {
         LayoutInflater.from(context).inflate(R.layout.view_search, this, true)

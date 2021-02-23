@@ -17,6 +17,6 @@ class RoutesRepositoryImplementation @Inject constructor(
     override suspend fun getRouteStatus(routeNumber: Int) =
         routesDataSource.getRouteStatus(routeNumber)
 
-    override suspend fun updateRouteStatus(routeNumber: Int, status: RouteStatus) =
-        routesDataSource.updateRouteStatus(routeNumber, status)
+    override suspend fun updateRouteStatus(routeNumber: Int, statusCategory: RouteStatus) =
+        routesDataSource.updateRouteStatus(routeNumber, statusCategory)
 }

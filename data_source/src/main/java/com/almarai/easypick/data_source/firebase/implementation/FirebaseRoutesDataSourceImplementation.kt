@@ -72,7 +72,7 @@ class FirebaseRoutesDataSourceImplementation @Inject constructor(
         return RouteAccessibility(routeNumber, RouteStatus.NotServed, true)
     }
 
-    override suspend fun updateRouteStatus(routeNumber: Int, status: RouteStatus) {
+    override suspend fun updateRouteStatus(routeNumber: Int, statusCategory: RouteStatus) {
 
     }
 }

@@ -1,7 +1,6 @@
 package com.almarai.easypick.data_source.web.api
 
 import com.almarai.data.easy_pick_models.product.Product
-import com.almarai.data.easy_pick_models.product.Products
 import com.almarai.data.easy_pick_models.route.RouteStatus
 import retrofit2.http.Body
 import retrofit2.http.GET
@@ -17,7 +16,7 @@ interface ProductsApi {
     @POST("updateRouteData")
     suspend fun updateRouteData(
         @Query("routeNumber") routeNumber: Int,
-        @Body products: Products
+        @Body products: List<Product>
     ): RouteStatus
 
     @POST("discardChanges")

@@ -1,7 +1,8 @@
 package com.almarai.data.easy_pick_models.route
 
-enum class RouteStatus {
-    NotServed,
-    Serving,
-    Served
+sealed class RouteStatus {
+    object NotServed : RouteStatus()
+    object Serving : RouteStatus()
+    object Served : RouteStatus()
+    object PartialServed : RouteStatus()
 }

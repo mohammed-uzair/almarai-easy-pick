@@ -85,7 +85,6 @@ class CustomEditText : AppCompatEditText {
 
             // this works for left since container shares 0,0 origin with bounds
             if (drawableLeft != null) {
-                bounds = null
                 bounds = drawableLeft!!.bounds
                 var x: Int
                 var y: Int

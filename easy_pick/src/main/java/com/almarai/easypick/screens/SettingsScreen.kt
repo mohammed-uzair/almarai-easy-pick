@@ -16,6 +16,7 @@ import com.almarai.easypick.voice.use_cases.NavigateScreen
 import com.almarai.easypick.voice.use_cases.Screen
 import kotlinx.coroutines.cancel
 import kotlinx.coroutines.launch
+import java.util.*
 
 class SettingsScreen(private val appUpdateFlow: AppUpdateFlow) : PreferenceFragmentCompat(),
     Preference.OnPreferenceChangeListener {

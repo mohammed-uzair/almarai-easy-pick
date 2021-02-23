@@ -2,7 +2,6 @@ package com.almarai.easypick.data_source.web.implementation
 
 import com.almarai.common.machine_learning.translation.OnDeviceTextTranslation
 import com.almarai.data.easy_pick_models.product.Product
-import com.almarai.data.easy_pick_models.product.Products
 import com.almarai.easypick.data_source.interfaces.ProductsDataSource
 import com.almarai.easypick.data_source.web.WebService
 import kotlinx.coroutines.flow.*
@@ -25,7 +24,7 @@ class WebProductsDataSourceImplementation @Inject constructor(private val webSer
     }
 
     override suspend fun updateRouteData(routeNumber: Int, products: List<Product>) =
-        webService.productsApi.updateRouteData(routeNumber, Products(products))
+        webService.productsApi.updateRouteData(routeNumber, products)
 
     override suspend fun discardAllChanges(routeNumber: Int) {
         webService.productsApi.discardAllChanges(routeNumber)

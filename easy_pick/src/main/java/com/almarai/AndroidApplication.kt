@@ -41,7 +41,7 @@ class AndroidApplication : Application() {
         FIREBASE_ANALYTICS = FirebaseAnalytics.getInstance(this)
 
         FIREBASE_ANALYTICS?.logEvent(FirebaseAnalytics.Event.APP_OPEN) {
-            param(FirebaseAnalytics.Param.START_DATE, DateUtil.getCurrentDate() ?: "")
+            param(FirebaseAnalytics.Param.START_DATE, DateUtil.getCurrentDate())
         }
     }
 

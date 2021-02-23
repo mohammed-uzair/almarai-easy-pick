@@ -12,6 +12,9 @@ import androidx.navigation.NavController
 import androidx.navigation.Navigation
 import com.almarai.easypick.R
 import com.almarai.easypick.databinding.ScreenNetworkConfigurationBinding
+import com.almarai.easypick.utils.RegexMaskTextWatcher
+import com.almarai.easypick.utils.alert_dialog.showAlertDialog
+import com.almarai.easypick.utils.IP_ADDRESS_REGEX
 import com.almarai.easypick.view_models.NetworkConfigurationViewModel
 import com.almarai.easypick.voice.use_cases.NavigateScreen
 import com.almarai.easypick.voice.use_cases.Screen
@@ -28,7 +31,7 @@ class NetworkConfigurationScreen : Fragment() {
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         screenNetworkConfigurationBinding =
             DataBindingUtil.inflate(
                 inflater,
@@ -60,15 +63,32 @@ class NetworkConfigurationScreen : Fragment() {
         animateUI()
 
         screenNetworkConfigurationBinding.screenNetworkConfigSaveButton.setOnClickListener {
-            if (viewModel.saveNetworkConfiguration()) {
-                when (viewModel.checkAppDataConfigurations()) {
-                    AppDataConfiguration.DataConfiguration ->
-                        navController.navigate(R.id.action_networkConfigurationScreen_to_dataConfigurationScreen)
-                    AppDataConfiguration.Home ->
-                        navController.navigate(R.id.action_networkConfigurationScreen_to_homeScreen)
+            if (validateNotEmptyValues()) {
+                if (viewModel.saveNetworkConfiguration()) {
+                    when (viewModel.checkAppDataConfigurations()) {
+                        AppDataConfiguration.DataConfiguration ->
+                            navController.navigate(R.id.action_networkConfigurationScreen_to_dataConfigurationScreen)
+                        AppDataConfiguration.Home ->
+                            navController.navigate(R.id.action_networkConfigurationScreen_to_homeScreen)
+                    }
+                }else{
+                    showAlertDialog(alertMessage = R.string.alert_invalid_ip_format)
                 }
             }
         }
+
+//        screenNetworkConfigurationBinding.screenNetworkConfigServerIpEditText.addTextChangedListener(RegexMaskTextWatcher(IP_ADDRESS_REGEX))
+    }
+
+    private fun validateNotEmptyValues(): Boolean {
+        val serverIp = viewModel.serverIp.value ?: ""
+        val serverPort = viewModel.serverPort.value ?: ""
+
+        if (serverIp.isBlank() || serverPort.isBlank()){
+            showAlertDialog(alertMessage = R.string.alert_ip_port_empty)
+            return false
+        }
+        return true
     }
 
     private fun animateUI() {

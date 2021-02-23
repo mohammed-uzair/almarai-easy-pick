@@ -106,7 +106,7 @@ class RouteSelectionScreen : Fragment(), SearchView.OnQueryTextListener {
                     //If the above is a valid route number, start serving it
                     try {
                         val route = routes.first { it.number == routeNumber.toInt() }
-                        if (adapter.isRouteNotServiced(route.serviceStatus)) {
+                        if (adapter.isRouteNotServiced(route.status)) {
                             adapter.processSelectedRoute(route.number)
                         }
                     } catch (exception: NoSuchElementException) {
@@ -303,9 +303,9 @@ class RouteSelectionScreen : Fragment(), SearchView.OnQueryTextListener {
                 //val route = routes.first { it.number == updatedRouteStatus.number }
                 for ((index, route) in routes.withIndex()) {
                     if (route.number == updatedRouteStatus.number
-                        && route.serviceStatus != updatedRouteStatus.status
+                        && route.status != updatedRouteStatus.statusCategory
                     ) {
-                        route.serviceStatus = updatedRouteStatus.status
+                        route.status = updatedRouteStatus.statusCategory
 
                         //Notify the adapter for the route status change
                         adapter.notifyItemChanged(index)

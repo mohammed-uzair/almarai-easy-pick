@@ -24,6 +24,6 @@ interface RoutesApi {
     @POST("updateRouteStatus")
     suspend fun updateRouteStatus(
         @Query("routeNumber") routeNumber: Int,
-        @Body status: RouteStatus
+        @Body statusCategory: RouteStatus
     )
 }

@@ -87,48 +87,8 @@
             android:src="@drawable/ic_status"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:routeStatus="@{route.serviceStatus}"
-            tools:src="@drawable/ic_status" />
+            app:routeStatus="@{route.status}" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
-
-    <!--<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"-->
-    <!--    xmlns:tools="http://schemas.android.com/tools"-->
-    <!--    android:id="@+id/item_route_root"-->
-    <!--    android:layout_width="match_parent"-->
-    <!--    android:layout_height="wrap_content"-->
-    <!--    android:background="?attr/colorListItemBackground"-->
-    <!--    android:orientation="horizontal"-->
-    <!--    android:weightSum="6">-->
-
-    <!--    <ImageView-->
-    <!--        android:id="@+id/item_route_status_image"-->
-    <!--        style="@style/AlmGridItemsTextView"-->
-    <!--        android:layout_width="0dp"-->
-    <!--        android:layout_height="match_parent"-->
-    <!--        android:layout_weight="1"-->
-    <!--        android:contentDescription="@string/image_description_status_route"-->
-    <!--        android:src="@drawable/ic_status"-->
-    <!--        tools:text="TC" />-->
-
-    <!--    <TextView-->
-    <!--        android:id="@+id/item_route_number_text"-->
-    <!--        style="@style/AlmGridItemsTextView"-->
-    <!--        android:layout_width="0dp"-->
-    <!--        android:layout_height="match_parent"-->
-    <!--        android:layout_weight="2"-->
-    <!--        android:gravity="center"-->
-    <!--        tools:text="123456" />-->
-
-    <!--    <TextView-->
-    <!--        android:id="@+id/item_route_description_text"-->
-    <!--        style="@style/AlmGridItemsTextView"-->
-    <!--        android:layout_width="0dp"-->
-    <!--        android:layout_height="match_parent"-->
-    <!--        android:layout_weight="3"-->
-    <!--        android:gravity="center|start"-->
-    <!--        tools:text="Customer Name" />-->
-
-    <!--</LinearLayout>-->
 
 </layout>

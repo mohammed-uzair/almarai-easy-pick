@@ -5,7 +5,8 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.almarai.common.machine_learning.translation.OnDeviceTextTranslation.translateText
+import com.almarai.alm_logging.database.params.AuditParams
+import com.almarai.alm_logging.util.AlmLogger
 import com.almarai.data.easy_pick_models.Result
 import com.almarai.data.easy_pick_models.filter.Filters
 import com.almarai.data.easy_pick_models.route.Route
@@ -14,6 +15,7 @@ import com.almarai.data.easy_pick_models.route.RouteServiceStatus
 import com.almarai.data.easy_pick_models.route.RouteStatus
 import com.almarai.data.easy_pick_models.util.ERROR_OCCURRED
 import com.almarai.data.easy_pick_models.util.exhaustive
+import com.almarai.easypick.adapters.item.TAG
 import com.almarai.repository.api.RoutesRepository
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.collect
@@ -74,13 +76,27 @@ class RouteSelectionViewModel @ViewModelInject constructor(private val repositor
         }
     }
 
+    fun updateRouteStatus(routeNumber: Int) = viewModelScope.launch(Dispatchers.IO) {
+        try {
+            repository.updateRouteStatus(routeNumber, RouteStatus.Serving)
+        } catch (exception: Exception) {
+            AlmLogger.saveLog(
+                AuditParams.LogLevel.Shallow,
+                AuditParams.LogType.LOG_ERROR,
+                TAG,
+                exception.message ?: ""
+            )
+        }
+    }
+
     fun setRouteServiceDetails(list: List<Route>) {
         var servedRoutes = 0
         var servingRoutes = 0
         var notServedRoutes = 0
         list.forEach {
-            when (it.serviceStatus) {
+            when (it.status) {
                 RouteStatus.Served -> ++servedRoutes
+                RouteStatus.PartialServed -> ++servedRoutes
                 RouteStatus.Serving -> ++servingRoutes
                 RouteStatus.NotServed -> ++notServedRoutes
             }.exhaustive
@@ -100,7 +116,7 @@ class RouteSelectionViewModel @ViewModelInject constructor(private val repositor
             for ((index, element) in routes.withIndex()) {
                 if (element.number == details.first) {
                     position = index
-                    element.serviceStatus = details.second
+                    element.status = details.second
                     break
                 }
             }

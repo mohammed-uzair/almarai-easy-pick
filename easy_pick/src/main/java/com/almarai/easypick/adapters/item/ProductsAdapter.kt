@@ -8,12 +8,16 @@ import androidx.core.view.isVisible
 import androidx.databinding.DataBindingUtil
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
+import com.almarai.alm_logging.database.params.AuditParams
+import com.almarai.alm_logging.util.AlmLogger
 import com.almarai.data.easy_pick_models.product.Product
 import com.almarai.easypick.R
 import com.almarai.easypick.databinding.ItemProductBinding
 import com.almarai.easypick.screens.ProductListScreenDirections
 import com.almarai.easypick.view_models.ProductListViewModel
 import javax.inject.Inject
+
+const val TAG = "ProductsAdapter"
 
 class ProductsAdapter @Inject constructor() : RecyclerView.Adapter<ProductsAdapter.ViewHolder>() {
     lateinit var products: List<Product>
@@ -79,7 +83,7 @@ class ProductsAdapter @Inject constructor() : RecyclerView.Adapter<ProductsAdapt
                     )
                 )
         } catch (e: IllegalArgumentException) {
-            val error = e.message
+            AlmLogger.saveLog(AuditParams.LogLevel.Shallow, AuditParams.LogType.LOG_ERROR, TAG, e.message ?: "")
         }
     }
 

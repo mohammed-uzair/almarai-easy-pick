@@ -1,12 +1,9 @@
 package com.almarai.data.easy_pick_models.product
 
-import android.os.Parcelable
 import com.almarai.data.easy_pick_models.GroupType
-import kotlinx.android.parcel.Parcelize
-import kotlinx.android.parcel.RawValue
+import com.almarai.data.easy_pick_models.util.exhaustive
 
-@Parcelize
-data class Product(
+class Product(
     val number: Int = 0,
     val description: String = "NA",
     var translatedDescription: String = description,
@@ -14,17 +11,19 @@ data class Product(
     val freshLoad: String = "NA",
     var totalStock: String = "NA",
     val group: List<GroupType> = listOf(),
-    val upc: Int = 0
-) : Parcelable {
-    var productStatus: @RawValue ProductStatus =
-        ProductStatus.NotPicked
+    val upc: Int = 0,
+    private val productStatus: com.almarai.data.easy_pick_models.web.enum.ProductStatus = com.almarai.data.easy_pick_models.web.enum.ProductStatus.NotPicked
+) {
+    var status: ProductStatus = ProductStatus.NotPicked
         get() {
-            //Note: Do not remove this below line, this is not a correct warning, will break the code if removed
-            if (field == null) field =
-                ProductStatus.NotPicked
-            return field
+            return when (productStatus.name) {
+                com.almarai.data.easy_pick_models.web.enum.ProductStatus.Picked.name -> ProductStatus.Picked
+                com.almarai.data.easy_pick_models.web.enum.ProductStatus.NotPicked.name -> ProductStatus.NotPicked
+                com.almarai.data.easy_pick_models.web.enum.ProductStatus.PartiallyPicked.name -> ProductStatus.PartiallyPicked
+                else -> ProductStatus.NotPicked
+            }.exhaustive
         }
 
-    var editedCrates: @RawValue Int = 0
-    var editedPieces: @RawValue Int = 0
+    var editedCrates: Int = 0
+    var editedPieces: Int = 0
 }

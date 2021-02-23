@@ -126,7 +126,7 @@
             android:src="@drawable/ic_status"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:productStatus="@{product.productStatus}"
+            app:productStatus="@{product.status}"
             tools:src="@drawable/ic_status" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
