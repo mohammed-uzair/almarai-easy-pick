@@ -72,9 +72,10 @@ const val Dependencies_Sdp = "com.intuit.sdp:sdp-android:$Dependencies_Version_S
 private const val Dependencies_Version_Retrofit = "2.9.0"
 
 const val Dependencies_Retrofit = "com.squareup.retrofit2:retrofit:$Dependencies_Version_Retrofit"
-const val Dependencies_Retrofit_Gson_Converter =
-    "com.squareup.retrofit2:converter-gson:$Dependencies_Version_Retrofit"
+const val Dependencies_Retrofit_Moshi_Converter =
+    "com.squareup.retrofit2:converter-moshi:$Dependencies_Version_Retrofit"
 const val Dependencies_Retrofit_Logging = "com.squareup.okhttp3:logging-interceptor:4.2.1"
+const val Dependencies_PolymorphicJsonAdapterFactory = "com.squareup.moshi:moshi-adapters:1.8.0"
 
 //DI - Hilt
 private const val Dependencies_Version_Hilt = "2.28-alpha"

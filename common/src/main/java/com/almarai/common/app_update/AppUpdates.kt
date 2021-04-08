@@ -15,8 +15,8 @@ class AppUpdates @Inject constructor() {
 
     private val _APP_UPDATE = MutableStateFlow(AppUpdate())
 
-    public fun setAppUpdate(appUpdate: AppUpdate) {
-        if (isValidUpdate(appUpdate)) _APP_UPDATE.value = appUpdate
+    public fun setAppUpdate(appUpdate: AppUpdate?) {
+        if (appUpdate != null && isValidUpdate(appUpdate)) _APP_UPDATE.value = appUpdate
     }
 
     public fun getAppUpdates(): Flow<AppUpdate> = _APP_UPDATE

@@ -70,6 +70,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:checked="true"
                 android:text="@string/ticket_bug"
                 android:textColor="?colorTitle" />
 
@@ -138,9 +139,9 @@
             android:id="@+id/screen_ticket_proofs_view"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:textAlignment="textStart"
             android:layout_marginStart="@dimen/_7sdp"
             android:maxLines="6"
+            android:textAlignment="textStart"
             app:layout_constraintEnd_toEndOf="@+id/screen_ticket_details_edit_text_layout"
             app:layout_constraintStart_toStartOf="@+id/screen_ticket_attach_proof_button"
             app:layout_constraintTop_toBottomOf="@+id/screen_ticket_attach_proof_button" />

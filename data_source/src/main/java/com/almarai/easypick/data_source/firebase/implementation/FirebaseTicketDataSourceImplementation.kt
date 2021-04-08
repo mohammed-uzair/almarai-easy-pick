@@ -17,27 +17,37 @@ class FirebaseTicketDataSourceImplementation @Inject constructor() :
         const val TAG = "FireFileUploadDSImpl"
     }
 
-    override suspend fun uploadFiles(type: String, feedback: String, files: List<Uri>, ticketNumber: String): String {
-        files.forEach { it ->
-            val firebaseStorageRoot =
-                Firebase.storage.reference.child(
-                    "Tickets/${ticketNumber}/${ticketNumber}_${
-                        Random.nextInt(
-                            1000,
-                            9999
+    override suspend fun uploadFiles(
+        type: String,
+        feedback: String,
+        files: List<Uri>?,
+        ticketNumber: String
+    ): String {
+        files?.let {
+            it.forEach { file ->
+                val firebaseStorageRoot =
+                    Firebase.storage.reference.child(
+                        "Tickets/${ticketNumber}/${ticketNumber}_${
+                            Random.nextInt(
+                                1000,
+                                9999
+                            )
+                        }"
+                    )
+
+                //addTicketDetailsToDataSource(type, feedback, ticketNumber, )
+
+                firebaseStorageRoot.putFile(file)
+                    .addOnSuccessListener {
+                        Log.i(
+                            TAG,
+                            "File uploaded successfully - File Name : ${it.uploadSessionUri}"
                         )
-                    }"
-                )
-
-            //addTicketDetailsToDataSource(type, feedback, ticketNumber, )
-
-            firebaseStorageRoot.putFile(it)
-                .addOnSuccessListener {
-                    Log.i(TAG, "File uploaded successfully - File Name : ${it.uploadSessionUri}")
-                }
-                .addOnFailureListener {
-                    Log.i(TAG, "File upload failed - File Name : ${it.message}")
-                }
+                    }
+                    .addOnFailureListener {
+                        Log.i(TAG, "File upload failed - File Name : ${it.message}")
+                    }
+            }
         }
 
         return ticketNumber

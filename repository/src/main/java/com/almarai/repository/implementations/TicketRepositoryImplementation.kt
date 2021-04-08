@@ -10,7 +10,7 @@ import kotlin.random.Random
 
 class TicketRepositoryImplementation @Inject constructor(private val ticketDataSource: TicketDataSource) :
     TicketRepository {
-    override suspend fun uploadFiles(type: String, feedback: String, files: List<Uri>): String {
+    override suspend fun uploadFiles(type: String, feedback: String, files: List<Uri>?): String {
         //Upload the files to the respective data source
         val ticketNumber = generateTicketNumber()
 
@@ -18,7 +18,7 @@ class TicketRepositoryImplementation @Inject constructor(private val ticketDataS
         return uploadFilesUsingFirebaseStorage(type, feedback, files, ticketNumber)
     }
 
-    private suspend fun uploadFilesUsingFirebaseStorage(type: String, feedback: String, files: List<Uri>, ticketNumber:String) =
+    private suspend fun uploadFilesUsingFirebaseStorage(type: String, feedback: String, files: List<Uri>?, ticketNumber:String) =
         ticketDataSource.uploadFiles(type, feedback, files, ticketNumber)
 
     private fun generateTicketNumber(): String {

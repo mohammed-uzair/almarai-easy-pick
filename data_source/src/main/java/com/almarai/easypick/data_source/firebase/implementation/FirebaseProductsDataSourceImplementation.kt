@@ -9,6 +9,7 @@ import com.almarai.easypick.data_source.interfaces.SharedPreferenceDataSource
 import com.almarai.easypick.data_source.request.RequestHeaders
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.gson.Gson
+import com.squareup.moshi.Moshi
 import kotlinx.coroutines.channels.awaitClose
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.callbackFlow
@@ -18,7 +19,7 @@ import javax.inject.Singleton
 @Singleton
 class FirebaseProductsDataSourceImplementation @Inject constructor(
     private val context: Context,
-    private val gson: Gson,
+    private val moshi: Moshi,
     private val sharedPreferenceDataSource: SharedPreferenceDataSource
 ) :
     ProductsDataSource {
@@ -53,10 +54,10 @@ class FirebaseProductsDataSourceImplementation @Inject constructor(
                             "${result.id} => ${result.data}"
                         )
 
-                        val dataInJson = gson.toJson(result.data).toString()
-                        val dataFormatted = gson.fromJson(dataInJson, Product::class.java)
-
-                        products.add(dataFormatted)
+//                        val dataInJson = gson.toJson(result.data).toString()
+//                        val dataFormatted = gson.fromJson(dataInJson, Product::class.java)
+//
+//                        products.add(dataFormatted)
                     }
 
                     offer(products)

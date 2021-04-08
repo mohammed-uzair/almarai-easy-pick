@@ -1,15 +1,13 @@
 package com.almarai.easypick.data_source.firebase.implementation
 
 import android.util.Log
-import com.almarai.data.easy_pick_models.route.Route
-import com.almarai.data.easy_pick_models.route.RouteAccessibility
-import com.almarai.data.easy_pick_models.route.RouteServiceStatus
-import com.almarai.data.easy_pick_models.route.RouteStatus
+import com.almarai.data.easy_pick_models.route.*
 import com.almarai.easypick.data_source.interfaces.RouteDataSource
 import com.almarai.easypick.data_source.interfaces.SharedPreferenceDataSource
 import com.almarai.easypick.data_source.request.RequestHeaders
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.gson.Gson
+import com.squareup.moshi.Moshi
 import kotlinx.coroutines.channels.awaitClose
 import kotlinx.coroutines.flow.*
 import javax.inject.Inject
@@ -17,7 +15,7 @@ import javax.inject.Singleton
 
 @Singleton
 class FirebaseRoutesDataSourceImplementation @Inject constructor(
-    private val gson: Gson,
+    private val moshi: Moshi,
     private val sharedPreferenceDataSource: SharedPreferenceDataSource
 ) :
     RouteDataSource {
@@ -45,10 +43,10 @@ class FirebaseRoutesDataSourceImplementation @Inject constructor(
                     for (result in snapshot.documents) {
                         Log.d(TAG, "${result.id} => ${result.data}")
 
-                        val dataInJson = gson.toJson(result.data).toString()
-                        val dataFormatted = gson.fromJson(dataInJson, Route::class.java)
+//                        val dataInJson = moshi.adapter(Route::class.java).toJson(result.data).toString()
+//                        val dataFormatted = gson.fromJson(dataInJson, Route::class.java)
 
-                        routes.add(dataFormatted)
+//                        routes.add(dataFormatted)
                     }
 
                     offer(routes)

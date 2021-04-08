@@ -14,7 +14,7 @@ class TicketViewModel @ViewModelInject constructor(private val ticketRepository:
     private val _ticketResult = MutableLiveData<Result<String>>()
     val uploadResult = _ticketResult
 
-    fun generateTicket(type: String, feedback: String, files: List<Uri>) {
+    fun generateTicket(type: String, feedback: String, files: List<Uri>?) {
         viewModelScope.launch {
             //Start the upload process
             _ticketResult.value = Result.Fetching

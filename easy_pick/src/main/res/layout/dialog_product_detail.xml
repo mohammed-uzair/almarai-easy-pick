@@ -39,7 +39,7 @@
             app:layout_constraintEnd_toStartOf="@+id/guideline"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:productStatus="@{product.status}"
+            app:productStatus="@{product.productStatus}"
             tools:src="?colorAccent" />
 
         <TextView

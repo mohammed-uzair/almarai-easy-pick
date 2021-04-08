@@ -11,14 +11,14 @@ import com.almarai.easypick.data_source.web.api.AppUpdateApi
 import com.almarai.easypick.data_source.web.api.ProductsApi
 import com.almarai.easypick.data_source.web.api.RoutesApi
 import com.almarai.easypick.data_source.web.api.StatisticsApi
-import com.google.gson.Gson
 import com.google.gson.JsonSyntaxException
+import com.squareup.moshi.Moshi
 import okhttp3.OkHttpClient
 import okhttp3.Request
 import okhttp3.Response
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
-import retrofit2.converter.gson.GsonConverterFactory
+import retrofit2.converter.moshi.MoshiConverterFactory
 import java.util.concurrent.TimeUnit
 import javax.inject.Inject
 import javax.inject.Singleton
@@ -29,7 +29,7 @@ const val DEFAULT_URL = "http://192.168.1.12:8080/"
 @Singleton
 class WebService @Inject constructor(
     private val sharedPreferenceDataSource: SharedPreferenceDataSource,
-    private val gson: Gson,
+    private val moshi: Moshi,
     private val appUpdates: AppUpdates
 ) {
     private var retrofit: Retrofit? = buildRetrofit()
@@ -95,7 +95,8 @@ class WebService @Inject constructor(
             if (newAppUpdates.isNotEmpty()) {
                 //Convert the app update from Json
                 try {
-                    val appUpdate = gson.fromJson(newAppUpdates, AppUpdate::class.java)
+                    val appUpdate: AppUpdate? =
+                        moshi.adapter(AppUpdate::class.java).fromJson(newAppUpdates)
                     appUpdates.setAppUpdate(appUpdate)
                 } catch (exception: JsonSyntaxException) {
                     Log.e(TAG, "Error on parsing app update", exception)
@@ -109,7 +110,7 @@ class WebService @Inject constructor(
 
         return Retrofit.Builder()
             .baseUrl(baseUrl)
-            .addConverterFactory(GsonConverterFactory.create())
+            .addConverterFactory(MoshiConverterFactory.create(moshi))
             .client(client)
             .build()
     }

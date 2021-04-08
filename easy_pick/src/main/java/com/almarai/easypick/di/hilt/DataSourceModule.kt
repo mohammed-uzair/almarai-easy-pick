@@ -12,7 +12,7 @@ import com.almarai.easypick.data_source.web.implementation.WebAppUpdateDataSourc
 import com.almarai.easypick.data_source.web.implementation.WebProductsDataSourceImplementation
 import com.almarai.easypick.data_source.web.implementation.WebRoutesDataSourceImplementation
 import com.almarai.easypick.data_source.web.implementation.WebStatisticsDataSourceImplementation
-import com.google.gson.Gson
+import com.squareup.moshi.Moshi
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -24,8 +24,8 @@ import javax.inject.Singleton
 class DataSourceModule {
     @Provides
     @Singleton
-    fun provideSharedPreferences(context: Context, gson: Gson): SharedPreferenceDataSource {
-        return SharedPreferenceDataSourceImplementation(context, gson)
+    fun provideSharedPreferences(context: Context, moshi: Moshi): SharedPreferenceDataSource {
+        return SharedPreferenceDataSourceImplementation(context, moshi)
     }
 
     @Provides
@@ -36,7 +36,10 @@ class DataSourceModule {
         appUpdates: AppUpdates
     ): AppUpdateDataSource {
         return when (appDataSourceType.getAppUpdateType()) {
-            AppDataSourceTypes.Almarai -> WebAppUpdateDataSourceImplementation(webservice, appUpdates)
+            AppDataSourceTypes.Almarai -> WebAppUpdateDataSourceImplementation(
+                webservice,
+                appUpdates
+            )
             else -> FirebaseAppUpdateDataSourceImplementation()
         }
     }
@@ -45,13 +48,13 @@ class DataSourceModule {
     fun provideRoutesDataSource(
         webservice: WebService,
         appDataSourceType: AppDataSourceType,
-        gson: Gson,
+        moshi: Moshi,
         sharedPreferenceDataSource: SharedPreferenceDataSource
     ): RouteDataSource {
         return when (appDataSourceType.getAppUpdateType()) {
             AppDataSourceTypes.Almarai -> WebRoutesDataSourceImplementation(webservice)
             else -> FirebaseRoutesDataSourceImplementation(
-                gson, sharedPreferenceDataSource
+                moshi, sharedPreferenceDataSource
             )
         }
     }
@@ -62,14 +65,14 @@ class DataSourceModule {
         context: Context,
         webservice: WebService,
         appDataSourceType: AppDataSourceType,
-        gson: Gson,
+        moshi: Moshi,
         sharedPreferenceDataSource: SharedPreferenceDataSource
     ): ProductsDataSource {
         return when (appDataSourceType.getAppUpdateType()) {
             AppDataSourceTypes.Almarai -> WebProductsDataSourceImplementation(webservice)
             else -> FirebaseProductsDataSourceImplementation(
                 context,
-                gson,
+                moshi,
                 sharedPreferenceDataSource
             )
         }
@@ -80,12 +83,12 @@ class DataSourceModule {
         webservice: WebService,
         appDataSourceType: AppDataSourceType,
         sharedPreferenceDataSource: SharedPreferenceDataSource,
-        gson: Gson
+        moshi: Moshi
     ): StatisticsDataSource {
         return when (appDataSourceType.getAppUpdateType()) {
             AppDataSourceTypes.Almarai ->
                 return WebStatisticsDataSourceImplementation(webservice)
-            else -> FirebaseStatisticsDataSourceImplementation(sharedPreferenceDataSource, gson)
+            else -> FirebaseStatisticsDataSourceImplementation(sharedPreferenceDataSource, moshi)
         }
     }
 

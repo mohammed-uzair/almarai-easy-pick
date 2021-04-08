@@ -8,7 +8,7 @@ import java.lang.IllegalStateException
 
 object InitializeFirebase {
     fun configureFirebase(context: Context) {
-        // Manually configure Firebase Options. The following fields are REQUIRED:
+        // To manually configure Firebase Options. The following fields are REQUIRED:
         //   - Project ID
         //   - App ID
         //   - API Key

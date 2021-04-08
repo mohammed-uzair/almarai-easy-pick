@@ -7,6 +7,5 @@ include(
     ":alm_ui",
     ":data",
     ":repository",
-    ":alm_logging",
     ":data_source"
 )

@@ -5,7 +5,7 @@ import android.view.View
 import android.widget.Toast
 import androidx.navigation.findNavController
 import com.almarai.easypick.MainActivity
-import com.almarai.easypick.screens.HomeScreenDirections
+import com.almarai.easypick.views.screens.HomeScreenDirections
 import kotlinx.android.synthetic.main.screen_home.*
 import javax.inject.Inject
 

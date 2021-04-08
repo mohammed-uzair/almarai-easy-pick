@@ -15,7 +15,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="?attr/colorBackgroundScreenBody"
-        tools:context=".screens.LoginScreen">
+        tools:context=".views.screens.LoginScreen">
 
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/screen_data_config_guideline_for_background_theme"

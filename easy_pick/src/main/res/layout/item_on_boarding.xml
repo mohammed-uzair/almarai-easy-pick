@@ -13,7 +13,7 @@
 
         <variable
             name="onBoardingCompletedListener"
-            type="com.almarai.easypick.utils.on_boarding.OnBoardingCompletedListener" />
+            type="com.almarai.easypick.views.utils.OnItemClickListener" />
 
     </data>
 
@@ -103,7 +103,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/_55sdp"
-            android:onClick="@{() -> onBoardingCompletedListener.onOnBoardingCompleted()}"
+            android:onClick="@{() -> onBoardingCompletedListener.onItemClick(null, -1)}"
             android:text="@string/alert_button_done"
             android:visibility="@{onBoarding.isLastScreen ? View.VISIBLE : View.GONE}"
             app:layout_constraintBottom_toBottomOf="parent"

@@ -4,11 +4,6 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-
-        <variable
-            name="adapter"
-            type="com.almarai.easypick.adapters.item.ProductsAdapter" />
-
         <variable
             name="position"
             type="Integer" />
@@ -17,13 +12,16 @@
             name="product"
             type="com.almarai.data.easy_pick_models.product.Product" />
 
+        <variable
+            name="onItemClickListener"
+            type="com.almarai.easypick.views.utils.OnItemClickListener" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/_2sdp"
-        android:onClick="@{(view) -> adapter.showProductDetailsDialog(view, position)}">
+        android:onClick="@{(view) -> onItemClickListener.onItemClick(product, position)}">
 
         <View
             android:id="@+id/item_product_selector"
@@ -126,7 +124,7 @@
             android:src="@drawable/ic_status"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:productStatus="@{product.status}"
+            app:productStatus="@{product.productStatus}"
             tools:src="@drawable/ic_status" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>

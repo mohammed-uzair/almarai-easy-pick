@@ -12,14 +12,14 @@ import com.almarai.alm_logging.util.AlmLogger
 import com.almarai.common.date_time.DateUtil.getCurrentDate
 import com.almarai.common.logging.FIREBASE_ANALYTICS
 import com.almarai.common.machine_learning.translation.OnDeviceTextTranslation
+import com.almarai.common.utils.Logger
 import com.almarai.easypick.R
 import com.almarai.easypick.common.AppUpdateFlow
 import com.almarai.easypick.data_source.interfaces.SharedPreferenceDataSource
 import com.almarai.easypick.extensions.IS_HARDWARE_KEYBOARD_AVAILABLE
 import com.almarai.easypick.extensions.isHardwareKeyboardAvailable
 import com.almarai.easypick.utils.AlertTones
-import com.almarai.easypick.utils.LanguageSetup
-import com.almarai.easypick.utils.ThemeSetup
+import com.almarai.easypick.common.ThemeSetup
 import com.almarai.easypick.voice.VoiceRecognitionServer
 import com.google.firebase.analytics.FirebaseAnalytics
 import com.google.firebase.analytics.ktx.logEvent
@@ -32,10 +32,7 @@ class ActivityLifecycleHandler @Inject constructor(
 ) :
     Application.ActivityLifecycleCallbacks {
     override fun onActivityCreated(activity: Activity, p1: Bundle?) {
-        AlmLogger.startLogging(activity.applicationContext)
-        AlmLogger.saveLog(
-            AuditParams.LogLevel.Deep,
-            AuditParams.LogType.LOG_INFO,
+        Logger.logInfo(
             activity.localClassName,
             "onActivityCreated at ${activity.localClassName}"
         )

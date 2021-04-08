@@ -3,14 +3,14 @@ package com.almarai.easypick.utils
 import android.widget.Filterable
 import androidx.recyclerview.widget.RecyclerView
 import com.almarai.common.utils.APP_LOCALE
-import com.almarai.data.easy_pick_models.GroupType
+import com.almarai.data.easy_pick_models.Group
 import com.almarai.data.easy_pick_models.filter.Filters
 import com.almarai.data.easy_pick_models.product.Product
 import com.almarai.data.easy_pick_models.product.ProductStatus
 import com.almarai.data.easy_pick_models.route.Route
 import com.almarai.data.easy_pick_models.route.RouteStatus
-import com.almarai.easypick.adapters.item.ProductsAdapter
-import com.almarai.easypick.adapters.route.RoutesAdapter
+import com.almarai.easypick.adapters.ProductsAdapter
+import com.almarai.easypick.adapters.RoutesAdapter
 import java.util.*
 
 const val FilterDifferentiation = "%"
@@ -42,7 +42,7 @@ class FilterFunnel(
                 }
 
                 if (filters.filterBySubCategory1Bakery) {
-                    if (route.group.contains(GroupType.Bakery)) {
+                    if (route.group.contains(Group.Bakery)) {
                         isFilteredRoute = true
                     } else if (filters.allowMultipleFilters) {
 //                        isFilteredRoute = false
@@ -51,7 +51,7 @@ class FilterFunnel(
                 }
 
                 if (filters.filterBySubCategory1Dairy) {
-                    if (route.group.contains(GroupType.Dairy)) {
+                    if (route.group.contains(Group.Dairy)) {
                         isFilteredRoute = true
                     } else if (filters.allowMultipleFilters) {
 //                        isFilteredRoute = false
@@ -60,7 +60,7 @@ class FilterFunnel(
                 }
 
                 if (filters.filterBySubCategory1Poultry) {
-                    if (route.group.contains(GroupType.Poultry)) {
+                    if (route.group.contains(Group.Poultry)) {
                         isFilteredRoute = true
                     } else if (filters.allowMultipleFilters) {
 //                        isFilteredRoute = false
@@ -69,7 +69,7 @@ class FilterFunnel(
                 }
 
                 if (filters.filterBySubCategory2IPNC) {
-                    if (route.group.contains(GroupType.IPNC)) {
+                    if (route.group.contains(Group.IPNC)) {
                         isFilteredRoute = true
                     } else if (filters.allowMultipleFilters) {
 //                        isFilteredRoute = false
@@ -78,7 +78,7 @@ class FilterFunnel(
                 }
 
                 if (filters.filterBySubCategory2NonIPNC) {
-                    if (route.group.contains(GroupType.NonIPNC)) {
+                    if (route.group.contains(Group.NonIPNC)) {
                         isFilteredRoute = true
                     } else if (filters.allowMultipleFilters) {
 //                        isFilteredRoute = false
@@ -87,7 +87,7 @@ class FilterFunnel(
                 }
 
                 if (filters.customerOnly) {
-                    if (route.group.contains(GroupType.Customer)) {
+                    if (route.group.contains(Group.Customer)) {
                         isFilteredRoute = true
                     } else if (filters.allowMultipleFilters) {
 //                        isFilteredRoute = false
@@ -109,7 +109,7 @@ class FilterFunnel(
         when {
             filters.sortWithXNumber -> if (filters.sortOrderAscending) filteredRoutes.sortBy { it.number } else filteredRoutes.sortByDescending { it.number }
             filters.sortWithXDescription -> if (filters.sortOrderAscending) filteredRoutes.sortBy { it.description } else filteredRoutes.sortByDescending { it.description }
-            filters.statusServed -> if (filters.sortOrderAscending) filteredRoutes.sortBy { it.status == RouteStatus.NotServed } else filteredRoutes.sortBy { it.status == RouteStatus.Served }
+            filters.statusServed -> if (filters.sortOrderAscending) filteredRoutes.sortBy { it.routeStatus == RouteStatus.NotServed } else filteredRoutes.sortBy { it.routeStatus == RouteStatus.Served }
         }
         //endregion
 
@@ -128,7 +128,7 @@ class FilterFunnel(
             }
 
             if (filters.filterBySubCategory1Bakery) {
-                if (product.group.contains(GroupType.Bakery)) {
+                if (product.group.contains(Group.Bakery)) {
                     isFilteredProduct = true
                 } else if (filters.allowMultipleFilters) {
                     isFilteredProduct = false
@@ -137,7 +137,7 @@ class FilterFunnel(
             }
 
             if (filters.filterBySubCategory1Dairy) {
-                if (product.group.contains(GroupType.Dairy)) {
+                if (product.group.contains(Group.Dairy)) {
                     isFilteredProduct = true
                 } else if (filters.allowMultipleFilters) {
                     isFilteredProduct = false
@@ -146,7 +146,7 @@ class FilterFunnel(
             }
 
             if (filters.filterBySubCategory1Poultry) {
-                if (product.group.contains(GroupType.Poultry)) {
+                if (product.group.contains(Group.Poultry)) {
                     isFilteredProduct = true
                 } else if (filters.allowMultipleFilters) {
                     isFilteredProduct = false
@@ -155,7 +155,7 @@ class FilterFunnel(
             }
 
             if (filters.filterBySubCategory2IPNC) {
-                if (product.group.contains(GroupType.IPNC)) {
+                if (product.group.contains(Group.IPNC)) {
                     isFilteredProduct = true
                 } else if (filters.allowMultipleFilters) {
                     isFilteredProduct = false
@@ -164,7 +164,7 @@ class FilterFunnel(
             }
 
             if (filters.filterBySubCategory2NonIPNC) {
-                if (product.group.contains(GroupType.NonIPNC)) {
+                if (product.group.contains(Group.NonIPNC)) {
                     isFilteredProduct = true
                 } else if (filters.allowMultipleFilters) {
                     isFilteredProduct = false
@@ -173,7 +173,7 @@ class FilterFunnel(
             }
 
             if (filters.customerOnly) {
-                if (product.group.contains(GroupType.Customer)) {
+                if (product.group.contains(Group.Customer)) {
                     isFilteredProduct = true
                 } else if (filters.allowMultipleFilters) {
                     isFilteredProduct = false
@@ -191,7 +191,7 @@ class FilterFunnel(
             when {
                 filters.sortWithXNumber -> if (filters.sortOrderAscending) filteredProducts.sortBy { product.number } else filteredProducts.sortByDescending { product.number }
                 filters.sortWithXDescription -> if (filters.sortOrderAscending) filteredProducts.sortBy { product.description } else filteredProducts.sortByDescending { product.description }
-                filters.statusServed -> if (filters.sortOrderAscending) filteredProducts.sortBy { product.status == ProductStatus.NotPicked } else filteredProducts.sortBy { product.status == ProductStatus.Picked }
+                filters.statusServed -> if (filters.sortOrderAscending) filteredProducts.sortBy { product.productStatus == ProductStatus.NotPicked } else filteredProducts.sortBy { product.productStatus == ProductStatus.Picked }
             }
             //endregion
         }
@@ -259,10 +259,10 @@ class FilterFunnel(
             if (adapter != null) {
                 if (adapter is RoutesAdapter) {
                     //Send this filter list again to filter next constraint
-                    adapter.routes = (results?.values ?: listOf<Route>()) as List<Route>
+                    adapter.submitList((results?.values ?: listOf<Route>()) as List<Route>)
                 } else if (adapter is ProductsAdapter) {
                     //Send this filter list again to filter next constraint
-                    adapter.products = (results?.values ?: listOf<Product>()) as List<Product>
+                    adapter.submitList((results?.values ?: listOf<Product>()) as List<Product>)
                 }
 
                 adapter.notifyDataSetChanged()

@@ -20,8 +20,11 @@ dependencies {
     implementation(Dependencies_Android_Kotlin_Extensions)
 
     implementation(Dependencies_Retrofit)
-    implementation(Dependencies_Retrofit_Gson_Converter)
+    implementation(Dependencies_Retrofit_Moshi_Converter)
+    implementation(Dependencies_PolymorphicJsonAdapterFactory)
     implementation(Dependencies_Retrofit_Logging)
+
+    implementation("com.squareup.moshi:moshi:1.11.0")
 
     implementation(Dependencies_Firestore)
     implementation(Dependencies_Firebase_Storage)

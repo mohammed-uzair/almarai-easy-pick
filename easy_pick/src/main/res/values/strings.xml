@@ -176,6 +176,7 @@
 
     <string name="alert_ticket_upload_failed_title">Ticket Not Created</string>
     <string name="alert_ticket_upload_failed_ticket_message">Some error occurred, your ticket could not be filed</string>
+    <string name="alert_ticket_no_description">Please add the ticket description to raise and generate the ticket</string>
 
     <string name="alert_default_title">Alert</string>
     <string name="alert_default_message">Could not find anything</string>
@@ -197,7 +198,7 @@
     <string name="alert_message_update_available">A new update for the app is available, please update your app\nUpdate Details\n</string>
     <string name="alert_message_force_update">This is a mandatory update, please update the app\nUpdate Details\n</string>
     <string name="alert_message_route_serve">Are you sure you want to serve this route ?</string>
-    <string name="alert_message_maximum_file_count_reached">You have selected %d files, which is more than the maximum number of files allowed, which is %d, remaining files will be omitted</string>
+    <string name="alert_message_maximum_file_count_reached" formatted="false">You have selected %d files, which is more than the maximum number of files allowed, which is %d, remaining files will be omitted</string>
     <string name="alert_message_maximum_file_count">You can select a maximum of %d files</string>
     <string name="alert_confirm_exit">Are you sure you want to exit &amp; discard changes</string>
     <string name="alert_ip_port_empty">Server IP or Server port cannot be empty</string>

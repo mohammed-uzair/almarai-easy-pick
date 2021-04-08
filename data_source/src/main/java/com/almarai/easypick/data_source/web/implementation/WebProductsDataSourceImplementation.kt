@@ -23,8 +23,16 @@ class WebProductsDataSourceImplementation @Inject constructor(private val webSer
         }
     }
 
-    override suspend fun updateRouteData(routeNumber: Int, products: List<Product>) =
-        webService.productsApi.updateRouteData(routeNumber, products)
+    override suspend fun updateRouteData(routeNumber: Int, products: List<Product>):com.almarai.data.easy_pick_models.route.RouteStatus {
+        return webService.productsApi.updateRouteData(routeNumber, products)
+//        return when(webService.productsApi.updateRouteData(routeNumber, products)){
+//            Serving -> Serving
+//            NotServed -> NotServed
+//            Served -> Served
+//            PartiallyServed -> PartialServed
+//            else -> NotServed
+//        }
+    }
 
     override suspend fun discardAllChanges(routeNumber: Int) {
         webService.productsApi.discardAllChanges(routeNumber)

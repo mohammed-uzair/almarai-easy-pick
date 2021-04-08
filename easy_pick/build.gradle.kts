@@ -48,8 +48,6 @@ dependencies {
     implementation(Dependencies_Hilt_Android_ViewModel)
     kapt(Dependencies_Hilt_Annotation_Processor)
     kapt(Dependencies_Hilt_Android_Annotation_Processor)
-    
-    implementation(Dependencies_Retrofit_Gson_Converter)
 
     implementation(Dependencies_Lifecycle_Runtime)
     implementation(Dependencies_Lifecycle_Common)
@@ -66,6 +64,12 @@ dependencies {
     implementation(Dependencies_Mp_Chart)
 
     implementation(Dependencies_Ml_Kit_On_Device_Text_Translation)
+
+    implementation ("com.squareup.moshi:moshi:1.11.0")
+    implementation ("com.squareup.moshi:moshi-kotlin:1.11.0")
+
+    implementation (Dependencies_Retrofit)
+    implementation (Dependencies_Retrofit_Moshi_Converter)
 
     //implementation(Dependencies_Leak_Canary)
 }

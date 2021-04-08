@@ -8,6 +8,7 @@ import com.almarai.easypick.data_source.BuildConfig
 import com.almarai.easypick.data_source.interfaces.SharedPreferenceDataSource
 import com.google.gson.Gson
 import com.google.gson.JsonSyntaxException
+import com.squareup.moshi.Moshi
 import java.lang.reflect.Type
 import javax.inject.Inject
 import javax.inject.Singleton
@@ -16,7 +17,7 @@ import javax.inject.Singleton
 class SharedPreferenceDataSourceImplementation
 @Inject constructor(
     private val context: Context,
-    private val gson: Gson
+    private val moshi: Moshi
 ) : SharedPreferenceDataSource {
     /**
      * Function to save [int] value to preference
@@ -49,13 +50,13 @@ class SharedPreferenceDataSourceImplementation
      * @param value Json [String] value to save in preference
      */
     override fun setSharedPreferenceJson(key: String, objectType: Any?) {
-        try {
-            if (objectType == null) {
-                editor.edit().putString(key, "").apply()
-            } else editor.edit().putString(key, gson.toJson(objectType)).apply()
-        } catch (exception: JsonSyntaxException) {
-            Log.e(TAG, "Could not parse json string", exception)
-        }
+//        try {
+//            if (objectType == null) {
+//                editor.edit().putString(key, "").apply()
+////            } else editor.edit().putString(key, moshi.adapter<Any>(objectType)).apply()
+//        } catch (exception: JsonSyntaxException) {
+//            Log.e(TAG, "Could not parse json string", exception)
+//        }
     }
 
     /**
@@ -94,7 +95,7 @@ class SharedPreferenceDataSourceImplementation
         var result: T? = null
         val jsonString = editor.getString(key, "")
         try {
-            result = gson.fromJson<Any>(jsonString, objectType) as T
+//            result = gson.fromJson<Any>(jsonString, objectType) as T
         } catch (exception: JsonSyntaxException) {
             Log.e(TAG, "Could not parse json string", exception)
         } catch (exception: ClassCastException) {

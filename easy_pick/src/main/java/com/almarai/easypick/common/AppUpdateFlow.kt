@@ -10,10 +10,10 @@ import com.almarai.common.app_update.AppUpdates
 import com.almarai.data.easy_pick_models.AppUpdate
 import com.almarai.easypick.BuildConfig
 import com.almarai.easypick.R
-import com.almarai.easypick.utils.alert_dialog.AppAlertDialog
-import com.almarai.easypick.utils.alert_dialog.OnNegativeButtonClickListener
-import com.almarai.easypick.utils.alert_dialog.OnPositiveButtonClickListener
-import com.almarai.easypick.utils.alert_dialog.showAlertDialog
+import com.almarai.easypick.views.utils.alert_dialog.AppAlertDialog
+import com.almarai.easypick.views.utils.alert_dialog.OnNegativeButtonClickListener
+import com.almarai.easypick.views.utils.alert_dialog.OnPositiveButtonClickListener
+import com.almarai.easypick.views.utils.alert_dialog.showAlertDialog
 import com.almarai.repository.api.AppUpdateRepository
 import com.almarai.repository.api.ApplicationRepository
 import kotlinx.coroutines.CoroutineScope

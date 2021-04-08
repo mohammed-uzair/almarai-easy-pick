@@ -5,5 +5,5 @@ import javax.inject.Singleton
 
 @Singleton
 interface TicketDataSource {
-    suspend fun uploadFiles(type: String, feedback: String, files: List<Uri>, ticketNumber: String): String
+    suspend fun uploadFiles(type: String, feedback: String, files: List<Uri>?, ticketNumber: String): String
 }

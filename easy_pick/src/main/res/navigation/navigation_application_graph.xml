@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/loginScreen"
-        android:name="com.almarai.easypick.screens.LoginScreen"
+        android:name="com.almarai.easypick.views.screens.LoginScreen"
         android:label="screen_login"
         tools:layout="@layout/screen_login">
         <action
@@ -20,7 +20,7 @@
     </fragment>
     <fragment
         android:id="@+id/networkConfigurationScreen"
-        android:name="com.almarai.easypick.screens.NetworkConfigurationScreen"
+        android:name="com.almarai.easypick.views.screens.NetworkConfigurationScreen"
         android:label="screen_network_configuration"
         tools:layout="@layout/screen_network_configuration">
         <action
@@ -49,7 +49,7 @@
     </fragment>
     <fragment
         android:id="@+id/dataConfigurationScreen"
-        android:name="com.almarai.easypick.screens.DataConfigurationScreen"
+        android:name="com.almarai.easypick.views.screens.DataConfigurationScreen"
         android:label="screen_data_configuration"
         tools:layout="@layout/screen_data_configuration">
         <action
@@ -71,7 +71,7 @@
     </fragment>
     <fragment
         android:id="@+id/routeSelectionScreen"
-        android:name="com.almarai.easypick.screens.RouteSelectionScreen"
+        android:name="com.almarai.easypick.views.screens.RouteSelectionScreen"
         android:label="screen_route_selection"
         tools:layout="@layout/screen_route_selection">
         <action
@@ -91,7 +91,7 @@
     </fragment>
     <fragment
         android:id="@+id/productListScreen"
-        android:name="com.almarai.easypick.screens.ProductListScreen"
+        android:name="com.almarai.easypick.views.screens.ProductListScreen"
         android:label="screen_product_list"
         tools:layout="@layout/screen_product">
         <action
@@ -118,7 +118,7 @@
     </fragment>
     <fragment
         android:id="@+id/homeScreen"
-        android:name="com.almarai.easypick.screens.HomeScreen"
+        android:name="com.almarai.easypick.views.screens.HomeScreen"
         android:label="main_recycler_view"
         tools:layout="@layout/screen_home">
         <action
@@ -159,7 +159,7 @@
     </fragment>
     <fragment
         android:id="@+id/launchScreen"
-        android:name="com.almarai.easypick.screens.LaunchScreen"
+        android:name="com.almarai.easypick.views.screens.LaunchScreen"
         android:label="LaunchScreen"
         tools:layout="@layout/screen_launch">
         <action
@@ -193,13 +193,13 @@
     </fragment>
     <fragment
         android:id="@+id/filterScreen"
-        android:name="com.almarai.easypick.screens.FilterScreen"
+        android:name="com.almarai.easypick.views.screens.FilterScreen"
         android:label="FilterScreen"
         tools:layout="@layout/screen_filter">
         <argument
             android:name="Filter_Source"
-            android:defaultValue="RouteSelectionScreenScreen"
-            app:argType="com.almarai.easypick.utils.FilterScreenSource" />
+            android:defaultValue="0"
+            app:argType="integer" />
         <argument
             android:name="Filter_Model"
             app:argType="com.almarai.data.easy_pick_models.filter.Filters"
@@ -207,12 +207,12 @@
     </fragment>
     <fragment
         android:id="@+id/statisticsScreen"
-        android:name="com.almarai.easypick.screens.StatisticsScreen"
+        android:name="com.almarai.easypick.views.screens.StatisticsScreen"
         android:label="StatisticsScreen"
         tools:layout="@layout/screen_statistics" />
     <fragment
         android:id="@+id/settingsScreen"
-        android:name="com.almarai.easypick.screens.SettingsScreen"
+        android:name="com.almarai.easypick.views.screens.SettingsScreen"
         android:label="SettingsScreen">
         <action
             android:id="@+id/action_settingsScreen_to_ticketScreen"
@@ -224,7 +224,7 @@
     </fragment>
     <dialog
         android:id="@+id/productDetailsDialog"
-        android:name="com.almarai.easypick.screens.ProductDetailsDialog"
+        android:name="com.almarai.easypick.views.screens.ProductDetailsDialog"
         android:label="ProductDetailsDialog"
         tools:layout="@layout/dialog_product_detail">
         <argument
@@ -234,12 +234,12 @@
     </dialog>
     <fragment
         android:id="@+id/onBoardingScreen"
-        android:name="com.almarai.easypick.screens.OnBoardingScreen"
+        android:name="com.almarai.easypick.views.screens.OnBoardingScreen"
         android:label="OnBoardingScreen"
         tools:layout="@layout/item_on_boarding" />
     <fragment
         android:id="@+id/ticketScreen"
-        android:name="com.almarai.easypick.screens.TicketScreen"
+        android:name="com.almarai.easypick.views.screens.TicketScreen"
         android:label="TicketScreen"
         tools:layout="@layout/screen_self_ticket_generator" />
 </navigation>

@@ -37,7 +37,7 @@ internal fun SearchView.setSearchView(
 internal fun Fragment.setHasSearchView(toggle: Boolean) {
 //    val searchView =
 //        (requireActivity() as AppCompatActivity).supportActionBar?.customView
-//            ?.findViewById<com.almarai.easypick.common.custom_views.search_view.SearchView>(
+//            ?.findViewById<com.almarai.easypick.views.custom.search_view.SearchView>(
 //                R.id.main_search_view
 //            )
 //

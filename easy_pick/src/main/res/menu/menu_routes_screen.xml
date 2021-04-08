@@ -7,12 +7,12 @@
         android:id="@+id/menu_route_action_search"
         android:icon="@drawable/ic_search"
         android:title="@string/menu_title_search"
-        app:actionViewClass="com.almarai.easypick.common.custom_views.search_view.SearchView"
+        app:actionViewClass="com.almarai.easypick.views.custom.search_view.SearchView"
         app:showAsAction="always|collapseActionView"
         tools:ignore="AlwaysShowAction" />
 
     <item
-        android:id="@+id/menu_route_action_filter"
+        android:id="@+id/filterScreen"
         android:icon="@drawable/ic_filter"
         android:title="@string/menu_title_filter"
         app:showAsAction="always|collapseActionView"

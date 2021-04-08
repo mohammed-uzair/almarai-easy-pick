@@ -7,6 +7,7 @@ import com.almarai.easypick.data_source.interfaces.StatisticsDataSource
 import com.almarai.easypick.data_source.request.RequestHeaders
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.gson.Gson
+import com.squareup.moshi.Moshi
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import javax.inject.Inject
@@ -14,7 +15,7 @@ import javax.inject.Singleton
 
 @Singleton
 class FirebaseStatisticsDataSourceImplementation @Inject constructor(
-    private val sharedPreferenceDataSource: SharedPreferenceDataSource, private val gson: Gson
+    private val sharedPreferenceDataSource: SharedPreferenceDataSource, private val moshi: Moshi
 ) :
     StatisticsDataSource {
     companion object {

@@ -11,8 +11,8 @@ import com.almarai.easypick.data_source.firebase.InitializeFirebase.configureFir
 import com.almarai.easypick.databinding.FragmentContainerBinding
 import com.almarai.easypick.extensions.OnBackPressListener
 import com.almarai.easypick.extensions.hideViewStateAlert
-import com.almarai.easypick.utils.LanguageSetup
-import com.almarai.easypick.utils.progress.AppProgressDialog
+import com.almarai.easypick.common.LanguageSetup
+import com.almarai.easypick.views.utils.progress.AppProgressDialog
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
