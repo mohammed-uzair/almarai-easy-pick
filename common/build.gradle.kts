@@ -11,7 +11,6 @@ plugins {
 }
 
 dependencies {
-    implementation(project(Dependencies_Project_Alm_Logging))
     implementation(project(Dependencies_Project_Data))
 
     implementation(Dependencies_Android_Kotlin_Extensions)
