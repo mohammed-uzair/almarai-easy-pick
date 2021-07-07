@@ -3,7 +3,7 @@ package com.almarai.easypick.views.utils.binding_adapters
 import android.annotation.SuppressLint
 import android.widget.TextView
 import androidx.databinding.BindingAdapter
-import com.almarai.business.Utils.AppDateTimeFormat
+import com.almarai.business.utils.AppDateTimeFormat
 import com.almarai.common.date_time.DateUtil
 
 @SuppressLint("SetTextI18n")

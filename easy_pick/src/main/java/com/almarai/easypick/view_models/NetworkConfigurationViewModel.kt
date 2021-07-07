@@ -1,17 +1,19 @@
 package com.almarai.easypick.view_models
 
 import android.util.Log
-import androidx.hilt.lifecycle.ViewModelInject
+import javax.inject.Inject
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.almarai.data.easy_pick_models.NetworkConfiguration
 import com.almarai.easypick.utils.Util
 import com.almarai.repository.api.ApplicationRepository
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
-class NetworkConfigurationViewModel @ViewModelInject constructor(private val applicationRepository: ApplicationRepository) :
+@HiltViewModel
+class NetworkConfigurationViewModel @Inject constructor(private val applicationRepository: ApplicationRepository) :
     ViewModel() {
     companion object {
         const val TAG = "NetworkConfigViewModel"

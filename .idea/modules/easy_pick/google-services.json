@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "1083305160395",
+    "firebase_url": "https://easy-pick-abc.firebaseio.com",
+    "project_id": "easy-pick-abc",
+    "storage_bucket": "easy-pick-abc.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1083305160395:android:48c09b2d49813611e2f54e",
+        "android_client_info": {
+          "package_name": "com.almarai.easypick"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1083305160395-0099fh7d76noto3cagfvic58a660jak9.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.almarai.easypick",
+            "certificate_hash": "6dd2562c9b76ea5e1bdeb8b630709d2c67cecab4"
+          }
+        },
+        {
+          "client_id": "1083305160395-d1ght6mvnpupqi7ge7nl098uj905ti0f.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCNmWv4HzKbbTfE7MzMxU6qo5R0oiNPb0s"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1083305160395-d1ght6mvnpupqi7ge7nl098uj905ti0f.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

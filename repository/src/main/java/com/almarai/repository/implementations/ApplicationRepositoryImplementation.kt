@@ -1,6 +1,6 @@
 package com.almarai.repository.implementations
 
-import com.almarai.business.Utils.AppDateTimeFormat
+import com.almarai.business.utils.AppDateTimeFormat
 import com.almarai.common.date_time.DateUtil
 import com.almarai.data.easy_pick_models.AppUpdate
 import com.almarai.data.easy_pick_models.DataConfiguration

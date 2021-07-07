@@ -1,15 +1,17 @@
 package com.almarai.easypick.view_models
 
 import android.net.Uri
-import androidx.hilt.lifecycle.ViewModelInject
+import javax.inject.Inject
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.almarai.data.easy_pick_models.Result
 import com.almarai.repository.api.TicketRepository
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 
-class TicketViewModel @ViewModelInject constructor(private val ticketRepository: TicketRepository) :
+@HiltViewModel
+class TicketViewModel @Inject constructor(private val ticketRepository: TicketRepository) :
     ViewModel() {
     private val _ticketResult = MutableLiveData<Result<String>>()
     val uploadResult = _ticketResult

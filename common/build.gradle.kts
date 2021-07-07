@@ -1,6 +1,6 @@
 import com.almarai.gradle.dependencies.*
 
-val kotlin_version: String by extra
+//val kotlin_version: String by extra
 
 plugins {
     id("com.android.library")
@@ -29,6 +29,19 @@ dependencies {
     implementation(Dependencies_Hilt)
     kapt(Dependencies_Hilt_Annotation_Processor)
 }
+
+kapt {
+    javacOptions {
+        // These options are normally set automatically via the Hilt Gradle plugin, but we
+        // set them manually to workaround a bug in the Kotlin 1.5.20
+        option("-Adagger.fastInit=ENABLED")
+        option("-Adagger.hilt.android.internal.disableAndroidSuperclassValidation=true")
+    }
+
+    correctErrorTypes = true
+}
+
 repositories {
+    google()
     mavenCentral()
 }

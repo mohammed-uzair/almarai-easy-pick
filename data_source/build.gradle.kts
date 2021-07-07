@@ -24,7 +24,7 @@ dependencies {
     implementation(Dependencies_PolymorphicJsonAdapterFactory)
     implementation(Dependencies_Retrofit_Logging)
 
-    implementation("com.squareup.moshi:moshi:1.11.0")
+    implementation("com.squareup.moshi:moshi:1.12.0")
 
     implementation(Dependencies_Firestore)
     implementation(Dependencies_Firebase_Storage)
@@ -33,6 +33,19 @@ dependencies {
     implementation(Dependencies_Hilt)
     kapt(Dependencies_Hilt_Annotation_Processor)
 }
+
+kapt {
+    javacOptions {
+        // These options are normally set automatically via the Hilt Gradle plugin, but we
+        // set them manually to workaround a bug in the Kotlin 1.5.20
+        option("-Adagger.fastInit=ENABLED")
+        option("-Adagger.hilt.android.internal.disableAndroidSuperclassValidation=true")
+    }
+
+    correctErrorTypes = true
+}
+
 repositories {
+    google()
     mavenCentral()
 }

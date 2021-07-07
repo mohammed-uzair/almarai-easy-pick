@@ -13,12 +13,12 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
-import com.almarai.business.Utils.AppDateTimeFormat
+import com.almarai.business.utils.AppDateTimeFormat
 import com.almarai.common.date_time.DateUtil
 import com.almarai.easypick.R
+import com.almarai.easypick.common.APP_SELECTED_THEME
+import com.almarai.easypick.common.AppTheme
 import com.almarai.easypick.databinding.ScreenDataConfigurationBinding
-import com.almarai.easypick.utils.APP_SELECTED_THEME
-import com.almarai.easypick.utils.AppTheme
 import com.almarai.easypick.view_models.DataConfigurationViewModel
 import com.almarai.easypick.voice.use_cases.NavigateScreen.Companion.CURRENT_SCREEN
 import com.almarai.easypick.voice.use_cases.Screen

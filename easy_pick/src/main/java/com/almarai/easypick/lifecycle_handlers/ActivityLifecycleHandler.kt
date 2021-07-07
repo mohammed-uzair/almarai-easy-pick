@@ -7,8 +7,6 @@ import android.media.AudioManager
 import android.os.Bundle
 import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
-import com.almarai.alm_logging.database.params.AuditParams
-import com.almarai.alm_logging.util.AlmLogger
 import com.almarai.common.date_time.DateUtil.getCurrentDate
 import com.almarai.common.logging.FIREBASE_ANALYTICS
 import com.almarai.common.machine_learning.translation.OnDeviceTextTranslation

@@ -1,6 +1,6 @@
 package com.almarai.easypick.view_models
 
-import androidx.hilt.lifecycle.ViewModelInject
+import javax.inject.Inject
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -9,11 +9,13 @@ import com.almarai.data.easy_pick_models.Result
 import com.almarai.data.easy_pick_models.statistics.Statistics
 import com.almarai.data.easy_pick_models.util.ERROR_OCCURRED
 import com.almarai.repository.api.StatisticsRepository
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 
-class StatisticsViewModel @ViewModelInject constructor(private val repository: StatisticsRepository) :
+@HiltViewModel
+class StatisticsViewModel @Inject constructor(private val repository: StatisticsRepository) :
     ViewModel() {
     private val _statistics = MutableLiveData<Result<Statistics>>()
     val statistics: LiveData<Result<Statistics>> = _statistics

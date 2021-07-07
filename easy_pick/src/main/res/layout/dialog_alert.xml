@@ -7,7 +7,7 @@
 
         <variable
             name="viewModel"
-            type="com.almarai.easypick.utils.alert_dialog.AppAlertDialogViewModel" />
+            type="com.almarai.easypick.views.utils.alert_dialog.AppAlertDialogViewModel" />
 
     </data>
 

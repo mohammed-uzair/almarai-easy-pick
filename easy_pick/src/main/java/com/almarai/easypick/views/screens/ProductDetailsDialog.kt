@@ -7,18 +7,26 @@ import android.view.*
 import androidx.appcompat.widget.SearchView
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.DialogFragment
+import androidx.fragment.app.activityViewModels
+import androidx.fragment.app.viewModels
+import androidx.lifecycle.Observer
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.RecyclerView
 import com.almarai.business.CratesAndPieces
 import com.almarai.business.CratesPieces
 import com.almarai.common.logging.FIREBASE_ANALYTICS
+import com.almarai.data.easy_pick_models.Result
 import com.almarai.data.easy_pick_models.product.Product
+import com.almarai.data.easy_pick_models.product.ProductStatus
 import com.almarai.easypick.R
 import com.almarai.easypick.databinding.DialogProductDetailBinding
 import com.almarai.easypick.extensions.hideKeyboard
 import com.almarai.easypick.extensions.positionDialogAtBottom
 import com.almarai.easypick.utils.AlertTones.playTone
+import com.almarai.easypick.view_models.HighlightItem
+import com.almarai.easypick.view_models.ProductListViewModel
+import com.almarai.easypick.view_models.UpdateProduct
 import com.google.firebase.analytics.FirebaseAnalytics
 import com.google.firebase.analytics.ktx.logEvent
 import dagger.hilt.android.AndroidEntryPoint
@@ -28,11 +36,11 @@ import kotlinx.coroutines.launch
 @AndroidEntryPoint
 class ProductDetailsDialog : DialogFragment(),
     View.OnKeyListener {
+    private val productListViewModel: ProductListViewModel by activityViewModels()
     private var indexPos = 0
     private val args: ProductDetailsDialogArgs by navArgs()
     private lateinit var products: List<Product>
     private lateinit var dialogProductDetailsBinding: DialogProductDetailBinding
-    private var productItemChangeListener: ProductItemChangeListener? = null
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -72,6 +80,16 @@ class ProductDetailsDialog : DialogFragment(),
         dialog?.window?.attributes?.windowAnimations = R.style.DialogAnimation
     }
 
+    private fun init() {
+        indexPos = args.SelectedProductPosition
+
+        productListViewModel.products.observe(viewLifecycleOwner, Observer {
+            it?.let { result ->
+                if (result is Result.Success) products = result.data
+            }
+        })
+    }
+
     override fun onResume() {
         super.onResume()
         dialog?.window?.setLayout(
@@ -80,10 +98,6 @@ class ProductDetailsDialog : DialogFragment(),
         )
 
         process()
-    }
-
-    private fun init() {
-        indexPos = args.SelectedProductPosition
     }
 
     private fun process() {
@@ -96,10 +110,6 @@ class ProductDetailsDialog : DialogFragment(),
         //Set the key listener
         dialogProductDetailsBinding.dialogProductDetailCratesEditText.setOnKeyListener(this@ProductDetailsDialog)
         dialogProductDetailsBinding.dialogProductDetailPiecesEditText.setOnKeyListener(this@ProductDetailsDialog)
-    }
-
-    fun setProductItemChangeListener(productItemChangeListener: ProductItemChangeListener) {
-        this.productItemChangeListener = productItemChangeListener
     }
 
     private fun setProductValues() {
@@ -169,14 +179,14 @@ class ProductDetailsDialog : DialogFragment(),
     private fun getDialogHeight() = dialog?.window?.decorView?.height ?: 286//Custom height, if null
 
     private fun onKeyBoardDownArrowPressed() {
-        productItemChangeListener?.highlightRecentItemInList(indexPos, getDialogHeight())
+        productListViewModel.highlightRecentItemInList(HighlightItem(indexPos, getDialogHeight()))
         indexPos++
         setProductValues()
     }
 
     private fun onKeyBoardUpArrowPressed() {
         --indexPos
-        productItemChangeListener?.highlightRecentItemInList(indexPos - 1, getDialogHeight())
+        productListViewModel.highlightRecentItemInList(HighlightItem(indexPos - 1, getDialogHeight()))
         setProductValues()
     }
 
@@ -212,11 +222,15 @@ class ProductDetailsDialog : DialogFragment(),
             product.upc
         )
 
+        //Update the data in the list
+        product.productStatus = ProductStatus.Picked
+        product.totalStock = "${cratesPieces.crates}/${cratesPieces.pieces}"
+
         val dialogHeight = dialog?.window?.decorView?.height ?: 286//Custom height
-        productItemChangeListener?.onItemChanged(indexPos, product, cratesPieces, dialogHeight)
+        productListViewModel.updateProduct(UpdateProduct(indexPos, product, cratesPieces, dialogHeight))
     }
 
-    interface ProductItemChangeListener{
+    interface ProductItemChangeListener {
         fun onItemChanged(
             position: Int,
             product: Product,

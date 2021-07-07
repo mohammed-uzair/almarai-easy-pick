@@ -1,6 +1,6 @@
 package com.almarai.easypick.view_models
 
-import androidx.hilt.lifecycle.ViewModelInject
+import javax.inject.Inject
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -14,11 +14,13 @@ import com.almarai.data.easy_pick_models.route.RouteServiceStatus
 import com.almarai.data.easy_pick_models.route.RouteStatus
 import com.almarai.data.easy_pick_models.util.ERROR_OCCURRED
 import com.almarai.repository.api.RoutesRepository
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 
-class RouteSelectionViewModel @ViewModelInject constructor(private val repository: RoutesRepository) :
+@HiltViewModel
+class RouteSelectionViewModel @Inject constructor(private val repository: RoutesRepository) :
     ViewModel() {
     companion object {
         const val TAG = "RouteSelectionViewModel"

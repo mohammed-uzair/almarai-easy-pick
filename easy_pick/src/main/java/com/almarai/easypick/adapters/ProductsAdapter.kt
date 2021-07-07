@@ -46,7 +46,7 @@ class ProductsAdapter @Inject constructor(private val onItemClickListener: OnIte
             productBinding.root.onFocusChangeListener =
                 View.OnFocusChangeListener { v, hasFocus ->
                     if (hasFocus) {
-                        if (!productBinding.itemProductSelector.isVisible) {
+                        if (productBinding.itemProductSelector.visibility != View.VISIBLE) {
                             productBinding.itemProductSelector.visibility = View.VISIBLE
 
                             val anim =

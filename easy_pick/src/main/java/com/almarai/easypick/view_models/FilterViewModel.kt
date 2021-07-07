@@ -1,14 +1,16 @@
 package com.almarai.easypick.view_models
 
 import android.util.Log
-import androidx.hilt.lifecycle.ViewModelInject
+import javax.inject.Inject
 import androidx.lifecycle.LifecycleObserver
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.almarai.data.easy_pick_models.filter.Filters
 import com.almarai.repository.api.ApplicationRepository
+import dagger.hilt.android.lifecycle.HiltViewModel
 
-class FilterViewModel @ViewModelInject constructor(private val applicationRepository: ApplicationRepository) : ViewModel(),
+@HiltViewModel
+class FilterViewModel @Inject constructor(private val applicationRepository: ApplicationRepository) : ViewModel(),
     LifecycleObserver {
     companion object {
         const val TAG = "FilterViewModel"

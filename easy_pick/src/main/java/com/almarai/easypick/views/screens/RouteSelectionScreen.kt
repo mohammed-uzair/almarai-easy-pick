@@ -358,7 +358,7 @@ class RouteSelectionScreen : Fragment(), SearchView.OnQueryTextListener {
         recyclerView.animation = null
         recyclerView.setHasFixedSize(true)
         recyclerView.layoutManager = LinearLayoutManager(activity)
-        adapter = RoutesAdapter()
+        adapter = RoutesAdapter(this, routesViewModel)
         recyclerView.adapter = adapter
     }
 

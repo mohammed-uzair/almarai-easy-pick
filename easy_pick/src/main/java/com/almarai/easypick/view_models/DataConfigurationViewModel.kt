@@ -1,18 +1,20 @@
 package com.almarai.easypick.view_models
 
 import android.util.Log
-import androidx.hilt.lifecycle.ViewModelInject
+import javax.inject.Inject
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.almarai.business.Utils.AppDateTimeFormat
+import com.almarai.business.utils.AppDateTimeFormat
 import com.almarai.common.date_time.DateUtil
 import com.almarai.data.easy_pick_models.DataConfiguration
 import com.almarai.repository.api.ApplicationRepository
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
-class DataConfigurationViewModel @ViewModelInject constructor(private val applicationRepository: ApplicationRepository) :
+@HiltViewModel
+class DataConfigurationViewModel @Inject constructor(private val applicationRepository: ApplicationRepository) :
     ViewModel() {
     companion object {
         const val TAG = "DataConfigViewModel"

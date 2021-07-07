@@ -1,11 +1,13 @@
 package com.almarai.easypick.view_models
 
-import androidx.hilt.lifecycle.ViewModelInject
+import javax.inject.Inject
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.almarai.repository.api.ApplicationRepository
+import dagger.hilt.android.lifecycle.HiltViewModel
 
-class LoginViewModel @ViewModelInject constructor(val applicationRepository: ApplicationRepository) : ViewModel() {
+@HiltViewModel
+class LoginViewModel @Inject constructor(val applicationRepository: ApplicationRepository) : ViewModel() {
     companion object {
         const val TAG = "LoginViewModel"
     }

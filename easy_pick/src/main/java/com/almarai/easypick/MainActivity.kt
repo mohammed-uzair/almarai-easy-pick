@@ -6,6 +6,7 @@ import android.view.KeyEvent
 import android.view.MenuItem
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatDelegate
 import androidx.databinding.DataBindingUtil
 import com.almarai.easypick.data_source.firebase.InitializeFirebase.configureFirebase
 import com.almarai.easypick.databinding.FragmentContainerBinding
@@ -31,6 +32,8 @@ class MainActivity : AppCompatActivity() {
         screenMainBinding.apply {
             lifecycleOwner = this@MainActivity
         }
+
+        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
 
         setSupportActionBar(screenMainBinding.fragmentContainerToolbar.toolbar)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)

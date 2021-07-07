@@ -1,6 +1,6 @@
 import com.almarai.gradle.dependencies.*
 
-val kotlin_version: String by extra
+//val kotlin_version: String by extra
 
 plugins {
     id("com.android.application")
@@ -44,8 +44,9 @@ dependencies {
     implementation(Dependencies_Navigation_Fragment_Kotlin_Extensions)
 
     implementation(Dependencies_Hilt)
-    implementation(Dependencies_Hilt_Android_ViewModel)
     kapt(Dependencies_Hilt_Annotation_Processor)
+
+    implementation(Dependencies_Hilt_Android_ViewModel)
     kapt(Dependencies_Hilt_Android_Annotation_Processor)
 
     implementation(Dependencies_Lifecycle_Runtime)
@@ -64,14 +65,27 @@ dependencies {
 
     implementation(Dependencies_Ml_Kit_On_Device_Text_Translation)
 
-    implementation ("com.squareup.moshi:moshi:1.11.0")
-    implementation ("com.squareup.moshi:moshi-kotlin:1.11.0")
+    implementation ("com.squareup.moshi:moshi:1.12.0")
+    implementation ("com.squareup.moshi:moshi-kotlin:1.12.0")
 
     implementation (Dependencies_Retrofit)
     implementation (Dependencies_Retrofit_Moshi_Converter)
 
     //implementation(Dependencies_Leak_Canary)
 }
+
+kapt {
+    javacOptions {
+        // These options are normally set automatically via the Hilt Gradle plugin, but we
+        // set them manually to workaround a bug in the Kotlin 1.5.20
+        option("-Adagger.fastInit=ENABLED")
+        option("-Adagger.hilt.android.internal.disableAndroidSuperclassValidation=true")
+    }
+
+    correctErrorTypes = true
+}
+
 repositories {
+    google()
     mavenCentral()
 }

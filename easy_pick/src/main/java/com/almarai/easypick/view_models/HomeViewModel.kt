@@ -1,7 +1,9 @@
 package com.almarai.easypick.view_models
 
-import androidx.hilt.lifecycle.ViewModelInject
+import javax.inject.Inject
 import androidx.lifecycle.ViewModel
 import com.almarai.repository.api.ApplicationRepository
+import dagger.hilt.android.lifecycle.HiltViewModel
 
-class HomeViewModel @ViewModelInject constructor(private val applicationRepository: ApplicationRepository) : ViewModel()
+@HiltViewModel
+class HomeViewModel @Inject constructor(private val applicationRepository: ApplicationRepository) : ViewModel()

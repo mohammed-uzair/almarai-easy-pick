@@ -9,7 +9,7 @@
 
         <variable
             name="onBoarding"
-            type="com.almarai.easypick.utils.on_boarding.OnBoarding" />
+            type="com.almarai.easypick.views.utils.on_boarding.OnBoarding" />
 
         <variable
             name="onBoardingCompletedListener"

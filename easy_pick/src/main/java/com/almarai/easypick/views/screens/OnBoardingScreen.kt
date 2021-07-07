@@ -16,6 +16,7 @@ import com.almarai.easypick.databinding.ScreenOnBoardingBinding
 import com.almarai.easypick.extensions.goBack
 import com.almarai.easypick.utils.BundleKeys
 import com.almarai.easypick.views.utils.OnItemClickListener
+import com.almarai.easypick.views.utils.on_boarding.OnBoardingScreens
 import com.almarai.repository.api.ApplicationRepository
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
@@ -30,7 +31,7 @@ class OnBoardingScreen(private val applicationRepository: ApplicationRepository)
         savedInstanceState: Bundle?
     ): View {
         screenOnBoardingBinding =
-            DataBindingUtil.inflate(inflater, R.layout.screen_route_selection, container, false)
+            DataBindingUtil.inflate(inflater, R.layout.screen_on_boarding, container, false)
 
         return screenOnBoardingBinding.root
     }
@@ -39,18 +40,20 @@ class OnBoardingScreen(private val applicationRepository: ApplicationRepository)
         super.onViewCreated(view, savedInstanceState)
         navController = Navigation.findNavController(view)
 
-        screenOnBoardingBinding.screenOnBoardingViewpager.adapter =
-            OnBoardingAdapter(object : OnItemClickListener {
-                override fun onItemClick(item: Any?, position: Int) {
-                    applicationRepository.setOnBoardingCompleted()
+        val adapter = OnBoardingAdapter(object : OnItemClickListener {
+            override fun onItemClick(item: Any?, position: Int) {
+                applicationRepository.setOnBoardingCompleted()
 
-                    //Set the result
-                    val saveStateHandle = navController.previousBackStackEntry?.savedStateHandle
-                    saveStateHandle?.set(BundleKeys.IS_ON_BOARDING_COMPLETED, true)
+                //Set the result
+                val saveStateHandle = navController.previousBackStackEntry?.savedStateHandle
+                saveStateHandle?.set(BundleKeys.IS_ON_BOARDING_COMPLETED, true)
 
-                    goBack()
-                }
-            })
+                goBack()
+            }
+        })
+        screenOnBoardingBinding.screenOnBoardingViewpager.adapter = adapter
+
+        adapter.submitList(OnBoardingScreens)
     }
 
     override fun onResume() {

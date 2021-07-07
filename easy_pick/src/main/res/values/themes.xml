@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <!--region Base App Theme-->
-    <style name="Theme.Base" parent="Theme.MaterialComponents.Light.NoActionBar">
+    <style name="Theme.Base" parent="Theme.MaterialComponents.DayNight.NoActionBar">
         <item name="colorPrimaryDark">@color/baseColorStatusBar</item>
         <item name="colorPrimary">@color/baseColorStatusBar</item>
         <item name="colorAccent">@color/baseColorAccent</item>

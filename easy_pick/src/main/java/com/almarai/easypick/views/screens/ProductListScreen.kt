@@ -7,15 +7,16 @@ import android.view.animation.AnimationUtils
 import androidx.appcompat.widget.SearchView
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.viewModels
-import androidx.lifecycle.MutableLiveData
+import androidx.fragment.app.activityViewModels
+import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.Observer
 import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.almarai.business.CratesAndPieces
+import androidx.recyclerview.widget.RecyclerView
 import com.almarai.common.utils.Logger
 import com.almarai.data.easy_pick_models.Result
 import com.almarai.data.easy_pick_models.filter.Filters
@@ -40,64 +41,28 @@ import com.almarai.easypick.views.utils.progress.hideProgress
 import com.almarai.easypick.views.utils.progress.showProgress
 import com.google.android.material.transition.MaterialContainerTransform
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.android.synthetic.main.screen_product.*
+import kotlinx.coroutines.InternalCoroutinesApi
 import kotlinx.coroutines.delay
+import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.flow.observeOn
 import kotlinx.coroutines.launch
 
 @Suppress("IMPLICIT_CAST_TO_ANY")
 @AndroidEntryPoint
 class ProductListScreen : Fragment(), SearchView.OnQueryTextListener {
-    private val productListViewModel: ProductListViewModel by viewModels()
+    private val productListViewModel: ProductListViewModel by activityViewModels()
     private var saveButton: MenuItem? = null
     private lateinit var navController: NavController
     private val args: ProductListScreenArgs by navArgs()
     private lateinit var screenProductBinding: ScreenProductBinding
     private lateinit var products: List<Product>
-    private val itemUpdated = MutableLiveData<Product>()
     private val adapter by lazy {
         ProductsAdapter(object : OnItemClickListener {
             override fun onItemClick(item: Any?, position: Int) {
                 showProductDetailsDialog(position)
             }
         })
-    }
-
-    private val productItemListener = object : ProductDetailsDialog.ProductItemChangeListener {
-        override fun onItemChanged(
-            position: Int,
-            product: Product,
-            cratesAndPieces: CratesAndPieces,
-            dialogHeight: Int
-        ) {
-            if (product.productStatus == ProductStatus.NotPicked) {
-                //Update the items picked count in the products main list screen
-                val itemsPicked: Int = productListViewModel.itemsPicked.value ?: 0
-                productListViewModel.itemsPicked.value = itemsPicked + 1
-            }
-
-            //Update the array list and the recycler view
-            products[position].apply {
-                editedCrates = cratesAndPieces.crates
-                editedPieces = cratesAndPieces.pieces
-                totalStock = "${cratesAndPieces.crates}/${cratesAndPieces.pieces}"
-                productStatus = ProductStatus.Picked
-            }
-
-            //Notify the adapter
-            adapter.notifyItemChanged(position)
-
-            highlightRecentItemInList(position, dialogHeight)
-        }
-
-        override fun highlightRecentItemInList(position: Int, dialogHeight: Int) {
-            //Init
-            val dialogOffset = calculateDialogOffset(position, dialogHeight)
-
-            //Scroll to specified item from the list, and display above this dialog
-            val layoutManager = adapter.recyclerView.layoutManager as LinearLayoutManager
-            layoutManager.scrollToPositionWithOffset(position, dialogOffset)
-            adapter.recyclerView.showFocus(position, lifecycleScope)
-        }
-
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -108,6 +73,8 @@ class ProductListScreen : Fragment(), SearchView.OnQueryTextListener {
             duration = 500
         }
         sharedElementEnterTransition = transformation
+
+        observeChanges()
     }
 
     override fun onCreateView(
@@ -177,6 +144,21 @@ class ProductListScreen : Fragment(), SearchView.OnQueryTextListener {
                 )
             }
         })
+    }
+
+    @OptIn(InternalCoroutinesApi::class)
+    private fun observeChanges() {
+        lifecycleScope.launch {
+            repeatOnLifecycle(Lifecycle.State.STARTED) {
+                productListViewModel.productUpdated.collect { updatedProduct ->
+                    updatedProduct.let {
+                        adapter.notifyItemChanged(updatedProduct!!.position)
+                        (screenProductBinding.recyclerView.layoutMainRecyclerview.layoutManager as LinearLayoutManager)
+                            .scrollToPositionWithOffset(updatedProduct.position, updatedProduct.dialogHeight)
+                    }
+                }
+            }
+        }
     }
 
     private fun handleFilterScreenResult() {

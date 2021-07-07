@@ -1,15 +1,15 @@
 package com.almarai.gradle.dependencies
 
 //region
-const val Dependencies_Version_Kotlin = "1.3.72"
+const val Dependencies_Version_Kotlin = "1.5.20"
 
 const val Dependencies_Kotlin =
-    "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$Dependencies_Version_Kotlin"
+    "org.jetbrains.kotlin:kotlin-stdlib:$Dependencies_Version_Kotlin"
 const val Dependencies_Kotlin_Reflect =
     "org.jetbrains.kotlin:kotlin-reflect:$Dependencies_Version_Kotlin"
 
 
-const val Dependencies_Plugin_Gradle = "com.android.tools.build:gradle:4.0.1"
+const val Dependencies_Plugin_Gradle = "com.android.tools.build:gradle:4.2.2"
 
 //const val Dependencies_Plugin_Kotlin_Gradle = kotlin("gradle-plugin", "1.3.72")
 public const val Dependencies_Plugin_Library = "com.android.library"
@@ -20,7 +20,7 @@ const val Dependencies_Plugin_Kotlin_Android_Extensions = "kotlin-android-extens
 const val Dependencies_Plugin_Jdk_Library = "stdlib-jdk8"
 
 //Android
-const val Dependencies_Android_Kotlin_Extensions = "androidx.core:core-ktx:1.3.1"
+const val Dependencies_Android_Kotlin_Extensions = "androidx.core:core-ktx:1.6.0"
 const val Dependencies_Android_AppCompat = "androidx.appcompat:appcompat:1.1.0"
 const val Dependencies_Android_Activity = "androidx.activity:activity-ktx:1.2.0-beta01"
 const val Dependencies_Android_Fragment = "androidx.fragment:fragment-ktx:1.3.0-alpha02"
@@ -33,15 +33,18 @@ const val Dependencies_Android_Material = "com.google.android.material:material:
 const val Dependencies_Android_Recycler_View = "androidx.recyclerview:recyclerview:1.2.0-alpha05"
 const val Dependencies_Android_Paging = "androidx.paging:paging-runtime-ktx:2.1.2"
 
-private const val Dependencies_Version_Lifecycle = "2.3.0-alpha06"
+private const val Dependencies_Version_Lifecycle = "2.4.0-alpha01"
 private const val Dependencies_Version_Lifecycle_Extensions = "2.2.0"
 
+//const val Dependencies_Lifecycle =
 const val Dependencies_Lifecycle_Runtime =
-    "androidx.lifecycle:lifecycle-runtime:$Dependencies_Version_Lifecycle"
+    "androidx.lifecycle:lifecycle-runtime-ktx:2.4.0-alpha02"
+//    "androidx.lifecycle:lifecycle-runtime:$Dependencies_Version_Lifecycle"
 const val Dependencies_Lifecycle_LiveData =
     "androidx.lifecycle:lifecycle-livedata-ktx:$Dependencies_Version_Lifecycle"
 const val Dependencies_Lifecycle_ViewModel =
     "androidx.lifecycle:lifecycle-viewmodel-ktx:$Dependencies_Version_Lifecycle"
+
 const val Dependencies_Lifecycle_Extensions =
     "androidx.lifecycle:lifecycle-extensions:$Dependencies_Version_Lifecycle_Extensions"
 const val Dependencies_Lifecycle_Arch_Extensions = "android.arch.lifecycle:extensions:1.1.1"
@@ -78,15 +81,16 @@ const val Dependencies_Retrofit_Logging = "com.squareup.okhttp3:logging-intercep
 const val Dependencies_PolymorphicJsonAdapterFactory = "com.squareup.moshi:moshi-adapters:1.8.0"
 
 //DI - Hilt
-private const val Dependencies_Version_Hilt = "2.28-alpha"
+private const val Dependencies_Version_Hilt = "2.37"
 
 const val Dependencies_Hilt = "com.google.dagger:hilt-android:$Dependencies_Version_Hilt"
 const val Dependencies_Hilt_Annotation_Processor =
     "com.google.dagger:hilt-android-compiler:$Dependencies_Version_Hilt"
+
 const val Dependencies_Hilt_Android_ViewModel =
-    "androidx.hilt:hilt-lifecycle-viewmodel:1.0.0-alpha01"
+    "androidx.hilt:hilt-lifecycle-viewmodel:1.0.0-alpha03"
 const val Dependencies_Hilt_Android_Annotation_Processor =
-    "androidx.hilt:hilt-compiler:1.0.0-alpha01"
+    "androidx.hilt:hilt-compiler:1.0.0"
 
 //Room
 private const val Dependencies_Version_Room = "2.2.5"

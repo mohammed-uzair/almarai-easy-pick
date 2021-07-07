@@ -13,9 +13,9 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
-import com.almarai.business.Utils.AppDateTimeFormat
-import com.almarai.business.Utils.Util.STATISTICS_CONSTRAINT_BEGINNING_DATE
-import com.almarai.business.Utils.Util.STATISTICS_CONSTRAINT_INITIAL_DAYS_PERIOD
+import com.almarai.business.utils.AppDateTimeFormat
+import com.almarai.business.utils.Util.STATISTICS_CONSTRAINT_BEGINNING_DATE
+import com.almarai.business.utils.Util.STATISTICS_CONSTRAINT_INITIAL_DAYS_PERIOD
 import com.almarai.data.easy_pick_models.Result
 import com.almarai.data.easy_pick_models.statistics.Statistics
 import com.almarai.data.easy_pick_models.statistics.StatisticsData

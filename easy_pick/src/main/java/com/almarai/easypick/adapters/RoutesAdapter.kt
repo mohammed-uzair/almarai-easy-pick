@@ -7,6 +7,8 @@ import android.view.ViewGroup
 import android.view.animation.AnimationUtils
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
+import androidx.navigation.findNavController
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
@@ -32,10 +34,8 @@ import com.google.firebase.analytics.ktx.logEvent
 
 private var selectedItemPosition = 0
 
-class RoutesAdapter : ListAdapter<Route, RoutesAdapter.ViewHolder>(RouteDiffCallback) {
+class RoutesAdapter(private val fragment :RouteSelectionScreen, private val viewModel: RouteSelectionViewModel) : ListAdapter<Route, RoutesAdapter.ViewHolder>(RouteDiffCallback) {
     private lateinit var binding: ItemRouteBinding
-    private lateinit var fragment: RouteSelectionScreen
-    private lateinit var viewModel: RouteSelectionViewModel
     private var selectedRoute = 0
 
     inner class ViewHolder(private val routeBinding: ItemRouteBinding) :
@@ -49,7 +49,7 @@ class RoutesAdapter : ListAdapter<Route, RoutesAdapter.ViewHolder>(RouteDiffCall
 //                    it.number == routeBinding.itemRouteNumberText.text.toString().toInt()
 //                }
                 selectedItemPosition = absoluteAdapterPosition
-                checkValidRoute()
+                checkValidRoute(selectedItemPosition)
             }
         }
 
@@ -118,8 +118,8 @@ class RoutesAdapter : ListAdapter<Route, RoutesAdapter.ViewHolder>(RouteDiffCall
     override fun onBindViewHolder(holder: ViewHolder, position: Int) =
         holder.bindData(getItem(holder.layoutPosition))
 
-    private fun checkValidRoute() {
-        if (isRouteNotServiced(binding.route?.routeStatus)) {
+    private fun checkValidRoute(position: Int) {
+        if (isRouteNotServiced(getItem(position).routeStatus)) {
             //                val extras = FragmentNavigatorExtras(view to "shared_element_container")
 
             fragment.showAlertDialog(
@@ -231,7 +231,7 @@ class RoutesAdapter : ListAdapter<Route, RoutesAdapter.ViewHolder>(RouteDiffCall
             //Update this route status
             viewModel.updateRouteStatus(selectedRoute)
 
-            routeBinding.root.findNavController()
+            fragment.findNavController()
                 .navigate(action)
         } catch (exception: IllegalArgumentException) {
             //Intentionally left empty, do not show alert, useless

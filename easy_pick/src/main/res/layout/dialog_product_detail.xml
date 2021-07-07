@@ -7,7 +7,7 @@
 
         <variable
             name="productDialog"
-            type="com.almarai.easypick.screens.ProductDetailsDialog" />
+            type="com.almarai.easypick.views.screens.ProductDetailsDialog" />
 
         <variable
             name="product"

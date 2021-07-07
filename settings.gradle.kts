@@ -1,11 +1,10 @@
-include(":common")
-include(":alm_logging:common")
 include(
+    ":common",
     ":machine_learning",
     ":easy_pick",
-    ":business",
     ":alm_ui",
     ":data",
     ":repository",
-    ":data_source"
+    ":data_source",
+    ":business"
 )
