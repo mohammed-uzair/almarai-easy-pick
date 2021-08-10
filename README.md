@@ -2,9 +2,9 @@
 An initiavitive to reduce paper consumption and making picking products a fun task :)
 
 ## Features
-  * Followa Material Design guidelines[MaterialIo]
-	* Uses multiple themes(Light, Dark & Night)
-	* Has support to 16 languages from in app using MachineLearning(English - ForeginLanguage)
+  * Follows [Material Design Guidelines]
+  * Uses multiple themes(Light, Dark & Night)
+  * Has support to 16 languages from in app using MachineLearning(English - ForeginLanguage)
   * Provides graphical view of the papers saved
   
 ## Libraries
@@ -21,7 +21,7 @@ An initiavitive to reduce paper consumption and making picking products a fun ta
   * MVVM
   
 ##Setting Up
-You will need to add your API key to the project, generate it from the google console here[API_KEY]
+You will need to add your API key to the project, generate it from the [google console]
 
 ## Report Issues
 Notice any issues with a repository? Please file a github issue in the repository.
@@ -42,6 +42,6 @@ License
     limitations under the License.
 
 
-[API_KEY]: https://console.developers.google.com/
-[MaterialIo]: https://material.io/
+[google console]: https://console.developers.google.com/
+[Material Design Guidelines]: https://material.io/
 
