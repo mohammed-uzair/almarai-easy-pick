@@ -11,6 +11,10 @@ An initiavitive to reduce paper consumption and making picking products a fun ta
 <img src="assets/light_theme/screen1.png" width="428" height="926" />	<img src="assets/light_theme/screen2.png" width="428" height="926" />
 <img src="assets/light_theme/screen3.png" width="428" height="926" />	<img src="assets/light_theme/screen4.png" width="428" height="926" />
 <img src="assets/light_theme/screen5.png" width="428" height="926" />	<img src="assets/light_theme/screen6.png" width="428" height="926" />
+
+<img src="assets/night_theme/screen1.png" width="428" height="926" />	<img src="assets/night_theme/screen2.png" width="428" height="926" />
+<img src="assets/night_theme/screen3.png" width="428" height="926" />	<img src="assets/night_theme/screen4.png" width="428" height="926" />
+<img src="assets/night_theme/screen5.png" width="428" height="926" />	<img src="assets/night_theme/screen6.png" width="428" height="926" />
   
 ## Libraries
   * Uses Firebase Analytics, crashlytics, firestore & storage
