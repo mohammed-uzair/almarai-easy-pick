@@ -8,9 +8,9 @@ An initiavitive to reduce paper consumption and making picking products a fun ta
   * Provides graphical view of the papers saved
 
 ## Screens
-<img src="assets/screen1.png" width="428" height="926" />	<img src="assets/screen2.png" width="428" height="926" />
-<img src="assets/screen3.png" width="428" height="926" />	<img src="assets/screen4.png" width="428" height="926" />
-<img src="assets/screen5.png" width="428" height="926" />	<img src="assets/screen6.png" width="428" height="926" />
+<img src="assets/light_theme/screen1.png" width="428" height="926" />	<img src="assets/light_theme/screen2.png" width="428" height="926" />
+<img src="assets/light_theme/screen3.png" width="428" height="926" />	<img src="assets/light_theme/screen4.png" width="428" height="926" />
+<img src="assets/light_theme/screen5.png" width="428" height="926" />	<img src="assets/light_theme/screen6.png" width="428" height="926" />
   
 ## Libraries
   * Uses Firebase Analytics, crashlytics, firestore & storage
