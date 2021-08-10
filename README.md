@@ -20,7 +20,7 @@ An initiavitive to reduce paper consumption and making picking products a fun ta
 ## Architecture
   * MVVM
   
-##Setting Up
+## Setting Up
 You will need to add your API key to the project, generate it from the [google console]
 
 ## Report Issues
